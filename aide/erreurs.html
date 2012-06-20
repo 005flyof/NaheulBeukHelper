@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html><!-- En-tete de la page --><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css" />
+		<title>NBH::Aide -> Erreurs</title>
+	</head>
+
+	<!-- Corps de la page -->
+	<body>
+		<div class="menu">
+			<ul>
+				<li><a class="menu-h" href="index.html">Sommaire</a></li>
+				<li><a class="menu-h" href="fonctions.html">Description des fonctions</a>
+					<ul style="width: 15%">
+						<li><a href="fonctions.html#gene">Fonctions générales</a></li>
+						<li><a href="fonctions.html#solo">Fonctions pour un personnage</a></li>
+						<li><a href="fonctions.html#gr">Fonctions de groupe</a></li>
+					</ul>
+				</li>
+				<li><a class="menu-h" href="fichier_rec.html">Enregistrement</a>
+					<ul style="width: 15%">
+						<li><a href="fichier_rec.html#gene">Structure générale</a></li>
+						<li><a href="fichier_rec.html#carac">Caractéristiques</a></li>
+						<li><a href="fichier_rec.html#rich">Richesses</a></li>
+						<li><a href="fichier_rec.html#type_arme">Type d'arme</a></li>
+						<li><a href="fichier_rec.html#rupt">Rupture</a></li>
+					</ul>
+				</li>
+				<li><a class="menu-h" href="erreurs.html">Erreurs</a>
+					<ul style="width: 15%">
+						<li><a href="erreurs.html#fatal">Erreurs fatales</a></li>
+						<li><a href="erreurs.html#errors">Erreurs non fatales</a></li>
+					</ul>
+				</li>
+				<br />
+				<li><a class="menu-h" href="http://005flyof.free-h.fr/">005flyof.free-h.fr</a></li>
+			</ul>
+		</div>
+		<h1>Erreurs</h1>
+		<p>Lorsque j'ai codé NBH, j'ai décidé qu'il y avait 2 niveaux d'erreurs : les erreurs fatales (celles qui empêcheraient le bon fonctionnement de NBH), et les autres.</p>
+		<p>Lors d'une erreur fatale, un fichier <strong>"error.log"</strong> est créé dans le répertoire où se trouve l'exécutable de NBH. Il contient des informations par rapport à l'erreur. Les différentes erreurs fatales sont détaillées <a href="#fatal">ici !</a></p>
+		<p>Les erreurs non fatales sont, quant à elles, répertoriées <a href="#errors">ici</a> <a href="#">ici</a> et sont décrites dans le fichier <strong>"nbh.log"</strong> s'il y en a.</p>
+		<h1 id="errors">Erreurs non fatales</h1>
+			<h2>"Il y a trop de XXX pour le personnage YYY."</h2>
+				<p>Cette erreur est dûe au fait qu'il y a trop d'élément XXX dans le fichier d'enregistrement du personnage YYY.</p>
+				<p>Cela peut venir d'une modification des fichiers personnages par vous-même ; regarder <a href="fichier_rec.html">la doc concernant l'enregistrement des fichiers</a>.</p>
+				<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+			<h2>"Impossible de charger le fichier de la licence"</h2>
+				<p>Cette erreur ne devrait pas se produire, ell est dûe à une mauvaise inclusion de certains fichiers dans le programme.</p>
+				<p>Signaler l'erreur <a href="http://005flyof.free-h.fr/nbh/bug.php">sur le site, dans la section "Bug de NBH"</a>.</p>
+				<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+			<h2>"Personnage non ouvert :"</h2>
+			<ul>
+				<li><h3>"élément inconnu !"</h3></li>
+					<p>Regarder si le fichier du personnage correspond à <a href="fichier_rec.html">un enregistrement normal</a>.</p>
+				<li><h3>"une des armes -> caractéristiques malus / bonus invalides !"</h3></li>
+					<p>Regarder si les armes du personnage correspondent à <a href="fichier_rec.html">un enregistrement normal</a>.</p>
+				<li><h3>"une des protections -> caractéristiques malus / bonus invalides !"</h3></li>
+					<p>Regarder si les protections du personnage correspondent à <a href="fichier_rec.html">un enregistrement normal</a>.</p>
+				<li><h3>"une des flèches -> caractéristiques malus / bonus invalides !"</h3></li>
+					<p>Regarder si les flèches du personnage correspondent à <a href="fichier_rec.html">un enregistrement normal</a>.</p>
+				<li><h3>"un des vêtements -> caractéristiques malus / bonus invalides !"</h3></li>
+					<p>Regarder si les vêtements du personnage correspondent à <a href="fichier_rec.html">un enregistrement normal</a>.</p>
+				<li><h3>"richesses invalides !"</h3></li>
+					<p>Regarder si les richesses du personnage correspondent à <a href="fichier_rec.html">un enregistrement normal</a>.</p>
+				<li><h3>"caractéristiques initiales / modifiées invalides !"</h3></li>
+					<p>Regarder si les richesses du personnage correspondent à <a href="fichier_rec.html">un enregistrement normal</a>.</p>
+			</ul>
+			<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+		<h1 id="fatal">Erreurs fatales</h1>
+			<h2>NBH ne démarre pas.</h2>
+				<p>Regarder s'il y a un fichier "error.log" / "nbh.log" et lire le message d'erreur dedans..</p>
+				<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+			<h2>"Le fichier de log est inaccessible."</h2>
+				<p>Cette erreur apparaît seulement lorsque NBH ne peut pas accéder au fichier "nbh.log", ce qui normalement, n'arrive pas.</p>
+				<p>Pour la résoudre, vérifier que NBH peut écrire dans le dossier le contenant.</p>
+				<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+			<h2>"Fichier contenant les origines / métiers inaccessible."</h2>
+				<p>Cette erreur ne devrait pas se produire, ell est dûe à une mauvaise inclusion de certains fichiers dans le programme.</p>
+				<p>Signaler l'erreur <a href="http://005flyof.free-h.fr/nbh/bug.php">sur le site, dans la section "Bug de NBH"</a>.</p>
+				<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+			<h2>"Impossible de créer / ouvrir le fichier de note / groupe / personnage sélectionné."</h2>
+				<p>Cette erreur est normalement impossible, sauf dans le cas où NBH ne pourrai modifier le contenu du dossier dans lequel il se trouve.</p>
+				<p>Vérifier que NBH peut écrire / lire dans le dossier le contenant.</p>
+				<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+			<h2>"Type d'objet inconnu !"</h2>
+				<p>Cette erreur ne devrait pas arriver en théorie. Je ne sais pas doù elle pourrait provenir, mais, j'en parle quand même.</p>
+				<p>Elle nous dit que le type d'objet que l'on a voulu attribué est inconnu, et elle donne ce numéro.</p>
+				<p>Réessayer de faire la manipulation de l'objet</p>
+				<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+	</body>
+</html>

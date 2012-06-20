@@ -1,0 +1,49 @@
+<RCC>
+    <qresource prefix="/prog-data/img">
+        <file>about-Qt.png</file>
+        <file>add.png</file>
+        <file>at_prd+.png</file>
+        <file>attaque.png</file>
+        <file>cha+.png</file>
+        <file>cou+.png</file>
+        <file>ea+.png</file>
+        <file>epee.png</file>
+        <file>ev+.png</file>
+        <file>fleche_bas.png</file>
+        <file>fleche_bas-1.png</file>
+        <file>fleche_haut.png</file>
+        <file>fleche_haut-1.png</file>
+        <file>fo+.png</file>
+        <file>help.png</file>
+        <file>int+.png</file>
+        <file>licence.png</file>
+        <file>maj.png</file>
+        <file>new.png</file>
+        <file>new-group.png</file>
+        <file>open.png</file>
+        <file>PA-.png</file>
+        <file>PA+.png</file>
+        <file>passif.png</file>
+        <file>PC-.png</file>
+        <file>PC+.png</file>
+        <file>PO-.png</file>
+        <file>PO+.png</file>
+        <file>quit.png</file>
+        <file>save.png</file>
+        <file>XP.png</file>
+        <file>icone.png</file>
+        <file>quit-group.png</file>
+    </qresource>
+    <qresource prefix="/prog-data">
+        <file>LICENCE</file>
+        <file>VERSION</file>
+        <file>metiers.txt</file>
+        <file>origines.txt</file>
+    </qresource>
+    <qresource prefix="/fen_aide/img">
+        <file>help.png</file>
+        <file>home.png</file>
+        <file>precedent.png</file>
+        <file>suivant.png</file>
+    </qresource>
+</RCC>

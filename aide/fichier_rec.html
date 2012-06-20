@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html><!-- En-tete de la page --><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css" />
+		<title>NBH::Aide -> Enregistrement</title>
+	</head>
+
+	<!-- Corps de la page -->
+	<body>
+		<div class="menu">
+			<ul>
+				<li><a class="menu-h" href="index.html">Sommaire</a></li>
+				<li><a class="menu-h" href="fonctions.html">Description des fonctions</a>
+					<ul style="width: 15%">
+						<li><a href="fonctions.html#gene">Fonctions générales</a></li>
+						<li><a href="fonctions.html#solo">Fonctions pour un personnage</a></li>
+						<li><a href="fonctions.html#gr">Fonctions de groupe</a></li>
+					</ul>
+				</li>
+				<li><a class="menu-h" href="fichier_rec.html">Enregistrement</a>
+					<ul style="width: 15%">
+						<li><a href="fichier_rec.html#gene">Structure générale</a></li>
+						<li><a href="fichier_rec.html#carac">Caractéristiques</a></li>
+						<li><a href="fichier_rec.html#rich">Richesses</a></li>
+						<li><a href="fichier_rec.html#type_arme">Type d'arme</a></li>
+						<li><a href="fichier_rec.html#rupt">Rupture</a></li>
+					</ul>
+				</li>
+				<li><a class="menu-h" href="erreurs.html">Erreurs</a>
+					<ul style="width: 15%">
+						<li><a href="erreurs.html#fatal">Erreurs fatales</a></li>
+						<li><a href="erreurs.html#errors">Erreurs non fatales</a></li>
+					</ul>
+				</li>
+				<br />
+				<li><a class="menu-h" href="http://005flyof.free-h.fr/">005flyof.free-h.fr</a></li>
+			</ul>
+		</div>
+		<h1>Enregistrement normal</h1>
+			<p>Sur cette page, l'enregistrement normal des fichiers personnages est décrit.</p>
+			<p>Il ne peut y avoir, au maximum, que :<ul>
+				<li>5 vêtements (1 châpeau, 1 haut, 1 bas, 1 chaussures, et 1 divers) ;</li>
+				<li>6 protections ;</li>
+				<li>4 armes ;</li>
+				<li>5 flèches ;</li>
+				<li>10 équipements.</li>
+			</ul></p>
+		<h1 id="gene">Structure du fichier</h1>
+			<p>Nom du personnage<br />
+			Sexe<br />
+			Origine<br />
+			Métier<br />
+			Energie Vitale<br />
+			Point<small>(s)</small> de destin<br />
+			Expérience<br />
+			<a href="#carac">Caractéristiques</a> initiales (avec AT/PRD)<br />
+			<a href="#carac">Caractéristiques</a> modifiées par les armes, etc... (avec AT/PRD)<br />
+			<a href="#rich">Richesses</a><br />
+			<span class="typeObj">~!chapeau!~</span><br />
+			Nom du châpeau<br />
+			<a href="#carac">Caractéristiques</a> bonus<br />
+			<a href="#carac">Caractéristiques</a> malus<br />
+			<span class="typeObj">~!haut!~</span><br />
+			Nom du haut<br />
+			<a href="#carac">Caractéristiques</a> bonus<br />
+			<a href="#carac">Caractéristiques</a> malus<br />
+			<span class="typeObj">~!bas!~</span><br />
+			Nom du bas<br />
+			<a href="#carac">Caractéristiques</a> bonus<br />
+			<a href="#carac">Caractéristiques</a> malus<br />
+			<span class="typeObj">~!chaussures!~</span><br />
+			Nom des chaussures<br />
+			<a href="#carac">Caractéristiques</a> bonus<br />
+			<a href="#carac">Caractéristiques</a> malus<br />
+			<span class="typeObj">~!divers!~</span><br />
+			Nom du vêtement divers<br />
+			<a href="#carac">Caractéristiques</a> bonus<br />
+			<a href="#carac">Caractéristiques</a> malus<br />
+			<span class="typeObj">~!protection!~</span><br />
+			Nom de la protection<br />
+			Nombre de protection<br />
+			<a href="#carac">Caractéristiques</a> bonus (avec AT/PRD)<br />
+			<a href="#carac">Caractéristiques</a> malus (avec AT/PRD)<br />
+			<span class="typeObj">~!arme!~</span><br />
+			Nom de l'arme<br />
+			Nombre de dés<br />
+			Nombre de dégats <strong>en plus</strong><br />
+			<a href="#carac">Caractéristiques</a> bonus (avec AT/PRD)<br />
+			<a href="#carac">Caractéristiques</a> malus (avec AT/PRD)<br />
+			<a href="#type_arme">Type de l'arme</a><br />
+			<a href="#rupt">Rupture max</a><br />
+			<span class="typeObj">~!fleches!~</span><br />
+			Nom des flèches<br />
+			Nombre de ces flèches<br />
+			Dégats bonus<br />
+			Bonus d'adresse (sous la forme de 2 chiffres ; ex : 00)<br />
+			<span class="typeObj">~!equipement!~</span><br />
+			Description de l'équipement (sur 1 ligne)<br />
+			<span class="typeObj">~!competence!~</span><br />
+			Nom de la compétence<br />
+			Description de la compétence (peut être sur plusieurs lignes)<br />
+			<span class="typeObj">~!FIN_ENREGISTREMENT!~</span>
+			</p>
+			<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+		<h1 id="carac">Caractéristiques</h1>
+			<p>Toutes les caractéristiques dans NBH sont enregistrées de la façon suivante :<ul>
+				<li>"COU_INT_CHA_AD_FO" (sans AT/PRD)</li>
+				<li>"COU_INT_CHA_AD_FO_AT_PRD" (avec AT/PRD)</li>
+			</ul>
+			En sachant que chaque caractéristique (COU, INT, CHA, AD, FO, AT et PRD) se compose de 2 chiffres.</p>
+			<p>Exemple de caractéristiques ayant 15 (COU), 12 (INT), 10 (CHA), 9 (AD), 16(FO), 10 (AT) et 3 (PRD) :<br />15_12_10_09_16_10_03</p>
+			<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+		<h1 id="rich">Richesses</h1>
+			<p>Toutes les richesses dans NBH sont enregistrées de la façon suivante : "PO_PA_PC"<br />
+			En sachant que chaque richesse (COU, INT, CHA, AD, FO, AT et PRD) se compose de 6 chiffres.</p>
+			<p>Exemple de richesses ayant 15 (PO), 120 (PA), 1000 (PC) :<br />000015_000120_001000</p>
+			<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+		<h1 id="type_arme">Type d'arme</h1>
+			<p>Les différents types d'armes sont les suivants :<ul>
+				<li>MainNue		-> valeur : 0</li>
+				<li>Tranchante	-> valeur : 1</li>
+				<li>Contandante	-> valeur : 2</li>
+				<li>Projectile	-> valeur : 3</li>
+			</ul></p>
+			<p style="text-align: right;"><a href="#">Remonter la page</a></p>
+		<h1 id="rupt">Rupture</h1>
+			<p>Les ruptures dans Naheulbeuk sont données de la façon suivante : "mini - max".<br />
+			La valeur à donner à NBH est celle de la rupture maximale.</p>
+			<p>Pour l'instant, la fonction de rupture est en développement.</p>
+			<p style="text-align: right;"><a href="">Remonter la page</a></p>
+	</body>
+</html>

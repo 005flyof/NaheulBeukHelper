@@ -1,0 +1,14 @@
+~!METIER!~
+Nom du métier
+Caractéristiques minimums : sous forme -> COU_INT_CHA_AD_FO
+AT (si non modifiée -> 'x')
+PRD (si non modifiée -> 'x')
+~!EV_CLASSES!~
+Nom de l'origine 1 qui a l'EV de départ modifiée
+Nom de l'origine 2 qui a l'EV de départ modifiée
+~!EV_MODIF!~
+EV pour les classes dont elle est modifiée
+EV en + pour les autres
+~!magie!~
+Type d'EA
+EA initiale

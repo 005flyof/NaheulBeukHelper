@@ -1,0 +1,265 @@
+~!NOUVELLE_ORIGINE!~
+Barbare
+12_00_00_00_13
+20_20_20_20_20
+35
+x
+~!competence-obligatoire!~
+AMBIDEXTRIE (AD)
+possibilité d'utiliser deux armes en même temps dans les combats – sujet à restrictions.
+~!competence-obligatoire!~
+CHERCHER DES NOISES
+le héros frappe toujours en premier lors d'un combat.
+~!competence-obligatoire!~
+SENTIR DES PIEDS
+éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+~!competence-obligatoire!~
+TÊTE VIDE
+immunité à certains sortilèges ayant pour cible l'esprit du héros.
+~!NOUVELLE_ORIGINE!~
+Demi-Elfe
+00_00_10_11_00
+20_20_20_20_20
+28
+x
+~!competence-obligatoire!~
+APPEL DES RENFORTS
+permet de fuir un combat sans risquer d'être blessé.
+~!competence-obligatoire!~
+DÉTECTION
+bonus pour toutes les épreuves de détection des pièges et du danger.
+~!competence-obligatoire!~
+CHOURAVER (AD)
+donne un bonus pour toutes les épreuves de vol à la tire.
+~!competence-obligatoire!~
+MÉFIANCE (INT)
+permet de savoir si un autre personnage ment.
+~!NOUVELLE_ORIGINE!~
+Demi-Orque
+00_00_00_00_12
+20_10_20_11_20
+35
+x
+~!competence-obligatoire!~
+AGORAPHOBIE (INT)
+le héros a du mal à garder son sang-froid en présence de foule.
+~!competence-obligatoire!~
+CHERCHER DES NOISES
+le héros frappe toujours en premier lors d'un combat.
+~!competence-obligatoire!~
+INSTINCT DE SURVIE
+capacité spéciale permettant de toujours trouver la nourriture.
+~!competence-obligatoire!~
+SENTIR DES PIEDS
+éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+~!competence-obligatoire!~
+TÊTE VIDE
+immunité à certains sortilèges ayant pour cible l'esprit du héros.
+~!NOUVELLE_ORIGINE!~
+Elfe noir
+00_12_00_13_00
+20_20_20_20_12
+25
+x
+~!competence-obligatoire!~
+AGORAPHOBIE (INT)
+le héros a du mal à garder son sang-froid en présence de foule.
+~!competence-obligatoire!~
+DÉPLACEMENT SILENCIEUX (AD)
+donne un bonus aux épreuves de discrétion et d'infiltration.
+~!competence-obligatoire!~
+DÉTECTION
+bonus pour toutes les épreuves de détection des pièges et du danger.
+~!competence-obligatoire!~
+TIRER CORRECTEMENT (AD)
+le personnage peut utiliser, sans malus, un arc ou d'autres armes de jet (selon origine).
+~!NOUVELLE_ORIGINE!~
+Elfe Sylvain
+00_00_12_10_00
+20_20_20_20_11
+25
+x
+~!competence-obligatoire!~
+CHEVAUCHER (AD, CHA)
+permet de monter à cheval sans épreuve, ou d'essayer de monter d'autres animaux.
+~!competence-obligatoire!~
+NAÏVETÉ TOUCHANTE (CHA)
+l'air gentil du héros lui permet de désamorcer certains conflits.
+~!competence-obligatoire!~
+PREMIERS SOINS (AD, INT)
+permet d'essayer de soigner un ami sur une épreuve de moyenne AD/INT.
+~!competence-obligatoire!~
+TIRER CORRECTEMENT (AD)
+le personnage peut utiliser, sans malus, un arc ou d'autres armes de jet (selon origine).
+~!competence-obligatoire!~
+TOMBER DANS LES PIÈGES
+le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.
+~!NOUVELLE_ORIGINE!~
+Gnome des forêts du Nord
+00_10_00_13_00
+20_20_20_20_08
+15
+x
+~!competence-obligatoire!~
+AMBIDEXTRIE (AD)
+possibilité d'utiliser deux armes en même temps dans les combats – sujet à restrictions.
+~!competence-obligatoire!~
+APPEL DES RENFORTS
+permet de fuir un combat sans risquer d'être blessé.
+~!competence-obligatoire!~
+CHEVAUCHER (AD, CHA)
+permet de monter à cheval sans épreuve, ou d'essayer de monter d'autres animaux.
+~!competence-obligatoire!~
+CHOURAVER (AD)
+donne un bonus pour toutes les épreuves de vol à la tire.
+~!competence-obligatoire!~
+DÉPLACEMENT SILENCIEUX (AD)
+donne un bonus aux épreuves de discrétion et d'infiltration.
+~!competence-obligatoire!~
+INSTINCT DU TRÉSOR (INT)
+donne un bonus aux épreuves pour trouver des trésors.
+~!NOUVELLE_ORIGINE!~
+Gobelin
+00_00_00_00_00
+10_10_08_20_09
+20
+09
+~!competence-obligatoire!~
+AGORAPHOBIE (INT)
+le héros a du mal à garder son sang-froid en présence de foule.
+~!competence-obligatoire!~
+APPEL DES RENFORTS
+permet de fuir un combat sans risquer d'être blessé.
+~!competence-obligatoire!~
+APPEL DU SAUVAGE
+le héros a du mal à choisir son camp en présence d'une horde.
+~!competence-obligatoire!~
+ATTIRE LES MONSTRES
+au début du combat, le héros est toujours pris pour cible par les monstres et les ennemis.
+~!competence-obligatoire!~
+INSTINCT DE SURVIE
+capacité spéciale permettant de toujours trouver la nourriture.
+~!competence-obligatoire!~
+INSTINCT DU TRÉSOR (INT)
+donne un bonus aux épreuves pour trouver des trésors.
+~!competence-obligatoire!~
+SENTIR DES PIEDS
+éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+~!competence-obligatoire!~
+TÊTE VIDE
+immunité à certains sortilèges ayant pour cible l'esprit du héros.
+~!NOUVELLE_ORIGINE!~
+Haut-elfe
+00_11_12_12_00
+20_20_20_20_12
+25
+x
+~!competence-obligatoire!~
+ÉRUDITION (INT)
+le héros sait lire, écrire et compter sans passer d'épreuve.
+~!competence-obligatoire!~
+RUNES BIZARRES (INT)
+permet de lire ou d'interpréter les écritures étranges et symboles.
+~!competence-obligatoire!~
+TOMBER DANS LES PIÈGES
+le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.
+~!NOUVELLE_ORIGINE!~
+Humain
+00_00_00_00_00
+20_20_20_20_20
+30
+x
+~!NOUVELLE_ORIGINE!~
+Nain
+11_00_00_00_12
+20_20_20_20_20
+35
+x
+~!competence-obligatoire!~
+APPEL DU TONNEAU (INT)
+le héros a du mal à se tenir en présence d'alcool.
+~!competence-obligatoire!~
+INSTINCT DU TRÉSOR (INT)
+donne un bonus aux épreuves pour trouver des trésors.
+~!competence-obligatoire!~
+PÉNIBLE (INT)
+le héros agace les membre de son groupe, et ça peut lui valoir des baffes.
+~!competence-obligatoire!~
+RADIN (CHA, INT)
+donne un bonus au marchandage, mais également un malus au partage !
+~!NOUVELLE_ORIGINE!~
+Ogre
+00_00_00_00_13
+20_09_10_11_20
+45
+08
+~!competence-obligatoire!~
+ARMES DE BOURRIN
+possibilité d'utiliser des armes à deux mains.
+~!competence-obligatoire!~
+APPEL DU TONNEAU (INT)
+le héros a du mal à se tenir en présence d'alcool.
+~!competence-obligatoire!~
+APPEL DU VENTRE (INT)
+le héros doit se nourrir souvent, ou bien il s'attaque aux équipiers.
+~!competence-obligatoire!~
+INSTINCT DE SURVIE
+capacité spéciale permettant de toujours trouver la nourriture.
+~!competence-obligatoire!~
+INTIMIDER (COU, CHA)
+le héros peut tenter d'effrayer quelqu'un à l'aide de son courage et son charisme.
+~!competence-obligatoire!~
+SENTIR DES PIEDS
+éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+~!competence-obligatoire!~
+TÊTE VIDE
+immunité à certains sortilèges ayant pour cible l'esprit du héros.
+~!NOUVELLE_ORIGINE!~
+Orque
+00_00_00_00_12
+20_08_10_20_20
+35
+09
+~!competence-obligatoire!~
+AGORAPHOBIE (INT)
+le héros a du mal à garder son sang-froid en présence de foule.
+~!competence-obligatoire!~
+APPEL DU SAUVAGE
+le héros a du mal à choisir son camp en présence d'une horde.
+~!competence-obligatoire!~
+APPEL DU TONNEAU (INT)
+le héros a du mal à se tenir en présence d'alcool.
+~!competence-obligatoire!~
+BOURRE-PIF
+le héros peut se battre à mains nues de façon efficace et accéder à des coups spéciaux.
+~!competence-obligatoire!~
+INSTINCT DE SURVIE
+capacité spéciale permettant de toujours trouver la nourriture.
+~!competence-obligatoire!~
+SENTIR DES PIEDS
+éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+~!competence-obligatoire!~
+TÊTE VIDE
+immunité à certains sortilèges ayant pour cible l'esprit du héros.
+~!NOUVELLE_ORIGINE!~
+Semi-Homme
+12_10_00_00_00
+20_20_20_20_10
+25
+09
+~!competence-obligatoire!~
+APPEL DU TONNEAU (INT)
+le héros a du mal à se tenir en présence d'alcool.
+~!competence-obligatoire!~
+CUISTOT (AD)
+permet à tout le groupe de récupérer des PV supplémentaires quand il prépare un repas.
+~!competence-obligatoire!~
+INSTINCT DE SURVIE
+capacité spéciale permettant de toujours trouver la nourriture.
+~!competence-obligatoire!~
+ATTIRE LES MONSTRES
+au début du combat, le héros est toujours pris pour cible par les monstres et les ennemis.
+~!competence-obligatoire!~
+RESSEMBLE À RIEN
+permet de se faire oublier, de passer inaperçu.
+~!FIN_ORIGINE!~

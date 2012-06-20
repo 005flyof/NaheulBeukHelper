@@ -1,0 +1,160 @@
+﻿h1 /* titre 1*/
+{
+   color: #c30000;	
+   text-align: center;
+   font-style: normal;
+   text-decoration: underline;
+   width: 95%;
+   margin-left: 20px; /* Marge intérieure de 20px */
+}
+h2 /* titre pour le menu */
+{
+   color: green;
+   text-align: left;
+   font-style: normal;
+   text-decoration: underline;
+   width: 95%;
+   margin-left: 20px; /* Marge intérieure de 20px */
+}
+h3 /* titre pour le corps de texte */
+{
+   color: rgb(5,0,214);
+   text-align: left;
+   font-style: normal;
+   text-decoration: underline;
+   width: 95%;
+   margin-left: 20px; /* Marge intérieure de 20px */
+}
+p /* paragraphe normal */
+{
+   color: black;
+   text-align: justify;
+}
+
+ul, ol /* ul=liste à puces non ordonnée & ol=liste à puces ordonnée */
+{
+   color: black;
+   text-align: justify;
+}
+a
+{
+	text-decoration: none;
+	color: #8b4513;
+}
+a:hover, a:visited:hover
+{
+	text-decoration: underline;
+}
+a:visited
+{
+	color: #8b4513;
+}
+strong /* mise en avant ++ */
+{
+   color: #228b22;
+   font-style: italic;
+   font-weight: bold;
+}
+em /* mise en avant -- */
+{
+   font-weight: bold;
+}
+
+.typeObj
+{
+	color: #003cfc;
+}
+.souligne /* souligné */
+{
+   text-decoration: underline;
+}
+
+body /* Corps de page */
+{
+   font-family: "Times new roman", Arial, "Trebuchet MS", Verdana, serif;
+   width: 95%; /* Taille d'utilisation des blocks par rappot à l'écran du visiteur ! */
+   margin: auto; /* Pour centrer notre page */
+   margin-top: 20px; /* Pour éviter de coller avec le haut de la fenêtre du navigateur. Essayez d'enlever pour voir ! */
+   margin-bottom: 20px;    /* Idem pour le bas du navigateur */
+   background-color: #ffffcf; /* Couleur de fond (pour éviter le fond blanc ! */	
+}
+
+
+.menu
+{
+	text-align: center;
+	
+	padding: 10px 10px 10px 10px;
+	margin: 10px auto 10px;
+}
+.menu-h
+{
+	margin: auto 20px auto 20px;
+	
+    color: blue;
+
+	line-height: 40px;
+	
+	font-size: 20px;
+	font-weight: bold;
+}
+.menu ul
+{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	text-align:center;
+}
+.menu li
+{
+	display: inline-block;
+}
+.menu li a
+{
+	color: blue;
+	display:block;
+	text-decoration:none;
+	padding:5px;
+}
+.menu ul li ul
+{
+	border: 3px solid green;
+	
+	padding: 15px;
+	
+	list-style: none;
+	font-size: 18px;
+	
+	display: none;
+	
+	background-color: white;
+	background-position: center;
+	z-index: 1;
+}
+.menu ul li:hover ul
+{
+	display:block;
+}
+.menu li ul
+{
+	position:absolute;
+}
+.menu ul li li
+{
+	margin: 0px 5px 0px 5px;
+	padding: 0px;
+	
+	text-align: center;
+	color: black;
+	
+	display: block;
+}
+.menu ul li li a
+{
+	color: #009900;
+}
+.menu ul li li a:hover
+{
+	color: #003300;
+	text-decoration: underline;
+}
