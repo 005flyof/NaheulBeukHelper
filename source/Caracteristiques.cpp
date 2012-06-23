@@ -1,488 +1,468 @@
 /*
-	Copyright (C) 2011 Florent FAYOLLAS
+    Copyright (C) 2011 Florent FAYOLLAS
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-	GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License along
-	with this program; if not, write to the Free Software Foundation, Inc.,
-	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
 #include "ClassePourPersonnage.h"
 
-Caracteristiques::Caracteristiques(bool at_prd_vrai,
-								   int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup,
-								   int AT_recup, int PRD_recup)
-	: AT_PRD_vrai(at_prd_vrai),
-	  COU(COU_recup), INT(INT_recup), CHA(CHA_recup), AD(AD_recup), FO(FO_recup),
-	  AT(AT_recup), PRD(PRD_recup)
+/*
+ * Constructeurs
+ */
+Caracteristiques::Caracteristiques(int COU, int INT, int CHA, int AD, int FO)
+    : m_courage(COU), m_intelligence(INT), m_charisme(CHA), m_adresse(AD), m_force(FO),
+      utilisation_AT_PRD(false), m_attaque(0), m_parade(0)
 {}
-Caracteristiques::Caracteristiques(Caracteristiques const& b)
-{
-	AT_PRD_vrai = b.AT_PRD_vrai;
-
-	COU = b.COU;
-	INT = b.INT;
-	CHA = b.CHA;
-	AD = b.AD;
-	FO = b.FO;
-	AT = b.AT;
-	PRD = b.PRD;
-}
+Caracteristiques::Caracteristiques(int COU, int INT, int CHA, int AD, int F0, int AT, int PRD)
+: m_courage(COU), m_intelligence(INT), m_charisme(CHA), m_adresse(AD), m_force(FO),
+  utilisation_AT_PRD(true), m_attaque(AT), m_parade(PRD)
+{}
 
 
+/*
+ * Opérateurs
+ */
 bool Caracteristiques::estEgal(Caracteristiques const& b) const
 {
-	if (COU == b.COU && INT == b.INT && CHA == b.CHA && AD == b.AD && FO == b.FO && AT == b.AT && PRD == b.PRD)
-		return true;
-	else
-		return false;
+    if (m_courage == b.m_courage
+            && m_intelligence == b.m_intelligence
+            && m_charisme == b.m_charisme
+            && m_adresse == b.m_adresse
+            && m_force == b.m_force
+            && utilisation_AT_PRD == b.utilisation_AT_PRD
+            && m_attaque == b.m_attaque
+            && m_parade == b.m_parade)
+        return true;
+    else
+        return false;
 }
 bool operator==(Caracteristiques const& a, Caracteristiques const& b)
 {
-	return a.estEgal(b);
+    return a.estEgal(b);
 }
 bool Caracteristiques::estInfOuEgal(Caracteristiques const& b) const
 {
-	if (COU <= b.COU && INT <= b.INT && CHA <= b.CHA && AD <= b.AD && FO <= b.FO)
-		return true;
-	else
-		return false;
+    // si il y a AT et PRD
+    if (utilisation_AT_PRD == b.utilisation_AT_PRD)
+    {
+        if (m_courage <= b.m_courage
+                && m_intelligence <= b.m_intelligence
+                && m_charisme <= b.m_charisme
+                && m_adresse <= b.m_adresse
+                && m_force <= b.m_force
+                && m_attaque <= b.m_attaque
+                && m_parade <= b.m_parade)
+            return true;
+        else
+            return false;
+    }
+    // sinon
+    else
+    {
+        if (m_courage <= b.m_courage
+                && m_intelligence <= b.m_intelligence
+                && m_charisme <= b.m_charisme
+                && m_adresse <= b.m_adresse
+                && m_force <= b.m_force)
+            return true;
+        else
+            return false;
+    }
 }
 bool operator<=(Caracteristiques const& a, Caracteristiques const& b)
 {
-	return a.estInfOuEgal(b);
+    return a.estInfOuEgal(b);
 }
 bool Caracteristiques::estSupOuEgal(Caracteristiques const& b) const
 {
-	if (COU >= b.COU && INT >= b.INT && CHA >= b.CHA && AD >= b.AD && FO >= b.FO)
-		return true;
-	else
-		return false;
+    // si il y a AT et PRD
+    if (utilisation_AT_PRD == b.utilisation_AT_PRD)
+    {
+        if (m_courage >= b.m_courage
+                && m_intelligence >= b.m_intelligence
+                && m_charisme >= b.m_charisme
+                && m_adresse >= b.m_adresse
+                && m_force >= b.m_force
+                && m_attaque >= b.m_attaque
+                && m_parade >= b.m_parade)
+            return true;
+        else
+            return false;
+    }
+    // sinon
+    else
+    {
+        if (m_courage >= b.m_courage
+                && m_intelligence >= b.m_intelligence
+                && m_charisme >= b.m_charisme
+                && m_adresse >= b.m_adresse
+                && m_force >= b.m_force)
+            return true;
+        else
+            return false;
+    }
 }
 bool operator>=(Caracteristiques const& a, Caracteristiques const& b)
 {
-	return a.estSupOuEgal(b);
+    return a.estSupOuEgal(b);
 }
-
 
 Caracteristiques& Caracteristiques::operator=(Caracteristiques const& b)
 {
-	if(this != &b)
-	{
-		AT_PRD_vrai = b.AT_PRD_vrai;
+    if(this != &b)
+    {
+        utilisation_AT_PRD = b.utilisation_AT_PRD;
 
-		COU = b.COU;
-		INT = b.INT;
-		CHA = b.CHA;
-		AD = b.AD;
-		FO = b.FO;
-		AT = b.AT;
-		PRD = b.PRD;
-	}
+        m_courage = b.m_courage;
+        m_intelligence = b.m_intelligence;
+        m_charisme = b.m_charisme;
+        m_adresse = b.m_adresse;
+        m_force = b.m_force;
+        m_attaque = b.m_attaque;
+        m_parade = b.m_parade;
+    }
 
-	return *this;
+    return *this;
 }
 Caracteristiques& Caracteristiques::operator+=(Caracteristiques const& b)
 {
-	if ((COU + b.COU) > 18)
-		COU = 18;
-	else
-		COU += b.COU;
+    if ((m_courage + b.m_courage) > MAX_CARAC)
+        m_courage = MAX_CARAC;
+    else
+        m_courage += b.m_courage;
 
-	if ((INT + b.INT) > 18)
-		INT = 18;
-	else
-		INT += b.INT;
+    if ((m_intelligence + b.m_intelligence) > MAX_CARAC)
+        m_intelligence = MAX_CARAC;
+    else
+        m_intelligence += b.m_intelligence;
 
-	if ((CHA + b.CHA) > 18)
-		CHA = 18;
-	else
-		CHA += b.CHA;
+    if ((m_charisme + b.m_charisme) > MAX_CARAC)
+        m_charisme = MAX_CARAC;
+    else
+        m_charisme += b.m_charisme;
 
-	if ((AD + b.AD) > 18)
-		AD = 18;
-	else
-		AD += b.AD;
+    if ((m_adresse + b.m_adresse) > MAX_CARAC)
+        m_adresse = MAX_CARAC;
+    else
+        m_adresse += b.m_adresse;
 
-	if ((FO + b.FO) > 18)
-		FO = 18;
-	else
-		FO += b.FO;
+    if ((m_force + b.m_force) > MAX_CARAC)
+        m_force = MAX_CARAC;
+    else
+        m_force += b.m_force;
 
-	return *this;
+    if (utilisation_AT_PRD)
+    {
+        if ((m_attaque + b.m_attaque) > MAX_CARAC)
+            m_attaque = MAX_CARAC;
+        else
+            m_attaque += b.m_attaque;
+
+        if ((m_parade + b.m_parade) > MAX_CARAC)
+            m_parade = MAX_CARAC;
+        else
+            m_parade += b.m_parade;
+    }
+
+    return *this;
 }
 Caracteristiques& Caracteristiques::operator-=(Caracteristiques const& b)
 {
-	if (COU != 0)
-		COU -= b.COU;
-	else if ((COU - b.COU) < 0)
-		COU = 0;
+    if (m_courage != MIN_CARAC)
+        m_courage -= b.m_courage;
+    else if ((m_courage - b.m_courage) < MIN_CARAC)
+        m_courage = MIN_CARAC;
 
-	if (INT != 0)
-		INT -= b.INT;
-	else if ((INT - b.INT) < 0)
-		INT = 0;
+    if (m_intelligence != MIN_CARAC)
+        m_intelligence -= b.m_intelligence;
+    else if ((m_intelligence - b.m_intelligence) < MIN_CARAC)
+        m_intelligence = MIN_CARAC;
 
-	if (CHA != 0)
-		CHA -= b.CHA;
-	else if ((CHA - b.CHA) < 0)
-		CHA = 0;
+    if (m_charisme != MIN_CARAC)
+        m_charisme -= b.m_charisme;
+    else if ((m_charisme - b.m_charisme) < MIN_CARAC)
+        m_charisme = MIN_CARAC;
 
-	if (AD != 0)
-		AD -= b.AD;
-	else if ((AD - b.AD) < 0)
-		AD = 0;
+    if (m_adresse != MIN_CARAC)
+        m_adresse -= b.m_adresse;
+    else if ((m_adresse - b.m_adresse) < MIN_CARAC)
+        m_adresse = MIN_CARAC;
 
-	if (FO != 0)
-		FO -= b.FO;
-	else if ((FO - b.FO) < 0)
-		FO = 0;
+    if (m_force != MIN_CARAC)
+        m_force -= b.m_force;
+    else if ((m_force - b.m_force) < MIN_CARAC)
+        m_force = MIN_CARAC;
 
-	return *this;
+    if (utilisation_AT_PRD)
+    {
+        if (m_attaque != MIN_CARAC)
+            m_attaque -= b.m_attaque;
+        else if ((m_attaque - b.m_attaque) < MIN_CARAC)
+            m_attaque = MIN_CARAC;
+
+        if (m_parade != MIN_CARAC)
+            m_parade -= b.m_parade;
+        else if ((m_parade - b.m_parade) < MIN_CARAC)
+            m_parade = MIN_CARAC;
+    }
+
+    return *this;
 }
 
 
-void Caracteristiques::remplir(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup,
-							   int AT_recup, int PRD_recup)
+/*
+ * Remplissage
+ */
+void Caracteristiques::caracRemplir(int COU, int INT, int CHA, int AD, int FO)
 {
-	if (AT_recup != 0 && PRD_recup != 0)
-		AT_PRD_vrai = true;
-	else
-		AT_PRD_vrai = false;
+    m_courage = COU;
+    m_intelligence = INT;
+    m_charisme = CHA;
+    m_adresse = AD;
+    m_force = FO;
 
-	COU = COU_recup;
-	INT = INT_recup;
-	CHA = CHA_recup;
-	AD = AD_recup;
-	FO = FO_recup;
-	AT = AT_recup;
-	PRD = PRD_recup;
+    utilisation_AT_PRD = false;
+    m_attaque = 0;
+    m_parade = 0;
+}
+void Caracteristiques::caracRemplir(int COU, int INT, int CHA, int AD, int FO, int AT, int PRD)
+{
+    m_courage = COU;
+    m_intelligence = INT;
+    m_charisme = CHA;
+    m_adresse = AD;
+    m_force = FO;
+
+    utilisation_AT_PRD = true;
+    m_attaque = AT;
+    m_parade = PRD;
 }
 
 
-int Caracteristiques::getCOU()
+/*
+ * Récupération
+ */
+QString Caracteristiques::caracAffichage(bool plus)
 {
-	return COU;
+    QString string = "";
+
+    if (plus)
+    {
+        if (m_courage != 0)
+            string = "COU+" + QString::number(m_courage);
+
+        if (m_intelligence != 0 && string != "")
+            string += " ; INT+" + QString::number(m_intelligence);
+        else if (m_intelligence != 0 && string == "")
+            string += "INT+" + QString::number(m_intelligence);
+
+        if (m_charisme != 0 && string != "")
+            string += " ; CHA+" + QString::number(m_charisme);
+        else if (m_charisme != 0 && string == "")
+            string += "CHA+" + QString::number(m_charisme);
+
+        if (m_adresse != 0 && string != "")
+            string += " ; AD+" + QString::number(m_adresse);
+        else if (m_adresse != 0 && string == "")
+            string += "AD+" + QString::number(m_adresse);
+
+        if (m_force != 0 && string != "")
+            string += " ; FO+" + QString::number(m_force);
+        else if (m_force != 0 && string == "")
+            string += "FO+" + QString::number(m_force);
+
+        if (m_attaque != 0 && string != "")
+            string += " ; AT+" + QString::number(m_attaque);
+        else if (m_attaque != 0 && string == "")
+            string += "AT+" + QString::number(m_attaque);
+
+        if (m_parade != 0 && string != "")
+            string += " ; PRD+" + QString::number(m_parade);
+        else if (m_parade != 0 && string == "")
+            string += "PRD+" + QString::number(m_parade);
+
+        if (string == "")
+            string += "aucun";
+    }
+    else
+    {
+        if (m_courage != 0)
+            string = "COU-" + QString::number(m_courage);
+
+        if (m_intelligence != 0 && string != "")
+            string += " ; INT-" + QString::number(m_intelligence);
+        else if (m_intelligence != 0 && string == "")
+            string += "INT-" + QString::number(m_intelligence);
+
+        if (m_charisme != 0 && string != "")
+            string += " ; CHA-" + QString::number(m_charisme);
+        else if (m_charisme != 0 && string == "")
+            string += "CHA-" + QString::number(m_charisme);
+
+        if (m_adresse != 0 && string != "")
+            string += " ; AD-" + QString::number(m_adresse);
+        else if (m_adresse != 0 && string == "")
+            string += "AD-" + QString::number(m_adresse);
+
+        if (m_force != 0 && string != "")
+            string += " ; FO-" + QString::number(m_force);
+        else if (m_force != 0 && string == "")
+            string += "FO-" + QString::number(m_force);
+
+        if (m_attaque != 0 && string != "")
+            string += " ; AT-" + QString::number(m_attaque);
+        else if (m_attaque != 0 && string == "")
+            string += "AT-" + QString::number(m_attaque);
+
+        if (m_parade != 0 && string != "")
+            string += " ; PRD-" + QString::number(m_parade);
+        else if (m_parade != 0 && string == "")
+            string += "PRD-" + QString::number(m_parade);
+
+        if (string == "")
+            string += "aucun";
+    }
+
+    return string;
 }
-int Caracteristiques::getCHA()
+QString Caracteristiques::caracEnregistrement() const
 {
-	return CHA;
-}
-int Caracteristiques::getINT()
-{
-	return INT;
-}
-int Caracteristiques::getAD()
-{
-	return AD;
-}
-int Caracteristiques::getFO()
-{
-	return FO;
-}
-int Caracteristiques::getAT()
-{
-	return AT;
-}
-int Caracteristiques::getPRD()
-{
-	return PRD;
-}
+    QString string;
 
+    if (m_courage < 10)
+        string += "0" + QString::number(m_courage) + "_";
+    else
+        string += QString::number(m_courage) + "_";
 
-QString Caracteristiques::getCarac(bool plus)
-{
-	QString string = "";
+    if (m_intelligence < 10)
+        string += "0" + QString::number(m_intelligence) + "_";
+    else
+        string += QString::number(m_intelligence) + "_";
 
-	if (plus)
-	{
-		if (COU != 0)
-			string = "COU+" + QString::number(COU);
+    if (m_charisme < 10)
+        string += "0" + QString::number(m_charisme) + "_";
+    else
+        string += QString::number(m_charisme) + "_";
 
-		if (INT != 0 && string != "")
-			string += " ; INT+" + QString::number(INT);
-		else if (INT != 0 && string == "")
-			string += "INT+" + QString::number(INT);
+    if (m_adresse < 10)
+        string += "0" + QString::number(m_adresse) + "_";
+    else
+        string += QString::number(m_adresse) + "_";
 
-		if (CHA != 0 && string != "")
-			string += " ; CHA+" + QString::number(CHA);
-		else if (CHA != 0 && string == "")
-			string += "CHA+" + QString::number(CHA);
+    if (utilisation_AT_PRD)
+    {
+        if (m_force < 10)
+            string += "0" + QString::number(m_force) + "_";
+        else
+            string += QString::number(m_force) + "_";
 
-		if (AD != 0 && string != "")
-			string += " ; AD+" + QString::number(AD);
-		else if (AD != 0 && string == "")
-			string += "AD+" + QString::number(AD);
+        if (m_attaque < 10)
+            string += "0" + QString::number(m_attaque) + "_";
+        else
+            string += QString::number(m_attaque) + "_";
 
-		if (FO != 0 && string != "")
-			string += " ; FO+" + QString::number(FO);
-		else if (FO != 0 && string == "")
-			string += "FO+" + QString::number(FO);
+        if (m_parade < 10)
+            string += "0" + QString::number(m_parade);
+        else
+            string += QString::number(m_parade);
+    }
+    else
+    {
+        if (m_force < 10)
+            string += "0" + QString::number(m_force);
+        else
+            string += QString::number(m_force);
+    }
 
-		if (AT != 0 && string != "")
-			string += " ; AT+" + QString::number(AT);
-		else if (AT != 0 && string == "")
-			string += "AT+" + QString::number(AT);
-
-		if (PRD != 0 && string != "")
-			string += " ; PRD+" + QString::number(PRD);
-		else if (PRD != 0 && string == "")
-			string += "PRD+" + QString::number(PRD);
-
-		if (string == "")
-			string += "aucun";
-	}
-	else
-	{
-		if (COU != 0)
-			string = "COU-" + QString::number(COU);
-
-		if (INT != 0 && string != "")
-			string += " ; INT-" + QString::number(INT);
-		else if (INT != 0 && string == "")
-			string += "INT-" + QString::number(INT);
-
-		if (CHA != 0 && string != "")
-			string += " ; CHA-" + QString::number(CHA);
-		else if (CHA != 0 && string == "")
-			string += "CHA-" + QString::number(CHA);
-
-		if (AD != 0 && string != "")
-			string += " ; AD-" + QString::number(AD);
-		else if (AD != 0 && string == "")
-			string += "AD-" + QString::number(AD);
-
-		if (FO != 0 && string != "")
-			string += " ; FO-" + QString::number(FO);
-		else if (FO != 0 && string == "")
-			string += "FO-" + QString::number(FO);
-
-		if (AT != 0 && string != "")
-			string += " ; AT-" + QString::number(AT);
-		else if (AT != 0 && string == "")
-			string += "AT-" + QString::number(AT);
-
-		if (PRD != 0 && string != "")
-			string += " ; PRD-" + QString::number(PRD);
-		else if (PRD != 0 && string == "")
-			string += "PRD-" + QString::number(PRD);
-
-		if (string == "")
-			string += "aucun";
-	}
-
-	return string;
-}
-
-
-QString Caracteristiques::getCaracteristiques() const
-{
-	QString string;
-
-	if (COU < 10)
-		string += "0" + QString::number(COU) + "_";
-	else
-		string += QString::number(COU) + "_";
-
-	if (INT < 10)
-		string += "0" + QString::number(INT) + "_";
-	else
-		string += QString::number(INT) + "_";
-
-	if (CHA < 10)
-		string += "0" + QString::number(CHA) + "_";
-	else
-		string += QString::number(CHA) + "_";
-
-	if (AD < 10)
-		string += "0" + QString::number(AD) + "_";
-	else
-		string += QString::number(AD) + "_";
-
-	if (AT_PRD_vrai)
-	{
-		if (FO < 10)
-			string += "0" + QString::number(FO) + "_";
-		else
-			string += QString::number(FO) + "_";
-
-		if (AT < 10)
-			string += "0" + QString::number(AT) + "_";
-		else
-			string += QString::number(AT) + "_";
-
-		if (PRD < 10)
-			string += "0" + QString::number(PRD);
-		else
-			string += QString::number(PRD);
-	}
-	else
-	{
-		if (FO < 10)
-			string += "0" + QString::number(FO);
-		else
-			string += QString::number(FO);
-	}
-
-	return string;
+    return string;
 }
 
 
-void Caracteristiques::setCOU(int nb)
+/*
+ * Accesseurs
+ */
+int Caracteristiques::getCourage() const
 {
-	COU = nb;
+    return m_courage;
 }
-void Caracteristiques::setINT(int nb)
+int Caracteristiques::getIntelligence() const
 {
-	INT = nb;
+    return m_intelligence;
 }
-void Caracteristiques::setCHA(int nb)
+int Caracteristiques::getCharisme() const
 {
-	CHA = nb;
+    return m_charisme;
 }
-void Caracteristiques::setAD(int nb)
+int Caracteristiques::getAdresse() const
 {
-	AD = nb;
+    return m_adresse;
 }
-void Caracteristiques::setFO(int nb)
+int Caracteristiques::getForce() const
 {
-	FO = nb;
+    return m_force;
 }
-void Caracteristiques::setAT(int nb)
+int Caracteristiques::getAttaque() const
 {
-	AT = nb;
+    if (utilisation_AT_PRD)
+        return m_attaque;
+    else
+        fatalError("L'attaque n'a pas été initialisée pour ces caractéristiques\n"
+                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
 }
-void Caracteristiques::setPRD(int nb)
+int Caracteristiques::getParade() const
 {
-	PRD = nb;
+    if (utilisation_AT_PRD)
+        return m_parade;
+    else
+        fatalError("La parade n'a pas été initialisée pour ces caractéristiques\n"
+                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
 }
 
-
-void Caracteristiques::COU_1(bool plus)
+void Caracteristiques::setCourage(int COU)
 {
-	if (plus)
-	{
-		if (COU+1 <= 18)
-			COU++;
-		else
-			return;
-	}
-	else
-	{
-		if (COU-1 <= 18)
-			COU--;
-		else
-			return;
-	}
+    m_courage = COU;
 }
-void Caracteristiques::INT_1(bool plus)
+void Caracteristiques::setIntelligence(int INT)
 {
-	if (plus)
-	{
-		if (INT+1 <= 18)
-			INT++;
-		else
-			return;
-	}
-	else
-	{
-		if (INT-1 <= 18)
-			INT--;
-		else
-			return;
-	}
+    m_intelligence = INT;
 }
-void Caracteristiques::CHA_1(bool plus)
+void Caracteristiques::setCharisme(int CHA)
 {
-	if (plus)
-	{
-		if (CHA+1 <= 18)
-			CHA++;
-		else
-			return;
-	}
-	else
-	{
-		if (CHA-1 <= 18)
-			CHA--;
-		else
-			return;
-	}
+    m_charisme = CHA;
 }
-void Caracteristiques::AD_1(bool plus)
+void Caracteristiques::setAdresse(int AD)
 {
-	if (plus)
-	{
-		if (AD+1 <= 18)
-			AD++;
-		else
-			return;
-	}
-	else
-	{
-		if (AD-1 <= 18)
-			AD--;
-		else
-			return;
-	}
+    m_adresse = AD;
 }
-void Caracteristiques::FO_1(bool plus)
+void Caracteristiques::setForce(int FO)
 {
-	if (plus)
-	{
-		if (FO+1 <= 18)
-			FO++;
-		else
-			return;
-	}
-	else
-	{
-		if (FO-1 <= 18)
-			FO--;
-		else
-			return;
-	}
+    m_force = FO;
 }
-void Caracteristiques::AT_1(bool plus)
+void Caracteristiques::setAttaque(int AT)
 {
-	if (plus)
-	{
-		if (AT+1 <= 18)
-			AT++;
-		else
-			return;
-	}
-	else
-	{
-		if (AT-1 <= 18)
-			AT--;
-		else
-			return;
-	}
+    if (utilisation_AT_PRD)
+        m_attaque = AT;
+    else
+        fatalError("L'attaque n'a pas été initialisée pour ces caractéristiques\n"
+                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
 }
-void Caracteristiques::PRD_1(bool plus)
+void Caracteristiques::setParade(int PRD)
 {
-	if (plus)
-	{
-		if (PRD+1 <= 18)
-			PRD++;
-		else
-			return;
-	}
-	else
-	{
-		if (PRD-1 <= 18)
-			PRD--;
-		else
-			return;
-	}
+    if (utilisation_AT_PRD)
+        m_parade = PRD;
+    else
+        fatalError("La parade n'a pas été initialisée pour ces caractéristiques\n"
+                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
 }

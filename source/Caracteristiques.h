@@ -1,86 +1,79 @@
 /*
-	Copyright (C) 2011 Florent FAYOLLAS
+    Copyright (C) 2011 Florent FAYOLLAS
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
-	(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-	GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License along
-	with this program; if not, write to the Free Software Foundation, Inc.,
-	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
 #ifndef CARACTERISTIQUES_H
-	#define CARACTERISTIQUES_H
+    #define CARACTERISTIQUES_H
 
-	#include <QtGui>
+    #include <QtGui>
 
-	class Caracteristiques
-	{
-	public:
-		Caracteristiques(bool at_prd_vrai = false,
-						 int COU_recup = 0, int INT_recup = 0, int CHA_recup = 0, int AD_recup = 0, int FO_recup = 0,
-						 int AT_recup = 0, int PRD_recup = 0);
-		Caracteristiques(Caracteristiques const& b);
+    #define MIN_CARAC 2
+    #define MAX_CARAC 18
 
-		bool estEgal(Caracteristiques const& b) const;
-		bool estInfOuEgal(Caracteristiques const& b) const;
-		bool estSupOuEgal(Caracteristiques const& b) const;
-		Caracteristiques& operator=(Caracteristiques const& b);
-		Caracteristiques& operator+=(Caracteristiques const& b);
-		Caracteristiques& operator-=(Caracteristiques const& b);
+    class Caracteristiques
+    {
+    public:
+        Caracteristiques(int COU, int INT, int CHA, int AD, int FO);
+        Caracteristiques(int COU, int INT, int CHA, int AD, int F0, int AT, int PRD);
 
-		void remplir(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup,
-					 int AT_recup = 0, int PRD_recup = 0);
+        bool estEgal(Caracteristiques const& b) const;
+        bool estInfOuEgal(Caracteristiques const& b) const;
+        bool estSupOuEgal(Caracteristiques const& b) const;
+        Caracteristiques& operator=(Caracteristiques const& b);
+        Caracteristiques& operator+=(Caracteristiques const& b);
+        Caracteristiques& operator-=(Caracteristiques const& b);
 
-		QString getCarac(bool plus);
-		QString getCaracteristiques() const;
+        void caracRemplir(int COU, int INT, int CHA, int AD, int FO);
+        void caracRemplir(int COU, int INT, int CHA, int AD, int FO, int AT, int PRD);
 
-		int getCOU();
-		int getINT();
-		int getCHA();
-		int getAD();
-		int getFO();
-		int getAT();
-		int getPRD();
+        QString caracAffichage(bool plus);
+        QString caracEnregistrement() const;
 
-		void setCOU(int nb);
-		void setINT(int nb);
-		void setCHA(int nb);
-		void setAD(int nb);
-		void setFO(int nb);
-		void setAT(int nb);
-		void setPRD(int nb);
+        int getCourage() const;
+        int getIntelligence() const;
+        int getCharisme() const;
+        int getAdresse() const;
+        int getForce() const;
+        int getAttaque() const;
+        int getParade() const;
 
-		void COU_1(bool plus = true);
-		void INT_1(bool plus = true);
-		void CHA_1(bool plus = true);
-		void AD_1(bool plus = true);
-		void FO_1(bool plus = true);
-		void AT_1(bool plus = true);
-		void PRD_1(bool plus = true);
+        void setCourage(int COU);
+        void setIntelligence(int INT);
+        void setCharisme(int CHA);
+        void setAdresse(int AD);
+        void setForce(int FO);
+        void setAttaque(int AT);
+        void setParade(int PRD);
 
-	private:
-		bool AT_PRD_vrai;
+    private:
+        bool utilisation_AT_PRD;
 
-		int COU;
-		int INT;
-		int CHA;
-		int AD;
-		int FO;
-		int AT;
-		int PRD;
-	};
+        int m_courage;
+        int m_intelligence;
+        int m_charisme;
+        int m_adresse;
+        int m_force;
+        int m_attaque;
+        int m_parade;
+    };
 
-	bool operator==(Caracteristiques const& a, Caracteristiques const& b);
-	bool operator<=(Caracteristiques const& a, Caracteristiques const& b);
-	bool operator>=(Caracteristiques const& a, Caracteristiques const& b);
+    bool operator==(Caracteristiques const& a, Caracteristiques const& b);
+    bool operator<=(Caracteristiques const& a, Caracteristiques const& b);
+    bool operator>=(Caracteristiques const& a, Caracteristiques const& b);
 
 
 #endif // CARACTERISTIQUES_H

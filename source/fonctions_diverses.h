@@ -26,4 +26,7 @@
     void fatalError(QString const& message, bool const& logErreur = false);
     void log(QString const& message, bool vider = false);
 
+// Variables
+    #define SITE_BUGS "https://sourceforge.net/p/naheulbeuk-help/bugs/"
+
 #endif // FONCTIONS_DIVERSES_H
