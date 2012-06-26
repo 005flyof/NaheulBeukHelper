@@ -3,6 +3,10 @@ Pour aider les gentils MJ du Jeu de rôle de NaheulBeuk !
 
 Pour plus d'informations : [[http://005flyof.github.com/NaheulBeukHelper/][voir la page de présentation]]
 
+** Explication des différents hébergeurs de NBH
+	+ Sourceforge.net	-> programme et sources en version release
+	+ GitHub			-> sources en version de développement
+
 * Versions
 ** Version 1.8.6 béta
   Version en cours de développement
