@@ -72,5 +72,5 @@ int main(int argc, char *argv[])
     15	- faire le log                                              (15)    - fait
     16	- fonctions d'ouverture des fichiers, de chargement des obj (16)	- pas la peine
     17	- changement des erreurs pour les chargements de  carac     (17)    - fait
-    18	- classe personnage à faire en 2 parties                    (18)    -
+    18	- classe personnage à faire en 2 parties                    (18)    - en cours
 */
