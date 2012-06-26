@@ -26,20 +26,19 @@
     {
     public:
         Fleche(QString nom, int nb, int PI, int AD);
-        Fleche(Fleche *ACopier);
 
         int getNombre() const;
         QString getNom() const;
-        QString getBonus() const;
+        QString getBonusAffichage() const;
         int getAD() const;
         int getPI() const;
 
         void setNom(QString nom);
         void setNombre(int nb);
-        void setDegats(int degats);
-        void setBonus(int ad_bonus);
+        void setPI(int degats);
+        void setAD(int ad_bonus);
 
-        QString getFleche() const;
+        QString flechesEnregistrement() const;
 
     private:
         int m_nombre;

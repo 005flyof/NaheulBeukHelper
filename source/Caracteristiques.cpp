@@ -432,28 +432,60 @@ int Caracteristiques::getParade() const
 
 void Caracteristiques::setCourage(int COU)
 {
-    m_courage = COU;
+    if (COU < 2)
+        m_courage = 2;
+    else if (COU > 18)
+        m_courage = 18;
+    else
+        m_courage = COU;
 }
 void Caracteristiques::setIntelligence(int INT)
 {
-    m_intelligence = INT;
+    if (INT < 2)
+        m_intelligence = 2;
+    else if (INT > 18)
+        m_intelligence = 18;
+    else
+        m_intelligence = INT;
 }
 void Caracteristiques::setCharisme(int CHA)
 {
-    m_charisme = CHA;
+    if (CHA < 2)
+        m_charisme = 2;
+    else if (CHA > 18)
+        m_charisme = 18;
+    else
+        m_charisme = CHA;
 }
 void Caracteristiques::setAdresse(int AD)
 {
-    m_adresse = AD;
+    if (AD < 2)
+        m_adresse = 2;
+    else if (AD > 18)
+        m_adresse = 18;
+    else
+        m_adresse = AD;
 }
 void Caracteristiques::setForce(int FO)
 {
-    m_force = FO;
+    if (FO < 2)
+        m_force = 2;
+    else if (FO > 18)
+        m_force = 18;
+    else
+        m_force = FO;
 }
 void Caracteristiques::setAttaque(int AT)
 {
     if (utilisation_AT_PRD)
-        m_attaque = AT;
+    {
+        if (AT < 2)
+            m_attaque = 2;
+        else if (AT > 18)
+            m_attaque = 18;
+        else
+            m_attaque = AT;
+    }
     else
         fatalError("L'attaque n'a pas été initialisée pour ces caractéristiques\n"
                    "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
@@ -461,7 +493,14 @@ void Caracteristiques::setAttaque(int AT)
 void Caracteristiques::setParade(int PRD)
 {
     if (utilisation_AT_PRD)
-        m_parade = PRD;
+    {
+        if (PRD < 2)
+            m_parade = 2;
+        else if (PRD > 18)
+            m_parade = 18;
+        else
+            m_parade = PRD;
+    }
     else
         fatalError("La parade n'a pas été initialisée pour ces caractéristiques\n"
                    "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);

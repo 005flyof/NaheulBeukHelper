@@ -18,28 +18,25 @@
 
 #include "ClassePourPersonnage.h"
 
-Arme::Arme(QString nom, int nbDes, int degatsEnPlus,
+/*
+ * Constructeurs
+ */
+Arme::Arme(QString nom,
+           int nbDes, int degatsEnPlus,
            int cou, int intel, int cha, int ad, int fo, int at, int prd,
            int COU, int INTEL, int CHA, int AD, int FO, int AT, int PRD)
 {
     m_nomArme = nom;
     m_nombreDes = nbDes;
     m_degats = degatsEnPlus;
-    m_bonus = Caracteristiques(true, COU, INTEL, CHA, AD, FO, AT, PRD);
-    m_malus = Caracteristiques(true, cou, intel, cha, ad, fo, at, prd);
-}
-
-Arme::Arme(Arme *ACopier)
-{
-    m_nomArme = ACopier->m_nomArme;
-    m_nombreDes = ACopier->m_nombreDes;
-    m_degats = ACopier->m_degats;
-
-    m_bonus = ACopier->m_bonus;
-    m_malus = ACopier->m_malus;
+    m_bonus = Caracteristiques(COU, INTEL, CHA, AD, FO, AT, PRD);
+    m_malus = Caracteristiques(cou, intel, cha, ad, fo, at, prd);
 }
 
 
+/*
+ * Accesseurs
+ */
 void Arme::setBonus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup)
 {
     m_bonus.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup, AT_recup, PRD_recup);
@@ -48,10 +45,12 @@ void Arme::setMalus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, i
 {
     m_malus.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup, AT_recup, PRD_recup);
 }
+
 void Arme::setNom(QString nom)
 {
     m_nomArme = nom;
 }
+
 void Arme::setDegats(int des, int degats)
 {
     m_nombreDes = des;
@@ -62,6 +61,7 @@ void Arme::setRupture(int maximum)
 {
     m_rupture_max = maximum;
 }
+
 void Arme::setType(Arme::typeArme type)
 {
     m_type = type;
@@ -72,19 +72,29 @@ QString Arme::getNom() const
 {
     return m_nomArme;
 }
-QString Arme::getBonus()
+
+QString Arme::getBonusAffichage() const
 {
     QString bonus_string = m_bonus.getCarac(true);
 
     return bonus_string;
 }
-QString Arme::getMalus()
+QString Arme::getMalusAffichage() const
 {
     QString malus_string = m_malus.getCarac(false);
 
     return malus_string;
 }
-QString Arme::getDegats()
+Caracteristiques Arme::getBonus() const
+{
+    return m_bonus;
+}
+Caracteristiques Arme::getMalus() const
+{
+    return m_malus;
+}
+
+QString Arme::getDegatsAffichage() const
 {
     QString degats = "";
 
@@ -97,17 +107,20 @@ QString Arme::getDegats()
 
     return degats;
 }
-int Arme::des() const
+int Arme::getNbDes() const
 {
     return m_nombreDes;
 }
-int Arme::degats() const
+int Arme::getDegatsEnPlus() const
 {
     return m_degats;
 }
 
 
-QString Arme::getArme() const
+/*
+ * Enregistrement
+ */
+QString Arme::armeEnregistrement() const
 {
     QString arme = "";
 
@@ -123,14 +136,4 @@ QString Arme::getArme() const
 
 
     return arme;
-}
-
-
-Caracteristiques Arme::bonus() const
-{
-    return m_bonus;
-}
-Caracteristiques Arme::malus() const
-{
-    return m_malus;
 }

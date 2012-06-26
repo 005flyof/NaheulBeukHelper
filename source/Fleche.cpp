@@ -18,6 +18,9 @@
 
 #include "ClassePourPersonnage.h"
 
+/*
+ * Constructeurs
+ */
 Fleche::Fleche(QString nom, int nb, int PI, int AD)
 {
     m_nombre = nb;
@@ -25,15 +28,11 @@ Fleche::Fleche(QString nom, int nb, int PI, int AD)
     m_degats = PI;
     m_bonusAD = AD;
 }
-Fleche::Fleche(Fleche *ACopier)
-{
-    m_nombre = ACopier->m_nombre;
-    m_nomFleche = ACopier->m_nomFleche;
-    m_degats = ACopier->m_degats;
-    m_bonusAD = ACopier->m_bonusAD;
-}
 
 
+/*
+ * Accesseurs
+ */
 int Fleche::getNombre() const
 {
     return m_nombre;
@@ -42,7 +41,7 @@ QString Fleche::getNom() const
 {
     return m_nomFleche;
 }
-QString Fleche::getBonus() const
+QString Fleche::getBonusAffichage() const
 {
     QString bonus = "PI : " + QString::number(m_degats);
     bonus += " / AD+" + QString::number(m_bonusAD);
@@ -70,17 +69,20 @@ void Fleche::setNombre(int nb)
     else
         m_nombre = nb;
 }
-void Fleche::setDegats(int degats)
+void Fleche::setPI(int degats)
 {
     m_degats = degats;
 }
-void Fleche::setBonus(int ad_bonus)
+void Fleche::setAD(int ad_bonus)
 {
     m_bonusAD = ad_bonus;
 }
 
 
-QString Fleche::getFleche() const
+/*
+ * Enregistrement
+ */
+QString Fleche::flechesEnregistrement() const
 {
     QString fleche = "";
 
