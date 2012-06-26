@@ -1,7 +1,14 @@
 * NaheulBeuk Helper
 Pour aider les gentils MJ du Jeu de rôle de NaheulBeuk !
-Pour plus d'informations : [voir la page de présentation](http://005flyof.github.com/NaheulBeukHelper/)
+
+Pour plus d'informations : [[http://005flyof.github.com/NaheulBeukHelper/][voir la page de présentation]]
 
 * Versions
-** 1.8.6 BETA
-Version en cours de développement
+** Version 1.8.6 béta
+  Version en cours de développement
+*** Nouveautés de la version
+    + Sécurisation de NBH (éviter les fuites de mémoires)
+    + Simplification du code source
+** Version 1.8.5
+*** Nouveautés de la version
+    + Gérer l'ordre de marche dans les donjons
