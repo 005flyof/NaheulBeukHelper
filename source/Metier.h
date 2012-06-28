@@ -26,7 +26,7 @@
     class Metier
     {
     public:
-        Metier(QString nom = "Métier sans nom !", int AT = 0, int PRD = 0,
+        Metier(QString nom = "MÃ©tier sans nom !", int AT = 0, int PRD = 0,
                int cou = 0, int intel = 0, int cha = 0, int ad = 0, int fo = 0);
 
         void setCarac_mini(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup);

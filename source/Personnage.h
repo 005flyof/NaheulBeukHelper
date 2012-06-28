@@ -31,20 +31,20 @@
     #define PAS_ARME "A mains nues"
     #define PAS_PROTECTION "Pas de protection"
     #define PAS_VETEMENT "Nu"
-    #define PAS_FLECHE "Pas de flèche"
-    #define PAS_EQUIPEMENTS "Pas d'équipement"
+    #define PAS_FLECHE "Pas de flÃ¨che"
+    #define PAS_EQUIPEMENTS "Pas d'Ã©quipement"
 
     class Personnage
     {
     public:
-        Personnage(QString nom = "Sans nom !", QString sexe = "Sexe non défini !",
-                   QString nomOrigine = "Sans Origine ?", QString nomMetier = "Sans métier ?",
+        Personnage(QString nom = "Sans nom !", QString sexe = "Sexe non dÃ©fini !",
+                   QString nomOrigine = "Sans Origine ?", QString nomMetier = "Sans mÃ©tier ?",
                    int cou = 8, int intel = 8, int cha = 8, int ad = 8, int fo = 8, int at = 0, int prd = 0,
                    int cou_modif = 8, int intel_modif = 8, int cha_modif = 8, int ad_modif = 8, int fo_modif = 8, int at_modif = 0, int prd_modif = 0,
                    int ptsDestin = 0, int xp = 0, int ev = 0,
                    int OR = 0, int ARGENT = 0, int CUIVRE = 0);
 
-        // Appliquer origine / métier
+        // Appliquer origine / mÃ©tier
         void setOrigine(Origine& a);
         void setMetier(Metier& a);
 
@@ -57,7 +57,7 @@
         // Appliquer une adresse de fichier
         void setAdresse(QString const& adresse);
 
-        // Appliquer des équipements lors de l'ouverture
+        // Appliquer des Ã©quipements lors de l'ouverture
         void addProtection(Protection *protectionAAjouter, int num);
         void addArme(Arme *armeAAjouter, int num);
         void addVetement(Vetement *VetementAAjouter, int num);
@@ -82,13 +82,13 @@
         void achatEV();
         void achatEA();
 
-        // Récupérer adresse du fichier
+        // RÃ©cupÃ©rer adresse du fichier
         QString getAdresse() const;
 
         // Enregistrer
         QString getPersoEntier() const;
 
-        // Tester origine / métier
+        // Tester origine / mÃ©tier
         bool testOrigine(Origine const& a);
         bool testMetier(Metier const& a);
 

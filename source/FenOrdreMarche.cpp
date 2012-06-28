@@ -46,7 +46,7 @@ FenOrdreMarche::FenOrdreMarche(QStringList const& nomPersos)
     QObject::connect(bas1, SIGNAL(clicked()), this, SLOT(descendre1()));
     QObject::connect(bas, SIGNAL(clicked()), this, SLOT(descendre()));
 
-// Modèle
+// ModÃ¨le
     modele = new QStringListModel(nomPersonnages);
         QObject::connect(modele, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(recharger()));
 

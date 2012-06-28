@@ -34,15 +34,15 @@
         void setMalus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup);
         void setNom(QString nom);
 
-    // Récupérer pour afficher
+    // RÃ©cupÃ©rer pour afficher
         QString getNom() const;
         QString getBonusAffichage() const;
         QString getMalusAffichage() const;
 
-    // Récupérer pour enregistrer
+    // RÃ©cupÃ©rer pour enregistrer
         QString getVetement() const;
 
-    // Récupérer les caractéristiques
+    // RÃ©cupÃ©rer les caractÃ©ristiques
         Caracteristiques bonus() const;
         Caracteristiques malus() const;
 

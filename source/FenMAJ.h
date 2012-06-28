@@ -50,7 +50,7 @@
         void messageErreur(QNetworkReply::NetworkError);
 
     private:
-        // Pour le téléchargement
+        // Pour le tÃ©lÃ©chargement
         QVBoxLayout *verticalLayout;
         QLabel *label;
         QLineEdit *urlEdit;

@@ -1,18 +1,18 @@
 * NaheulBeuk Helper
-Pour aider les gentils MJ du Jeu de rÙle de NaheulBeuk !
+Pour aider les gentils MJ du Jeu de r√¥le de NaheulBeuk !
 
-Pour plus d'informations : [[http://005flyof.github.com/NaheulBeukHelper/][voir la page de prÈsentation]]
+Pour plus d'informations : [[http://005flyof.github.com/NaheulBeukHelper/][voir la page de pr√©sentation]]
 
-** Explication des diffÈrents hÈbergeurs de NBH
+** Explication des diff√©rents h√©bergeurs de NBH
 	+ Sourceforge.net	-> programme et sources en version release
-	+ GitHub			-> sources en version de dÈveloppement
+	+ GitHub			-> sources en version de d√©veloppement
 
 * Versions
-** Version 1.8.6 bÈta
-  Version en cours de dÈveloppement
-*** NouveautÈs de la version
-    + SÈcurisation de NBH (Èviter les fuites de mÈmoires)
+** Version 1.8.6 b√©ta
+  Version en cours de d√©veloppement
+*** Nouveaut√©s de la version
+    + S√©curisation de NBH (√©viter les fuites de m√©moires)
     + Simplification du code source
 ** Version 1.8.5
-*** NouveautÈs de la version
-    + GÈrer l'ordre de marche dans les donjons
+*** Nouveaut√©s de la version
+    + G√©rer l'ordre de marche dans les donjons

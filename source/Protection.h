@@ -34,17 +34,17 @@
         void setNom(QString nom);
         void setPR(int pr);
 
-    // Récupérer pour afficher
+    // RÃ©cupÃ©rer pour afficher
         QString getNom() const;
         QString getBonusAffichage() const;
         QString getMalusAffichage() const;
         QString getNbPR_Affichage() const;
         int getNbPR() const;
 
-    // Récupérer pour enregistrer
+    // RÃ©cupÃ©rer pour enregistrer
         QString protectionEnregistrement() const;
 
-    // Récupérer les caractéristiques
+    // RÃ©cupÃ©rer les caractÃ©ristiques
         Caracteristiques getBonus() const;
         Caracteristiques getMalus() const;
 

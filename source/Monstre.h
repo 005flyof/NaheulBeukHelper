@@ -33,7 +33,7 @@
 		QString nom() const;
 
 	private:
-	// Cractéristiques
+	// CractÃ©ristiques
 		QString m_nom;
 
 		int m_COU;

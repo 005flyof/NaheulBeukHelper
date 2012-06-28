@@ -40,14 +40,14 @@
 
         void afficher();
 
-        // Réception des éléments
+        // RÃ©ception des Ã©lÃ©ments
         void modif_vetement(Vetement const& objet);
         void modif_protection(Protection const& objet);
         void modif_arme(Arme const& objet);
         void modif_fleche(Fleche const& objet);
         void modif_equipement(QString* objet);
 
-        // Renvoie des éléments
+        // Renvoie des Ã©lÃ©ments
         Vetement return_vetement();
         Protection return_protection();
         Arme return_arme();

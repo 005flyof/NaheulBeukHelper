@@ -7,11 +7,11 @@ Assassin / Ninja
 TIRER CORRECTEMENT (AD)
 Le personnage peut utiliser un arc ou d'autres armes de jet (selon origine).
 ~!competence-obligatoire!~
-FRAPPER LÂCHEMENT
-Permet de doubler les dégâts d’une attaque lorsque celle-ci est placée dans le dos, une fois par combat.
+FRAPPER LÃ‚CHEMENT
+Permet de doubler les dÃ©gÃ¢ts dâ€™une attaque lorsque celle-ci est placÃ©e dans le dos, une fois par combat.
 ~!competence-obligatoire!~
-DÉPLACEMENT SILENCIEUX (AD)
-bonus aux épreuves de discrétion et d'infiltration
+DÃ‰PLACEMENT SILENCIEUX (AD)
+bonus aux Ã©preuves de discrÃ©tion et d'infiltration
 ~!NOUVEAU_METIER!~
 Bourgeois
 00_10_11_00_00
@@ -19,19 +19,19 @@ x
 x
 ~!competence-obligatoire!~
 APPEL DES RENFORTS
-permet de fuir un combat sans risquer d'être blessé.
+permet de fuir un combat sans risquer d'Ãªtre blessÃ©.
 ~!competence-obligatoire!~
 ATTIRE LES MONSTRES
-au début du combat, le héros est toujours pris pour cible par les monstres et les ennemis.
+au dÃ©but du combat, le hÃ©ros est toujours pris pour cible par les monstres et les ennemis.
 ~!competence-obligatoire!~
 CHEVAUCHER (AD, CHA)
-permet de monter à cheval sans épreuve, ou d'essayer de monter d'autres animaux.
+permet de monter Ã  cheval sans Ã©preuve, ou d'essayer de monter d'autres animaux.
 ~!competence-obligatoire!~
-ÉRUDITION (INT)
-le héros sait lire, écrire et compter sans passer d'épreuve.
+Ã‰RUDITION (INT)
+le hÃ©ros sait lire, Ã©crire et compter sans passer d'Ã©preuve.
 ~!competence-obligatoire!~
-PÉNIBLE (INT)
-le héros agace les membre de son groupe, et ça peut lui valoir des baffes.
+PÃ‰NIBLE (INT)
+le hÃ©ros agace les membre de son groupe, et Ã§a peut lui valoir des baffes.
 ~!NOUVEAU_METIER!~
 Guerrier / Gladiateur
 12_00_00_00_12
@@ -45,30 +45,30 @@ Barbare
 5
 ~!competence-obligatoire!~
 ARMES DE BOURRIN
-possibilité d'utiliser des armes à deux mains (sous réserve de restriction d'origine).
+possibilitÃ© d'utiliser des armes Ã  deux mains (sous rÃ©serve de restriction d'origine).
 ~!competence-obligatoire!~
 BOURRE-PIF
-le héros peut se battre à mains nues de façon efficace et accéder à des coups spéciaux.
+le hÃ©ros peut se battre Ã  mains nues de faÃ§on efficace et accÃ©der Ã  des coups spÃ©ciaux.
 ~!NOUVEAU_METIER!~
-Ingénieur
+IngÃ©nieur
 00_00_00_11_00
 x
 x
 ~!competence-obligatoire!~
 BRICOLO DU DIMANCHE
-possibilité de fabriquer des objets variés à partir de matières premières, des réparations.
+possibilitÃ© de fabriquer des objets variÃ©s Ã  partir de matiÃ¨res premiÃ¨res, des rÃ©parations.
 ~!competence-obligatoire!~
-DÉSAMORCER
-le héros peut s'aider d'un bonus pour désamorcer des pièges ou mécanismes.
+DÃ‰SAMORCER
+le hÃ©ros peut s'aider d'un bonus pour dÃ©samorcer des piÃ¨ges ou mÃ©canismes.
 ~!competence-obligatoire!~
 FORGERON (AD)
-capacité spéciale permettant de réparer ou d'améliorer des armes.
+capacitÃ© spÃ©ciale permettant de rÃ©parer ou d'amÃ©liorer des armes.
 ~!competence-obligatoire!~
-RESSEMBLE À RIEN
-permet de se faire oublier, de passer inaperçu.
+RESSEMBLE Ã€ RIEN
+permet de se faire oublier, de passer inaperÃ§u.
 ~!competence-obligatoire!~
 SERRURIER (AD)
-peut tenter de crocheter des mécanismes et serrures, sans malus à l'épreuve.
+peut tenter de crocheter des mÃ©canismes et serrures, sans malus Ã  l'Ã©preuve.
 ~!NOUVEAU_METIER!~
 Mage
 00_12_00_00_00
@@ -84,14 +84,14 @@ pourcent
 -
 30
 ~!competence-obligatoire!~
-ÉRUDITION (INT)
-le héros sait lire, écrire et compter sans passer d'épreuve.
+Ã‰RUDITION (INT)
+le hÃ©ros sait lire, Ã©crire et compter sans passer d'Ã©preuve.
 ~!competence-obligatoire!~
-RÉCUPÉRATION (PA)
-besoin de lire/méditer 1H par jour pour régénérer ses pouvoirs (en plus du sommeil).
+RÃ‰CUPÃ‰RATION (PA)
+besoin de lire/mÃ©diter 1H par jour pour rÃ©gÃ©nÃ©rer ses pouvoirs (en plus du sommeil).
 ~!competence-obligatoire!~
 RUNES BIZARRES (INT)
-permet de lire ou d'interpréter les écritures étranges et symboles.
+permet de lire ou d'interprÃ©ter les Ã©critures Ã©tranges et symboles.
 ~!NOUVEAU_METIER!~
 Marchand
 00_12_11_00_00
@@ -99,42 +99,42 @@ x
 x
 ~!competence-obligatoire!~
 APPEL DES RENFORTS
-permet de fuir un combat sans risquer d'être blessé.
+permet de fuir un combat sans risquer d'Ãªtre blessÃ©.
 ~!competence-obligatoire!~
 ARNAQUE ET CARAMBOUILLE (CHA)
 permet d'arnaquer les marchands pour obtenir des remises.
 ~!competence-obligatoire!~
-ÉRUDITION (INT)
-le héros sait lire, écrire et compter sans passer d'épreuve.
+Ã‰RUDITION (INT)
+le hÃ©ros sait lire, Ã©crire et compter sans passer d'Ã©preuve.
 ~!competence-obligatoire!~
 FARIBOLES (INT, CHA)
-bonus pour déstabiliser, distraire et captiver l'auditoire à l'aide de son baratin.
+bonus pour dÃ©stabiliser, distraire et captiver l'auditoire Ã  l'aide de son baratin.
 ~!competence-obligatoire!~
-MÉFIANCE (INT)
+MÃ‰FIANCE (INT)
 permet de savoir si un autre personnage ment.
 ~!NOUVEAU_METIER!~
-Ménestrel
+MÃ©nestrel
 00_00_12_11_00
 x
 x
 ~!competence-obligatoire!~
 ATTIRE LES MONSTRES
-au début du combat, le héros est toujours pris pour cible par les monstres et les ennemis.
+au dÃ©but du combat, le hÃ©ros est toujours pris pour cible par les monstres et les ennemis.
 ~!competence-obligatoire!~
 CHEVAUCHER (AD, CHA)
-permet de monter à cheval sans épreuve, ou d'essayer de monter d'autres animaux.
+permet de monter Ã  cheval sans Ã©preuve, ou d'essayer de monter d'autres animaux.
 ~!competence-obligatoire!~
-ÉRUDITION (INT)
-le héros sait lire, écrire et compter sans passer d'épreuve.
+Ã‰RUDITION (INT)
+le hÃ©ros sait lire, Ã©crire et compter sans passer d'Ã©preuve.
 ~!competence-obligatoire!~
 FARIBOLES (INT, CHA)
-bonus pour déstabiliser, distraire et captiver l'auditoire à l'aide de son baratin.
+bonus pour dÃ©stabiliser, distraire et captiver l'auditoire Ã  l'aide de son baratin.
 ~!competence-obligatoire!~
 JONGLAGE ET DANSE (AD)
-possibilité d'improviser des spectacle pour distraire les gens.
+possibilitÃ© d'improviser des spectacle pour distraire les gens.
 ~!competence-obligatoire!~
-NAÏVETÉ TOUCHANTE (CHA)
-l'air gentil du héros lui permet de désamorcer certains conflits.
+NAÃVETÃ‰ TOUCHANTE (CHA)
+l'air gentil du hÃ©ros lui permet de dÃ©samorcer certains conflits.
 ~!NOUVEAU_METIER!~
 Paladin
 12_10_11_00_09
@@ -150,13 +150,13 @@ Karmique
 10
 ~!competence-obligatoire!~
 CHEVAUCHER (AD, CHA)
-permet de monter à cheval sans épreuve, ou d'essayer de monter d'autres animaux.
+permet de monter Ã  cheval sans Ã©preuve, ou d'essayer de monter d'autres animaux.
 ~!competence-obligatoire!~
 INTIMIDER (COU, CHA)
-le héros peut tenter d'effrayer quelqu'un à l'aide de son courage et son charisme.
+le hÃ©ros peut tenter d'effrayer quelqu'un Ã  l'aide de son courage et son charisme.
 ~!competence-obligatoire!~
-RÉCUPÉRATION (PA)
-besoin de lire/méditer 1H par jour pour régénérer ses pouvoirs (en plus du sommeil).
+RÃ‰CUPÃ‰RATION (PA)
+besoin de lire/mÃ©diter 1H par jour pour rÃ©gÃ©nÃ©rer ses pouvoirs (en plus du sommeil).
 ~!NOUVEAU_METIER!~
 Pirate
 11_00_00_11_00
@@ -164,24 +164,24 @@ x
 x
 ~!competence-obligatoire!~
 APPEL DES RENFORTS
-permet de fuir un combat sans risquer d'être blessé.
+permet de fuir un combat sans risquer d'Ãªtre blessÃ©.
 ~!competence-obligatoire!~
 APPEL DU TONNEAU (INT)
-le héros a du mal à se tenir en présence d'alcool.
+le hÃ©ros a du mal Ã  se tenir en prÃ©sence d'alcool.
 ~!competence-obligatoire!~
 ARNAQUE ET CARAMBOUILLE (CHA)
 permet d'arnaquer les marchands pour obtenir des remises.
 ~!competence-obligatoire!~
 CHOURAVER (AD)
-donne un bonus pour toutes les épreuves de vol à la tire.
+donne un bonus pour toutes les Ã©preuves de vol Ã  la tire.
 ~!competence-obligatoire!~
 ESCALADER (AD)
-permet de grimer un peu partout avec un bonus aux épreuves.
+permet de grimer un peu partout avec un bonus aux Ã©preuves.
 ~!competence-obligatoire!~
 NAGER (AD, FO)
-le héros a déjà appris à nager et peut passer des épreuves en immersion.
+le hÃ©ros a dÃ©jÃ  appris Ã  nager et peut passer des Ã©preuves en immersion.
 ~!NOUVEAU_METIER!~
-Prêtre
+PrÃªtre
 00_00_12_00_00
 x
 x
@@ -189,34 +189,34 @@ x
 Karmique
 20
 ~!competence-obligatoire!~
-ÉRUDITION (INT)
-le héros sait lire, écrire et compter sans passer d'épreuve.
+Ã‰RUDITION (INT)
+le hÃ©ros sait lire, Ã©crire et compter sans passer d'Ã©preuve.
 ~!competence-obligatoire!~
-MÉFIANCE (INT)
+MÃ‰FIANCE (INT)
 permet de savoir si un autre personnage ment.
 ~!competence-obligatoire!~
-RÉCUPÉRATION (PA)
-besoin de lire/méditer 1H par jour pour régénérer ses pouvoirs (en plus du sommeil).
+RÃ‰CUPÃ‰RATION (PA)
+besoin de lire/mÃ©diter 1H par jour pour rÃ©gÃ©nÃ©rer ses pouvoirs (en plus du sommeil).
 ~!NOUVEAU_METIER!~
 Ranger
 00_00_10_10_00
 x
 x
 ~!competence-obligatoire!~
-DÉPLACEMENT SILENCIEUX (AD)
-donne un bonus aux épreuves de discrétion et d'infiltration.
+DÃ‰PLACEMENT SILENCIEUX (AD)
+donne un bonus aux Ã©preuves de discrÃ©tion et d'infiltration.
 ~!competence-obligatoire!~
-DÉTECTION (INT)
-bonus pour toutes les épreuves de détection des pièges et du danger.
+DÃ‰TECTION (INT)
+bonus pour toutes les Ã©preuves de dÃ©tection des piÃ¨ges et du danger.
 ~!competence-obligatoire!~
 CHEVAUCHER (AD, CHA)
-permet de monter à cheval sans épreuve, ou d'essayer de monter d'autres animaux.
+permet de monter Ã  cheval sans Ã©preuve, ou d'essayer de monter d'autres animaux.
 ~!competence-obligatoire!~
 NAGER (AD, FO)
-le héros a déjà appris à nager et peut passer des épreuves en immersion.
+le hÃ©ros a dÃ©jÃ  appris Ã  nager et peut passer des Ã©preuves en immersion.
 ~!competence-obligatoire!~
 PISTER (INT)
-bonus aux épreuves de pistage, recherche de traces, filature.
+bonus aux Ã©preuves de pistage, recherche de traces, filature.
 ~!NOUVEAU_METIER!~
 Voleur
 00_00_00_12_00
@@ -224,17 +224,17 @@ x
 x
 ~!competence-obligatoire!~
 APPEL DES RENFORTS
-permet de fuir un combat sans risquer d'être blessé.
+permet de fuir un combat sans risquer d'Ãªtre blessÃ©.
 ~!competence-obligatoire!~
 CHOURAVER (AD)
-donne un bonus pour toutes les épreuves de vol à la tire.
+donne un bonus pour toutes les Ã©preuves de vol Ã  la tire.
 ~!competence-obligatoire!~
-DÉPLACEMENT SILENCIEUX (AD)
-donne un bonus aux épreuves de discrétion et d'infiltration.
+DÃ‰PLACEMENT SILENCIEUX (AD)
+donne un bonus aux Ã©preuves de discrÃ©tion et d'infiltration.
 ~!competence-obligatoire!~
-DÉTECTION (INT)
-bonus pour toutes les épreuves de détection des pièges et du danger.
+DÃ‰TECTION (INT)
+bonus pour toutes les Ã©preuves de dÃ©tection des piÃ¨ges et du danger.
 ~!competence-obligatoire!~
 SERRURIER (AD)
-peut tenter de crocheter des mécanismes et serrures, sans malus à l'épreuve.
+peut tenter de crocheter des mÃ©canismes et serrures, sans malus Ã  l'Ã©preuve.
 ~!FIN_METIER!~

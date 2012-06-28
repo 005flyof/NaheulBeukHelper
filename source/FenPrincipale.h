@@ -126,7 +126,7 @@
         // Pour les blagues
         QPushButton *merci, *ohNon;
 
-        // Nécessaire partout
+        // NÃ©cessaire partout
         QString noteAdresse;
         QTextEdit *notes_txt;
         QTabWidget *monstres;
@@ -145,7 +145,7 @@
 
         QSpacerItem *spacer[NB_SPACER_FENPRINCIPALE];
 
-        // Pour la création d'un nouveau personnage
+        // Pour la crÃ©ation d'un nouveau personnage
         QDialog *nouveau_fenetre, *nouveau_fenetre2, *nouveau_fenetre3;
 
         QMap<QString, Origine> tableauDOrigines;
@@ -193,7 +193,7 @@
         QSpinBox *ajouter_PA;
         QSpinBox *ajouter_PC;
 
-        // Pour ajouter un équipement
+        // Pour ajouter un Ã©quipement
         QDialog *fen;
         QLineEdit *nom;
         QSpinBox *prix;

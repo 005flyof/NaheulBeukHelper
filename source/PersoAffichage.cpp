@@ -104,7 +104,7 @@ Personnage::Personnage(QString nom, QString sexe, QString nomOrigine, QString no
 
     m_energieAstrale = 0;
     m_energieAstrale_modif = 0;
-    typeEnergieAstrale = "Pas d'Ènergie astrale";
+    typeEnergieAstrale = "Pas d'√©nergie astrale";
     presenceEnergieAstrale = false;
 
     m_caracInitiales.remplir(cou, intel, cha, ad, fo, at, prd);
@@ -141,7 +141,7 @@ Personnage::Personnage(QString nom, QString sexe, QString nomOrigine, QString no
 
 Personnage& Personnage::operator=(Personnage const& b)
 {
-    if(this != &b) 	// VÈrification que ´ objet& != de objetACopier ª
+    if(this != &b) 	// V√©rification que ¬´ objet& != de objetACopier ¬ª
     {
         m_totalProtection = b.m_totalProtection;
 
@@ -203,13 +203,13 @@ Personnage::~Personnage()
 {}
 
 
-// Pour rÈcupÈrer le widget reprÈsentant le personnage
+// Pour r√©cup√©rer le widget repr√©sentant le personnage
 QTabWidget* Personnage::afficher()
 {
     ongletsCarac();
     ongletsEquip();
 
-// CompÈtences
+// Comp√©tences
     layoutCompetences = new QVBoxLayout();
         layoutCompetences->setSpacing(10);
         afficherCompetences();
@@ -229,9 +229,9 @@ QTabWidget* Personnage::afficher()
 
     QWidget *e = new QWidget();
         e->setLayout(layoutCompetences_Bouton);
-    this->addTab(e, "CompÈtences");
+    this->addTab(e, "Comp√©tences");
 
-// On renvoie le objet lui-mÍme
+// On renvoie le objet lui-m√™me
     return this;
 }
 void Personnage::ongletsCarac()
@@ -239,15 +239,15 @@ void Personnage::ongletsCarac()
     lecteurLabel = 0;
 //    setCaracModif();
 // Layout 1
-    // Informations gÈnÈriques
-        QGroupBox *perso_infos = new QGroupBox("Informations gÈnÈrales");
+    // Informations g√©n√©riques
+        QGroupBox *perso_infos = new QGroupBox("Informations g√©n√©rales");
         QGridLayout *perso_layoutInfos = new QGridLayout;
             QLabel *nom = new QLabel("Nom :	" + m_nomPerso);
             QLabel *sexe = new QLabel("Sexe :	" + m_sexePerso);
             QLabel *origineNom = new QLabel("Origine :	" + m_originePersonnage);
-            QLabel *metierNom = new QLabel("MÈtier :	" + m_metierPersonnage);
+            QLabel *metierNom = new QLabel("M√©tier :	" + m_metierPersonnage);
 
-            QLabel *XP_label = new QLabel("ExpÈrience : ");
+            QLabel *XP_label = new QLabel("Exp√©rience : ");
                 XP = new QLineEdit(QString::number(m_experience));
                     XP->setReadOnly(true);
                     XP->setAlignment(Qt::AlignCenter);
@@ -289,7 +289,7 @@ void Personnage::ongletsCarac()
     // Richesses
         QGroupBox *perso_richesse = new QGroupBox("Richesses de " + m_nomPerso);
         QGridLayout *perso_layoutRichesse = new QGridLayout;
-            QLabel *PO_label = new QLabel("- PiËces d'or (PO) : ");
+            QLabel *PO_label = new QLabel("- Pi√®ces d'or (PO) : ");
                 PO = new QLineEdit(QString::number(m_pieces->getRichesses_Or()));
                     PO->setReadOnly(true);
                     PO->setAlignment(Qt::AlignCenter);
@@ -305,7 +305,7 @@ void Personnage::ongletsCarac()
                     else
                         PO_moins->setEnabled(false);
 
-            QLabel *PA_label = new QLabel("- PiËces d'argent (PA) : ");
+            QLabel *PA_label = new QLabel("- Pi√®ces d'argent (PA) : ");
                 PA = new QLineEdit(QString::number(m_pieces->getRichesses_Argent()));
                     PA->setReadOnly(true);
                     PA->setAlignment(Qt::AlignCenter);
@@ -321,7 +321,7 @@ void Personnage::ongletsCarac()
                     else
                         PA_moins->setEnabled(false);
 
-            QLabel *PC_label = new QLabel("- PiËces de cuivre (PC) : ");
+            QLabel *PC_label = new QLabel("- Pi√®ces de cuivre (PC) : ");
                 PC = new QLineEdit(QString::number(m_pieces->getRichesses_Cuivre()));
                     PC->setReadOnly(true);
                     PC->setAlignment(Qt::AlignCenter);
@@ -383,16 +383,16 @@ void Personnage::ongletsCarac()
         QWidget *partie1 = new QWidget();
             partie1->setLayout(infos_pieces);
 
-    this->addTab(partie1, "Informations gÈnÈrales && richesses");
+    this->addTab(partie1, "Informations g√©n√©rales && richesses");
 
-    // CaractÈristiques
+    // Caract√©ristiques
         QGridLayout *perso_layoutCarac = new QGridLayout;
 
-            QLabel *explicCarac = new QLabel("Nrom de la caractÈristique");
+            QLabel *explicCarac = new QLabel("Nrom de la caract√©ristique");
                 explicCarac->setAlignment(Qt::AlignCenter);
             QLabel *explicCaracInitiale = new QLabel("Initiale");
                 explicCaracInitiale->setAlignment(Qt::AlignCenter);
-            QLabel *explicCaracModif = new QLabel("ModifiÈe");
+            QLabel *explicCaracModif = new QLabel("Modifi√©e");
                 explicCaracModif->setAlignment(Qt::AlignCenter);
             QPushButton *recalculer = new QPushButton("Recalculer...");
 
@@ -415,7 +415,7 @@ void Personnage::ongletsCarac()
                         EV_moins->setEnabled(false);
 
 
-            QLabel *magieResist_label = new QLabel("RÈsistance ‡ la magie :");
+            QLabel *magieResist_label = new QLabel("R√©sistance √† la magie :");
                 magieResist = new QLineEdit(QString::number( (m_caracModifiees.getINT() + m_caracModifiees.getCOU() + m_caracModifiees.getFO()) / 3) );
                     magieResist->setEnabled(false);
                     magieResist->setAlignment(Qt::AlignCenter);
@@ -592,7 +592,7 @@ void Personnage::ongletsCarac()
                     else
                         EA_moins->setEnabled(false);
 
-                QLabel *typeEA_label = new QLabel("Type d'Ènergie astrale :");
+                QLabel *typeEA_label = new QLabel("Type d'√©nergie astrale :");
                     typeEA = new QLineEdit(typeEnergieAstrale);
                     typeEA->setEnabled(false);
                 QLabel *magiePhys_label = new QLabel("Magie physique :");
@@ -682,23 +682,23 @@ void Personnage::ongletsCarac()
             perso_layoutCarac->setSpacing(10);
             perso_layoutCarac->setAlignment(Qt::AlignCenter);
 
-        QGroupBox *carac = new QGroupBox("CaractÈristiques");
+        QGroupBox *carac = new QGroupBox("Caract√©ristiques");
             carac->setLayout(perso_layoutCarac);
 
         QGridLayout *bonus_layout = new QGridLayout;
-            QLabel *carac_degatsBonus_label = new QLabel("DÈg‚ts dus ‡ la FO");
+            QLabel *carac_degatsBonus_label = new QLabel("D√©g√¢ts dus √† la FO");
                 carac_degatsBonus = new QLineEdit(QString::number(m_degatsBonus));
                     carac_degatsBonus->setReadOnly(true);
                     carac_degatsBonus->setAlignment(Qt::AlignCenter);
-            QLabel *carac_attaqueBonus_label = new QLabel("Points d'AT dus ‡ l'AD");
+            QLabel *carac_attaqueBonus_label = new QLabel("Points d'AT dus √† l'AD");
                 carac_attaqueBonus = new QLineEdit(QString::number(m_attaqueBonus));
                     carac_attaqueBonus->setReadOnly(true);
                     carac_attaqueBonus->setAlignment(Qt::AlignCenter);
-            QLabel *carac_paradeBonus_label = new QLabel("Points de PRD dus ‡ l'AD");
+            QLabel *carac_paradeBonus_label = new QLabel("Points de PRD dus √† l'AD");
                 carac_paradeBonus = new QLineEdit(QString::number(m_paradeBonus));
                     carac_paradeBonus->setReadOnly(true);
                     carac_paradeBonus->setAlignment(Qt::AlignCenter);
-            QLabel *carac_degatsBonusSorts_label = new QLabel("DÈg‚ts dus ‡ l'INT\n(valable seulement pour les sorts)");
+            QLabel *carac_degatsBonusSorts_label = new QLabel("D√©g√¢ts dus √† l'INT\n(valable seulement pour les sorts)");
                 carac_degatsBonusSorts = new QLineEdit(QString::number(m_degatsBonusSorts));
                     carac_degatsBonusSorts->setReadOnly(true);
                     carac_degatsBonusSorts->setAlignment(Qt::AlignCenter);
@@ -712,7 +712,7 @@ void Personnage::ongletsCarac()
             bonus_layout->addWidget(carac_degatsBonusSorts_label, 4, 1);
             bonus_layout->addWidget(carac_degatsBonusSorts, 4, 2);
 
-        QGroupBox *bonus = new QGroupBox("CaractÈristiques supÈrieures/infÈrieures ‡ la moyenne");
+        QGroupBox *bonus = new QGroupBox("Caract√©ristiques sup√©rieures/inf√©rieures √† la moyenne");
             bonus->setLayout(bonus_layout);
 
         QVBoxLayout *perso_layoutCarac_total = new QVBoxLayout;
@@ -720,8 +720,8 @@ void Personnage::ongletsCarac()
             perso_layoutCarac_total->addWidget(bonus);
         QWidget *partie2 = new QWidget();
         partie2->setLayout(perso_layoutCarac_total);
-    this->addTab(partie2, "CaractÈristiques");
-// On crÈe les connexions
+    this->addTab(partie2, "Caract√©ristiques");
+// On cr√©e les connexions
     QObject::connect(recalculer, SIGNAL(clicked()), this, SLOT(setCaracModif_Affichage()));
 
     QObject::connect(COU_plus, SIGNAL(clicked()), this, SLOT(plus_cou()));
@@ -756,7 +756,7 @@ void Personnage::ongletsCarac()
 }
 void Personnage::ongletsEquip()
 {
-// VÍtements
+// V√™tements
     QGridLayout *perso_layoutVetements = new QGridLayout();
         perso_layoutVetements->setSpacing(15);
         perso_layoutVetements->setAlignment(Qt::AlignCenter);
@@ -779,7 +779,7 @@ void Personnage::ongletsEquip()
             switch (lecteurVetement)
             {
             case 0:
-                vetement_type[lecteurVetement] = new QLabel("Ch‚peau");
+                vetement_type[lecteurVetement] = new QLabel("Ch√¢peau");
                 break;
             case 1:
                 vetement_type[lecteurVetement] = new QLabel("Haut");
@@ -845,7 +845,7 @@ void Personnage::ongletsEquip()
 
     QWidget *a = new QWidget();
     a->setLayout(perso_layoutVetements);
-    this->addTab(a, "VÍtements");
+    this->addTab(a, "V√™tements");
 
 // Protections
     QGridLayout *perso_layoutProtections = new QGridLayout();
@@ -938,9 +938,9 @@ void Personnage::ongletsEquip()
 
         QLabel *armement_explic[5];
 
-        armement_explic[0] = new QLabel("N∞ :");
+        armement_explic[0] = new QLabel("N¬∞ :");
         armement_explic[1] = new QLabel("Nom :");
-        armement_explic[2] = new QLabel("DÈg‚ts :");
+        armement_explic[2] = new QLabel("D√©g√¢ts :");
         armement_explic[3] = new QLabel("Bonus :");
         armement_explic[4] = new QLabel("Malus :");
 
@@ -1011,8 +1011,8 @@ void Personnage::ongletsEquip()
 
     armement->setLayout(perso_layoutArmement);
 
-// FlËches
-    fleche = new QGroupBox("FlËches de " + m_nomPerso);
+// Fl√®ches
+    fleche = new QGroupBox("Fl√®ches de " + m_nomPerso);
         QGridLayout *perso_layoutFleches = new QGridLayout();
         perso_layoutFleches->setSpacing(15);
         perso_layoutFleches->setAlignment(Qt::AlignCenter);
@@ -1116,7 +1116,7 @@ void Personnage::ongletsEquip()
 
         while (lecteurEquipement < MAX_EQUIPEMENT)
         {
-            equipement_num[lecteurEquipement] = new QLabel("Equipement n∞ " + QString::number(lecteurLigne) + " :");
+            equipement_num[lecteurEquipement] = new QLabel("Equipement n¬∞ " + QString::number(lecteurLigne) + " :");
             equipement_nom[lecteurEquipement] = new QTextEdit(*m_equipements[lecteurEquipement]);
                 equipement_nom[lecteurEquipement]->setReadOnly(true);
                 equipement_nom[lecteurEquipement]->setMinimumWidth(300);
@@ -1163,16 +1163,16 @@ void Personnage::afficherCompetences(bool nouvelleCompetence)
     if (m_competences.isEmpty())
     {
         bool ok(true);
-        int nb = QInputDialog::getInt(this, m_nomPerso + " -> Aucunes compÈtences",
-                                     "Ce pesonnage ne semble pas avoir de compÈtence, est-il si nul que Áa ?\n"
-                                     "Combien de compÈtences voulez-vous lui rajouter ?\n"
+        int nb = QInputDialog::getInt(this, m_nomPerso + " -> Aucunes comp√©tences",
+                                     "Ce pesonnage ne semble pas avoir de comp√©tence, est-il si nul que √ßa ?\n"
+                                     "Combien de comp√©tences voulez-vous lui rajouter ?\n"
                                      "Cliquez sur annuler pour ne pas en ajouter !", 1, 1, 50, 1, &ok);
         if (ok)
             for (int i(0); i < nb; i++)
                 addCompetence();
     }
 
-    // Si nouvelle compÈtence -> ajout du dernier widget
+    // Si nouvelle comp√©tence -> ajout du dernier widget
     if (nouvelleCompetence)
         layoutCompetences->addWidget(m_competences.at(m_competences.count() - 1)->getWidget());
     // Sinon, ajout du tableau
@@ -1181,13 +1181,13 @@ void Personnage::afficherCompetences(bool nouvelleCompetence)
             layoutCompetences->addWidget(m_competences.at(i)->getWidget());
 }
 
-// Pour rÈcuÈrer le nom de l'individu
+// Pour r√©cu√©rer le nom de l'individu
 QString Personnage::getNom() const
 {
     return m_nomPerso;
 }
 
-// Pour rÈcupÈrer l'adresse
+// Pour r√©cup√©rer l'adresse
 QString Personnage::getAdresse() const
 {
     return m_adresseFichierPerso;
@@ -1306,7 +1306,7 @@ bool Personnage::setNiveau()
 
     level->setText(QString::number(m_niveau));
 
-    // Si le niveau est modifiÈ, on renvoie 'true'
+    // Si le niveau est modifi√©, on renvoie 'true'
     if (niveauAncien != m_niveau)
         return true;
     else
@@ -1328,12 +1328,12 @@ void Personnage::setAdresse(QString const& adresse)
     m_adresseFichierPerso = adresse;
 }
 
-// Pour recalculer les caractËristiques
+// Pour recalculer les caract√®ristiques
 void Personnage::setCaracModif_Affichage()
 {
     m_totalProtection = 0;
     m_caracModifiees = m_caracInitiales;
-// VÍtements
+// V√™tements
     for (int lecteur = 0; lecteur < MAX_VETEMENT; lecteur++)
     {
         m_caracModifiees += m_vetements[lecteur]->bonus();
@@ -1374,12 +1374,12 @@ void Personnage::setBonus_Malus_caracSup_Inf_moyenne(int degatsBonus, int bonusA
         m_degatsBonus = degatsBonus;
 
 // bonus / malus de AD
-    if (bonusAttaque == 0 && bonusParade == 0) // si pas renseignÈ
+    if (bonusAttaque == 0 && bonusParade == 0) // si pas renseign√©
     {
 //        if (m_caracModifiees.getAT() + 1 == m_caracInitiales.getAT()
 //                || m_caracModifiees.getAT() - 1 == m_caracInitiales.getAT()
 //                || m_caracModifiees.getPRD() + 1 == m_caracInitiales.getPRD()
-//                || m_caracModifiees.getPRD() - 1 == m_caracInitiales.getPRD()) // si dÈj‡ modifiÈ
+//                || m_caracModifiees.getPRD() - 1 == m_caracInitiales.getPRD()) // si d√©j√† modifi√©
 //        {
         m_caracModifiees.setAT(m_caracModifiees.getAT() - m_attaqueBonus);
         m_caracModifiees.setPRD(m_caracModifiees.getPRD() - m_paradeBonus);
@@ -1394,7 +1394,7 @@ void Personnage::setBonus_Malus_caracSup_Inf_moyenne(int degatsBonus, int bonusA
                 QString choix("");
 
                 while (!ok)
-                    choix = QInputDialog::getItem(this, m_nomPerso + " -> CaractÈristiques infÈrieures ‡ la normale.",
+                    choix = QInputDialog::getItem(this, m_nomPerso + " -> Caract√©ristiques inf√©rieures √† la normale.",
                                                   "Ce personnage a un malus de 1 point, en raison de son adresse nullissime, sur :",
                                                   at_prd, 0, false, &ok);
                 if (choix == "Attaque")
@@ -1416,7 +1416,7 @@ void Personnage::setBonus_Malus_caracSup_Inf_moyenne(int degatsBonus, int bonusA
                 QString choix("");
 
                 while (!ok)
-                    choix = QInputDialog::getItem(this, m_nomPerso + " -> CaractÈristiques infÈrieures ‡ la normale.",
+                    choix = QInputDialog::getItem(this, m_nomPerso + " -> Caract√©ristiques inf√©rieures √† la normale.",
                                                   "Ce personnage a un malus de 1 point, en raison de son adresse nullissime, sur :",
                                                   at_prd, 0, false, &ok);
                 if (choix == "Attaque")
@@ -1439,7 +1439,7 @@ void Personnage::setBonus_Malus_caracSup_Inf_moyenne(int degatsBonus, int bonusA
     }
 
 
-//    problËme de vÈrification si dÈj‡ fait !!!
+//    probl√®me de v√©rification si d√©j√† fait !!!
 
 // bonus / malus de INT
     if (degatsBonusSorts == 0)
@@ -1455,7 +1455,7 @@ void Personnage::setBonus_Malus_caracSup_Inf_moyenne(int degatsBonus, int bonusA
 }
 
 
-// Pour rafraÓchir les widgets
+// Pour rafra√Æchir les widgets
 void Personnage::rafraichir()
 {
     setBonus_Malus_caracSup_Inf_moyenne();
@@ -1505,7 +1505,7 @@ void Personnage::rafraichir()
             PC_moins->setEnabled(false);
 
 
-// EV et EA + RÈsistance magie + magie Physique + magie psychique
+// EV et EA + R√©sistance magie + magie Physique + magie psychique
     EV->setText(QString::number(m_energieVitale));
     EV_modif->setText(QString::number(m_energieVitale_modif));
         if (m_energieVitale_modif != m_energieVitale)
@@ -1543,7 +1543,7 @@ void Personnage::rafraichir()
     }
 
 
-// Autres caractÈristiques
+// Autres caract√©ristiques
     COU->setText(QString::number(m_caracInitiales.getCOU()));
     COU_modif->setText(QString::number(m_caracModifiees.getCOU()));
         if (m_caracModifiees.getCOU() != 18)
@@ -1651,22 +1651,22 @@ void Personnage::achatATPRD()
     a << "AT" << "PRD";
     bool ok(false);
     QString b = QInputDialog::getItem(this, m_nomPerso + " -> Achat de puissance",
-                                      "Ce personnage achËte un stage pour 500 PO pour obtenir un point de :", a, 0, ok);
+                                      "Ce personnage ach√®te un stage pour 500 PO pour obtenir un point de :", a, 0, ok);
     if (b == "AT" && ok)
     {
         QMessageBox::information(this, m_nomPerso + " -> Achat de puissance",
-                                "Ce personnage achËte 500 PO un stage d'un mois pour acheter un point de AT");
+                                "Ce personnage ach√®te 500 PO un stage d'un mois pour acheter un point de AT");
         m_caracInitiales.AT_1();
 
-        log(m_nomPerso + " achËte un point de AT.");
+        log(m_nomPerso + " ach√®te un point de AT.");
     }
     else if (b == "PRD" && ok)
     {
         QMessageBox::information(this, m_nomPerso + " -> Achat de puissance",
-                                "Ce personnage achËte 500 PO un stage d'un mois pour acheter un point de PRD");
+                                "Ce personnage ach√®te 500 PO un stage d'un mois pour acheter un point de PRD");
         m_caracInitiales.PRD_1();
 
-        log(m_nomPerso + " achËte un point de de PRD.");
+        log(m_nomPerso + " ach√®te un point de de PRD.");
     }
 
     if (ok)
@@ -1693,12 +1693,12 @@ void Personnage::achatINT()
         return;
 
     QMessageBox::information(this, m_nomPerso + " -> Achat de puissance",
-                            "Ce personnage achËte 500 PO un stage de 6 mois pour obtenir un point de INT");
+                            "Ce personnage ach√®te 500 PO un stage de 6 mois pour obtenir un point de INT");
     m_caracInitiales.INT_1();
 
     m_pieces->setRichesses_Or(m_pieces->getRichesses_Or() - 500);
 
-    log(m_nomPerso + " achËte un point de INT.");
+    log(m_nomPerso + " ach√®te un point de INT.");
 
     rafraichir();
 }
@@ -1721,12 +1721,12 @@ void Personnage::achatCHA()
         return;
 
     QMessageBox::information(this, m_nomPerso + " -> Achat de puissance",
-                             "Ce personnage achËte 400 PO un stage de 1 semaine (max 1 par mois) pour obtenir un point de CHA");
+                             "Ce personnage ach√®te 400 PO un stage de 1 semaine (max 1 par mois) pour obtenir un point de CHA");
     m_caracInitiales.CHA_1();
 
     m_pieces->setRichesses_Or(m_pieces->getRichesses_Or() - 400);
 
-    log(m_nomPerso + " achËte un point de CHA.");
+    log(m_nomPerso + " ach√®te un point de CHA.");
 
     rafraichir();
 }
@@ -1749,12 +1749,12 @@ void Personnage::achatFO()
         return;
 
     QMessageBox::information(this, m_nomPerso + " -> Achat de puissance",
-                            "Ce personnage achËte 400 PO un stage de 1 mois pour obtenir un point de FO");
+                            "Ce personnage ach√®te 400 PO un stage de 1 mois pour obtenir un point de FO");
     m_caracInitiales.FO_1();
 
     m_pieces->setRichesses_Or(m_pieces->getRichesses_Or() - 400);
 
-    log(m_nomPerso + " achËte un point de FO.");
+    log(m_nomPerso + " ach√®te un point de FO.");
 
     rafraichir();
 }
@@ -1777,12 +1777,12 @@ void Personnage::achatCOU()
         return;
 
     QMessageBox::information(this, m_nomPerso + " -> Achat de puissance",
-                            "Ce personnage achËte 400 PO un stage de 1 mois pour obtenir un point de COU");
+                            "Ce personnage ach√®te 400 PO un stage de 1 mois pour obtenir un point de COU");
     m_caracInitiales.COU_1();
 
     m_pieces->setRichesses_Or(m_pieces->getRichesses_Or() - 400);
 
-    log(m_nomPerso + " achËte un point de COU.");
+    log(m_nomPerso + " ach√®te un point de COU.");
 
     rafraichir();
 }
@@ -1795,7 +1795,7 @@ void Personnage::achatEV()
         return;
     }
 
-    QMessageBox verif(QMessageBox::Question, m_nomPerso + " -> Achat d'Ènergie",
+    QMessageBox verif(QMessageBox::Question, m_nomPerso + " -> Achat d'√©nergie",
                       "Ce personnage va acheter pour 200 PO en stage de 2 semaine2 pour obtenir un point de EV...");
     QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
     QPushButton *annuler = verif.addButton(QMessageBox::Abort);
@@ -1804,12 +1804,12 @@ void Personnage::achatEV()
     if (verif.clickedButton() == annuler)
         return;
 
-    QMessageBox::information(this, m_nomPerso + " -> Achat d'Ènergie",
-                            "Ce personnage achËte 200 PO un stage de 2 semaines pour obtenir un point de EV");
+    QMessageBox::information(this, m_nomPerso + " -> Achat d'√©nergie",
+                            "Ce personnage ach√®te 200 PO un stage de 2 semaines pour obtenir un point de EV");
     m_energieVitale++;
     m_pieces->setRichesses_Or(m_pieces->getRichesses_Or() - 200);
 
-    log(m_nomPerso + " achËte un point de EV.");
+    log(m_nomPerso + " ach√®te un point de EV.");
 
     rafraichir();
 }
@@ -1830,7 +1830,7 @@ void Personnage::achatEA()
         return;
     }
 
-    QMessageBox verif(QMessageBox::Question, m_nomPerso + " -> Achat d'Ènergie",
+    QMessageBox verif(QMessageBox::Question, m_nomPerso + " -> Achat d'√©nergie",
                       "Ce personnage va acheter pour 200 PO en stage de 1 mois pour obtenir un point de EA...");
     QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
     QPushButton *annuler = verif.addButton(QMessageBox::Abort);
@@ -1839,26 +1839,26 @@ void Personnage::achatEA()
     if (verif.clickedButton() == annuler)
         return;
 
-    QMessageBox::information(this, m_nomPerso + " -> Achat d'Ènergie",
-                            "Ce personnage achËte 200 PO un stage de 1 mois pour obtenir un point de EA");
+    QMessageBox::information(this, m_nomPerso + " -> Achat d'√©nergie",
+                            "Ce personnage ach√®te 200 PO un stage de 1 mois pour obtenir un point de EA");
     m_energieAstrale++;
     m_pieces->setRichesses_Or(m_pieces->getRichesses_Or() - 200);
 
-    log(m_nomPerso + " achËte un point de EA.");
+    log(m_nomPerso + " ach√®te un point de EA.");
 
     rafraichir();
 }
 
 
-// Ajout d'Èquipements lors du chargement du fichier d'enregistrement
+// Ajout d'√©quipements lors du chargement du fichier d'enregistrement
 void Personnage::addVetement(Vetement *VetementAAjouter, int num)
 {
     if (num < MAX_VETEMENT)
         m_vetements[num] = new Vetement(VetementAAjouter);
     else
     {
-        log("ERREUR : Il y a trop de vÍtements pour '" + m_nomPerso + "' !");
-        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop de vÍtements pour ce personnage !\n\nCe problËme peut venir du fait que vous ayez fait vous mÍme le fichier *.perso !\nEvitez de faire cela !");
+        log("ERREUR : Il y a trop de v√™tements pour '" + m_nomPerso + "' !");
+        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop de v√™tements pour ce personnage !\n\nCe probl√®me peut venir du fait que vous ayez fait vous m√™me le fichier *.perso !\nEvitez de faire cela !");
     }
 }
 void Personnage::addProtection(Protection *protectionAAjouter, int num)
@@ -1868,7 +1868,7 @@ void Personnage::addProtection(Protection *protectionAAjouter, int num)
     else
     {
         log("ERREUR : Il y a trop de protections pour '" + m_nomPerso + "' !");
-        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop de protection pour ce personnage !\n\nCe problËme peut venir du fait que vous ayez fait vous mÍme le fichier *.perso !\nEvitez de faire cela !");
+        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop de protection pour ce personnage !\n\nCe probl√®me peut venir du fait que vous ayez fait vous m√™me le fichier *.perso !\nEvitez de faire cela !");
     }
 }
 void Personnage::addArme(Arme *armeAAjouter, int num)
@@ -1878,7 +1878,7 @@ void Personnage::addArme(Arme *armeAAjouter, int num)
     else
     {
         log("ERREUR : Il y a trop d'armes pour '" + m_nomPerso + "' !");
-        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop d'arme pour ce personnage !\n\nCe problËme peut venir du fait que vous ayez fait vous mÍme le fichier *.perso !\nEvitez de faire cela !");
+        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop d'arme pour ce personnage !\n\nCe probl√®me peut venir du fait que vous ayez fait vous m√™me le fichier *.perso !\nEvitez de faire cela !");
     }
 }
 void Personnage::addFleche(Fleche *flecheAAjouter, int num)
@@ -1887,8 +1887,8 @@ void Personnage::addFleche(Fleche *flecheAAjouter, int num)
         m_fleches[num] = new Fleche(flecheAAjouter);
     else
     {
-        log("ERREUR : Il y a trop de flÍches pour '" + m_nomPerso + "' !");
-        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop de flËches pour ce personnage !\n\nCe problËme peut venir du fait que vous ayez fait vous mÍme le fichier *.perso !\nEvitez de faire cela !");
+        log("ERREUR : Il y a trop de fl√™ches pour '" + m_nomPerso + "' !");
+        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop de fl√®ches pour ce personnage !\n\nCe probl√®me peut venir du fait que vous ayez fait vous m√™me le fichier *.perso !\nEvitez de faire cela !");
     }
 }
 void Personnage::addEquipement(QString nom, int num)
@@ -1897,8 +1897,8 @@ void Personnage::addEquipement(QString nom, int num)
         m_equipements[num] = new QString(nom);
     else
     {
-        log("ERREUR : Il y a trop d'Èquipements pour '" + m_nomPerso + "' !");
-        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop d'Èquipement pour ce personnage !\n\nCe problËme peut venir du fait que vous ayez fait vous mÍme le fichier *.perso !\nEvitez de faire cela !");
+        log("ERREUR : Il y a trop d'√©quipements pour '" + m_nomPerso + "' !");
+        QMessageBox::information(labelPourSaut[0], "Erreur", "ERREUR :\nIl y a trop d'√©quipement pour ce personnage !\n\nCe probl√®me peut venir du fait que vous ayez fait vous m√™me le fichier *.perso !\nEvitez de faire cela !");
     }
 }
 void Personnage::addCompetence(QString nom, QString description)
@@ -1910,7 +1910,7 @@ void Personnage::addCompetence(QString nom, QString description)
     else
     {
         fenAjoutCompetence = new QDialog(this, Qt::WindowCancelButtonHint | Qt::WindowOkButtonHint | Qt::WindowSystemMenuHint | Qt::WindowTitleHint);
-            fenAjoutCompetence->setWindowTitle(m_nomPerso + " -> ajout d'une compÈtence !");
+            fenAjoutCompetence->setWindowTitle(m_nomPerso + " -> ajout d'une comp√©tence !");
 
         QGroupBox nom_group("Nom");
             competence_nom = new QLineEdit();
@@ -2017,7 +2017,7 @@ QString Personnage::getPersoEntier() const
 }
 
 
-// Pour les tests d'origines et de mÈtiers
+// Pour les tests d'origines et de m√©tiers
 bool Personnage::testOrigine(Origine const& a)
 {
     bool possible = false;
@@ -2037,7 +2037,7 @@ bool Personnage::testMetier(Metier const& a)
     return possible;
 }
 
-// Pour appliquer une origine et un mÈtier
+// Pour appliquer une origine et un m√©tier
 void Personnage::setOrigine(Origine &a)
 {
     m_energieVitale = a.getEV();
@@ -2062,7 +2062,7 @@ void Personnage::setMetier(Metier& a)
     if (a.getPRD() != 0)
         m_caracInitiales.setPRD(a.getPRD());
 
-// Modification pour certains mÈtiers :
+// Modification pour certains m√©tiers :
     if (a.getEV_pourClassesModifiees() != 0)
     {
         QStringList listeClasseModifiees = a.getClassesModifiees();
@@ -2083,7 +2083,7 @@ void Personnage::setMetier(Metier& a)
                 int modif = a.getEV_pourAutresClasses();    // On demande combien de pourcent
                 // On calcule 1 pourcent de l'actuelle EV
                 double unPourcent_EV = static_cast<double>(m_energieVitale) / static_cast<double>(100);
-                int ajout = unPourcent_EV * modif;          // On calcule le rÈsultat ‡ ajouter
+                int ajout = unPourcent_EV * modif;          // On calcule le r√©sultat √† ajouter
 
                 m_energieVitale += ajout;
             }
@@ -2099,7 +2099,7 @@ void Personnage::setMetier(Metier& a)
         setEA(a.getEA(), a.getTypeEA());
     }
 
-// Copie des caractÈristiques
+// Copie des caract√©ristiques
     QVector<Competence *> compet_obli = a.getCompetences();
     for (int i(0); i < compet_obli.count(); i++)
         m_competences.append(compet_obli.at(i));
@@ -2129,38 +2129,38 @@ void Personnage::conversionPA_PC()
     rafraichir();
 }
 
-// Ajout diffÈrents de 1
+// Ajout diff√©rents de 1
 void Personnage::plus_xp(int value)
 {
     if (value == 0)
     {
         bool ok(false);
 
-        int XP_EnPlus = QInputDialog::getInteger(labelPourSaut[0], "Ajouter de l'expÈrience", "Ajouter de l'expÈrience ‡ " + m_nomPerso, 1, 1, 999999, 1, &ok);
+        int XP_EnPlus = QInputDialog::getInteger(labelPourSaut[0], "Ajouter de l'exp√©rience", "Ajouter de l'exp√©rience √† " + m_nomPerso, 1, 1, 999999, 1, &ok);
 
         if (ok)
         {
             m_experience += XP_EnPlus;
 
-            log(m_nomPerso + " gagne de l'expÈrience : " + QString::number(XP_EnPlus) + " point(s) !");
+            log(m_nomPerso + " gagne de l'exp√©rience : " + QString::number(XP_EnPlus) + " point(s) !");
         }
     }
     else
     {
         m_experience += value;
 
-        log(m_nomPerso + " gagne de l'expÈrience : " + QString::number(value) + " point(s) !");
+        log(m_nomPerso + " gagne de l'exp√©rience : " + QString::number(value) + " point(s) !");
     }
 
     bool niveauChange(setNiveau());
     if (niveauChange)
     {
         QString D;
-        QMessageBox::information(this, "Niveau", m_nomPerso + " a gagnÈ un niveau, nous allons voir les modifications...");
+        QMessageBox::information(this, "Niveau", m_nomPerso + " a gagn√© un niveau, nous allons voir les modifications...");
         QStringList D6_D4;
         D6_D4 << "D6" << "D4";
         D = QInputDialog::getItem(this, m_nomPerso + " -> Passage d'un niveau -> EV",
-                                  "Quel type de dÈ l'origine de ce personnage a besoin pour l'ajout d'EV ?",
+                                  "Quel type de d√© l'origine de ce personnage a besoin pour l'ajout d'EV ?",
                                   D6_D4);
         int ev;
         if (D == "D6")
@@ -2191,8 +2191,8 @@ void Personnage::plus_xp(int value)
 
         QStringList carac;
         carac << "COU" << "INT" << "AD" << "FO";
-        D = QInputDialog::getItem(this, m_nomPerso + " -> Passage d'un niveau -> CaractÈristiques",
-                                  "Ce personnage a droit ‡ un point en plus sur les caractÈristiques suivantes.\n"
+        D = QInputDialog::getItem(this, m_nomPerso + " -> Passage d'un niveau -> Caract√©ristiques",
+                                  "Ce personnage a droit √† un point en plus sur les caract√©ristiques suivantes.\n"
                                   "Choisissez en une !",
                                   carac);
         if (D == "COU")
@@ -2232,7 +2232,7 @@ void Personnage::plus_xp(int value)
             QStringList At_Prd;
             At_Prd << "AT" << "PRD";
             D = QInputDialog::getItem(this, m_nomPerso + " -> Passage d'un niveau -> AT / PRD",
-                                      "Ce personnage a droit ‡ un point en plus sur les caractÈristiques suivantes.\n"
+                                      "Ce personnage a droit √† un point en plus sur les caract√©ristiques suivantes.\n"
                                       "Choisissez en une !",
                                       At_Prd);
             if (D == "AT")
@@ -2264,28 +2264,28 @@ void Personnage::plus_xp(int value)
         // Test de niveau
         if (m_niveau == 3)
         {
-            QMessageBox::information(this, "Choix d'une compÈtence supplÈmentaire",
-                                     m_nomPerso + " doit choisir une compÈtence supplÈmentaire.");
+            QMessageBox::information(this, "Choix d'une comp√©tence suppl√©mentaire",
+                                     m_nomPerso + " doit choisir une comp√©tence suppl√©mentaire.");
         }
         else if (m_niveau == 5 && m_metierPersonnage == "Mage / Sorcier")
         {
-            QMessageBox::information(this, "Choix d'une spÈcialisation supplÈmentaire",
-                                     m_nomPerso + " doit choisir une spÈcialisation supplÈmentaire");
+            QMessageBox::information(this, "Choix d'une sp√©cialisation suppl√©mentaire",
+                                     m_nomPerso + " doit choisir une sp√©cialisation suppl√©mentaire");
         }
         else if (m_niveau == 6)
         {
-            QMessageBox::information(this, "Choix d'une compÈtence supplÈmentaire",
-                                     m_nomPerso + " doit choisir une compÈtence supplÈmentaire.");
+            QMessageBox::information(this, "Choix d'une comp√©tence suppl√©mentaire",
+                                     m_nomPerso + " doit choisir une comp√©tence suppl√©mentaire.");
         }
         else if (m_niveau == 10)
         {
-            QMessageBox::information(this, "Choix d'une compÈtence supplÈmentaire",
-                                     m_nomPerso + " doit choisir une compÈtence supplÈmentaire.");
+            QMessageBox::information(this, "Choix d'une comp√©tence suppl√©mentaire",
+                                     m_nomPerso + " doit choisir une comp√©tence suppl√©mentaire.");
         }
         else if (m_niveau == 15 && m_metierPersonnage == "Mage / Sorcier")
         {
-            QMessageBox::information(this, "Choix d'une spÈcialisation supplÈmentaire",
-                                     m_nomPerso + " doit choisir une spÈcialisation supplÈmentaire");
+            QMessageBox::information(this, "Choix d'une sp√©cialisation suppl√©mentaire",
+                                     m_nomPerso + " doit choisir une sp√©cialisation suppl√©mentaire");
         }
 
         log(m_nomPerso + " gagne un niveau.");
@@ -2299,7 +2299,7 @@ void Personnage::plus_ev()
 
     int EV_EnPlus = QInputDialog::getInteger(labelPourSaut[0],
                                              "Ajouter de l'EV",
-                                             "Ajouter de l'Ènergie vitale ‡ " + m_nomPerso,
+                                             "Ajouter de l'√©nergie vitale √† " + m_nomPerso,
                                              1, 1, 999, 1, &ok);
 
     if (ok && (m_energieVitale_modif + EV_EnPlus) <= m_energieVitale)
@@ -2315,7 +2315,7 @@ void Personnage::plus_ea()
 
     int EA_EnPlus = QInputDialog::getInteger(labelPourSaut[0],
                                              "Ajouter de l'EA",
-                                             "Ajouter de l'Ènergie astrale ‡ " + m_nomPerso,
+                                             "Ajouter de l'√©nergie astrale √† " + m_nomPerso,
                                              1, 1, 999, 1, &ok);
 
     if (ok && (m_energieAstrale_modif + EA_EnPlus) <= m_energieAstrale)
@@ -2333,7 +2333,7 @@ void Personnage::plus_po(int value)
 
         int PO_EnPlus = QInputDialog::getInteger(labelPourSaut[0],
                                                  "Ajouter des PO",
-                                                 "Ajouter des PiËces d'Or ‡ " + m_nomPerso,
+                                                 "Ajouter des Pi√®ces d'Or √† " + m_nomPerso,
                                                  1, 1, (999999 - m_pieces->getRichesses_Or()), 1, &ok);
 
         if (ok)
@@ -2352,7 +2352,7 @@ void Personnage::plus_pa(int value)
 
         int PA_EnPlus = QInputDialog::getInteger(labelPourSaut[0],
                                                  "Ajouter des PA",
-                                                 "Ajouter des PiËces d'Argent ‡ " + m_nomPerso,
+                                                 "Ajouter des Pi√®ces d'Argent √† " + m_nomPerso,
                                                  1, 1, (999999 - m_pieces->getRichesses_Argent()), 1, &ok);
 
         if (ok)
@@ -2371,7 +2371,7 @@ void Personnage::plus_pc(int value)
 
         int PC_EnPlus = QInputDialog::getInteger(labelPourSaut[0],
                                                  "Ajouter des PC",
-                                                 "Ajouter des PiËces de Cuivre ‡ " + m_nomPerso,
+                                                 "Ajouter des Pi√®ces de Cuivre √† " + m_nomPerso,
                                                  1, 1, (999999 - m_pieces->getRichesses_Cuivre()), 1, &ok);
 
         if (ok)
@@ -2383,14 +2383,14 @@ void Personnage::plus_pc(int value)
     rafraichir();
 }
 
-// Retrait diffÈrents de 1
+// Retrait diff√©rents de 1
 void Personnage::moins_ev()
 {
     bool ok(false);
 
     int EV_Enmoins = QInputDialog::getInteger(labelPourSaut[0],
                                              "Retirer de l'EV",
-                                             "Retirer de l'Ènergie vitale ‡ " + m_nomPerso,
+                                             "Retirer de l'√©nergie vitale √† " + m_nomPerso,
                                              1, 1, 999, 1, &ok);
 
     if (ok && (m_energieVitale_modif - EV_Enmoins) >= 0)
@@ -2406,7 +2406,7 @@ void Personnage::moins_ea()
 
     int EA_Enmoins = QInputDialog::getInteger(labelPourSaut[0],
                                              "Retirer de l'EA",
-                                             "Retirer de l'Ènergie astrale ‡ " + m_nomPerso,
+                                             "Retirer de l'√©nergie astrale √† " + m_nomPerso,
                                              1, 1, 999, 1, &ok);
 
     if (ok && (m_energieAstrale_modif - EA_Enmoins) >= 0)
@@ -2424,7 +2424,7 @@ void Personnage::moins_po(int value)
 
         int PO_Enmoins = QInputDialog::getInteger(labelPourSaut[0],
                                                  "Retirer des PO",
-                                                 "Retirer des PiËces d'Or ‡ " + m_nomPerso,
+                                                 "Retirer des Pi√®ces d'Or √† " + m_nomPerso,
                                                  1, 1, 999999, 1, &ok);
 
         if (ok)
@@ -2443,7 +2443,7 @@ void Personnage::moins_pa(int value)
 
         int PA_Enmoins = QInputDialog::getInteger(labelPourSaut[0],
                                                  "Retirer des PA",
-                                                 "Retirer des PiËces d'Argent ‡ " + m_nomPerso,
+                                                 "Retirer des Pi√®ces d'Argent √† " + m_nomPerso,
                                                  1, 1, 999999, 1, &ok);
 
         if (ok)
@@ -2462,7 +2462,7 @@ void Personnage::moins_pc(int value)
 
         int PC_Enmoins = QInputDialog::getInteger(labelPourSaut[0],
                                                  "Retirer des PC",
-                                                 "Retirer des PiËces de Cuivre ‡ " + m_nomPerso,
+                                                 "Retirer des Pi√®ces de Cuivre √† " + m_nomPerso,
                                                  1, 1, 999999, 1, &ok);
 
         if (ok)
@@ -2590,7 +2590,7 @@ void Personnage::attaquer()
     bool attaqueFaite(false);
     while (!attaqueFaite)
     {
-        // On teste si c'est l'arme choisi est celle correspondant ‡ i
+        // On teste si c'est l'arme choisi est celle correspondant √† i
         if (nom_arme == m_armes[i]->getNom())
         {
             // Valeur de D20 pour savoir s'il peut attaquer
@@ -2602,8 +2602,8 @@ void Personnage::attaquer()
             if (ok && (vingt == 19 || vingt == 20))
             {
                 QMessageBox::information(this, m_nomPerso + " -> Attaque -> Echec critique",
-                                         "Ce personnage a fait un Èchec critique en essayant d'attaquer.");
-                log(m_nomPerso + " fait un Èchec critique.");
+                                         "Ce personnage a fait un √©chec critique en essayant d'attaquer.");
+                log(m_nomPerso + " fait un √©chec critique.");
             }
             // Coup critique
             if (ok && (vingt == 1 || vingt == 2))
@@ -2615,38 +2615,38 @@ void Personnage::attaquer()
             // Attaque
             if (ok && (vingt < m_caracModifiees.getAT()))
             {
-                // Erreur si les dÈs sont ‡ 0
+                // Erreur si les d√©s sont √† 0
                 if (m_armes[i]->des() == 0)
                 {
                     QMessageBox::information(this, m_nomPerso + " -> Attaque -> Impossible",
-                                             "L'arme choisie a un nombre de dÈs Ègal ‡ 0.\nElle ne sert ‡ rien");
+                                             "L'arme choisie a un nombre de d√©s √©gal √† 0.\nElle ne sert √† rien");
                     return;
                 }
 
                 // On continu
                 int i2(1), totalDegats(m_armes[i]->degats());
-                while (i2 <= m_armes[i]->des()) // On demande les rÈsultats des dÈs
+                while (i2 <= m_armes[i]->des()) // On demande les r√©sultats des d√©s
                 {
-                    totalDegats += QInputDialog::getInt(this, m_nomPerso + " -> Attaque -> DÈg‚ts",
-                                                        "Rentrez le score indiquÈ par le D6 :", 1, 1, 6, 1);
+                    totalDegats += QInputDialog::getInt(this, m_nomPerso + " -> Attaque -> D√©g√¢ts",
+                                                        "Rentrez le score indiqu√© par le D6 :", 1, 1, 6, 1);
                     i2++;
                 }
 
-                // Si "‡ mains nues" => message
+                // Si "√† mains nues" => message
                 if (m_armes[i]->getNom() == PAS_ARME)
                 {
-                    QMessageBox::information(this, m_nomPerso + " -> Attaque -> RÈcapitulatif",
-                                             "Ce personnage attaque ‡ mains nues et fait " + QString::number(totalDegats) + " de dÈg‚ts.\n"
-                                             "A cela, il faut enlever la valeur de protection de la personne/monstre attaquÈ !");
-                    log(m_nomPerso + " attaque ‡ mains nues et fait " + QString::number(totalDegats) + " de dÈg‚ts.");
+                    QMessageBox::information(this, m_nomPerso + " -> Attaque -> R√©capitulatif",
+                                             "Ce personnage attaque √† mains nues et fait " + QString::number(totalDegats) + " de d√©g√¢ts.\n"
+                                             "A cela, il faut enlever la valeur de protection de la personne/monstre attaqu√© !");
+                    log(m_nomPerso + " attaque √† mains nues et fait " + QString::number(totalDegats) + " de d√©g√¢ts.");
                 }
                 // Si arme => message
                 else
                 {
-                    QMessageBox::information(this, m_nomPerso + " -> Attaque -> RÈcapitulatif",
-                                             "Ce personnage attaque avec son/sa " + m_armes[i]->getNom() + " et fait " + QString::number(totalDegats) + " de dÈg‚ts.\n"
-                                             "A cela, il faut enlever la valeur de protection de la personne/monstre attaquÈ !");
-                    log(m_nomPerso + " attaque avec son/sa " + m_armes[i]->getNom() + " et fait " + QString::number(totalDegats) + " de dÈg‚ts.");
+                    QMessageBox::information(this, m_nomPerso + " -> Attaque -> R√©capitulatif",
+                                             "Ce personnage attaque avec son/sa " + m_armes[i]->getNom() + " et fait " + QString::number(totalDegats) + " de d√©g√¢ts.\n"
+                                             "A cela, il faut enlever la valeur de protection de la personne/monstre attaqu√© !");
+                    log(m_nomPerso + " attaque avec son/sa " + m_armes[i]->getNom() + " et fait " + QString::number(totalDegats) + " de d√©g√¢ts.");
                 }
             }
             // Attaque pas
@@ -2657,10 +2657,10 @@ void Personnage::attaquer()
                 log(m_nomPerso + " essaye d'attaquer, mais se rate royalement son attaque.");
             }
 
-            // On dit au while que l'attaque a ÈtÈ faite
+            // On dit au while que l'attaque a √©t√© faite
             attaqueFaite = true;
         }
-        // On dit au while que l'attaque a ÈtÈ faite
+        // On dit au while que l'attaque a √©t√© faite
         if (i >= MAX_ARME)
             attaqueFaite = true;
 

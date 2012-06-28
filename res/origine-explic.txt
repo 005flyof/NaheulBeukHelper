@@ -1,6 +1,6 @@
 ~!ORIGINE!~
 Nom de l'origine
-Caractéristiques minimums : sous forme -> COU_INT_CHA_AD_FO
-Caractéristiques maximums : sous forme -> COU_INT_CHA_AD_FO
+CaractÃ©ristiques minimums : sous forme -> COU_INT_CHA_AD_FO
+CaractÃ©ristiques maximums : sous forme -> COU_INT_CHA_AD_FO
 EV initiale
-AT (si non modifiée -> 'x')
+AT (si non modifiÃ©e -> 'x')

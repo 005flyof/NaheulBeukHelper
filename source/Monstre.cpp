@@ -52,13 +52,13 @@ QWidget* Monstre::afficher()
 	QLabel *PR_Label = new QLabel("PR :	" + QString::number(m_PR));
 	QLabel *degats_Label = new QLabel();
 		if (m_nbDes != 0 && m_degatsEnPlus > 0)
-			degats_Label->setText("DÈg‚ts :	" + QString::number(m_nbDes) + "D + " + QString::number(m_degatsEnPlus));
+			degats_Label->setText("D√©g√¢ts :	" + QString::number(m_nbDes) + "D + " + QString::number(m_degatsEnPlus));
 		else if (m_nbDes != 0 && m_degatsEnPlus < 0)
-			degats_Label->setText("DÈg‚ts :	" + QString::number(m_nbDes) + "D " + QString::number(m_degatsEnPlus));
+			degats_Label->setText("D√©g√¢ts :	" + QString::number(m_nbDes) + "D " + QString::number(m_degatsEnPlus));
 		else if (m_nbDes != 0 && m_degatsEnPlus == 0)
-			degats_Label->setText("DÈg‚ts :	" + QString::number(m_nbDes) + "D");
+			degats_Label->setText("D√©g√¢ts :	" + QString::number(m_nbDes) + "D");
 		else
-			degats_Label->setText("DÈg‚ts :	" + QString::number(m_degatsEnPlus));
+			degats_Label->setText("D√©g√¢ts :	" + QString::number(m_degatsEnPlus));
 
 	QLabel *XP_Label = new QLabel("XP :	" + QString::number(m_XP));
 

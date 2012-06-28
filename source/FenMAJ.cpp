@@ -27,20 +27,20 @@ FenMAJ::FenMAJ(QWidget* parent)
     setModal(true);
 //    setIcone(this);
     this->setWindowIcon(QIcon(":prog-data/img/maj.png"));
-//On donne une taille par défaut à la fenêtre
+//On donne une taille par dÃ©faut Ã  la fenÃªtre
     resize(228, 112);
     setWindowTitle("NBH Updater");
 
-//On définit les layouts
+//On dÃ©finit les layouts
     verticalLayout = new QVBoxLayout(this);
 
     label = new QLabel("Bienvenue dans le gestionnaire de MAJ de NBH.");
         verticalLayout->addWidget(label);
 
-    verifier = new QPushButton("Vérifier les MAJ(s)...");
+    verifier = new QPushButton("VÃ©rifier les MAJ(s)...");
         verticalLayout->addWidget(verifier);
 
-    demarrerTelechargement = new QPushButton("Télécharger et installer\n(lance 'NBH-updater')");
+    demarrerTelechargement = new QPushButton("TÃ©lÃ©charger et installer\n(lance 'NBH-updater')");
         demarrerTelechargement->setEnabled(false);
         verticalLayout->addWidget(demarrerTelechargement);
 
@@ -48,34 +48,34 @@ FenMAJ::FenMAJ(QWidget* parent)
         progression->setValue(0);
         verticalLayout->addWidget(progression);
 
-    QPushButton *fermer = new QPushButton("Fermer cette fenêtre");
+    QPushButton *fermer = new QPushButton("Fermer cette fenÃªtre");
         verticalLayout->addWidget(fermer);
 
     connect(verifier, SIGNAL(clicked()), this, SLOT(verifierMAJ()));
     connect(demarrerTelechargement, SIGNAL(clicked()), this, SLOT(telechargement()));
     connect(fermer, SIGNAL(clicked()), this, SLOT(close()));
 
-    log("Recherche de Mises à Jour.");
+    log("Recherche de Mises Ã  Jour.");
 }
 
 void FenMAJ::verifierMAJ()
 {
-    log("Recherche de Mises à Jour.");
+    log("Recherche de Mises Ã  Jour.");
 
     verifier->setEnabled(false);
-    label->setText("Vérification de la disponibilité de Mise à Jour.");
+    label->setText("VÃ©rification de la disponibilitÃ© de Mise Ã  Jour.");
 
-//On récupère l'URL entrée par l'utilisateur.
+//On rÃ©cupÃ¨re l'URL entrÃ©e par l'utilisateur.
     const QUrl url = QUrl("http://005flyof.free-h.fr/download/index.php?fichier=VERSION&dossier=nbh");
-//On crée notre requête
+//On crÃ©e notre requÃªte
     const QNetworkRequest requete(url);
 
-//On crée le QNetworkAccessManager qui va traiter la requête
+//On crÃ©e le QNetworkAccessManager qui va traiter la requÃªte
     QNetworkAccessManager *m = new QNetworkAccessManager;
 
 
-// Ensuite, on utilise la méthode get() pour télécharger le contenu de notre requête.
-// On récupère un pointeur de QNetworkReply.
+// Ensuite, on utilise la mÃ©thode get() pour tÃ©lÃ©charger le contenu de notre requÃªte.
+// On rÃ©cupÃ¨re un pointeur de QNetworkReply.
     QNetworkReply *r = m->get(requete);
 
     connect(r, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(messageErreur(QNetworkReply::NetworkError)));
@@ -84,22 +84,22 @@ void FenMAJ::verifierMAJ()
 }
 void FenMAJ::verifierMAJ_2()
 {
-    //On vérifie qu'il n'y a pas eu d'erreur.
+    //On vÃ©rifie qu'il n'y a pas eu d'erreur.
     if(!erreurTrouvee)
     {
-        QNetworkReply *r = qobject_cast<QNetworkReply*>(sender()); //On récupère la réponse du serveur
+        QNetworkReply *r = qobject_cast<QNetworkReply*>(sender()); //On rÃ©cupÃ¨re la rÃ©ponse du serveur
         QFile f(":/prog-data/VERSION"); //On ouvre le fichier
 
         if ( f.open(QIODevice::ReadOnly) )
         {
-            // Si c'est à jour
+            // Si c'est Ã  jour
             if (f.readLine() == r->readLine())
             {
                 f.close(); //On ferme le fichier
-                label->setText("NBH est à jour");
-                QMessageBox::information(this, "NBH déjà à jour", "NBH est déjà à jour...");
+                label->setText("NBH est Ã  jour");
+                QMessageBox::information(this, "NBH dÃ©jÃ  Ã  jour", "NBH est dÃ©jÃ  Ã  jour...");
 
-                log("NBH est à jour !");
+                log("NBH est Ã  jour !");
 
                 close();
                 return;
@@ -107,22 +107,22 @@ void FenMAJ::verifierMAJ_2()
 
             // Sinon
             demarrerTelechargement->setEnabled(true);
-            label->setText("NBH n'est pas à jour !");
-            log("NBH n'est pas à jour !");
+            label->setText("NBH n'est pas Ã  jour !");
+            log("NBH n'est pas Ã  jour !");
 
-            //On indique que tout s'est bien passé
-            QMessageBox::information(this, "Fin de vérification", "Vérification terminé !\nVotre version n'est pas à jour.");
+            //On indique que tout s'est bien passÃ©
+            QMessageBox::information(this, "Fin de vÃ©rification", "VÃ©rification terminÃ© !\nVotre version n'est pas Ã  jour.");
         }
     }
 }
 
 void FenMAJ::telechargement()
 {
-    label->setText("Installation de la Mise à Jour !");
+    label->setText("Installation de la Mise Ã  Jour !");
 
-    QMessageBox::information(this, "NBH va se mettre à jour !",
-                             "NBH va se mettre à jour ; pour cela, il va se fermer automatiquement puis redémarrer.\n"
-                             "N'ayez pas peur, vos modifications ont étés enregistrées !");
+    QMessageBox::information(this, "NBH va se mettre Ã  jour !",
+                             "NBH va se mettre Ã  jour ; pour cela, il va se fermer automatiquement puis redÃ©marrer.\n"
+                             "N'ayez pas peur, vos modifications ont Ã©tÃ©s enregistrÃ©es !");
     log("Lancement de l'updater !");
 
     if (OS == 0)
@@ -149,7 +149,7 @@ void FenMAJ::messageErreur(QNetworkReply::NetworkError)
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender());
     QMessageBox::critical(this, "Erreur",
                           "Erreur lors du chargement."
-                          "Vérifiez votre connexion internet ou réessayez plus tard.<br /><br />"
+                          "VÃ©rifiez votre connexion internet ou rÃ©essayez plus tard.<br /><br />"
                           "Code de l'erreur : <br /><em>" + r->errorString() + "</em>");
 
     verifier->setEnabled(true);

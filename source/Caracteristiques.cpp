@@ -32,7 +32,7 @@ Caracteristiques::Caracteristiques(int COU, int INT, int CHA, int AD, int F0, in
 
 
 /*
- * Opérateurs
+ * OpÃ©rateurs
  */
 bool Caracteristiques::estEgal(Caracteristiques const& b) const
 {
@@ -252,7 +252,7 @@ void Caracteristiques::caracRemplir(int COU, int INT, int CHA, int AD, int FO, i
 
 
 /*
- * Récupération
+ * RÃ©cupÃ©ration
  */
 QString Caracteristiques::caracAffichage(bool plus)
 {
@@ -418,7 +418,7 @@ int Caracteristiques::getAttaque() const
     if (utilisation_AT_PRD)
         return m_attaque;
     else
-        fatalError("L'attaque n'a pas été initialisée pour ces caractéristiques\n"
+        fatalError("L'attaque n'a pas Ã©tÃ© initialisÃ©e pour ces caractÃ©ristiques\n"
                    "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
 }
 int Caracteristiques::getParade() const
@@ -426,7 +426,7 @@ int Caracteristiques::getParade() const
     if (utilisation_AT_PRD)
         return m_parade;
     else
-        fatalError("La parade n'a pas été initialisée pour ces caractéristiques\n"
+        fatalError("La parade n'a pas Ã©tÃ© initialisÃ©e pour ces caractÃ©ristiques\n"
                    "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
 }
 
@@ -487,7 +487,7 @@ void Caracteristiques::setAttaque(int AT)
             m_attaque = AT;
     }
     else
-        fatalError("L'attaque n'a pas été initialisée pour ces caractéristiques\n"
+        fatalError("L'attaque n'a pas Ã©tÃ© initialisÃ©e pour ces caractÃ©ristiques\n"
                    "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
 }
 void Caracteristiques::setParade(int PRD)
@@ -502,6 +502,6 @@ void Caracteristiques::setParade(int PRD)
             m_parade = PRD;
     }
     else
-        fatalError("La parade n'a pas été initialisée pour ces caractéristiques\n"
+        fatalError("La parade n'a pas Ã©tÃ© initialisÃ©e pour ces caractÃ©ristiques\n"
                    "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
 }

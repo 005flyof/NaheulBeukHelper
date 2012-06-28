@@ -74,7 +74,7 @@
         FenCheckBox fenChangement;
         QPushButton* modifier;
 
-        // Objets à modifier
+        // Objets Ã  modifier
         Vetement* m_vet;
         Protection* m_pr;
         Arme* m_arme;
@@ -90,7 +90,7 @@
         QLabel* m_degats;
         QLineEdit* m_nombre;
 
-        // Boutons pour les flèches
+        // Boutons pour les flÃ¨ches
         QPushButton *m_plus;
         QPushButton *m_moins;
     };

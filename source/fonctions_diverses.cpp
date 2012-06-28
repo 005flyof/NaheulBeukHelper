@@ -38,9 +38,9 @@ void fatalError(QString const& message, bool const& logErreur)
 
         QWidget *a = new QWidget();
         QMessageBox::critical(a, "Erreur fatale",
-                              "NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
+                              "NBH va Ãªtre fermÃ© car une erreur fatale a Ã©tÃ© dÃ©celÃ©e :\n\n" + message);
         if (!logErreur)
-            log("Erreur fatale : NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
+            log("Erreur fatale : NBH va Ãªtre fermÃ© car une erreur fatale a Ã©tÃ© dÃ©celÃ©e :\n\n" + message);
     }
 
     exit(2);

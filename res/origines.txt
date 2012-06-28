@@ -6,16 +6,16 @@ Barbare
 x
 ~!competence-obligatoire!~
 AMBIDEXTRIE (AD)
-possibilité d'utiliser deux armes en même temps dans les combats – sujet à restrictions.
+possibilitÃ© d'utiliser deux armes en mÃªme temps dans les combats â€“ sujet Ã  restrictions.
 ~!competence-obligatoire!~
 CHERCHER DES NOISES
-le héros frappe toujours en premier lors d'un combat.
+le hÃ©ros frappe toujours en premier lors d'un combat.
 ~!competence-obligatoire!~
 SENTIR DES PIEDS
-éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+Ã©loigne les animaux (bivouac milieu naturel) â€“ gÃªne les alliÃ©s pour dormir en milieu confinÃ©.
 ~!competence-obligatoire!~
-TÊTE VIDE
-immunité à certains sortilèges ayant pour cible l'esprit du héros.
+TÃŠTE VIDE
+immunitÃ© Ã  certains sortilÃ¨ges ayant pour cible l'esprit du hÃ©ros.
 ~!NOUVELLE_ORIGINE!~
 Demi-Elfe
 00_00_10_11_00
@@ -24,15 +24,15 @@ Demi-Elfe
 x
 ~!competence-obligatoire!~
 APPEL DES RENFORTS
-permet de fuir un combat sans risquer d'être blessé.
+permet de fuir un combat sans risquer d'Ãªtre blessÃ©.
 ~!competence-obligatoire!~
-DÉTECTION
-bonus pour toutes les épreuves de détection des pièges et du danger.
+DÃ‰TECTION
+bonus pour toutes les Ã©preuves de dÃ©tection des piÃ¨ges et du danger.
 ~!competence-obligatoire!~
 CHOURAVER (AD)
-donne un bonus pour toutes les épreuves de vol à la tire.
+donne un bonus pour toutes les Ã©preuves de vol Ã  la tire.
 ~!competence-obligatoire!~
-MÉFIANCE (INT)
+MÃ‰FIANCE (INT)
 permet de savoir si un autre personnage ment.
 ~!NOUVELLE_ORIGINE!~
 Demi-Orque
@@ -42,19 +42,19 @@ Demi-Orque
 x
 ~!competence-obligatoire!~
 AGORAPHOBIE (INT)
-le héros a du mal à garder son sang-froid en présence de foule.
+le hÃ©ros a du mal Ã  garder son sang-froid en prÃ©sence de foule.
 ~!competence-obligatoire!~
 CHERCHER DES NOISES
-le héros frappe toujours en premier lors d'un combat.
+le hÃ©ros frappe toujours en premier lors d'un combat.
 ~!competence-obligatoire!~
 INSTINCT DE SURVIE
-capacité spéciale permettant de toujours trouver la nourriture.
+capacitÃ© spÃ©ciale permettant de toujours trouver la nourriture.
 ~!competence-obligatoire!~
 SENTIR DES PIEDS
-éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+Ã©loigne les animaux (bivouac milieu naturel) â€“ gÃªne les alliÃ©s pour dormir en milieu confinÃ©.
 ~!competence-obligatoire!~
-TÊTE VIDE
-immunité à certains sortilèges ayant pour cible l'esprit du héros.
+TÃŠTE VIDE
+immunitÃ© Ã  certains sortilÃ¨ges ayant pour cible l'esprit du hÃ©ros.
 ~!NOUVELLE_ORIGINE!~
 Elfe noir
 00_12_00_13_00
@@ -63,13 +63,13 @@ Elfe noir
 x
 ~!competence-obligatoire!~
 AGORAPHOBIE (INT)
-le héros a du mal à garder son sang-froid en présence de foule.
+le hÃ©ros a du mal Ã  garder son sang-froid en prÃ©sence de foule.
 ~!competence-obligatoire!~
-DÉPLACEMENT SILENCIEUX (AD)
-donne un bonus aux épreuves de discrétion et d'infiltration.
+DÃ‰PLACEMENT SILENCIEUX (AD)
+donne un bonus aux Ã©preuves de discrÃ©tion et d'infiltration.
 ~!competence-obligatoire!~
-DÉTECTION
-bonus pour toutes les épreuves de détection des pièges et du danger.
+DÃ‰TECTION
+bonus pour toutes les Ã©preuves de dÃ©tection des piÃ¨ges et du danger.
 ~!competence-obligatoire!~
 TIRER CORRECTEMENT (AD)
 le personnage peut utiliser, sans malus, un arc ou d'autres armes de jet (selon origine).
@@ -81,43 +81,43 @@ Elfe Sylvain
 x
 ~!competence-obligatoire!~
 CHEVAUCHER (AD, CHA)
-permet de monter à cheval sans épreuve, ou d'essayer de monter d'autres animaux.
+permet de monter Ã  cheval sans Ã©preuve, ou d'essayer de monter d'autres animaux.
 ~!competence-obligatoire!~
-NAÏVETÉ TOUCHANTE (CHA)
-l'air gentil du héros lui permet de désamorcer certains conflits.
+NAÃVETÃ‰ TOUCHANTE (CHA)
+l'air gentil du hÃ©ros lui permet de dÃ©samorcer certains conflits.
 ~!competence-obligatoire!~
 PREMIERS SOINS (AD, INT)
-permet d'essayer de soigner un ami sur une épreuve de moyenne AD/INT.
+permet d'essayer de soigner un ami sur une Ã©preuve de moyenne AD/INT.
 ~!competence-obligatoire!~
 TIRER CORRECTEMENT (AD)
 le personnage peut utiliser, sans malus, un arc ou d'autres armes de jet (selon origine).
 ~!competence-obligatoire!~
-TOMBER DANS LES PIÈGES
-le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.
+TOMBER DANS LES PIÃˆGES
+le hÃ©ros est toujours le premier Ã  tomber dans un piÃ¨ge si l'Ã©quipe en croise un.
 ~!NOUVELLE_ORIGINE!~
-Gnome des forêts du Nord
+Gnome des forÃªts du Nord
 00_10_00_13_00
 20_20_20_20_08
 15
 x
 ~!competence-obligatoire!~
 AMBIDEXTRIE (AD)
-possibilité d'utiliser deux armes en même temps dans les combats – sujet à restrictions.
+possibilitÃ© d'utiliser deux armes en mÃªme temps dans les combats â€“ sujet Ã  restrictions.
 ~!competence-obligatoire!~
 APPEL DES RENFORTS
-permet de fuir un combat sans risquer d'être blessé.
+permet de fuir un combat sans risquer d'Ãªtre blessÃ©.
 ~!competence-obligatoire!~
 CHEVAUCHER (AD, CHA)
-permet de monter à cheval sans épreuve, ou d'essayer de monter d'autres animaux.
+permet de monter Ã  cheval sans Ã©preuve, ou d'essayer de monter d'autres animaux.
 ~!competence-obligatoire!~
 CHOURAVER (AD)
-donne un bonus pour toutes les épreuves de vol à la tire.
+donne un bonus pour toutes les Ã©preuves de vol Ã  la tire.
 ~!competence-obligatoire!~
-DÉPLACEMENT SILENCIEUX (AD)
-donne un bonus aux épreuves de discrétion et d'infiltration.
+DÃ‰PLACEMENT SILENCIEUX (AD)
+donne un bonus aux Ã©preuves de discrÃ©tion et d'infiltration.
 ~!competence-obligatoire!~
-INSTINCT DU TRÉSOR (INT)
-donne un bonus aux épreuves pour trouver des trésors.
+INSTINCT DU TRÃ‰SOR (INT)
+donne un bonus aux Ã©preuves pour trouver des trÃ©sors.
 ~!NOUVELLE_ORIGINE!~
 Gobelin
 00_00_00_00_00
@@ -126,28 +126,28 @@ Gobelin
 09
 ~!competence-obligatoire!~
 AGORAPHOBIE (INT)
-le héros a du mal à garder son sang-froid en présence de foule.
+le hÃ©ros a du mal Ã  garder son sang-froid en prÃ©sence de foule.
 ~!competence-obligatoire!~
 APPEL DES RENFORTS
-permet de fuir un combat sans risquer d'être blessé.
+permet de fuir un combat sans risquer d'Ãªtre blessÃ©.
 ~!competence-obligatoire!~
 APPEL DU SAUVAGE
-le héros a du mal à choisir son camp en présence d'une horde.
+le hÃ©ros a du mal Ã  choisir son camp en prÃ©sence d'une horde.
 ~!competence-obligatoire!~
 ATTIRE LES MONSTRES
-au début du combat, le héros est toujours pris pour cible par les monstres et les ennemis.
+au dÃ©but du combat, le hÃ©ros est toujours pris pour cible par les monstres et les ennemis.
 ~!competence-obligatoire!~
 INSTINCT DE SURVIE
-capacité spéciale permettant de toujours trouver la nourriture.
+capacitÃ© spÃ©ciale permettant de toujours trouver la nourriture.
 ~!competence-obligatoire!~
-INSTINCT DU TRÉSOR (INT)
-donne un bonus aux épreuves pour trouver des trésors.
+INSTINCT DU TRÃ‰SOR (INT)
+donne un bonus aux Ã©preuves pour trouver des trÃ©sors.
 ~!competence-obligatoire!~
 SENTIR DES PIEDS
-éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+Ã©loigne les animaux (bivouac milieu naturel) â€“ gÃªne les alliÃ©s pour dormir en milieu confinÃ©.
 ~!competence-obligatoire!~
-TÊTE VIDE
-immunité à certains sortilèges ayant pour cible l'esprit du héros.
+TÃŠTE VIDE
+immunitÃ© Ã  certains sortilÃ¨ges ayant pour cible l'esprit du hÃ©ros.
 ~!NOUVELLE_ORIGINE!~
 Haut-elfe
 00_11_12_12_00
@@ -155,14 +155,14 @@ Haut-elfe
 25
 x
 ~!competence-obligatoire!~
-ÉRUDITION (INT)
-le héros sait lire, écrire et compter sans passer d'épreuve.
+Ã‰RUDITION (INT)
+le hÃ©ros sait lire, Ã©crire et compter sans passer d'Ã©preuve.
 ~!competence-obligatoire!~
 RUNES BIZARRES (INT)
-permet de lire ou d'interpréter les écritures étranges et symboles.
+permet de lire ou d'interprÃ©ter les Ã©critures Ã©tranges et symboles.
 ~!competence-obligatoire!~
-TOMBER DANS LES PIÈGES
-le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.
+TOMBER DANS LES PIÃˆGES
+le hÃ©ros est toujours le premier Ã  tomber dans un piÃ¨ge si l'Ã©quipe en croise un.
 ~!NOUVELLE_ORIGINE!~
 Humain
 00_00_00_00_00
@@ -177,16 +177,16 @@ Nain
 x
 ~!competence-obligatoire!~
 APPEL DU TONNEAU (INT)
-le héros a du mal à se tenir en présence d'alcool.
+le hÃ©ros a du mal Ã  se tenir en prÃ©sence d'alcool.
 ~!competence-obligatoire!~
-INSTINCT DU TRÉSOR (INT)
-donne un bonus aux épreuves pour trouver des trésors.
+INSTINCT DU TRÃ‰SOR (INT)
+donne un bonus aux Ã©preuves pour trouver des trÃ©sors.
 ~!competence-obligatoire!~
-PÉNIBLE (INT)
-le héros agace les membre de son groupe, et ça peut lui valoir des baffes.
+PÃ‰NIBLE (INT)
+le hÃ©ros agace les membre de son groupe, et Ã§a peut lui valoir des baffes.
 ~!competence-obligatoire!~
 RADIN (CHA, INT)
-donne un bonus au marchandage, mais également un malus au partage !
+donne un bonus au marchandage, mais Ã©galement un malus au partage !
 ~!NOUVELLE_ORIGINE!~
 Ogre
 00_00_00_00_13
@@ -195,25 +195,25 @@ Ogre
 08
 ~!competence-obligatoire!~
 ARMES DE BOURRIN
-possibilité d'utiliser des armes à deux mains.
+possibilitÃ© d'utiliser des armes Ã  deux mains.
 ~!competence-obligatoire!~
 APPEL DU TONNEAU (INT)
-le héros a du mal à se tenir en présence d'alcool.
+le hÃ©ros a du mal Ã  se tenir en prÃ©sence d'alcool.
 ~!competence-obligatoire!~
 APPEL DU VENTRE (INT)
-le héros doit se nourrir souvent, ou bien il s'attaque aux équipiers.
+le hÃ©ros doit se nourrir souvent, ou bien il s'attaque aux Ã©quipiers.
 ~!competence-obligatoire!~
 INSTINCT DE SURVIE
-capacité spéciale permettant de toujours trouver la nourriture.
+capacitÃ© spÃ©ciale permettant de toujours trouver la nourriture.
 ~!competence-obligatoire!~
 INTIMIDER (COU, CHA)
-le héros peut tenter d'effrayer quelqu'un à l'aide de son courage et son charisme.
+le hÃ©ros peut tenter d'effrayer quelqu'un Ã  l'aide de son courage et son charisme.
 ~!competence-obligatoire!~
 SENTIR DES PIEDS
-éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+Ã©loigne les animaux (bivouac milieu naturel) â€“ gÃªne les alliÃ©s pour dormir en milieu confinÃ©.
 ~!competence-obligatoire!~
-TÊTE VIDE
-immunité à certains sortilèges ayant pour cible l'esprit du héros.
+TÃŠTE VIDE
+immunitÃ© Ã  certains sortilÃ¨ges ayant pour cible l'esprit du hÃ©ros.
 ~!NOUVELLE_ORIGINE!~
 Orque
 00_00_00_00_12
@@ -222,25 +222,25 @@ Orque
 09
 ~!competence-obligatoire!~
 AGORAPHOBIE (INT)
-le héros a du mal à garder son sang-froid en présence de foule.
+le hÃ©ros a du mal Ã  garder son sang-froid en prÃ©sence de foule.
 ~!competence-obligatoire!~
 APPEL DU SAUVAGE
-le héros a du mal à choisir son camp en présence d'une horde.
+le hÃ©ros a du mal Ã  choisir son camp en prÃ©sence d'une horde.
 ~!competence-obligatoire!~
 APPEL DU TONNEAU (INT)
-le héros a du mal à se tenir en présence d'alcool.
+le hÃ©ros a du mal Ã  se tenir en prÃ©sence d'alcool.
 ~!competence-obligatoire!~
 BOURRE-PIF
-le héros peut se battre à mains nues de façon efficace et accéder à des coups spéciaux.
+le hÃ©ros peut se battre Ã  mains nues de faÃ§on efficace et accÃ©der Ã  des coups spÃ©ciaux.
 ~!competence-obligatoire!~
 INSTINCT DE SURVIE
-capacité spéciale permettant de toujours trouver la nourriture.
+capacitÃ© spÃ©ciale permettant de toujours trouver la nourriture.
 ~!competence-obligatoire!~
 SENTIR DES PIEDS
-éloigne les animaux (bivouac milieu naturel) – gêne les alliés pour dormir en milieu confiné.
+Ã©loigne les animaux (bivouac milieu naturel) â€“ gÃªne les alliÃ©s pour dormir en milieu confinÃ©.
 ~!competence-obligatoire!~
-TÊTE VIDE
-immunité à certains sortilèges ayant pour cible l'esprit du héros.
+TÃŠTE VIDE
+immunitÃ© Ã  certains sortilÃ¨ges ayant pour cible l'esprit du hÃ©ros.
 ~!NOUVELLE_ORIGINE!~
 Semi-Homme
 12_10_00_00_00
@@ -249,17 +249,17 @@ Semi-Homme
 09
 ~!competence-obligatoire!~
 APPEL DU TONNEAU (INT)
-le héros a du mal à se tenir en présence d'alcool.
+le hÃ©ros a du mal Ã  se tenir en prÃ©sence d'alcool.
 ~!competence-obligatoire!~
 CUISTOT (AD)
-permet à tout le groupe de récupérer des PV supplémentaires quand il prépare un repas.
+permet Ã  tout le groupe de rÃ©cupÃ©rer des PV supplÃ©mentaires quand il prÃ©pare un repas.
 ~!competence-obligatoire!~
 INSTINCT DE SURVIE
-capacité spéciale permettant de toujours trouver la nourriture.
+capacitÃ© spÃ©ciale permettant de toujours trouver la nourriture.
 ~!competence-obligatoire!~
 ATTIRE LES MONSTRES
-au début du combat, le héros est toujours pris pour cible par les monstres et les ennemis.
+au dÃ©but du combat, le hÃ©ros est toujours pris pour cible par les monstres et les ennemis.
 ~!competence-obligatoire!~
-RESSEMBLE À RIEN
-permet de se faire oublier, de passer inaperçu.
+RESSEMBLE Ã€ RIEN
+permet de se faire oublier, de passer inaperÃ§u.
 ~!FIN_ORIGINE!~

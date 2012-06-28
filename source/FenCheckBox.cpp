@@ -32,7 +32,7 @@ FenCheckBox::FenCheckBox(QWidget *parent, TypeObjet obj)
     switch (obj)
     {
     case vet:
-        nomfenetre += "le vêtement !";
+        nomfenetre += "le vÃªtement !";
         initialiserVet();
         break;
 
@@ -47,12 +47,12 @@ FenCheckBox::FenCheckBox(QWidget *parent, TypeObjet obj)
         break;
 
     case fleche:
-        nomfenetre += "les flêches !";
+        nomfenetre += "les flÃªches !";
         initialiserFleche();
         break;
 
     case equip:
-        nomfenetre += "l'équipement !";
+        nomfenetre += "l'Ã©quipement !";
         initialiserEquip();
         break;
 
@@ -324,7 +324,7 @@ void FenCheckBox::initialiserArme()
 
     tableau_spacers.append(new QSpacerItem(10, 10));
 
-    degats = new QLabel("Dégats :");
+    degats = new QLabel("DÃ©gats :");
         plusDegats = new QLabel("D +");
         des_spin = new QSpinBox();
         degats_spin = new QSpinBox();
@@ -380,7 +380,7 @@ void FenCheckBox::initialiserFleche()
 
     tableau_spacers.append(new QSpacerItem(10, 10));
 
-    nb_label = new QLabel("Nombre de ces flèches :");
+    nb_label = new QLabel("Nombre de ces flÃ¨ches :");
         nb = new QSpinBox();
 
     tableau_spacers.append(new QSpacerItem(10, 10));

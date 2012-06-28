@@ -21,7 +21,7 @@
 FenAttaque::FenAttaque(QStringList const& nomPersos, QMainWindow *parent)
     : QWidget(), m_parent(parent), m_nomPersos(nomPersos)
 {
-// Modèle
+// ModÃ¨le
     modele = new QStringListModel(m_nomPersos);
         QObject::connect(modele, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(recharger()));
 

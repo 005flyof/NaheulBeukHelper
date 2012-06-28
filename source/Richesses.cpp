@@ -28,21 +28,21 @@ Richesses::Richesses(int OR, int ARGENT, int CUIVRE)
 void Richesses::setRichesses_Or(unsigned int OR)
 {
     if (OR > 999999)
-        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PO (= 999999) a été dépassé !");
+        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PO (= 999999) a Ã©tÃ© dÃ©passÃ© !");
     else
         m_or = OR;
 }
 void Richesses::setRichesses_Argent(unsigned int ARGENT)
 {
     if (ARGENT > 999999)
-        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PA (= 999999) a été dépassé !");
+        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PA (= 999999) a Ã©tÃ© dÃ©passÃ© !");
     else
         m_argent = ARGENT;
 }
 void Richesses::setRichesses_Cuivre(unsigned int CUIVRE)
 {
     if (CUIVRE > 999999)
-        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PC (= 999999) a été dépassé !");
+        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PC (= 999999) a Ã©tÃ© dÃ©passÃ© !");
     else
         m_cuivre = CUIVRE;
 }

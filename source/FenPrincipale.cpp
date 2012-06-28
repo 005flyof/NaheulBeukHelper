@@ -21,19 +21,19 @@
 
 #define VERSION 1.8
 
-#define NOTES_BASE "Vos notes par rapport ‡ ce que l'on pert dans le programme une fois sur l'autre !\n\n" \
+#define NOTES_BASE "Vos notes par rapport √† ce que l'on pert dans le programme une fois sur l'autre !\n\n" \
                    "Comme les maladies, etc...\n\n" \
                    "	------------\n\n" \
                    "Merci d'utiliser ce programme !\n\n" \
                    "	------------\n\n" \
                    "Pour commencer :\n" \
-                      "* crÈer un groupe\n" \
-                      "* crÈer / ajouter un personnage au groupe crÈÈ\n" \
+                      "* cr√©er un groupe\n" \
+                      "* cr√©er / ajouter un personnage au groupe cr√©√©\n" \
                       "* ouvrir le groupe\n" \
                       "* enjoy the features of this program !!!\n\n" \
                    "	------------\n\n" \
                    "Vous utilisez la version " + QString::number(VERSION) + " de ce programme.\n" \
-                   "Ce programme est dÈveloppÈ en C++ avec QtCreator, par Florent Fayollas.\n"
+                   "Ce programme est d√©velopp√© en C++ avec QtCreator, par Florent Fayollas.\n"
 
 #define CARAC_A_ZERO	ouverture_COU = 0;\
     ouverture_INT = 0;\
@@ -52,17 +52,17 @@
 
 using namespace std;
 
-// FenÍtre principale
+// Fen√™tre principale
 FenPrincipale::FenPrincipale() : QMainWindow(), compteurOnglets(0)
 {
-// On s'occupe de la fenÍtre
+// On s'occupe de la fen√™tre
     setWindowTitle("NBH     --     NaheulBeuk Helper");
     setIcone(this);
     setMinimumSize(910, 540);
 
-// CrÈation de la statusBar
+// Cr√©ation de la statusBar
     statusBar = new QStatusBar();
-    statusBar->addWidget(new QLabel("PrÍt"));
+    statusBar->addWidget(new QLabel("Pr√™t"));
     setStatusBar(statusBar);
 
 // Initialisation diverses
@@ -94,26 +94,26 @@ void FenPrincipale::initMenus_ToolBars()
 // Menu : Fichier
     QMenu *fichier = barreDeMenu->addMenu("&Fichier");
 
-    QAction *nouveauPerso = fichier->addAction("CrÈer un personnage de niveau  1");
+    QAction *nouveauPerso = fichier->addAction("Cr√©er un personnage de niveau  1");
         nouveauPerso->setShortcut(QKeySequence("Ctrl+N"));
         nouveauPerso->setIcon(QIcon(":prog-data/img/new.png"));
-        nouveauPerso->setStatusTip("CrÈer un personnage de niveau puis l'ajouter ‡ un groupe de personnage crÈÈ auparavant.");
-    QAction *nouveauGroupe = fichier->addAction("CrÈer un groupe de personnage");
+        nouveauPerso->setStatusTip("Cr√©er un personnage de niveau puis l'ajouter √† un groupe de personnage cr√©√© auparavant.");
+    QAction *nouveauGroupe = fichier->addAction("Cr√©er un groupe de personnage");
         nouveauGroupe->setIcon(QIcon(":prog-data/img/new-group.png"));
-        nouveauGroupe->setStatusTip("CrÈer un groupe de personnage.");
+        nouveauGroupe->setStatusTip("Cr√©er un groupe de personnage.");
     fichier->addSeparator();
 
     QAction *ajouterPerso = fichier->addAction("Ajouter un personnage");
         ajouterPerso->setShortcut(QKeySequence("Ctrl+Shift+N"));
         ajouterPerso->setIcon(QIcon(":prog-data/img/add.png"));
-        ajouterPerso->setStatusTip("Ajouter un personnage que vous aviez crÈÈ auparavant.");
+        ajouterPerso->setStatusTip("Ajouter un personnage que vous aviez cr√©√© auparavant.");
     fichier->addSeparator();
 
-    QAction *ouvrirPersos = fichier->addAction("Ouvrir un groupe de personnages dÈj‡ crÈÈs");
+    QAction *ouvrirPersos = fichier->addAction("Ouvrir un groupe de personnages d√©j√† cr√©√©s");
         ouvrirPersos->setShortcut(QKeySequence("Ctrl+O"));
         ouvrirPersos->setIcon(QIcon(":prog-data/img/open.png"));
         ouvrirPersos->setStatusTip("Ouvrir un groupe de personnage");
-    enregistrer = fichier->addAction("Enregistrer les modifications apportÈes au groupe");
+    enregistrer = fichier->addAction("Enregistrer les modifications apport√©es au groupe");
         enregistrer->setShortcut(QKeySequence("Ctrl+S"));
         enregistrer->setIcon(QIcon(":prog-data/img/save.png"));
         enregistrer->setStatusTip("Forcer l'enregistrement des personnages du groupe ouvert.");
@@ -156,35 +156,35 @@ void FenPrincipale::initMenus_ToolBars()
 
     xpGroupe = groupe->addAction("XP de groupe");
         xpGroupe->setIcon(QIcon(":prog-data/img/XP.png"));
-        xpGroupe->setStatusTip("Ajouter de l'expÈrience au groupe entier.");
+        xpGroupe->setStatusTip("Ajouter de l'exp√©rience au groupe entier.");
         xpGroupe->setEnabled(false);
     groupe->addSeparator();
 
     POGroupe = groupe->addAction("Ajout PO en groupe");
         POGroupe->setIcon(QIcon(":prog-data/img/PO+.png"));
-        POGroupe->setStatusTip("Ajouter des PiËces d'Or ‡ chacun des personnages du groupe.");
+        POGroupe->setStatusTip("Ajouter des Pi√®ces d'Or √† chacun des personnages du groupe.");
         POGroupe->setEnabled(false);
     PAGroupe = groupe->addAction("Ajout PA en groupe");
         PAGroupe->setIcon(QIcon(":prog-data/img/PA+.png"));
-        PAGroupe->setStatusTip("Ajouter des PiËces d'Argent ‡ chacun des personnages du groupe.");
+        PAGroupe->setStatusTip("Ajouter des Pi√®ces d'Argent √† chacun des personnages du groupe.");
         PAGroupe->setEnabled(false);
     PCGroupe = groupe->addAction("Ajout PC en groupe");
         PCGroupe->setIcon(QIcon(":prog-data/img/PC+.png"));
-        PCGroupe->setStatusTip("Ajouter des PiËces de Cuivre ‡ chacun des personnages du groupe.");
+        PCGroupe->setStatusTip("Ajouter des Pi√®ces de Cuivre √† chacun des personnages du groupe.");
         PCGroupe->setEnabled(false);
     groupe->addSeparator();
 
     poGroupe = groupe->addAction("Retrait PO en groupe");
         poGroupe->setIcon(QIcon(":prog-data/img/PO-.png"));
-        poGroupe->setStatusTip("Retirer des PiËces d'Or ‡ chacun des personnages du groupe.");
+        poGroupe->setStatusTip("Retirer des Pi√®ces d'Or √† chacun des personnages du groupe.");
         poGroupe->setEnabled(false);
     paGroupe = groupe->addAction("Retrait PA en groupe");
         paGroupe->setIcon(QIcon(":prog-data/img/PA-.png"));
-        paGroupe->setStatusTip("Retirer des PiËces d'Argent ‡ chacun des personnages du groupe.");
+        paGroupe->setStatusTip("Retirer des Pi√®ces d'Argent √† chacun des personnages du groupe.");
         paGroupe->setEnabled(false);
     pcGroupe = groupe->addAction("Retrait PC en groupe");
         pcGroupe->setIcon(QIcon(":prog-data/img/PC-.png"));
-        pcGroupe->setStatusTip("Retirer des PiËces de Cuivre ‡ chacun des personnages du groupe.");
+        pcGroupe->setStatusTip("Retirer des Pi√®ces de Cuivre √† chacun des personnages du groupe.");
         pcGroupe->setEnabled(false);
 
 // Menu : Perso en cours
@@ -251,7 +251,7 @@ void FenPrincipale::initMenus_ToolBars()
         licence->setIcon(QIcon(":prog-data/img/licence.png"));
     question->addSeparator();
 
-    QAction *maj = question->addAction("Mise ‡ jour");
+    QAction *maj = question->addAction("Mise √† jour");
         maj->setIcon(QIcon(":prog-data/img/maj.png"));
     question->addSeparator();
 
@@ -259,11 +259,11 @@ void FenPrincipale::initMenus_ToolBars()
         aide->setShortcut(QKeySequence("F1"));
         aide->setIcon(QIcon(":prog-data/img/help.png"));
 
-    // Ajout de la barre des menus ‡ la fenÍtre
+    // Ajout de la barre des menus √† la fen√™tre
     setMenuBar(barreDeMenu);
 
 
-// CrÈation des connexion
+// Cr√©ation des connexion
     QObject::connect(nouveauPerso, SIGNAL(triggered()), this, SLOT(creerNouveauPersonnage()));
     QObject::connect(nouveauGroupe, SIGNAL(triggered()), this, SLOT(creerNouveauGroupe()));
     QObject::connect(ajouterPerso, SIGNAL(triggered()), this, SLOT(ajouterPersonnage()));
@@ -357,7 +357,7 @@ void FenPrincipale::initMenus_ToolBars()
 }
 void FenPrincipale::initWidget()
 {
-// CrÈation du widget central
+// Cr√©ation du widget central
     zoneCentrale = new QMdiArea(this);
     zoneCentrale->setViewMode(QMdiArea::TabbedView);
     zoneCentrale->setTabsMovable(true); // pour Qt 4.8 et sup
@@ -366,7 +366,7 @@ void FenPrincipale::initWidget()
     setCentralWidget(zoneCentrale);
 
 
-// CrÈation du widget pour les notes
+// Cr√©ation du widget pour les notes
     QDockWidget *notes = new QDockWidget("Notes :");
     notes->setFeatures(QDockWidget::NoDockWidgetFeatures);
     notes->setObjectName("dock-notes");
@@ -383,7 +383,7 @@ void FenPrincipale::initWidget()
     addDockWidget(Qt::LeftDockWidgetArea, notes);
 
 
-// CrÈation du widget pour les monstres
+// Cr√©ation du widget pour les monstres
 //    QDockWidget *monstres_dock = new QDockWidget("Monstres :");
 //    monstres_dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
 //    monstres_dock->setObjectName("dock-monstres");
@@ -395,11 +395,11 @@ void FenPrincipale::initWidget()
 
 //    addDockWidget(Qt::RightDockWidgetArea, monstres_dock);
 
-//    Monstre *fenetre = new Monstre("Mendiant 1", 5, 5, 5, 15, 1, 0, 2, 5, "Combat ‡ mains nues");
+//    Monstre *fenetre = new Monstre("Mendiant 1", 5, 5, 5, 15, 1, 0, 2, 5, "Combat √† mains nues");
 //    monstres->addTab(fenetre->afficher(), fenetre->nom());
 
 
-// CrÈation du widget pour l'ordre de marche
+// Cr√©ation du widget pour l'ordre de marche
     QDockWidget *ordreMarche_dock = new QDockWidget("Ordre de marche :");
     ordreMarche_dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
     ordreMarche_dock->setObjectName("dock-marche");
@@ -414,7 +414,7 @@ void FenPrincipale::initWidget()
     addDockWidget(Qt::RightDockWidgetArea, ordreMarche_dock);
 
 
-// CrÈation du widget de gestion des attaques
+// Cr√©ation du widget de gestion des attaques
     attaque_dock = new QDockWidget("Gestion des attaques :");
     attaque_dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
     attaque_dock->setObjectName("attack-dock");
@@ -434,7 +434,7 @@ void FenPrincipale::initWidget()
 FenPrincipale::~FenPrincipale()
 {}
 
-// FenÍtre de crÈation des personnages
+// Fen√™tre de cr√©ation des personnages
 void FenPrincipale::creerNouveauPersonnage()
 {
     progressBar_status = new QProgressBar();
@@ -445,11 +445,11 @@ void FenPrincipale::creerNouveauPersonnage()
         spacer[i] = new QSpacerItem(30, 10);
 
     nouveau_fenetre = new QDialog(this, Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
-    nouveau_fenetre->setWindowTitle("CrÈer un personnage -> informations gÈnÈriques");
+    nouveau_fenetre->setWindowTitle("Cr√©er un personnage -> informations g√©n√©riques");
     nouveau_fenetre->setModal(true);
     setIcone(nouveau_fenetre);
 
-// On rempli la fenÍtre
+// On rempli la fen√™tre
     nouveau_nom = new QLineEdit;
     nouveau_sexe = new QLineEdit;
 
@@ -495,7 +495,7 @@ void FenPrincipale::creerNouveauPersonnage()
         nouveau_layout1->addItem(spacer[lecteur_spacer]);
         lecteur_spacer++;
 
-        nouveau_layout1->addRow("PO (piËces d'or) :\n"
+        nouveau_layout1->addRow("PO (pi√®ces d'or) :\n"
                                "(2D6 x 10)", nouveau_PO);
         nouveau_layout1->addItem(spacer[lecteur_spacer]);
         lecteur_spacer++;
@@ -551,9 +551,9 @@ void FenPrincipale::creerNouveauPersonnage_Origine()
         layout_vertical->addWidget(explication);
 
     int totalOrigine = 0;
-// On crÈe le personnage !
+// On cr√©e le personnage !
     tableauDePersonnages[nouveau_nom->text()] = Personnage(nouveau_nom->text(), nouveau_sexe->text(),
-                                                           "Origine ‡ dÈfinir !", "MÈtier ‡ dÈfinr",
+                                                           "Origine √† d√©finir !", "M√©tier √† d√©finr",
                                                            nouveau_COU->value(), nouveau_INT->value(), nouveau_CHA->value(),
                                                            nouveau_AD->value(), nouveau_FO->value(), 8, 10,
                                                            nouveau_COU->value(), nouveau_INT->value(), nouveau_CHA->value(),
@@ -561,7 +561,7 @@ void FenPrincipale::creerNouveauPersonnage_Origine()
                                                            nouveau_ptsDestin->value(), 0,
                                                            0, nouveau_PO->value(), 0, 0);
 
-// On crÈe les origines depuis le fichier conteneur
+// On cr√©e les origines depuis le fichier conteneur
     QFile nouveau_origine_conteneur(":prog-data/origines.txt");
     if (!nouveau_origine_conteneur.open(QIODevice::ReadOnly | QIODevice::Text))
         fatalError("Fichier contenant les origines inaccessible !");
@@ -613,11 +613,11 @@ void FenPrincipale::creerNouveauPersonnage_Origine()
                     origine_fo = origineCarac_string.toInt();
                     break;
                 default:
-                    QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                    QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                           "ERREUR : Erreur lors de l'ouverture du fichier contenant les origines :\n"
                                           "     ->  Origine : \"" + origine_nom + "\" invalide !\n\n"
-                                          "CaractÈristiques minimum non valides !\n");
-                    statusBar->showMessage("Action annulÈe -> Erreur lors de l'ouverture du fichier contenant les origines !");
+                                          "Caract√©ristiques minimum non valides !\n");
+                    statusBar->showMessage("Action annul√©e -> Erreur lors de l'ouverture du fichier contenant les origines !");
                     return;
                     break;
                 }
@@ -657,11 +657,11 @@ void FenPrincipale::creerNouveauPersonnage_Origine()
                     origine_FO = origineCarac_string.toInt();
                     break;
                 default:
-                    QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                    QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                           "ERREUR : Erreur lors de l'ouverture du fichier contenant les origines :\n"
                                           "     ->  Origine : \"" + origine_nom + "\" invalide !\n\n"
-                                          "CaractÈristiques maximum non valides !\n");
-                    statusBar->showMessage("Action annulÈe -> Erreur lors de l'ouverture du fichier contenant les origines !");
+                                          "Caract√©ristiques maximum non valides !\n");
+                    statusBar->showMessage("Action annul√©e -> Erreur lors de l'ouverture du fichier contenant les origines !");
                     return;
                     break;
                 }
@@ -695,7 +695,7 @@ void FenPrincipale::creerNouveauPersonnage_Origine()
             totalOrigine++;
         }
 
-    // On charge la ligne pour vÈrifier que le fichier n'est pas fini
+    // On charge la ligne pour v√©rifier que le fichier n'est pas fini
         ligne = nouveau_origineTexte.readLine();
 
         while (ligne == "~!competence-obligatoire!~")
@@ -719,9 +719,9 @@ void FenPrincipale::creerNouveauPersonnage_Origine()
         }
     } while (ligne != "~!FIN_ORIGINE!~");
 
-// On affiche la fenÍtre proposant les origines possibles
+// On affiche la fen√™tre proposant les origines possibles
     nouveau_fenetre2 = new QDialog(this, Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
-    nouveau_fenetre2->setWindowTitle("CrÈer un personnage -> choix de l'origine");
+    nouveau_fenetre2->setWindowTitle("Cr√©er un personnage -> choix de l'origine");
     nouveau_fenetre2->setModal(true);
     setIcone(nouveau_fenetre2);
 
@@ -750,15 +750,15 @@ void FenPrincipale::creerNouveauPersonnage_Metier()
 
     QVBoxLayout *layout_vertical = new QVBoxLayout();
     QHBoxLayout *layout = new QHBoxLayout();
-        QLabel *explication = new QLabel("Voici les mÈtiers que vous pouvez choisir :");
+        QLabel *explication = new QLabel("Voici les m√©tiers que vous pouvez choisir :");
         layout_vertical->addWidget(explication);
 
     int totalMetiers = 0;
 
-// On crÈe les mÈtiers depuis le fichier conteneur
+// On cr√©e les m√©tiers depuis le fichier conteneur
     QFile nouveau_metier_conteneur(":prog-data/metiers.txt");
     if (!nouveau_metier_conteneur.open(QIODevice::ReadOnly | QIODevice::Text))
-        fatalError("Impossible de charger le fichier contenant les mÈtiers.");
+        fatalError("Impossible de charger le fichier contenant les m√©tiers.");
 
     QTextStream nouveau_metierTexte(&nouveau_metier_conteneur);
 
@@ -802,11 +802,11 @@ void FenPrincipale::creerNouveauPersonnage_Metier()
                     metier_fo = metierCarac_string.toInt();
                     break;
                 default:
-                    QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
-                                          "ERREUR : Erreur lors de l'ouverture du fichier contenant les mÈtiers :\n"
-                                          "     ->  MÈtier : \"" + metier_nom + "\" invalide !\n\n"
-                                          "CaractÈristiques minimum non valides !\n");
-                    statusBar->showMessage("Action annulÈe -> Erreur lors de l'ouverture du fichier contenant les mÈtiers !");
+                    QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
+                                          "ERREUR : Erreur lors de l'ouverture du fichier contenant les m√©tiers :\n"
+                                          "     ->  M√©tier : \"" + metier_nom + "\" invalide !\n\n"
+                                          "Caract√©ristiques minimum non valides !\n");
+                    statusBar->showMessage("Action annul√©e -> Erreur lors de l'ouverture du fichier contenant les m√©tiers !");
                     return;
                     break;
                 }
@@ -823,7 +823,7 @@ void FenPrincipale::creerNouveauPersonnage_Metier()
         if (ligne != "x")
             metier_prd = ligne.toInt();
 
-    // On crÈe le mÈtier
+    // On cr√©e le m√©tier
         tableauDeMetiers[metier_nom] = Metier(metier_nom, metier_at, metier_prd,
                                               metier_cou, metier_int, metier_cha, metier_ad, metier_fo);
 
@@ -840,10 +840,10 @@ void FenPrincipale::creerNouveauPersonnage_Metier()
             ligne = nouveau_metierTexte.readLine();
 
             do {
-            // On remplit la liste de classes modifiÈes
+            // On remplit la liste de classes modifi√©es
                 liste_classes << ligne;
 
-            // On charge la ligne pour vÈrifier que la liste des classes modifiÈes n'est pas fini
+            // On charge la ligne pour v√©rifier que la liste des classes modifi√©es n'est pas fini
                 ligne = nouveau_metierTexte.readLine();
             } while (ligne != "~!EV_MODIF!~");
 
@@ -855,15 +855,15 @@ void FenPrincipale::creerNouveauPersonnage_Metier()
             QString ligne2 = nouveau_metierTexte.readLine();
             if (ligne2 == "pourcent")
             {
-            // On ajoute tout cela au mÈtier
+            // On ajoute tout cela au m√©tier
                 tableauDeMetiers[metier_nom].setEV(liste_classes, ev_pourClassesModifiees, evEnPlus_pourLesAutres, true);
-            // On charge la ligne pour pouvoir vÈrifier que le fichier n'est pas fini
+            // On charge la ligne pour pouvoir v√©rifier que le fichier n'est pas fini
                 ligne = nouveau_metierTexte.readLine();
             }
             else
             {
                 ligne = ligne2;
-            // On ajoute tout cela au mÈtier
+            // On ajoute tout cela au m√©tier
                 tableauDeMetiers[metier_nom].setEV(liste_classes, ev_pourClassesModifiees, evEnPlus_pourLesAutres, false);
             }
         }
@@ -873,10 +873,10 @@ void FenPrincipale::creerNouveauPersonnage_Metier()
             QString typeEA = nouveau_metierTexte.readLine();
             int EA = nouveau_metierTexte.readLine().toInt();
 
-        // On ajoute l'EA au mÈtier
+        // On ajoute l'EA au m√©tier
             tableauDeMetiers[metier_nom].setEA(typeEA, EA);
 
-        // On charge la ligne pour pouvoir vÈrifier que le fichier n'est pas fini
+        // On charge la ligne pour pouvoir v√©rifier que le fichier n'est pas fini
             ligne = nouveau_metierTexte.readLine();
         }
 
@@ -913,9 +913,9 @@ void FenPrincipale::creerNouveauPersonnage_Metier()
         }
     } while (ligne != "~!FIN_METIER!~");
 
-// On affiche la fenÍtre proposant les mÈtiers possibles
+// On affiche la fen√™tre proposant les m√©tiers possibles
     nouveau_fenetre3 = new QDialog(this, Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
-    nouveau_fenetre3->setWindowTitle("CrÈer un personnage -> choix du mÈtier");
+    nouveau_fenetre3->setWindowTitle("Cr√©er un personnage -> choix du m√©tier");
     nouveau_fenetre3->setModal(true);
     setIcone(nouveau_fenetre3);
 
@@ -946,11 +946,11 @@ void FenPrincipale::creerNouveauPersonnage_Set()
     {
         if (tableauDeRadioButton_Origine[i]->isChecked())
         {
-        // On capte le nom du mÈtier
+        // On capte le nom du m√©tier
             QString nomOrigine = tableauDeRadioButton_Origine[i]->text();
-        // On crÈe un iterator sur le mÈtier
+        // On cr√©e un iterator sur le m√©tier
             QMap<QString, Origine>::iterator it = tableauDOrigines.find(nomOrigine);
-        // On valide le mÈtier
+        // On valide le m√©tier
             tableauDePersonnages[nouveau_nom->text()].setOrigine(*it);
         }
     }
@@ -958,16 +958,16 @@ void FenPrincipale::creerNouveauPersonnage_Set()
     {
         if (tableauDeRadioButton_Metier[i]->isChecked())
         {
-        // On capte le nom du mÈtier
+        // On capte le nom du m√©tier
             QString nomMetier = tableauDeRadioButton_Metier[i]->text();
-        // On crÈe un iterator sur le mÈtier
+        // On cr√©e un iterator sur le m√©tier
             QMap<QString, Metier>::iterator it = tableauDeMetiers.find(nomMetier);
-        // On valide le mÈtier
+        // On valide le m√©tier
             tableauDePersonnages[nouveau_nom->text()].setMetier(*it);
         }
     }
 
-// On demande o˘ l'enregistrer et on ouvre le fichier
+// On demande o√π l'enregistrer et on ouvre le fichier
     QString cheminPerso = QFileDialog::getSaveFileName(zoneCentrale, "Enregistrer un personnage",
                                                        QString("enregistrements"), "Personnages (*.perso)");
 
@@ -988,11 +988,11 @@ void FenPrincipale::creerNouveauPersonnage_Set()
     {
         QMessageBox::critical(this, "Erreur",
                               "ERREUR :\nVous essayez d'enregistrer le nouveau personnage "
-                              "sur un autre dÈj‡ crÈÈ et ouvert !");
+                              "sur un autre d√©j√† cr√©√© et ouvert !");
 
         QMessageBox *msgBox1 = new QMessageBox(QMessageBox::Information, "Information",
-                                               "Si vous voulez recrÈer ce personnage,"
-                                               "il va falloir re-rentrer toutes les caractÈristiques de celui-ci !\n\n"
+                                               "Si vous voulez recr√©er ce personnage,"
+                                               "il va falloir re-rentrer toutes les caract√©ristiques de celui-ci !\n\n"
                                                "C'est votre punition !");
             merci = msgBox1->addButton("Oh non !", QMessageBox::AcceptRole);
             setIcone(msgBox1);
@@ -1001,7 +1001,7 @@ void FenPrincipale::creerNouveauPersonnage_Set()
         QMessageBox *msgBox2 = new QMessageBox(QMessageBox::Information, "Information",
                                                "Alors, vous enragez ?\n\n"
                                                "Eh ben, vous avez de la chance, je suis de bonne humeur aujourd'hui !\n"
-                                               "En consÈquent, vous n'aurez pas besoin de re-remplir ce formulaire !\n\n"
+                                               "En cons√©quent, vous n'aurez pas besoin de re-remplir ce formulaire !\n\n"
                                                "Qu'est-ce qu'on dit ?");
             ohNon = msgBox2->addButton("Merci !", QMessageBox::AcceptRole);
             setIcone(msgBox2);
@@ -1017,9 +1017,9 @@ void FenPrincipale::creerNouveauPersonnage_Set()
 
     QFile persoRec(cheminPerso);
     if (!persoRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de crÈer le fichier personnage sÈlectionnÈ. C'est une erreur impossible normalement. RÈessayez d'ajouter le personnage.");
+        fatalError("Impossible de cr√©er le fichier personnage s√©lectionn√©. C'est une erreur impossible normalement. R√©essayez d'ajouter le personnage.");
 
-    log("Enregistrement du personnage crÈÈ prÈcÈdemment.");
+    log("Enregistrement du personnage cr√©√© pr√©c√©demment.");
     QTextStream sortie(&persoRec);
     sortie << tableauDePersonnages[nouveau_nom->text()].getPersoEntier();
 
@@ -1036,7 +1036,7 @@ void FenPrincipale::creerNouveauPersonnage_Set()
                                                     QString("enregistrements"), "Groupes de personnages (*.nbh)");
 
         if (cheminGroupe.isEmpty())
-            QMessageBox::critical(zoneCentrale, "ERREUR !", "Erreur :\nVous devez choisir un groupe ‡ modifier !");
+            QMessageBox::critical(zoneCentrale, "ERREUR !", "Erreur :\nVous devez choisir un groupe √† modifier !");
         else
             erreur = true;
     }
@@ -1045,9 +1045,9 @@ void FenPrincipale::creerNouveauPersonnage_Set()
         cheminGroupe.replace("/", "\\");
     QFile groupeRec(cheminGroupe);
     if (!groupeRec.open(QIODevice::Append | QIODevice::Text))
-        fatalError("Impossible d'ouvrir le fichier de groupe sÈlectionnÈ. C'est une erreur impossible normalement. RÈessayez de crÈer le personnage.");
+        fatalError("Impossible d'ouvrir le fichier de groupe s√©lectionn√©. C'est une erreur impossible normalement. R√©essayez de cr√©er le personnage.");
 
-    log("Ajout du personnage ‡ un groupe !");
+    log("Ajout du personnage √† un groupe !");
 
     QTextStream groupe(&groupeRec);
 
@@ -1103,18 +1103,18 @@ void FenPrincipale::creerNouveauPersonnage_Set()
     statusBar->removeWidget(progressBar_status);
     delete progressBar_status;
     progressBar_status = 0;
-    statusBar->showMessage("Personnage crÈÈ et ajoutÈ au groupe", 2000);
+    statusBar->showMessage("Personnage cr√©√© et ajout√© au groupe", 2000);
 
-    QMessageBox::information(this, "CompÈtences",
-                             "Les compÈtences acquises de naissance par le personnage ont ÈtÈ ajoutÈes au personnage, mais pas celle qu'il peut dÈvelopper.\n\n"
-                             "Merci de les ajouter par vous-mÍme, la fonction d'ajout automatique est en dÈveloppement.");
+    QMessageBox::information(this, "Comp√©tences",
+                             "Les comp√©tences acquises de naissance par le personnage ont √©t√© ajout√©es au personnage, mais pas celle qu'il peut d√©velopper.\n\n"
+                             "Merci de les ajouter par vous-m√™me, la fonction d'ajout automatique est en d√©veloppement.");
 }
 
-// CrÈer un nouveau groupe
+// Cr√©er un nouveau groupe
 void FenPrincipale::creerNouveauGroupe()
 {
 // Choix des chemins
-    QString cheminGroupe = QFileDialog::getSaveFileName(zoneCentrale, "CrÈer un groupe -> Fichier 'NBH'",
+    QString cheminGroupe = QFileDialog::getSaveFileName(zoneCentrale, "Cr√©er un groupe -> Fichier 'NBH'",
                                                        QString("enregistrements"), "Groupe de personnages (*.nbh)");
 
     if (cheminGroupe.isEmpty())
@@ -1125,9 +1125,9 @@ void FenPrincipale::creerNouveauGroupe()
     while (!erreur)
     {
         QMessageBox::information(zoneCentrale, "Notes",
-                                 "Dans la fenÍtre suivante, vous devrez rentrer un nom pour le fichier qui contiendra vos notes.");
+                                 "Dans la fen√™tre suivante, vous devrez rentrer un nom pour le fichier qui contiendra vos notes.");
 
-        cheminNotes = QFileDialog::getSaveFileName(zoneCentrale, "CrÈer un groupe -> Fichier 'notes'",
+        cheminNotes = QFileDialog::getSaveFileName(zoneCentrale, "Cr√©er un groupe -> Fichier 'notes'",
                                                            QString("enregistrements"), "Fichier Notes (*.notes)");
 
         if (cheminNotes.isEmpty())
@@ -1139,15 +1139,15 @@ void FenPrincipale::creerNouveauGroupe()
 // Enregistrement
     QFile notesRec(cheminNotes);
     if (!notesRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de crÈer le fichier de note sÈlectionnÈ. C'est une erreur impossible normalement. RÈessayez de crÈer le groupe.");
+        fatalError("Impossible de cr√©er le fichier de note s√©lectionn√©. C'est une erreur impossible normalement. R√©essayez de cr√©er le groupe.");
 
-    log("CrÈation d'un fichier de notes.");
+    log("Cr√©ation d'un fichier de notes.");
 
     QFile groupeRec(cheminGroupe);
     if (!groupeRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de crÈer le fichier de groupe sÈlectionnÈ. C'est une erreur impossible normalement. RÈessayez de crÈer le groupe.");
+        fatalError("Impossible de cr√©er le fichier de groupe s√©lectionn√©. C'est une erreur impossible normalement. R√©essayez de cr√©er le groupe.");
 
-    log("CrÈation d'un fichier groupe.");
+    log("Cr√©ation d'un fichier groupe.");
 
     QTextStream sortie(&groupeRec);
 
@@ -1161,8 +1161,8 @@ void FenPrincipale::creerNouveauGroupe()
     cheminNotes = cheminNotes.remove(cheminApp);
     sortie << cheminNotes + "\n";
 
-    log("Groupe bien crÈe !");
-    statusBar->showMessage("Groupe bien crÈÈ", 2000);
+    log("Groupe bien cr√©e !");
+    statusBar->showMessage("Groupe bien cr√©√©", 2000);
 }
 
 // Ajouter un personnage
@@ -1175,10 +1175,10 @@ void FenPrincipale::ajouterPersonnage()
     for (int i = 0; i < NB_SPACER_FENPRINCIPALE; i++)
         spacer[i] = new QSpacerItem(30, 10);
 
-// On crÈe la fenÍtre !
+// On cr√©e la fen√™tre !
     ajouter_fenetre = new QDialog(this, Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
         setIcone(ajouter_fenetre);
-        ajouter_fenetre->setWindowTitle("Ajouter un personnage crÈÈ auparavant");
+        ajouter_fenetre->setWindowTitle("Ajouter un personnage cr√©√© auparavant");
         ajouter_fenetre->setModal(true);
 
         ajouter_nom = new QLineEdit();
@@ -1218,7 +1218,7 @@ void FenPrincipale::ajouterPersonnage()
             ajouter_PC->setMaximum(999999);
 
         QFormLayout *ajouter_layout1 = new QFormLayout();
-            ajouter_layout1->addRow("Nom du personnage ‡ ajouter :", ajouter_nom);
+            ajouter_layout1->addRow("Nom du personnage √† ajouter :", ajouter_nom);
             ajouter_layout1->addRow("Sexe :", ajouter_sexe);
             ajouter_layout1->addItem(spacer[lecteur_spacer]);
             lecteur_spacer++;
@@ -1243,16 +1243,16 @@ void FenPrincipale::ajouterPersonnage()
 
         QFormLayout *ajouter_layout2 = new QFormLayout();
             ajouter_layout2->addRow("Nom de l'origine", ajouter_origineNom);
-            ajouter_layout2->addRow("Nom du mÈtier :", ajouter_metierNom);
+            ajouter_layout2->addRow("Nom du m√©tier :", ajouter_metierNom);
             ajouter_layout2->addItem(spacer[lecteur_spacer]);
             lecteur_spacer++;
 
             ajouter_layout2->addRow("EA :", ajouter_EA);
-            ajouter_layout2->addRow("Type d'Ènergie astrale :", ajouter_EA_type);
+            ajouter_layout2->addRow("Type d'√©nergie astrale :", ajouter_EA_type);
             ajouter_layout2->addItem(spacer[lecteur_spacer]);
             lecteur_spacer++;
 
-            ajouter_layout2->addRow("ExpÈrience dÈj‡ acquise :", ajouter_XP);
+            ajouter_layout2->addRow("Exp√©rience d√©j√† acquise :", ajouter_XP);
             ajouter_layout2->addRow("Points de destin :", ajouter_ptsDestin);
             ajouter_layout2->addItem(spacer[lecteur_spacer]);
             lecteur_spacer++;
@@ -1269,8 +1269,8 @@ void FenPrincipale::ajouterPersonnage()
             lecteur_spacer++;
             ajouter_layout->addLayout(ajouter_layout2);
 
-        QLabel *explication = new QLabel("- Si le personnage n'est pas magicien, laisser ‡ zÈro l'EA et laisser vide le champs \"Type d'Ènergie astrale\".\n"
-                                         "- Vous pourrez habiller le personnage, lui donner des protections, des armes, et des flËches lorsque celui-ci sera ouvert.");
+        QLabel *explication = new QLabel("- Si le personnage n'est pas magicien, laisser √† z√©ro l'EA et laisser vide le champs \"Type d'√©nergie astrale\".\n"
+                                         "- Vous pourrez habiller le personnage, lui donner des protections, des armes, et des fl√®ches lorsque celui-ci sera ouvert.");
 
         QDialogButtonBox *ajouter_boutonsBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
             QObject::connect(ajouter_boutonsBox, SIGNAL(accepted()), this, SLOT(ajouterPersonnage_Save()));
@@ -1284,14 +1284,14 @@ void FenPrincipale::ajouterPersonnage()
 
         ajouter_fenetre->setLayout(ajouter_layoutTotal);
 
-// On affiche la fenÍtre
+// On affiche la fen√™tre
     ajouter_fenetre->show();
 }
 void FenPrincipale::ajouterPersonnage_Save()
 {
     progressBar_status->setValue(50);
 
-// On crÈe le personnage !
+// On cr√©e le personnage !
     tableauDePersonnages[ajouter_nom->text()] = Personnage(ajouter_nom->text(), ajouter_sexe->text(),
                                                            ajouter_origineNom->text(), ajouter_metierNom->text(),
                                                            ajouter_COU->value(), ajouter_INT->value(), ajouter_CHA->value(), ajouter_AD->value(),
@@ -1302,11 +1302,11 @@ void FenPrincipale::ajouterPersonnage_Save()
                                                            ajouter_EV->value(),
                                                            ajouter_PO->value(), ajouter_PA->value(), ajouter_PC->value());
 
-// Si le personnage ajoutÈ est mage
+// Si le personnage ajout√© est mage
     if (ajouter_EA_type->text() != "" && ajouter_EA->value() != 0)
         tableauDePersonnages[ajouter_nom->text()].setEA(ajouter_EA->value(), ajouter_EA_type->text());
 
-// On demande o˘ l'enregistrer et on ouvre le fichier
+// On demande o√π l'enregistrer et on ouvre le fichier
     QString cheminPerso = QFileDialog::getSaveFileName(zoneCentrale, "Enregistrer un personnage",
                                                        QString("enregistrements"), "Personnages (*.perso)");
     if (cheminPerso.isEmpty())
@@ -1325,11 +1325,11 @@ void FenPrincipale::ajouterPersonnage_Save()
     if (ouvert)
     {
         QMessageBox::critical(this, "Erreur",
-                              "ERREUR :\nVous essayez d'enregistrer le nouveau personnage\nsur un autre dÈj‡ crÈÈ et ouvert !");
+                              "ERREUR :\nVous essayez d'enregistrer le nouveau personnage\nsur un autre d√©j√† cr√©√© et ouvert !");
 
         QMessageBox *msgBox1 = new QMessageBox(QMessageBox::Information, "Information",
-                                               "Si vous voulez recrÈer ce personnage,"
-                                               "il va falloir re-rentrer toutes les caractÈristiques de celui-ci !\n\n"
+                                               "Si vous voulez recr√©er ce personnage,"
+                                               "il va falloir re-rentrer toutes les caract√©ristiques de celui-ci !\n\n"
                                                "C'est votre punition !");
             merci = msgBox1->addButton("Oh non !", QMessageBox::AcceptRole);
             setIcone(msgBox1);
@@ -1338,7 +1338,7 @@ void FenPrincipale::ajouterPersonnage_Save()
         QMessageBox *msgBox2 = new QMessageBox(QMessageBox::Information, "Information",
                                                "Alors, vous enragez ?\n\n"
                                                "Eh ben, vous avez de la chance, je suis de bonne humeur aujourd'hui !\n"
-                                               "En consÈquent, vous n'aurez pas besoin de re-remplir ce formulaire !\n\n"
+                                               "En cons√©quent, vous n'aurez pas besoin de re-remplir ce formulaire !\n\n"
                                                "Qu'est-ce qu'on dit ?");
             ohNon = msgBox2->addButton("Merci !", QMessageBox::AcceptRole);
             setIcone(msgBox2);
@@ -1355,9 +1355,9 @@ void FenPrincipale::ajouterPersonnage_Save()
 
     QFile persoRec(cheminPerso);
     if (!persoRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de crÈer le fichier personnage sÈlectionnÈ. C'est une erreur impossible normalement. RÈessayez d'ajouter le personnage.");
+        fatalError("Impossible de cr√©er le fichier personnage s√©lectionn√©. C'est une erreur impossible normalement. R√©essayez d'ajouter le personnage.");
 
-    log("Enregistrement du personnage ajoutÈ !");
+    log("Enregistrement du personnage ajout√© !");
 
     QTextStream sortie(&persoRec);
 
@@ -1376,7 +1376,7 @@ void FenPrincipale::ajouterPersonnage_Save()
                                                     QString("enregistrements"), "Groupes de personnages (*.nbh)");
 
         if (cheminGroupe.isEmpty())
-            QMessageBox::critical(zoneCentrale, "ERREUR !", "Erreur :\nVous devez choisir un groupe ‡ modifier !");
+            QMessageBox::critical(zoneCentrale, "ERREUR !", "Erreur :\nVous devez choisir un groupe √† modifier !");
         else
             erreur = true;
     }
@@ -1385,9 +1385,9 @@ void FenPrincipale::ajouterPersonnage_Save()
         cheminGroupe.replace("/", "\\");
     QFile groupeRec(cheminGroupe);
     if (!groupeRec.open(QIODevice::Append | QIODevice::Text))
-        fatalError("Impossible d'ouvrir le fichier de groupe sÈlectionnÈ. RÈessayez d'ajouter le personnage au groupe.");
+        fatalError("Impossible d'ouvrir le fichier de groupe s√©lectionn√©. R√©essayez d'ajouter le personnage au groupe.");
 
-    log("Ajout du personnage ‡ un groupe !");
+    log("Ajout du personnage √† un groupe !");
 
     QTextStream groupe(&groupeRec);
 
@@ -1441,7 +1441,7 @@ void FenPrincipale::ajouterPersonnage_Save()
     statusBar->removeWidget(progressBar_status);
     delete progressBar_status;
     progressBar_status = 0;
-    statusBar->showMessage("Personnage crÈÈ et ajoutÈ au groupe", 2000);
+    statusBar->showMessage("Personnage cr√©√© et ajout√© au groupe", 2000);
 }
 
 // Ouvrir
@@ -1454,7 +1454,7 @@ void FenPrincipale::ouvrir()
         return;
     }
 
-// On demande ‡ l'utilisateur de choisir le fichier contenant le groupe
+// On demande √† l'utilisateur de choisir le fichier contenant le groupe
     groupeAdresse = QFileDialog::getOpenFileName(zoneCentrale,
                                           "Ouvrir un groupe",
                                           "enregistrements",
@@ -1469,7 +1469,7 @@ void FenPrincipale::ouvrir()
     {
         QMessageBox::critical(this, "Erreur lors de l'ouverture du groupe !",
                               "Impossible d'ouvrir le fichier de groupe.\n"
-                              "Veuillez rÈessayer !");
+                              "Veuillez r√©essayer !");
         log("Erreur lors de l'ouverture du groupe : '" + groupeAdresse + "'\n"
             "Annulation du chargement du groupe.");
         groupeAdresse = "";
@@ -1502,7 +1502,7 @@ void FenPrincipale::ouvrir()
     {
         QMessageBox::critical(this, "Erreur lors de l'ouverture de notes !",
                               "Impossible d'ouvrir le fichier de notes.\n"
-                              "Veuillez rÈessayer !");
+                              "Veuillez r√©essayer !");
         log("Erreur lors de l'ouverture du fichier de note : '" + noteAdresse + "'\n"
             "Annulation du chargement du groupe.");
         groupeAdresse = "";
@@ -1518,7 +1518,7 @@ void FenPrincipale::ouvrir()
     notes_txt->setText(notes_string);
     notes_txt->setEnabled(true);
     notes_txt->setUndoRedoEnabled(true);
-// On ajoute 1 ‡ l'itÈrateur
+// On ajoute 1 √† l'it√©rateur
     cheminPersoOuverture++;
 
     while(cheminPersoOuverture != chemins.end())
@@ -1550,7 +1550,7 @@ void FenPrincipale::ouvrir()
         QString ouvertureXP_string = entree.readLine();
         ouvertureXP = ouvertureXP_string.toInt();
 
-    // Ouverture pour les caractÈristiques
+    // Ouverture pour les caract√©ristiques
             // Initiales
         QString ouvertureCarac_ligne = entree.readLine();
         lecteurLigne = 0;
@@ -1590,12 +1590,12 @@ void FenPrincipale::ouvrir()
                     ouverture_PRD = ouvertureCarac_string.toInt();
                     break;
                 default:
-                    QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                    QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                           "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                           "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                          "CaractÈristiques initiales non valides !\n");
+                                          "Caract√©ristiques initiales non valides !\n");
                     fermerOnglets();
-                    log("Personnage non ouvert : caractÈristiques initiales invalides !");
+                    log("Personnage non ouvert : caract√©ristiques initiales invalides !");
                     log("Annulation du chargement du groupe !");
                     statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                     return;
@@ -1605,7 +1605,7 @@ void FenPrincipale::ouvrir()
             }
         }
 
-            // ModifiÈes
+            // Modifi√©es
         ouvertureCarac_ligne = entree.readLine();
         lecteurLigne = 0;
         while (lecteurLigne < ouvertureCarac_ligne.size())
@@ -1643,12 +1643,12 @@ void FenPrincipale::ouvrir()
                     ouverture_prd = ouvertureCarac_string.toInt();
                     break;
                 default:
-                    QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                    QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                           "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                           "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                          "CaractÈristiques modifiÈes non valides !\n");
+                                          "Caract√©ristiques modifi√©es non valides !\n");
                     fermerOnglets();
-                    log("Personnage non ouvert : caractÈristiques modifiÈes invalides !");
+                    log("Personnage non ouvert : caract√©ristiques modifi√©es invalides !");
                     log("Annulation du chargement du groupe !");
                     statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                     return;
@@ -1658,7 +1658,7 @@ void FenPrincipale::ouvrir()
             }
         }
 
-    // Ouverture pour les piËces
+    // Ouverture pour les pi√®ces
         QString ouverturePieces_ligne = entree.readLine();
         lecteurLigne = 0;
         while (lecteurLigne < ouverturePieces_ligne.size())
@@ -1687,7 +1687,7 @@ void FenPrincipale::ouvrir()
                     ouverturePC = ouverturePieces_string.toInt();
                     break;
                 default:
-                    QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                    QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                           "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                           "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
                                           "Richesses non valides !\n");
@@ -1702,7 +1702,7 @@ void FenPrincipale::ouvrir()
             }
         }
 
-    // CrÈation du personnage
+    // Cr√©ation du personnage
         tableauDePersonnages[ouvertureNom] = Personnage(ouvertureNom, ouvertureSexe, ouvertureNomOrigine, ouvertureNomMetier,
                                                         ouverture_COU, ouverture_INT, ouverture_CHA,
                                                         ouverture_AD, ouverture_FO, ouverture_AT, ouverture_PRD,
@@ -1734,8 +1734,8 @@ void FenPrincipale::ouvrir()
             if (!ligneDejaLue)
                 ligne = entree.readLine();
 
-            ligneDejaLue = false;   // on resete le fait que la ligne est dÈj‡ lue ou pas
-            lecteurLigne = 0;		// Pour sÈlectionner un caractËre de la ligne
+            ligneDejaLue = false;   // on resete le fait que la ligne est d√©j√† lue ou pas
+            lecteurLigne = 0;		// Pour s√©lectionner un caract√®re de la ligne
 
         // carac
             if (ligne == "~!carac_sup_inf!~")
@@ -1745,7 +1745,7 @@ void FenPrincipale::ouvrir()
                 int ouvertureParadeBonus = entree.readLine().toInt();
                 int ouvertureDegatsBonusSorts = entree.readLine().toInt();
 
-            // On crÈe les bonus
+            // On cr√©e les bonus
                 tableauDePersonnages[ouvertureNom].setBonus_Malus_caracSup_Inf_moyenne(ouvertureDegatsBonus,
                                                                                        ouvertureAttaqueBonus,
                                                                                        ouvertureParadeBonus,
@@ -1758,15 +1758,15 @@ void FenPrincipale::ouvrir()
                 int ouvertureEA = entree.readLine().toInt();
                 QString ouvertureTypeEA = entree.readLine();
 
-            // On crÈe l'EA
+            // On cr√©e l'EA
                 tableauDePersonnages[ouvertureNom].setEA(ouvertureEA, ouvertureTypeEA);
             }
 
-        // Pour les vÍtements
-            // Ch‚peau
+        // Pour les v√™tements
+            // Ch√¢peau
             else if (ligne == "~!chapeau!~")
             {
-            // Ch‚peau
+            // Ch√¢peau
                 // Nom
                 QString ouvertureChapeau_nom = entree.readLine();
 
@@ -1803,12 +1803,12 @@ void FenPrincipale::ouvrir()
                             ouverture_FO= ouvertureHaut_bonus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Ch‚peau -> CaractÈristiques bonus non valides !\n");
+                                                  "Ch√¢peau -> Caract√©ristiques bonus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Ch‚peau -> caractÈristiques bonus invalides !");
+                            log("Personnage non ouvert : Ch√¢peau -> caract√©ristiques bonus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -1848,12 +1848,12 @@ void FenPrincipale::ouvrir()
                             ouverture_fo = ouvertureHaut_malus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Ch‚peau -> CaractÈristiques malus non valides !\n");
+                                                  "Ch√¢peau -> Caract√©ristiques malus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Ch‚peau -> caractÈristiques malus invalides !");
+                            log("Personnage non ouvert : Ch√¢peau -> caract√©ristiques malus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -1863,7 +1863,7 @@ void FenPrincipale::ouvrir()
                     }
                 }
 
-                // CrÈation
+                // Cr√©ation
                 ouverture_VETEMENT = new Vetement(ouvertureChapeau_nom,
                                                   ouverture_cou, ouverture_int, ouverture_cha, ouverture_ad, ouverture_fo,
                                                   ouverture_COU, ouverture_INT, ouverture_CHA, ouverture_AD, ouverture_FO);
@@ -1910,12 +1910,12 @@ void FenPrincipale::ouvrir()
                             ouverture_FO= ouvertureHaut_bonus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Haut -> CaractÈristiques bonus non valides !\n");
+                                                  "Haut -> Caract√©ristiques bonus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Haut -> caractÈristiques bonus invalides !");
+                            log("Personnage non ouvert : Haut -> caract√©ristiques bonus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -1955,12 +1955,12 @@ void FenPrincipale::ouvrir()
                             ouverture_fo = ouvertureHaut_malus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Haut -> CaractÈristiques malus non valides !\n");
+                                                  "Haut -> Caract√©ristiques malus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Haut -> caractÈristiques malus invalides !");
+                            log("Personnage non ouvert : Haut -> caract√©ristiques malus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -1970,7 +1970,7 @@ void FenPrincipale::ouvrir()
                     }
                 }
 
-                // CrÈation
+                // Cr√©ation
                 ouverture_VETEMENT = new Vetement(ouvertureHaut_nom,
                                                   ouverture_cou, ouverture_int, ouverture_cha, ouverture_ad, ouverture_fo,
                                                   ouverture_COU, ouverture_INT, ouverture_CHA, ouverture_AD, ouverture_FO);
@@ -2017,12 +2017,12 @@ void FenPrincipale::ouvrir()
                             ouverture_FO= ouvertureBas_bonus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Bas -> CaractÈristiques bonus non valides !\n");
+                                                  "Bas -> Caract√©ristiques bonus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Bas -> caractÈristiques bonus invalides !");
+                            log("Personnage non ouvert : Bas -> caract√©ristiques bonus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2063,12 +2063,12 @@ void FenPrincipale::ouvrir()
                             ouverture_fo = ouvertureBas_malus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Bas -> CaractÈristiques malus non valides !\n");
+                                                  "Bas -> Caract√©ristiques malus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Bas -> caractÈristiques malus invalides !");
+                            log("Personnage non ouvert : Bas -> caract√©ristiques malus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2078,7 +2078,7 @@ void FenPrincipale::ouvrir()
                     }
                 }
 
-                // CrÈation
+                // Cr√©ation
                 ouverture_VETEMENT = new Vetement(ouvertureBas_nom,
                                                   ouverture_cou, ouverture_int, ouverture_cha, ouverture_ad, ouverture_fo,
                                                   ouverture_COU, ouverture_INT, ouverture_CHA, ouverture_AD, ouverture_FO);
@@ -2126,12 +2126,12 @@ void FenPrincipale::ouvrir()
                             ouverture_FO= ouvertureChaussures_bonus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Chaussures -> CaractÈristiques bonus non valides !\n");
+                                                  "Chaussures -> Caract√©ristiques bonus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Chaussures -> caractÈristiques bonus invalides !");
+                            log("Personnage non ouvert : Chaussures -> caract√©ristiques bonus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2172,12 +2172,12 @@ void FenPrincipale::ouvrir()
                             ouverture_fo = ouvertureChaussures_malus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Chaussures -> CaractÈristiques malus non valides !\n");
+                                                  "Chaussures -> Caract√©ristiques malus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Chaussures -> caractÈristiques malus invalides !");
+                            log("Personnage non ouvert : Chaussures -> caract√©ristiques malus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2187,7 +2187,7 @@ void FenPrincipale::ouvrir()
                     }
                 }
 
-                // CrÈation
+                // Cr√©ation
                 ouverture_VETEMENT = new Vetement(ouvertureChaussures_nom,
                                                   ouverture_cou, ouverture_int, ouverture_cha, ouverture_ad, ouverture_fo,
                                                   ouverture_COU, ouverture_INT, ouverture_CHA, ouverture_AD, ouverture_FO);
@@ -2234,12 +2234,12 @@ void FenPrincipale::ouvrir()
                             ouverture_FO= ouvertureDivers_bonus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Divers -> CaractÈristiques bonus non valides !\n");
+                                                  "Divers -> Caract√©ristiques bonus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Divers -> caractÈristiques bonus invalides !");
+                            log("Personnage non ouvert : Divers -> caract√©ristiques bonus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2280,12 +2280,12 @@ void FenPrincipale::ouvrir()
                             ouverture_fo = ouvertureDivers_malus_string.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Divers -> CaractÈristiques malus non valides !\n");
+                                                  "Divers -> Caract√©ristiques malus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : Divers -> caractÈristiques malus invalides !");
+                            log("Personnage non ouvert : Divers -> caract√©ristiques malus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2295,7 +2295,7 @@ void FenPrincipale::ouvrir()
                     }
                 }
 
-                // CrÈation
+                // Cr√©ation
                 ouverture_VETEMENT = new Vetement(ouvertureDivers_nom,
                                                   ouverture_cou, ouverture_int, ouverture_cha, ouverture_ad, ouverture_fo,
                                                   ouverture_COU, ouverture_INT, ouverture_CHA, ouverture_AD, ouverture_FO);
@@ -2352,12 +2352,12 @@ void FenPrincipale::ouvrir()
                             ouverture_PRD = ouvertureProtection_bonus.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Protection -> CaractÈristiques bonus non valides !\n");
+                                                  "Protection -> Caract√©ristiques bonus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : une des protections -> caractÈristiques bonus invalides !");
+                            log("Personnage non ouvert : une des protections -> caract√©ristiques bonus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2405,12 +2405,12 @@ void FenPrincipale::ouvrir()
                             ouverture_prd = ouvertureProtection_malus.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Protection -> CaractÈristiques malus non valides !\n");
+                                                  "Protection -> Caract√©ristiques malus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : une des protections -> caractÈristiques malus invalides !");
+                            log("Personnage non ouvert : une des protections -> caract√©ristiques malus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2439,10 +2439,10 @@ void FenPrincipale::ouvrir()
                 // Nom
                 QString ouvertureArme_nom = entree.readLine();
 
-                // Nombre de dÈs
+                // Nombre de d√©s
                 int ouvertureArme_nbDes = entree.readLine().toInt();
 
-                // Nombre de dÈg‚ts en plus
+                // Nombre de d√©g√¢ts en plus
                 int ouvertureArme_degats = entree.readLine().toInt();
 
                 // Bonus
@@ -2481,12 +2481,12 @@ void FenPrincipale::ouvrir()
                             ouverture_PRD = ouvertureArme_bonus.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Arme -> CaractÈristiques bonus non valides !\n");
+                                                  "Arme -> Caract√©ristiques bonus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : une des armes -> caractÈristiques bonus invalides !");
+                            log("Personnage non ouvert : une des armes -> caract√©ristiques bonus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2533,12 +2533,12 @@ void FenPrincipale::ouvrir()
                             ouverture_prd = ouvertureArme_malus.toInt();
                             break;
                         default:
-                            QMessageBox::critical(zoneCentrale, "Erreur rÈparable !",
+                            QMessageBox::critical(zoneCentrale, "Erreur r√©parable !",
                                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                                   "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                                  "Arme -> CaractÈristiques malus non valides !\n");
+                                                  "Arme -> Caract√©ristiques malus non valides !\n");
                             fermerOnglets();
-                            log("Personnage non ouvert : une des armes -> caractÈristiques malus invalides !");
+                            log("Personnage non ouvert : une des armes -> caract√©ristiques malus invalides !");
                             log("Annulation du chargement du groupe !");
                             statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
                             return;
@@ -2555,7 +2555,7 @@ void FenPrincipale::ouvrir()
                 // Prix
                 int ouvertureArme_rupture = entree.readLine().toInt();
 
-                // CrÈation
+                // Cr√©ation
                 ouverture_ARME = new Arme(ouvertureArme_nom, ouvertureArme_nbDes, ouvertureArme_degats,
                                           ouverture_cou, ouverture_int, ouverture_cha, ouverture_ad, ouverture_fo, ouverture_at, ouverture_prd,
                                           ouverture_COU, ouverture_INT, ouverture_CHA, ouverture_AD, ouverture_FO, ouverture_AT, ouverture_PRD);
@@ -2584,7 +2584,7 @@ void FenPrincipale::ouvrir()
                 lecteurLigne = 0;
             }
 
-        // Pour les flËches
+        // Pour les fl√®ches
             else if (ligne == "~!fleche!~")
             {
                 CARAC_A_ZERO;
@@ -2592,7 +2592,7 @@ void FenPrincipale::ouvrir()
                 // Nom
                 QString ouvertureFleche_nom = entree.readLine();
 
-                // Nombre de flËches
+                // Nombre de fl√®ches
                 QString Fleche_ligne = entree.readLine();
                 int ouvertureFleche_nb = Fleche_ligne.toInt();
 
@@ -2604,7 +2604,7 @@ void FenPrincipale::ouvrir()
                 Fleche_ligne = entree.readLine();
                 ouverture_AD = Fleche_ligne.toInt();
 
-                // CrÈation
+                // Cr√©ation
                 ouverture_FLECHE = new Fleche(ouvertureFleche_nom, ouvertureFleche_nb,
                                               ouvertureFleche_PI, ouverture_AD);
                 tableauDePersonnages[ouvertureNom].addFleche(ouverture_FLECHE, lecteurTableauFleche);
@@ -2614,7 +2614,7 @@ void FenPrincipale::ouvrir()
                 lecteurLigne = 0;
             }
 
-        // Pour l'Èquipement
+        // Pour l'√©quipement
             else if (ligne == "~!equipement!~")
             {
                 ouverture_EQUIPEMENT = entree.readLine();
@@ -2648,7 +2648,7 @@ void FenPrincipale::ouvrir()
                 ligneDejaLue = true;
             }
 
-        // Pour les compÈtences
+        // Pour les comp√©tences
             else if (ligne == "~!competence!~")
             {
                 QString ouvertureCompetence_nom = entree.readLine();
@@ -2689,8 +2689,8 @@ void FenPrincipale::ouvrir()
                 QMessageBox::critical(zoneCentrale, "Erreur inconnue !",
                                       "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                       "     -> " + *cheminPersoOuverture + " (" + ouvertureNom + ") !\n\n"
-                                      "ElÈment inconnu !\n");
-                log("Personnage non ouvert : ÈlÈment inconnu !");
+                                      "El√©ment inconnu !\n");
+                log("Personnage non ouvert : √©l√©ment inconnu !");
                 log("Annulation du chargement du groupe !");
                 fermerOnglets();
                 statusBar->showMessage("Groupe non ouvert -> Erreur lors de l'ouverture du fichier \"" + *cheminPersoOuverture + "\" !");
@@ -2780,7 +2780,7 @@ void FenPrincipale::enregistrerTout()
     {
         QFile notesRec(noteAdresse);
         if (!notesRec.open(QIODevice::WriteOnly | QIODevice::Text))
-            fatalError("Impossible d'enregistrer le fichier de note. RÈessayez d'enregistrer le groupe.");
+            fatalError("Impossible d'enregistrer le fichier de note. R√©essayez d'enregistrer le groupe.");
 
         QTextStream sortie(&notesRec);
         sortie << notes_txt->toHtml();
@@ -2795,7 +2795,7 @@ void FenPrincipale::enregistrerTout()
 
         QFile persoRec(adresse);
         if (!persoRec.open(QIODevice::WriteOnly | QIODevice::Text))
-            fatalError("Impossible d'enregistrer le fichier de personnage sÈlectionnÈ. RÈessayez d'enregistrer le groupe.");
+            fatalError("Impossible d'enregistrer le fichier de personnage s√©lectionn√©. R√©essayez d'enregistrer le groupe.");
 
         QTextStream sortie(&persoRec);
 
@@ -2805,8 +2805,8 @@ void FenPrincipale::enregistrerTout()
         persoRec.close();
     }
 
-    log("Enregistrement effectuÈ !");
-    statusBar->showMessage("Enregistrement effectuÈ", 2000);
+    log("Enregistrement effectu√© !");
+    statusBar->showMessage("Enregistrement effectu√©", 2000);
 }
 
 // Fermer le groupe en cours
@@ -2873,9 +2873,9 @@ void FenPrincipale::quitterNBH()
 }
 void FenPrincipale::closeEvent(QCloseEvent *e)
 {
-// On vÈrifie que l'utilisateur veut vraiment fermer
+// On v√©rifie que l'utilisateur veut vraiment fermer
     int reponse = QMessageBox::question(zoneCentrale, "Quitter NaheulBeuk Helper ?",
-                                        " tes-vous s˚r(e) de vouloir quitter NaheulBeuk Helper ?",
+                                        "√ätes-vous s√ªr(e) de vouloir quitter NaheulBeuk Helper ?",
                                         QMessageBox::Yes | QMessageBox::No);
 
 // Si "oui", on enregistre puis on ferme
@@ -2896,7 +2896,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
                     settings->setValue("Achat", afficher_achat->isChecked());
                 settings->endGroup();
             settings->endGroup();
-        log("Enregistrement des prÈfÈrences !");
+        log("Enregistrement des pr√©f√©rences !");
         log("Fermeture de NBH.");
 
     // On ferme NBH (fen)
@@ -2910,7 +2910,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
 // Mode d'attaque
 void FenPrincipale::modeAttaque()
 {
-// Si l'utilisateur ‡ dÈcochÈ la case attaque sans toucher ‡ la case passive
+// Si l'utilisateur √† d√©coch√© la case attaque sans toucher √† la case passive
     if (!attaque->isChecked())
     {
         attaque->setChecked(true);
@@ -2925,7 +2925,7 @@ void FenPrincipale::modeAttaque()
 // Mode passif
 void FenPrincipale::modePassif()
 {
-// Si l'utilisateur ‡ dÈcochÈ la case passive sans toucher ‡ la case attaque
+// Si l'utilisateur √† d√©coch√© la case passive sans toucher √† la case attaque
     if (!passif->isChecked())
     {
         passif->setChecked(true);
@@ -2949,8 +2949,8 @@ void FenPrincipale::attaquer()
 void FenPrincipale::xp()
 {
     bool ok(false);
-    int xpPlus = QInputDialog::getInteger(zoneCentrale, "Ajout d'expÈrience de groupe",
-                                          "Veuillez rentrer l'XP ‡ ajouter ‡ chaque personnage du groupe :",
+    int xpPlus = QInputDialog::getInteger(zoneCentrale, "Ajout d'exp√©rience de groupe",
+                                          "Veuillez rentrer l'XP √† ajouter √† chaque personnage du groupe :",
                                           1, 1, 100000, 1, &ok);
 
     if (ok)
@@ -2958,7 +2958,7 @@ void FenPrincipale::xp()
         for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
             tableauDePersonnages[*it].plus_xp(xpPlus);
 
-        log("Ajout d'expÈrience de groupe : " + QString::number(xpPlus));
+        log("Ajout d'exp√©rience de groupe : " + QString::number(xpPlus));
     }
 }
 
@@ -2967,7 +2967,7 @@ void FenPrincipale::PO()
 {
     bool ok(false);
     int poPlus = QInputDialog::getInteger(zoneCentrale, "Ajout de PO de groupe",
-                                          "Veuillez rentrer le nombre de PO ‡ ajouter ‡ chaque personnage du groupe :",
+                                          "Veuillez rentrer le nombre de PO √† ajouter √† chaque personnage du groupe :",
                                           1, 1, 100000, 1, &ok);
 
     if (ok)
@@ -2983,7 +2983,7 @@ void FenPrincipale::PA()
 {
     bool ok(false);
     int paPlus = QInputDialog::getInteger(zoneCentrale, "Ajout de PA de groupe",
-                                          "Veuillez rentrer le nombre de PO ‡ ajouter ‡ chaque personnage du groupe :",
+                                          "Veuillez rentrer le nombre de PO √† ajouter √† chaque personnage du groupe :",
                                           1, 1, 100000, 1, &ok);
 
     if (ok)
@@ -2999,7 +2999,7 @@ void FenPrincipale::PC()
 {
     bool ok(false);
     int pcPlus = QInputDialog::getInteger(zoneCentrale, "Ajout de PC de groupe",
-                                          "Veuillez rentrer le nombre de PO ‡ ajouter ‡ chaque personnage du groupe :",
+                                          "Veuillez rentrer le nombre de PO √† ajouter √† chaque personnage du groupe :",
                                           1, 1, 100000, 1, &ok);
 
     if (ok)
@@ -3016,7 +3016,7 @@ void FenPrincipale::po()
 {
     bool ok(false);
     int poMoins = QInputDialog::getInteger(zoneCentrale, "Retrait de PO de groupe",
-                                          "Veuillez rentrer le nombre de PO ‡ retirer ‡ chaque personnage du groupe :",
+                                          "Veuillez rentrer le nombre de PO √† retirer √† chaque personnage du groupe :",
                                           1, 1, 100000, 1, &ok);
 
     if (ok)
@@ -3032,7 +3032,7 @@ void FenPrincipale::pa()
 {
     bool ok(false);
     int paMoins = QInputDialog::getInteger(zoneCentrale, "Retrait de PA de groupe",
-                                          "Veuillez rentrer le nombre de PO ‡ retirer ‡ chaque personnage du groupe :",
+                                          "Veuillez rentrer le nombre de PO √† retirer √† chaque personnage du groupe :",
                                           1, 1, 100000, 1, &ok);
 
     if (ok)
@@ -3048,7 +3048,7 @@ void FenPrincipale::pc()
 {
     bool ok(false);
     int pcMoins = QInputDialog::getInteger(zoneCentrale, "Retrait de PC de groupe",
-                                          "Veuillez rentrer le nombre de PO ‡ retirer ‡ chaque personnage du groupe :",
+                                          "Veuillez rentrer le nombre de PO √† retirer √† chaque personnage du groupe :",
                                           1, 1, 100000, 1, &ok);
 
     if (ok)
@@ -3116,13 +3116,13 @@ void FenPrincipale::afficherAchat(bool affiche)
 // A propos
 void FenPrincipale::aProposDeNBH()
 {
-// On affiche le message d'‡ propos
+// On affiche le message d'√† propos
     QMessageBox::about(zoneCentrale, "A propos de NaheulBeuk Helper",
-                       "NaheulBeuk Helper est un programme destinÈ aux maÓtres du jeu qui jouent au jeu de rÙle de Naheulbeuk...\n"
-                       "Ce programme facilitera leur t‚che... qui est assez difficile !\n\n\n"
+                       "NaheulBeuk Helper est un programme destin√© aux ma√Ætres du jeu qui jouent au jeu de r√¥le de Naheulbeuk...\n"
+                       "Ce programme facilitera leur t√¢che... qui est assez difficile !\n\n\n"
                        "Vous utilisez la version " + QString::number(VERSION) + ".\n\n"
-                       "Le lecteur d'aide est basÈ sur zNavigator, le navigateur des zÈros, fait dans un TP disponible sur le site du zÈro.\n\n"
-                       "Ce programme est dÈveloppÈ en C++, avec QtCreator et utilise a bibliothËque graphique open source Qt.");
+                       "Le lecteur d'aide est bas√© sur zNavigator, le navigateur des z√©ros, fait dans un TP disponible sur le site du z√©ro.\n\n"
+                       "Ce programme est d√©velopp√© en C++, avec QtCreator et utilise a biblioth√®que graphique open source Qt.");
 }
 
 // Affichage de la licence
@@ -3134,7 +3134,7 @@ void FenPrincipale::licence()
     {
         QMessageBox::critical(this, "Licence -> erreur d'ouverture",
                               "Impossible de charger le fichier contenant la licence de NBH.\n"
-                              "Cette fenÍtre va se fermer !");
+                              "Cette fen√™tre va se fermer !");
         log("Impossible de charger le fichier contenant la licence");
         return;
     }
@@ -3162,15 +3162,15 @@ void FenPrincipale::licence()
     licenceDialog->show();
 }
 
-// VÈrification de MAJ
+// V√©rification de MAJ
 void FenPrincipale::MAJ()
 {
     enregistrerTout();
 
-// On crÈe la fenÍtre
+// On cr√©e la fen√™tre
     FenMAJ *maj = new FenMAJ(this);
 
-// On affiche la fenÍtre
+// On affiche la fen√™tre
     maj->show();
 }
 
@@ -3200,7 +3200,7 @@ bool FenPrincipale::testOuverture(QString const& cheminFichier)
     return ouvert;
 }
 
-// MdiSubWindow modifiÈe
+// MdiSubWindow modifi√©e
 MdiSubWindow::MdiSubWindow()
 {
 
