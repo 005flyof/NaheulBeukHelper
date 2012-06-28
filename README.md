@@ -29,7 +29,8 @@ Version 1.8
 Version 1.7
 -----------
 ### Nouveautés de la version
-    * Possibilité d'ouvrir les groupes de personnages : eh oui, on ne pouvait pas, la fonction ne marchait pas, elle plantait !
+    * Possibilité d'ouvrir les groupes de personnages :
+		eh oui, on ne pouvait pas, la fonction ne marchait pas, elle plantait !
 Version 1.0
 -----------
 ### Nouveautés de la version

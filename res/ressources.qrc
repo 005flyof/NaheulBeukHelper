@@ -36,7 +36,6 @@
     </qresource>
     <qresource prefix="/prog-data">
         <file>LICENCE</file>
-        <file>VERSION</file>
         <file>metiers.txt</file>
         <file>origines.txt</file>
     </qresource>

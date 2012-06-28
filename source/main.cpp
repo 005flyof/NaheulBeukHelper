@@ -24,6 +24,9 @@ int main(int argc, char *argv[])
 // On crée l'application
 	QApplication app(argc, argv);
 
+// On indique l'UTF-8
+	QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
+
 // On traduit
 	QString locale = QLocale::system().name().section('_', 0, 0);
 	QTranslator translator;
@@ -74,6 +77,6 @@ int main(int argc, char *argv[])
 	17	- changement des erreurs pour les chargements de  carac     (17)    - fait
 	18	- classe personnage à faire en 2 parties                    (18)    - en cours
 	19	- changer l'encodage de tous les fichiers : iso -> utf-8	(19)	- fait
-	20	- modififer les updates / updaters							(20)	-
+	20	- modififer les updates / updaters							(20)	- fait
 	21	- faire la doc des sources									(21)	-
 */
