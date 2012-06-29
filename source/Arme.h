@@ -73,8 +73,4 @@
 		int m_rupture_max;
 	};
 
-	/*! \class Arme
-	 *  \brief Classe gérant l'arme
-	 */
-
 #endif // ARME_H

@@ -59,8 +59,8 @@ int main(int argc, char *argv[])
 	- monstres !!! -> ouverture du fichier quand début fenêtre
 
 	1	- XP / PO / PA / PC de groupe								(1)		- fait
-	2	- modificat° tout le temps (if fo >= 12) etc				(2)		- en cours
-	3	- pouvoir attaquer, parer, esquiver => combat				(3)		- en cours -> branche git
+	2	- modificat° tout le temps (if fo >= 12) etc				(2)		-
+	3	- pouvoir attaquer, parer, esquiver => combat				(3)		-
 	4	- augmentation d'un niveau									(4)		- fait
 	5	- acheter puissance											(5)		- fait
 	6	- mankdebol / débilibeuk									(6)		- NON
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 	15	- faire le log                                              (15)    - fait
 	16	- fonctions d'ouverture des fichiers, de chargement des obj (16)	- pas la peine
 	17	- changement des erreurs pour les chargements de  carac     (17)    - fait
-	18	- classe personnage à faire en 2 parties                    (18)    - en cours
+	18	- classe personnage à faire en 2 parties                    (18)    -
 	19	- changer l'encodage de tous les fichiers : iso -> utf-8	(19)	- fait
 	20	- modififer les updates / updaters							(20)	- fait
 	21	- faire la doc des sources									(21)	-
