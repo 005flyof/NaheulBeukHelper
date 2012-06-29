@@ -2939,8 +2939,8 @@ void FenPrincipale::modePassif()
 // Attaque
 void FenPrincipale::attaquer()
 {
-	QString perso = attaque_fen->getNomActivePerso();
-	tableauDePersonnages[perso].attaquer();
+	QMessageBox::information(this, "En dévelopemment",
+							 "Cette fonction est encore en développement.");
 }
 
 // XP de groupe
