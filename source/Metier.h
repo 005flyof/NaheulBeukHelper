@@ -26,23 +26,23 @@
     class Metier
     {
     public:
-        Metier(QString nom = "Métier sans nom !", int AT = 0, int PRD = 0,
-               int cou = 0, int intel = 0, int cha = 0, int ad = 0, int fo = 0);
+        Metier(QString nom, int AT, int PRD,
+               int cou, int intel, int cha, int ad, int fo);
 
-        void setCarac_mini(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup);
         void setEV(QStringList classesModifiees, int EV_pourClasseModifiees, int EV_pourAutresClasses, bool pourcent);
         void setEA(QString typeEA, int EA);
+
         void addCompetence(QString nom, QString description, bool obligatoire = true);
 
+
         QString getNom() const;
-        Caracteristiques getMini() const;
+        Caracteristiques getCaracMini() const;
         int getAT() const;
         int getPRD() const;
-        QStringList getClassesModifiees() const;
+        QStringList getClassesModifiees_EV() const;
         int getEV_pourClassesModifiees() const;
         int getEV_pourAutresClasses() const;
         bool getEV_pourAutresClasses_pourcent() const;
-
 
         bool getPresenceEA() const;
         int getEA() const;
@@ -51,21 +51,24 @@
         QVector<Competence *> getCompetences(bool obligatoire = true);
 
     private:
-        QString m_nomMetier;
-        Caracteristiques m_caracMini;
+        QString m_nom;
 
+        Caracteristiques m_caracMini;
         int m_AT;
         int m_PRD;
 
+        // Modifications sur certaines classes seulement
         int m_EV_pourClassesModifiees;
         QStringList m_classesModifiees;
         int m_EV_pourAutresClasses;
 
+        // Si on peut faire de la magie avec ces classes
         bool m_presenceEA;
         int m_EA;
         QString m_typeEA;
         bool m_pourcent;
 
+        // Compétences
         QVector<Competence *> m_competenceObligatoires;
         QVector<Competence *> m_competenceChoisir;
     };

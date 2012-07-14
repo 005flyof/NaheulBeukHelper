@@ -21,7 +21,7 @@
 Metier::Metier(QString nom, int AT, int PRD,
                int cou, int intel, int cha, int ad, int fo)
 {
-    m_nomMetier = nom;
+    m_nom = nom;
     m_caracMini = Caracteristiques(false, cou, intel, cha, ad, fo);
     m_AT = AT;
     m_PRD = PRD;
@@ -36,10 +36,6 @@ Metier::Metier(QString nom, int AT, int PRD,
 }
 
 
-void Metier::setCarac_mini(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup)
-{
-    m_caracMini.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup);
-}
 void Metier::setEV(QStringList classesModifiees, int EV_pourClasseModifiees, int EV_pourAutresClasses, bool pourcent)
 {
     m_classesModifiees = classesModifiees;
@@ -53,6 +49,7 @@ void Metier::setEA(QString typeEA, int EA)
     m_typeEA = typeEA;
     m_presenceEA = true;
 }
+
 void Metier::addCompetence(QString nom, QString description, bool obligatoire)
 {
     if (obligatoire)
@@ -66,7 +63,7 @@ QString Metier::getNom() const
 {
     return m_nomMetier;
 }
-Caracteristiques Metier::getMini() const
+Caracteristiques Metier::getCaracMini() const
 {
     return m_caracMini;
 }
@@ -78,7 +75,7 @@ int Metier::getPRD() const
 {
     return m_PRD;
 }
-QStringList Metier::getClassesModifiees() const
+QStringList Metier::getClassesModifiees_EV() const
 {
     return m_classesModifiees;
 }
