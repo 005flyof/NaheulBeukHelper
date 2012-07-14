@@ -24,89 +24,103 @@ Richesses::Richesses(int OR, int ARGENT, int CUIVRE)
     pb = new QWidget();
 }
 
+void Richesses::setOr(int value)
+{
+    if (value > 999999)
+        QMessageBox::information(pb, "Information",
+                                 "ATTENTION :\nLe nombre maximum de PO (= 999999) a été dépassé !\n\n"
+                                 "Le nombre de PO n'a donc pas été modifié");
+    else
+        m_or = value;
 
-void Richesses::setRichesses_Or(unsigned int OR)
-{
-    if (OR > 999999)
-        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PO (= 999999) a été dépassé !");
-    else
-        m_or = OR;
+    // Pas de contrôle au cas où c'est inférieur à zéro, les joueurs peuvent être endettés ! :)
 }
-void Richesses::setRichesses_Argent(unsigned int ARGENT)
+void Richesses::setArgent(int value)
 {
-    if (ARGENT > 999999)
-        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PA (= 999999) a été dépassé !");
+    if (value > 999999)
+        QMessageBox::information(pb, "Information",
+                                 "ATTENTION :\nLe nombre maximum de PA (= 999999) a été dépassé !\n\n"
+                                 "Le nombre de PA n'a donc pas été modifié");
     else
-        m_argent = ARGENT;
-}
-void Richesses::setRichesses_Cuivre(unsigned int CUIVRE)
-{
-    if (CUIVRE > 999999)
-        QMessageBox::information(pb, "Information", "ATTENTION :\nLe nombre maximum de PC (= 999999) a été dépassé !");
-    else
-        m_cuivre = CUIVRE;
-}
+        m_argent = value;
 
-void Richesses::or_plus(int valeur)
-{
-    if (valeur < (999999 - m_or))
-        m_or += valeur;
-    else
-        m_or = 999999;
+    // Pas de contrôle au cas où c'est inférieur à zéro, les joueurs peuvent être endettés ! :)
 }
-void Richesses::argent_plus(int valeur)
+void Richesses::setCuivre(int value)
 {
-    if (valeur < (999999 - m_argent))
-        m_argent += valeur;
+    if (value > 999999)
+        QMessageBox::information(pb, "Information",
+                                 "ATTENTION :\nLe nombre maximum de PC (= 999999) a été dépassé !\n\n"
+                                 "Le nombre de PC n'a donc pas été modifié");
     else
-        m_argent = 999999;
-}
-void Richesses::cuivre_plus(int valeur)
-{
-    if (valeur < (999999 - m_cuivre))
-        m_cuivre += valeur;
-    else
-        m_cuivre = 999999;
+        m_cuivre = value;
+
+    // Pas de contrôle au cas où c'est inférieur à zéro, les joueurs peuvent être endettés ! :)
 }
 
-void Richesses::or_moins(int valeur)
-{
-    if (m_or - valeur < 0)
-        m_or = 0;
-    else
-        m_or -= valeur;
-}
-void Richesses::argent_moins(int valeur)
-{
-    if (m_argent - valeur < 0)
-        m_argent = 0;
-    else
-        m_argent -= valeur;
-}
-void Richesses::cuivre_moins(int valeur)
-{
-    if (m_cuivre - valeur < 0)
-        m_cuivre = 0;
-    else
-        m_cuivre -= valeur;
-}
-
-
-int Richesses::getRichesses_Or() const
+int Richesses::getOr() const
 {
     return m_or;
 }
-int Richesses::getRichesses_Argent() const
+int Richesses::getArgent() const
 {
     return m_argent;
 }
-int Richesses::getRichesses_Cuivre() const
+int Richesses::getCuivre() const
 {
     return m_cuivre;
 }
 
+void Richesses::convertir(conversion convert)
+{
+    switch (convert)
+    {
+    // Convertir les PO en PA
+    case PO_en_PA:
+        if (m_or >= 1)
+        {
+            m_or--;
+            m_argent += 10;
+        }
+        break;
 
-QString Richesses::getRichesses() const
+    // Convertir les PO en PC
+    case PO_en_PC:
+        if (m_or >= 1)
+        {
+            m_or--;
+            m_cuivre += 100;
+        }
+        break;
+
+    // Convertir les PA en PC
+    case PA_en_PC:
+        if (m_argent >= 1)
+        {
+            m_argent--;
+            m_cuivre += 10;
+        }
+        break;
+
+    // Convertir les PA et PC en PO
+    case PA_PC_en_PO:
+        // Conversion des PC en PA
+        while (m_cuivre >= 10)
+        {
+           m_cuivre -= 10;
+           m_argent++;
+        }
+        // Conversion des PA en PO
+        while (m_argent >= 10)
+        {
+            m_argent -= 10;
+            m_or++;
+        }
+        break;
+    }
+}
+
+QString Richesses::richessesEnregistrement() const
 {
     QString richesses = "";
 
@@ -150,46 +164,4 @@ QString Richesses::getRichesses() const
         richesses += QString::number(m_cuivre);
 
     return richesses;
-}
-
-
-void Richesses::conversionPAPC_PO()
-{
-// Conversion des PC en PA
-    while (m_cuivre >= 10)
-    {
-        m_cuivre -= 10;
-        m_argent++;
-    }
-
-// Conversion des PA en PO
-    while (m_argent >= 10)
-    {
-        m_argent -= 10;
-        m_or++;
-    }
-}
-void Richesses::conversionPO_PA()
-{
-    if (m_or >= 1)
-    {
-        m_or--;
-        m_argent += 10;
-    }
-}
-void Richesses::conversionPO_PC()
-{
-    if (m_or >= 1)
-    {
-        m_or--;
-        m_cuivre += 100;
-    }
-}
-void Richesses::conversionPA_PC()
-{
-    if (m_argent >= 1)
-    {
-        m_argent--;
-        m_cuivre += 10;
-    }
 }

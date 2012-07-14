@@ -24,28 +24,23 @@
     class Richesses
     {
     public:
-        Richesses(int OR = 0, int ARGENT = 0, int CUIVRE = 0);
+        Richesses(int OR, int ARGENT, int CUIVRE);
 
-        void setRichesses_Or(unsigned int OR);
-        void setRichesses_Argent(unsigned int Argent);
-        void setRichesses_Cuivre(unsigned int Cuivre);
-        void or_plus(int valeur);
-        void argent_plus(int valeur);
-        void cuivre_plus(int valeur);
-        void or_moins(int valeur);
-        void argent_moins(int valeur);
-        void cuivre_moins(int valeur);
+        void setOr(int value);
+        void setArgent(int value);
+        void setCuivre(int value);
 
-        int getRichesses_Or() const;
-        int getRichesses_Argent() const;
-        int getRichesses_Cuivre() const;
+        int getOr() const;
+        int getArgent() const;
+        int getCuivre() const;
 
-        void conversionPAPC_PO();
-        void conversionPO_PA();
-        void conversionPO_PC();
-        void conversionPA_PC();
+        enum conversion
+        {
+            PO_en_PA, PO_en_PC, PA_en_PC, PA_PC_en_PO
+        };
+        void convertir(conversion convert);
 
-        QString getRichesses() const;
+        QString richessesEnregistrement() const;
 
     private:
         int m_or;
