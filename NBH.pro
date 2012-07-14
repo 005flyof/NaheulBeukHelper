@@ -17,8 +17,7 @@ HEADERS += \
     source/FenOrdreMarche.h \
     source/FenCheckBox.h \
     source/Competence.h \
-    source/FenAttaque.h \
-    source/PersoAffichage.h
+    source/FenAttaque.h
 
 SOURCES += \
     source/main.cpp \
@@ -39,8 +38,7 @@ SOURCES += \
     source/FenOrdreMarche.cpp \
     source/FenCheckBox.cpp \
     source/Competence.cpp \
-    source/FenAttaque.cpp \
-    source/PersoAffichage.cpp
+    source/FenAttaque.cpp
 
 QT += network
 

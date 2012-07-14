@@ -148,10 +148,10 @@
         // Pour la création d'un nouveau personnage
         QDialog *nouveau_fenetre, *nouveau_fenetre2, *nouveau_fenetre3;
 
-        QMap<QString, Origine> tableauDOrigines;
+        QMap<QString, Origine*> tableauDOrigines;
         QVector<QRadioButton*> tableauDeRadioButton_Origine;
 
-        QMap<QString, Metier> tableauDeMetiers;
+        QMap<QString, Metier*> tableauDeMetiers;
         QVector<QRadioButton*> tableauDeRadioButton_Metier;
 
         QLineEdit *nouveau_nom;
