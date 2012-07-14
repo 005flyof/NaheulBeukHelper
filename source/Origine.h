@@ -26,24 +26,22 @@
     class Origine
     {
     public:
-        Origine(QString nom = "Origine sans nom !", int EV = 0, int AT = 0,
-                int cou = 0, int intel = 0, int cha = 0, int ad = 0, int fo = 0,
-                int COU = 0, int INTEL = 0, int CHA = 0, int AD = 0, int FO = 0);
+        Origine(QString nom, int EV, int AT,
+                int cou, int intel, int cha, int ad, int fo,
+                int COU, int INTEL, int CHA, int AD, int FO);
 
-        void setCarac_mini(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup);
-        void setCarac_max(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup);
         void addCompetence(QString nom, QString description, bool obligatoire = true);
 
         QString getNom() const;
         int getEV() const;
-        Caracteristiques getMini() const;
-        Caracteristiques getMaxi() const;
         int getAT() const;
+        Caracteristiques getCaracMini() const;
+        Caracteristiques getCaracMaxi() const;
 
         QVector<Competence *> getCompetences(bool obligatoire = true);
 
     private:
-        QString m_nomOrigine;
+        QString m_nom;
         Caracteristiques m_caracMini;
         Caracteristiques m_caracMax;
         int m_EV;
