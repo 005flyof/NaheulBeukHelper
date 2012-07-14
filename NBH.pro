@@ -17,7 +17,8 @@ HEADERS += \
     source/FenOrdreMarche.h \
     source/FenCheckBox.h \
     source/Competence.h \
-    source/FenAttaque.h
+    source/FenAttaque.h \
+    source/FenChargement.h
 
 SOURCES += \
     source/main.cpp \
@@ -38,7 +39,8 @@ SOURCES += \
     source/FenOrdreMarche.cpp \
     source/FenCheckBox.cpp \
     source/Competence.cpp \
-    source/FenAttaque.cpp
+    source/FenAttaque.cpp \
+    source/FenChargement.cpp
 
 QT += network
 
@@ -49,3 +51,6 @@ OTHER_FILES += \
 
 RESOURCES += \
     res/ressources.qrc
+
+FORMS += \
+    source/FenChargement.ui

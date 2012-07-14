@@ -33,6 +33,7 @@
         <file>XP.png</file>
         <file>icone.png</file>
         <file>quit-group.png</file>
+        <file>fen-chargement.png</file>
     </qresource>
     <qresource prefix="/prog-data">
         <file>LICENCE</file>

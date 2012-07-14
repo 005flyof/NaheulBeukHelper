@@ -17,7 +17,7 @@
 */
 
 #include <QtGui>
-#include "FenPrincipale.h"
+#include "FenChargement.h"
 
 int main(int argc, char *argv[])
 {
@@ -33,23 +33,8 @@ int main(int argc, char *argv[])
     translator.load("qt_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     app.installTranslator(&translator);
 
-// On crée la fenêtre
-    FenPrincipale fenetre;
-
-// Suppression des fichiers de MAJ et d'erreur si ils sont là
-    remove("tmp.zip");
-    remove("error.log");
-
-// Ecriture du log
-    if (QString(argv[1]) == "-fermer_gr")
-        log("Fermeture du groupe");
-    else if (QString(argv[1]) == "-fermer_onglets")
-        log("Fermeture du groupe dûe à une erreur dans un des fichiers.");
-    else
-        log("Lancement de NBH", true);
-
-// On affiche la fenêtre
-    fenetre.show();
+// Création de l'interface
+    FenChargement fenetre(argv);
 
     return app.exec();
 }
@@ -79,5 +64,5 @@ int main(int argc, char *argv[])
     19	- changer l'encodage de tous les fichiers : iso -> utf-8	(19)	- fait
     20	- modififer les updates / updaters							(20)	- fait
     21	- faire la doc des sources									(21)	-
-    22	- chargement des orginines/métiers au démarrage				(22)	-
+    22	- chargement des origines/métiers au démarrage				(22)	-
 */
