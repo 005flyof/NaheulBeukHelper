@@ -20,6 +20,7 @@
     #define FONCTIONS_DIVERSES_H
 
     #include <QtGui>
+    #include "Personnage.h"
 
 // Fonctions
     void setIcone(QWidget* widget);

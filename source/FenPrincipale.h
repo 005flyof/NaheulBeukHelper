@@ -151,7 +151,7 @@
         QMap<QString, Origine*> tableauDOrigines;
         QVector<QRadioButton*> tableauDeRadioButton_Origine;
 
-        QMap<QString, Metier*> tableauDeMetiers;
+        QVector<Metier*> tableauDeMetiers;
         QVector<QRadioButton*> tableauDeRadioButton_Metier;
 
         QLineEdit *nouveau_nom;
@@ -192,47 +192,6 @@
         QSpinBox *ajouter_PO;
         QSpinBox *ajouter_PA;
         QSpinBox *ajouter_PC;
-
-        // Pour ajouter un équipement
-        QDialog *fen;
-        QLineEdit *nom;
-        QSpinBox *prix;
-        QSpinBox *des;
-        QSpinBox *degats;
-
-        QSpinBox *COU_;
-        QSpinBox *INT_;
-        QSpinBox *CHA_;
-        QSpinBox *AD_;
-        QSpinBox *FO_;
-        QSpinBox *AT_;
-        QSpinBox *PRD_;
-
-        QSpinBox *cou_;
-        QSpinBox *intel_;
-        QSpinBox *cha_;
-        QSpinBox *ad_;
-        QSpinBox *fo_;
-        QSpinBox *at_;
-        QSpinBox *prd_;
-        QComboBox *type_;
-
-        // Pour l'ouverture
-        QString groupeAdresse;
-        int lecteurLigne;
-        int lecteurTableauProtection, lecteurTableauArme, lecteurTableauFleche, lecteurTableauEquipement;
-
-        int ouvertureEV, ouverturePtsDestin, ouvertureXP;
-        int ouverturePO, ouverturePA, ouverturePC;
-        int ouverture_COU, ouverture_INT, ouverture_CHA, ouverture_AD, ouverture_FO, ouverture_AT, ouverture_PRD;
-        int ouverture_cou, ouverture_int, ouverture_cha, ouverture_ad, ouverture_fo, ouverture_at, ouverture_prd;
-
-        QString ouvertureNom, ouvertureSexe, ouvertureNomOrigine, ouvertureNomMetier;
-        Vetement *ouverture_VETEMENT;
-        Protection *ouverture_PROTECTION;
-        Arme *ouverture_ARME;
-        Fleche *ouverture_FLECHE;
-        QString ouverture_EQUIPEMENT;
     };
 
     class MdiSubWindow : public QMdiSubWindow

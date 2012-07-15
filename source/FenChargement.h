@@ -5,7 +5,7 @@
     #include "FenPrincipale.h"
 
     namespace Ui {
-    class FenChargement;
+        class FenChargement;
     }
 
     class FenChargement : public QDialog

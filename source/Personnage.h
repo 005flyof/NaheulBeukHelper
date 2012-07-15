@@ -42,13 +42,13 @@
                    int cou, int intel, int cha, int ad, int fo, int at, int prd,
                    int cou_modif, int intel_modif, int cha_modif, int ad_modif, int fo_modif, int at_modif, int prd_modif,
                    int ptsDestin, int xp, int ev,
-                   int OR, int ARGENT, int CUIVRE);
+                   int OR, int ARGENT, int CUIVRE);/*
         Personnage(QString nom = "Sans nom !", QString sexe = "Sexe non défini !",
                    QString nomOrigine = "Sans Origine ?", QString nomMetier = "Sans métier ?",
                    int cou = 8, int intel = 8, int cha = 8, int ad = 8, int fo = 8, int at = 0, int prd = 0,
                    int cou_modif = 8, int intel_modif = 8, int cha_modif = 8, int ad_modif = 8, int fo_modif = 8, int at_modif = 0, int prd_modif = 0,
                    int ptsDestin = 0, int xp = 0, int ev = 0,
-                   int OR = 0, int ARGENT = 0, int CUIVRE = 0);
+                   int OR = 0, int ARGENT = 0, int CUIVRE = 0);*/
 
         // Appliquer origine / métier
         void setOrigine(Origine* a);

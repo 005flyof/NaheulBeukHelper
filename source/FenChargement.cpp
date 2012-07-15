@@ -233,7 +233,7 @@ void FenChargement::ouvrirMetiers()
         // On travaille sur le fichier
             QString metier_nom = nouveau_metierTexte.readLine();
 
-            lecteurLigne = 0;
+            int lecteurLigne = 0;
             int metier_cou(0), metier_int(0), metier_cha(0), metier_fo(0), metier_ad(0), metier_at(0), metier_prd(0);
 
             // Carac minimum
@@ -290,8 +290,7 @@ void FenChargement::ouvrirMetiers()
 
         // On crée le métier
             m_metiers[metier_nom] = new Metier(metier_nom, metier_at, metier_prd,
-                                                      metier_cou, metier_int, metier_cha, metier_ad, metier_fo);
-
+                                               metier_cou, metier_int, metier_cha, metier_ad, metier_fo);
 
             // EV
             ligne = nouveau_metierTexte.readLine();
@@ -363,18 +362,6 @@ void FenChargement::ouvrirMetiers()
                 m_metiers[metier_nom]->addCompetence(competence_nom, competence_description, false);
 
                 ligne = nouveau_metierTexte.readLine();
-            }
-
-            bool possible = tableauDePersonnages[nouveau_nom->text()].testMetier(m_metiers[metier_nom]);
-
-            if (possible)
-            {
-                QRadioButton *temp = new QRadioButton(metier_nom);
-                tableauDeRadioButton_Metier.push_back(temp);
-
-                QVector<QRadioButton>::iterator it = tableauDeRadioButton_Metier.at(totalMetiers);
-                layout->addWidget(&*it);
-                totalMetiers++;
             }
         } while (ligne != "~!FIN_METIER!~");
 }
