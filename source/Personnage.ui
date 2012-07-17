@@ -16,6 +16,12 @@
     <height>500</height>
    </size>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>860</width>
+    <height>16777215</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>ScrollArea</string>
   </property>
@@ -29,12 +35,18 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
+     <y>-983</y>
      <width>841</width>
      <height>3000</height>
     </rect>
    </property>
    <property name="minimumSize">
+    <size>
+     <width>841</width>
+     <height>3000</height>
+    </size>
+   </property>
+   <property name="maximumSize">
     <size>
      <width>841</width>
      <height>3000</height>
@@ -49,7 +61,7 @@
       <x>10</x>
       <y>10</y>
       <width>821</width>
-      <height>1329</height>
+      <height>1604</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="layoutPrincipal">
@@ -1066,14 +1078,14 @@ p, li { white-space: pre-wrap; }
      <item row="11" column="3">
       <layout class="QGridLayout" name="layoutArmes">
        <item row="2" column="9">
-        <widget class="QPushButton" name="edit_7">
+        <widget class="QPushButton" name="armesEdit_1">
          <property name="text">
           <string>Modifier</string>
          </property>
         </widget>
        </item>
        <item row="2" column="4">
-        <widget class="QLabel" name="malus_7">
+        <widget class="QLabel" name="armesMalus_1">
          <property name="text">
           <string>-</string>
          </property>
@@ -1083,7 +1095,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="2" column="2">
-        <widget class="QLabel" name="bonus_7">
+        <widget class="QLabel" name="armesBonus_1">
          <property name="text">
           <string>-</string>
          </property>
@@ -1093,7 +1105,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="nom_7">
+        <widget class="QLabel" name="armesNom_1">
          <property name="text">
           <string>A mains nues</string>
          </property>
@@ -1133,7 +1145,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="2" column="6">
-        <widget class="QLabel" name="pr_7">
+        <widget class="QLabel" name="armesPi_1">
          <property name="text">
           <string>1D - 2</string>
          </property>
@@ -1143,7 +1155,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="2" column="8">
-        <widget class="QLabel" name="rupt_7">
+        <widget class="QLabel" name="armesRupt_1">
          <property name="text">
           <string>-</string>
          </property>
@@ -1176,14 +1188,14 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="nom_8">
+        <widget class="QLabel" name="armesNom_2">
          <property name="text">
           <string>A mains nues</string>
          </property>
         </widget>
        </item>
        <item row="3" column="2">
-        <widget class="QLabel" name="bonus_8">
+        <widget class="QLabel" name="armesBonus_2">
          <property name="text">
           <string>-</string>
          </property>
@@ -1193,7 +1205,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="3" column="4">
-        <widget class="QLabel" name="malus_8">
+        <widget class="QLabel" name="armesMalus_2">
          <property name="text">
           <string>-</string>
          </property>
@@ -1203,7 +1215,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="3" column="6">
-        <widget class="QLabel" name="pr_8">
+        <widget class="QLabel" name="armesPi_2">
          <property name="text">
           <string>1D - 2</string>
          </property>
@@ -1213,7 +1225,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="3" column="8">
-        <widget class="QLabel" name="rupt_8">
+        <widget class="QLabel" name="armesRupt_2">
          <property name="text">
           <string>-</string>
          </property>
@@ -1223,28 +1235,28 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="3" column="9">
-        <widget class="QPushButton" name="edit_8">
+        <widget class="QPushButton" name="armesEdit_2">
          <property name="text">
           <string>Modifier</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="nom_11">
+        <widget class="QLabel" name="armesNom_3">
          <property name="text">
           <string>A mains nues</string>
          </property>
         </widget>
        </item>
        <item row="5" column="0">
-        <widget class="QLabel" name="nom_12">
+        <widget class="QLabel" name="armesNom_4">
          <property name="text">
           <string>A mains nues</string>
          </property>
         </widget>
        </item>
        <item row="4" column="2">
-        <widget class="QLabel" name="bonus_9">
+        <widget class="QLabel" name="armesBonus_3">
          <property name="text">
           <string>-</string>
          </property>
@@ -1254,7 +1266,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="4" column="4">
-        <widget class="QLabel" name="malus_9">
+        <widget class="QLabel" name="armesMalus_3">
          <property name="text">
           <string>-</string>
          </property>
@@ -1264,7 +1276,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="4" column="6">
-        <widget class="QLabel" name="pr_9">
+        <widget class="QLabel" name="armesPi_3">
          <property name="text">
           <string>1D - 2</string>
          </property>
@@ -1274,7 +1286,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="4" column="8">
-        <widget class="QLabel" name="rupt_11">
+        <widget class="QLabel" name="armesRupt_3">
          <property name="text">
           <string>-</string>
          </property>
@@ -1284,21 +1296,21 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="4" column="9">
-        <widget class="QPushButton" name="edit_9">
+        <widget class="QPushButton" name="armesEdit_3">
          <property name="text">
           <string>Modifier</string>
          </property>
         </widget>
        </item>
        <item row="5" column="9">
-        <widget class="QPushButton" name="edit_10">
+        <widget class="QPushButton" name="armesEdit_4">
          <property name="text">
           <string>Modifier</string>
          </property>
         </widget>
        </item>
        <item row="5" column="8">
-        <widget class="QLabel" name="rupt_12">
+        <widget class="QLabel" name="armesRupt_4">
          <property name="text">
           <string>-</string>
          </property>
@@ -1308,7 +1320,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="5" column="4">
-        <widget class="QLabel" name="malus_10">
+        <widget class="QLabel" name="armesMalus_4">
          <property name="text">
           <string>-</string>
          </property>
@@ -1318,7 +1330,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="5" column="2">
-        <widget class="QLabel" name="bonus_10">
+        <widget class="QLabel" name="armesBonus_4">
          <property name="text">
           <string>-</string>
          </property>
@@ -1328,9 +1340,9 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="5" column="6">
-        <widget class="QLabel" name="pr_12">
+        <widget class="QLabel" name="armesPi_4">
          <property name="text">
-          <string>-</string>
+          <string>1D - 2</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1338,7 +1350,7 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="6" column="0" colspan="10">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="imgEpee4">
          <property name="text">
           <string/>
          </property>
@@ -1930,6 +1942,351 @@ p, li { white-space: pre-wrap; }
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
+     </item>
+     <item row="12" column="3">
+      <layout class="QGridLayout" name="layoutArmes_2">
+       <item row="2" column="7">
+        <widget class="QPushButton" name="vetEdit_1">
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QLabel" name="vetMalus_1">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="vetBonus_1">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="vetNom_1">
+         <property name="text">
+          <string>Nu</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="vetExplic">
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Vêtements :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="vetBonusExplic">
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Cantarell'; font-size:12pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Bonus :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="vetMalusExplic">
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Cantarell'; font-size:12pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Malus :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="vetNom_2">
+         <property name="text">
+          <string>Nu</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="vetBonus_2">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="QLabel" name="vetMalus_2">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="7">
+        <widget class="QPushButton" name="vetEdit_2">
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="vetNom_3">
+         <property name="text">
+          <string>Nu</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="vetNom_4">
+         <property name="text">
+          <string>Nu</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLabel" name="vetBonus_3">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="QLabel" name="vetMalus_3">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="7">
+        <widget class="QPushButton" name="vetEdit_3">
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="7">
+        <widget class="QPushButton" name="vetEdit_4">
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="4">
+        <widget class="QLabel" name="vetMalus_4">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QLabel" name="vetBonus_4">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" rowspan="7">
+        <widget class="Line" name="vetSepaV1">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3" rowspan="7">
+        <widget class="Line" name="vetSepaV2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5" rowspan="7">
+        <widget class="Line" name="vetSepaV3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="Line" name="vetSepaH1">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="Line" name="vetSepaH1_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="Line" name="vetSepaH1_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="vetNom_5">
+         <property name="text">
+          <string>Nu</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QLabel" name="vetBonus_5">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="4">
+        <widget class="QLabel" name="vetMalus_5">
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="7">
+        <widget class="QPushButton" name="vetEdit_5">
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="QLabel" name="vetVisibleExplic">
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Visible :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="6">
+        <widget class="QCheckBox" name="vetVisible_1">
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="6">
+        <widget class="QCheckBox" name="vetVisible_2">
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="6">
+        <widget class="QCheckBox" name="vetVisible_3">
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="6">
+        <widget class="QCheckBox" name="vetVisible_4">
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="6">
+        <widget class="QCheckBox" name="vetVisible_5">
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="8">
+        <widget class="QLabel" name="imgEpee5">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="../res/ressources.qrc">:/prog-data/img/epee.png</pixmap>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="6">
+        <widget class="Line" name="vetSepaH1_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
