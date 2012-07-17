@@ -14,7 +14,7 @@
    <string>Chargement de NaheulBeuk Helper</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res/ressources.qrc">
+   <iconset resource="../res/ressources.qrc">
     <normaloff>:/prog-data/img/icone.png</normaloff>:/prog-data/img/icone.png</iconset>
   </property>
   <property name="windowOpacity">
@@ -39,14 +39,14 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="res/ressources.qrc">:/prog-data/img/fen-chargement.png</pixmap>
+       <pixmap resource="../res/ressources.qrc">:/prog-data/img/fen-chargement.png</pixmap>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>TextLabel</string>
+       <string>NaheulBeuk Helper</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -64,7 +64,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="res/ressources.qrc"/>
+  <include location="../res/ressources.qrc"/>
  </resources>
  <connections/>
 </ui>

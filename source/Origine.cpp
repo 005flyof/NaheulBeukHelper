@@ -23,12 +23,12 @@ Origine::Origine(QString nom, int EV, int AT,
                  int COU, int INTEL, int CHA, int AD, int FO)
 {
     m_nom = nom;
-    m_caracMini = Caracteristiques(false, cou, intel, cha, ad, fo);
-    m_caracMax = Caracteristiques(false, COU, INTEL, CHA, AD, FO);
+    m_caracMini = new Caracteristiques(cou, intel, cha, ad, fo);
+    m_caracMax = new Caracteristiques(COU, INTEL, CHA, AD, FO);
     m_EV = EV;
     m_AT = AT;
 }
-
+/*
 void Origine::addCompetence(QString nom, QString description, bool obligatoire)
 {
     if (obligatoire)
@@ -36,7 +36,7 @@ void Origine::addCompetence(QString nom, QString description, bool obligatoire)
     else
         m_competenceChoisir.append(new Competence(nom, description));
 }
-
+*/
 QString Origine::getNom() const
 {
     return m_nom;
@@ -51,13 +51,13 @@ int Origine::getAT() const
 }
 Caracteristiques Origine::getCaracMini() const
 {
-    return m_caracMini;
+    return *m_caracMini;
 }
 Caracteristiques Origine::getCaracMaxi() const
 {
-    return m_caracMax;
+    return *m_caracMax;
 }
-
+/*
 QVector<Competence *> Origine::getCompetences(bool obligatoire = true)
 {
     if (obligatoire)
@@ -65,3 +65,4 @@ QVector<Competence *> Origine::getCompetences(bool obligatoire = true)
     else
         return m_competenceChoisir;
 }
+*/

@@ -1,8 +1,6 @@
 HEADERS += \
-    source/FenPrincipale.h \
-    source/Personnage.h \
-    source/ClassePourPersonnage.h \
     source/Caracteristiques.h \
+    source/ClassePourPersonnage.h \
     source/Origine.h \
     source/Metier.h \
     source/Richesses.h \
@@ -10,20 +8,12 @@ HEADERS += \
     source/Arme.h \
     source/Fleche.h \
     source/Vetement.h \
-    source/CheckBox.h \
     source/fonctions_diverses.h \
-    source/FenMAJ.h \
-    source/Monstre.h \
-    source/FenOrdreMarche.h \
-    source/FenCheckBox.h \
-    source/Competence.h \
-    source/FenAttaque.h \
-    source/FenChargement.h
+    source/FenChargement.h \
+    source/Personnage.h
 
 SOURCES += \
     source/main.cpp \
-    source/FenPrincipale.cpp \
-    source/Personnage.cpp \
     source/Caracteristiques.cpp \
     source/Origine.cpp \
     source/Metier.cpp \
@@ -32,15 +22,9 @@ SOURCES += \
     source/Arme.cpp \
     source/Fleche.cpp \
     source/Vetement.cpp \
-    source/CheckBox.cpp \
     source/fonctions_diverses.cpp \
-    source/FenMAJ.cpp \
-    source/Monstre.cpp \
-    source/FenOrdreMarche.cpp \
-    source/FenCheckBox.cpp \
-    source/Competence.cpp \
-    source/FenAttaque.cpp \
-    source/FenChargement.cpp
+    source/FenChargement.cpp \
+    source/Personnage.cpp
 
 QT += network
 
@@ -53,4 +37,5 @@ RESOURCES += \
     res/ressources.qrc
 
 FORMS += \
-    source/FenChargement.ui
+    source/FenChargement.ui \
+    source/Personnage.ui

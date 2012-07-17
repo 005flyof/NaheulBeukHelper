@@ -29,8 +29,6 @@
                    int cou, int intel, int cha, int ad, int fo, int at, int prd,
                    int COU, int INTEL, int CHA, int AD, int FO, int AT, int PRD);
 
-        void setBonus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup);
-        void setMalus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup);
         void setNom(QString nom);
         void setPR(int pr);
 
@@ -51,8 +49,8 @@
     private:
         QString m_nomProtection;
         int m_nombreProtection;
-        Caracteristiques m_bonus;
-        Caracteristiques m_malus;
+        Caracteristiques *m_bonus;
+        Caracteristiques *m_malus;
     };
 
 #endif // PROTECTION_H

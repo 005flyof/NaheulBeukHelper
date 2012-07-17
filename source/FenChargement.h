@@ -2,7 +2,9 @@
     #define FENCHARGEMENT_H
 
     #include <QtGui>
-    #include "FenPrincipale.h"
+    //#include "FenPrincipale.h"
+    #include "Personnage.h"
+    #include "fonctions_diverses.h"
 
     namespace Ui {
         class FenChargement;
@@ -15,16 +17,16 @@
     public:
         explicit FenChargement(char *argv[]);
         ~FenChargement();
-
+/*
         void ouvrirOrigines();
-        void ouvrirMetiers();
+        void ouvrirMetiers();*/
 
     private:
         Ui::FenChargement *ui;
-        FenPrincipale *fenetrePrincipale;
 
+        /*FenPrincipale *fenetrePrincipale;
         QMap<QString, Origine*> m_origines;
-        QMap<QString, Metier*> m_metiers;
+        QMap<QString, Metier*> m_metiers;*/
     };
 
 #endif // FENCHARGEMENT_H

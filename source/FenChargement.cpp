@@ -8,6 +8,7 @@ FenChargement::FenChargement(char *argv[])
     ui->progression->setValue(0);
 
     show();
+    setModal(true);
 
 // Suppression du fichier temporaire de la MAJ
     ui->label->setText("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...");
@@ -23,13 +24,13 @@ FenChargement::FenChargement(char *argv[])
 
 // Chargement des origines
     ui->label->setText("Chargement des origines...");
-    ouvrirOrigines();
+    //ouvrirOrigines();
     ui->progression->setValue(50);
     ui->label->setText("Origines chargées !");
 
 // Chargement des métiers
     ui->label->setText("Chargement des métiers...");
-    ouvrirMetiers();
+    //ouvrirMetiers();
     ui->progression->setValue(80);
     ui->label->setText("Métiers chargés !");
 
@@ -43,22 +44,22 @@ FenChargement::FenChargement(char *argv[])
     else
         log("Lancement de NBH", true);
 
-    fenetrePrincipale = new FenPrincipale;
+    //fenetrePrincipale = new FenPrincipale;
+    Personnage *perso = new Personnage("Babar");
 
     ui->progression->setValue(100);
     ui->label->setText("Interface chargée ! Fermeture de la fenêtre de chargement...");
 
-// On affiche la fenêtre principale
-    fenetrePrincipale->show();
-// On cache la fenêtre de chargement
-    hide();
+    close();
+    //fenetrePrincipale->show();
+    perso->show();
 }
 
 FenChargement::~FenChargement()
 {
     delete ui;
 }
-
+/*
 void FenChargement::ouvrirOrigines()
 {
     QFile nouveau_origine_conteneur(":prog-data/origines.txt");
@@ -365,3 +366,4 @@ void FenChargement::ouvrirMetiers()
             }
         } while (ligne != "~!FIN_METIER!~");
 }
+*/

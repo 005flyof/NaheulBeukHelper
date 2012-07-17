@@ -21,7 +21,7 @@
 
     #include <QtGui>
     #include "Caracteristiques.h"
-    #include "Competence.h"
+    //#include "Competence.h"
 
     class Metier
     {
@@ -48,12 +48,12 @@
         int getEA() const;
         QString getTypeEA() const;
 
-        QVector<Competence *> getCompetences(bool obligatoire = true);
+        //QVector<Competence *> getCompetences(bool obligatoire = true);
 
     private:
         QString m_nom;
 
-        Caracteristiques m_caracMini;
+        Caracteristiques *m_caracMini;
         int m_AT;
         int m_PRD;
 
@@ -69,8 +69,8 @@
         bool m_pourcent;
 
         // Compétences
-        QVector<Competence *> m_competenceObligatoires;
-        QVector<Competence *> m_competenceChoisir;
+        //QVector<Competence *> m_competenceObligatoires;
+        //QVector<Competence *> m_competenceChoisir;
     };
 
 #endif // METIER_H

@@ -25,9 +25,9 @@ Caracteristiques::Caracteristiques(int COU, int INT, int CHA, int AD, int FO)
     : m_courage(COU), m_intelligence(INT), m_charisme(CHA), m_adresse(AD), m_force(FO),
       utilisation_AT_PRD(false), m_attaque(0), m_parade(0)
 {}
-Caracteristiques::Caracteristiques(int COU, int INT, int CHA, int AD, int F0, int AT, int PRD)
-: m_courage(COU), m_intelligence(INT), m_charisme(CHA), m_adresse(AD), m_force(FO),
-  utilisation_AT_PRD(true), m_attaque(AT), m_parade(PRD)
+Caracteristiques::Caracteristiques(int COU, int INT, int CHA, int AD, int FO, int AT, int PRD)
+    : m_courage(COU), m_intelligence(INT), m_charisme(CHA), m_adresse(AD), m_force(FO),
+      utilisation_AT_PRD(true), m_attaque(AT), m_parade(PRD)
 {}
 
 
@@ -418,16 +418,22 @@ int Caracteristiques::getAttaque() const
     if (utilisation_AT_PRD)
         return m_attaque;
     else
+    {
         fatalError("L'attaque n'a pas été initialisée pour ces caractéristiques\n"
-                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
+                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " SITE_BUGS);
+        return 0;
+    }
 }
 int Caracteristiques::getParade() const
 {
     if (utilisation_AT_PRD)
         return m_parade;
     else
+    {
         fatalError("La parade n'a pas été initialisée pour ces caractéristiques\n"
-                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
+                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " SITE_BUGS);
+    return 0;
+    }
 }
 
 void Caracteristiques::setCourage(int COU)
@@ -488,7 +494,7 @@ void Caracteristiques::setAttaque(int AT)
     }
     else
         fatalError("L'attaque n'a pas été initialisée pour ces caractéristiques\n"
-                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
+                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " SITE_BUGS);
 }
 void Caracteristiques::setParade(int PRD)
 {
@@ -503,5 +509,5 @@ void Caracteristiques::setParade(int PRD)
     }
     else
         fatalError("La parade n'a pas été initialisée pour ces caractéristiques\n"
-                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " + SITE_BUGS);
+                   "Ceci est une erreur de conception du programme, veuillez la signaler sur " SITE_BUGS);
 }

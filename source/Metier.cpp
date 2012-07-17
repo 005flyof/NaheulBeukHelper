@@ -22,7 +22,7 @@ Metier::Metier(QString nom, int AT, int PRD,
                int cou, int intel, int cha, int ad, int fo)
 {
     m_nom = nom;
-    m_caracMini = Caracteristiques(false, cou, intel, cha, ad, fo);
+    m_caracMini = new Caracteristiques(cou, intel, cha, ad, fo);
     m_AT = AT;
     m_PRD = PRD;
 
@@ -49,7 +49,7 @@ void Metier::setEA(QString typeEA, int EA)
     m_typeEA = typeEA;
     m_presenceEA = true;
 }
-
+/*
 void Metier::addCompetence(QString nom, QString description, bool obligatoire)
 {
     if (obligatoire)
@@ -57,15 +57,15 @@ void Metier::addCompetence(QString nom, QString description, bool obligatoire)
     else
         m_competenceChoisir.append(new Competence(nom, description));
 }
-
+*/
 
 QString Metier::getNom() const
 {
-    return m_nomMetier;
+    return m_nom;
 }
 Caracteristiques Metier::getCaracMini() const
 {
-    return m_caracMini;
+    return *m_caracMini;
 }
 int Metier::getAT() const
 {
@@ -104,7 +104,7 @@ QString Metier::getTypeEA() const
 {
     return m_typeEA;
 }
-
+/*
 QVector<Competence *> Metier::getCompetences(bool obligatoire)
 {
     if (obligatoire)
@@ -112,3 +112,4 @@ QVector<Competence *> Metier::getCompetences(bool obligatoire)
     else
         return m_competenceChoisir;
 }
+*/

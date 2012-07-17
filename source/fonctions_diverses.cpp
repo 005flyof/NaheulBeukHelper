@@ -65,10 +65,10 @@ void log(QString const& message, bool vider)
     entree << QDate::currentDate().day() << "/" << QDate::currentDate().month() << "/" << QDate::currentDate().year() << " ";
     entree << QTime::currentTime().hour() << ":" << QTime::currentTime().minute() << " -> " << message << "\n";
 }
-
+/*
 Personnage chargerPerso(QString chemin)
 {
-    QFile persoOuverture(*cheminPersoOuverture);
+    QFile persoOuverture(chemin);
     if (!persoOuverture.open(QIODevice::ReadOnly | QIODevice::Text))
         fatalError("Impossible d'ouvrir le fichier personnage suivant : " + *cheminPersoOuverture);
 
@@ -1255,3 +1255,4 @@ Personnage chargerPerso(QString chemin)
         }
     }
 }
+*/

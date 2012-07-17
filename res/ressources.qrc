@@ -7,7 +7,6 @@
         <file>cha+.png</file>
         <file>cou+.png</file>
         <file>ea+.png</file>
-        <file>epee.png</file>
         <file>ev+.png</file>
         <file>fleche_bas.png</file>
         <file>fleche_bas-1.png</file>
@@ -34,16 +33,12 @@
         <file>icone.png</file>
         <file>quit-group.png</file>
         <file>fen-chargement.png</file>
+        <file>epee.png</file>
+        <file>img_perso.png</file>
     </qresource>
     <qresource prefix="/prog-data">
         <file>LICENCE</file>
         <file>metiers.txt</file>
         <file>origines.txt</file>
-    </qresource>
-    <qresource prefix="/fen_aide/img">
-        <file>help.png</file>
-        <file>home.png</file>
-        <file>precedent.png</file>
-        <file>suivant.png</file>
     </qresource>
 </RCC>

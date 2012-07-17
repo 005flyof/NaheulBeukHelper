@@ -21,7 +21,7 @@
 
     #include <QtGui>
     #include "Caracteristiques.h"
-    #include "Competence.h"
+    //#include "Competence.h"
 
     class Origine
     {
@@ -38,17 +38,17 @@
         Caracteristiques getCaracMini() const;
         Caracteristiques getCaracMaxi() const;
 
-        QVector<Competence *> getCompetences(bool obligatoire = true);
+        //QVector<Competence *> getCompetences(bool obligatoire = true);
 
     private:
         QString m_nom;
-        Caracteristiques m_caracMini;
-        Caracteristiques m_caracMax;
+        Caracteristiques *m_caracMini;
+        Caracteristiques *m_caracMax;
         int m_EV;
         int m_AT;
 
-        QVector<Competence *> m_competenceObligatoires;
-        QVector<Competence *> m_competenceChoisir;
+        //QVector<Competence *> m_competenceObligatoires;
+        //QVector<Competence *> m_competenceChoisir;
     };
 
 #endif // ORIGINE_H

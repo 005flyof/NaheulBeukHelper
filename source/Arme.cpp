@@ -29,23 +29,14 @@ Arme::Arme(QString nom,
     m_nomArme = nom;
     m_nombreDes = nbDes;
     m_degats = degatsEnPlus;
-    m_bonus = Caracteristiques(COU, INTEL, CHA, AD, FO, AT, PRD);
-    m_malus = Caracteristiques(cou, intel, cha, ad, fo, at, prd);
+    m_bonus = new Caracteristiques(COU, INTEL, CHA, AD, FO, AT, PRD);
+    m_malus = new Caracteristiques(cou, intel, cha, ad, fo, at, prd);
 }
 
 
 /*
  * Accesseurs
  */
-void Arme::setBonus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup)
-{
-    m_bonus.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup, AT_recup, PRD_recup);
-}
-void Arme::setMalus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup)
-{
-    m_malus.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup, AT_recup, PRD_recup);
-}
-
 void Arme::setNom(QString nom)
 {
     m_nomArme = nom;
@@ -75,23 +66,23 @@ QString Arme::getNom() const
 
 QString Arme::getBonusAffichage() const
 {
-    QString bonus_string = m_bonus.getCarac(true);
+    QString bonus_string = m_bonus->caracAffichage(true);
 
     return bonus_string;
 }
 QString Arme::getMalusAffichage() const
 {
-    QString malus_string = m_malus.getCarac(false);
+    QString malus_string = m_malus->caracAffichage(false);
 
     return malus_string;
 }
 Caracteristiques Arme::getBonus() const
 {
-    return m_bonus;
+    return *m_bonus;
 }
 Caracteristiques Arme::getMalus() const
 {
-    return m_malus;
+    return *m_malus;
 }
 
 QString Arme::getDegatsAffichage() const
@@ -128,8 +119,8 @@ QString Arme::armeEnregistrement() const
     arme += m_nomArme + "\n";
     arme += QString::number(m_nombreDes) + "\n";
     arme += QString::number(m_degats) + "\n";
-    arme += m_bonus.getCaracteristiques() + "\n";
-    arme += m_malus.getCaracteristiques() + "\n";
+    arme += m_bonus->caracEnregistrement() + "\n";
+    arme += m_malus->caracEnregistrement() + "\n";
 
     arme += QString::number(m_type) + "\n";
     arme += QString::number(m_rupture_max);

@@ -25,7 +25,6 @@
     class Vetement
     {
     public:
-        Vetement(QString nom, Caracteristiques bonus_recup, Caracteristiques malus_recup);
         Vetement(QString nom,
                  int cou, int intel, int cha, int ad, int fo,
                  int COU, int INTEL, int CHA, int AD, int FO);
@@ -43,13 +42,13 @@
         QString getVetement() const;
 
     // Récupérer les caractéristiques
-        Caracteristiques bonus() const;
-        Caracteristiques malus() const;
+        Caracteristiques getBonus() const;
+        Caracteristiques getMalus() const;
 
     private:
         QString m_nomVetement;
-        Caracteristiques m_bonus;
-        Caracteristiques m_malus;
+        Caracteristiques *m_bonus;
+        Caracteristiques *m_malus;
     };
 
 #endif // VETEMENT_H

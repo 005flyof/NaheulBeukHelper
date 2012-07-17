@@ -21,33 +21,19 @@
 /*
  * Constructeurs
  */
-Vetement::Vetement(QString nom, Caracteristiques bonus_recup, Caracteristiques malus_recup)
-{
-    m_nomVetement = nom;
-    m_bonus = bonus_recup;
-    m_malus = malus_recup;
-}
 Vetement::Vetement(QString nom,
                    int cou, int intel, int cha, int ad, int fo,
                    int COU, int INTEL, int CHA, int AD, int FO)
 {
     m_nomVetement = nom;
-    m_bonus = Caracteristiques(false, COU, INTEL, CHA, AD, FO);
-    m_malus = Caracteristiques(false, cou, intel, cha, ad, fo);
+    m_bonus = new Caracteristiques(COU, INTEL, CHA, AD, FO);
+    m_malus = new Caracteristiques(cou, intel, cha, ad, fo);
 }
 
 
 /*
  * Accesseurs
  */
-void Vetement::setBonus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup)
-{
-    m_bonus.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup);
-}
-void Vetement::setMalus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup)
-{
-    m_malus.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup);
-}
 void Vetement::setNom(QString nom)
 {
     m_nomVetement = nom;
@@ -59,23 +45,23 @@ QString Vetement::getNom() const
 }
 QString Vetement::getBonusAffichage() const
 {
-    QString bonus_string = m_bonus.getCarac(true);
+    QString bonus_string = m_bonus->caracAffichage(true);
 
     return bonus_string;
 }
 QString Vetement::getMalusAffichage() const
 {
-    QString malus_string = m_malus.getCarac(false);
+    QString malus_string = m_malus->caracAffichage(false);
 
     return malus_string;
 }
 Caracteristiques Vetement::getBonus() const
 {
-    return m_bonus;
+    return *m_bonus;
 }
 Caracteristiques Vetement::getMalus() const
 {
-    return m_malus;
+    return *m_malus;
 }
 
 /*
@@ -86,8 +72,8 @@ QString Vetement::getVetement() const
     QString vetement = "";
 
     vetement += m_nomVetement + "\n";
-    vetement += m_bonus.getCaracteristiques() + "\n";
-    vetement += m_malus.getCaracteristiques();
+    vetement += m_bonus->caracEnregistrement() + "\n";
+    vetement += m_malus->caracEnregistrement();
 
     return vetement;
 }

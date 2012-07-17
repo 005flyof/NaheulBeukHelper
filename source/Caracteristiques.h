@@ -60,13 +60,13 @@
         void setParade(int PRD);
 
     private:
-        bool utilisation_AT_PRD;
-
         int m_courage;
         int m_intelligence;
         int m_charisme;
         int m_adresse;
         int m_force;
+
+        bool utilisation_AT_PRD;
         int m_attaque;
         int m_parade;
     };

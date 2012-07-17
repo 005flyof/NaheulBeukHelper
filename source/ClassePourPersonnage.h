@@ -26,12 +26,10 @@
     #include "Vetement.h"
     #include "Fleche.h"
     #include "Metier.h"
-//	#include "ObjetSpecial.h"
     #include "Origine.h"
-//	#include "Potion_Poison.h"
     #include "Protection.h"
     #include "Richesses.h"
 
-    #include "Competence.h"
+    //#include "Competence.h"
 
 #endif // CLASSEPOURPERSONNAGE_H

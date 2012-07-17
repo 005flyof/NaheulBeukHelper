@@ -27,22 +27,14 @@ Protection::Protection(QString nom, int nb_PR,
 {
     m_nomProtection = nom;
     m_nombreProtection = nb_PR;
-    m_bonus = Caracteristiques(true, COU, INTEL, CHA, AD, FO, AT, PRD);
-    m_malus = Caracteristiques(true, cou, intel, cha, ad, fo, at, prd);
+    m_bonus = new Caracteristiques(COU, INTEL, CHA, AD, FO, AT, PRD);
+    m_malus = new Caracteristiques(cou, intel, cha, ad, fo, at, prd);
 }
 
 
 /*
  * Accesseurs
  */
-void Protection::setBonus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup)
-{
-    m_bonus.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup, AT_recup, PRD_recup);
-}
-void Protection::setMalus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup)
-{
-    m_malus.remplir(COU_recup, INT_recup, CHA_recup, AD_recup, FO_recup, AT_recup, PRD_recup);
-}
 void Protection::setNom(QString nom)
 {
     m_nomProtection = nom;
@@ -58,13 +50,13 @@ QString Protection::getNom() const
 }
 QString Protection::getBonusAffichage() const
 {
-    QString bonus_string = m_bonus.getCarac(true);
+    QString bonus_string = m_bonus->caracAffichage(true);
 
     return bonus_string;
 }
 QString Protection::getMalusAffichage() const
 {
-    QString malus_string = m_malus.getCarac(false);
+    QString malus_string = m_malus->caracAffichage(false);
 
     return malus_string;
 }
@@ -79,11 +71,11 @@ int Protection::getNbPR() const
 }
 Caracteristiques Protection::getBonus() const
 {
-    return m_bonus;
+    return *m_bonus;
 }
 Caracteristiques Protection::getMalus() const
 {
-    return m_malus;
+    return *m_malus;
 }
 
 
@@ -97,8 +89,8 @@ QString Protection::protectionEnregistrement() const
     pr += "~!protection!~\n";
     pr += m_nomProtection + "\n";
     pr += QString::number(m_nombreProtection) + "\n";
-    pr += m_bonus.getCaracteristiques() + "\n";
-    pr += m_malus.getCaracteristiques();
+    pr += m_bonus->caracEnregistrement() + "\n";
+    pr += m_malus->caracEnregistrement();
 
     return pr;
 }
