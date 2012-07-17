@@ -40,5 +40,6 @@
         <file>LICENCE</file>
         <file>metiers.txt</file>
         <file>origines.txt</file>
+        <file>lance.png</file>
     </qresource>
 </RCC>
