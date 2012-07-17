@@ -35,7 +35,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>-285</y>
+     <y>-1170</y>
      <width>901</width>
      <height>3000</height>
     </rect>
@@ -60,7 +60,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>861</width>
+      <width>864</width>
       <height>2248</height>
      </rect>
     </property>
@@ -2029,22 +2029,6 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </item>
-     <item row="1" column="2">
-      <spacer name="spacerGaucheDroite">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
      <item row="0" column="0" colspan="2">
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="leftMargin">
@@ -2859,6 +2843,22 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="0" column="2" rowspan="12">
+      <widget class="QLabel" name="label">
+       <property name="maximumSize">
+        <size>
+         <width>23</width>
+         <height>800</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../res/ressources.qrc">:/prog-data/lance.png</pixmap>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
