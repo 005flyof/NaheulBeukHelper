@@ -1,6 +1,5 @@
 HEADERS += \
     source/Caracteristiques.h \
-    source/ClassePourPersonnage.h \
     source/Origine.h \
     source/Metier.h \
     source/Richesses.h \
@@ -10,7 +9,9 @@ HEADERS += \
     source/Vetement.h \
     source/fonctions_diverses.h \
     source/FenChargement.h \
-    source/Personnage.h
+    source/Personnage.h \
+    source/ClassesPourPersonnage.h \
+    source/Competence.h
 
 SOURCES += \
     source/main.cpp \
@@ -24,7 +25,8 @@ SOURCES += \
     source/Vetement.cpp \
     source/fonctions_diverses.cpp \
     source/FenChargement.cpp \
-    source/Personnage.cpp
+    source/Personnage.cpp \
+    source/Competence.cpp
 
 QT += network
 

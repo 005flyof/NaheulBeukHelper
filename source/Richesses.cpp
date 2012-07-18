@@ -16,7 +16,7 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "ClassePourPersonnage.h"
+#include "ClassesPourPersonnage.h"
 
 Richesses::Richesses(int OR, int ARGENT, int CUIVRE)
     : m_or(OR), m_argent(ARGENT), m_cuivre(CUIVRE)

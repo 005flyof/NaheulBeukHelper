@@ -16,8 +16,8 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef CLASSEPOURPERSONNAGE_H
-    #define CLASSEPOURPERSONNAGE_H
+#ifndef CLASSESPOURPERSONNAGE_H
+    #define CLASSESPOURPERSONNAGE_H
 
     #include "fonctions_diverses.h"
 
@@ -30,6 +30,6 @@
     #include "Protection.h"
     #include "Richesses.h"
 
-    //#include "Competence.h"
+    #include "Competence.h"
 
-#endif // CLASSEPOURPERSONNAGE_H
+#endif // CLASSESPOURPERSONNAGE_H

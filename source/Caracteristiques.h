@@ -27,7 +27,7 @@
     class Caracteristiques
     {
     public:
-        Caracteristiques(int COU, int INT, int CHA, int AD, int FO);
+        explicit Caracteristiques(int COU, int INT, int CHA, int AD, int FO);
         Caracteristiques(int COU, int INT, int CHA, int AD, int F0, int AT, int PRD);
 
         bool estEgal(Caracteristiques const& b) const;

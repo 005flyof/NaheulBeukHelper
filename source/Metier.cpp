@@ -16,7 +16,7 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "ClassePourPersonnage.h"
+#include "ClassesPourPersonnage.h"
 
 Metier::Metier(QString nom, int AT, int PRD,
                int cou, int intel, int cha, int ad, int fo)

@@ -35,7 +35,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>-1270</y>
+     <y>-1291</y>
      <width>901</width>
      <height>2491</height>
     </rect>
@@ -83,6 +83,9 @@
        </item>
        <item row="0" column="2">
         <widget class="QPushButton" name="nomEdit">
+         <property name="toolTip">
+          <string>Modifier le nom du personnage</string>
+         </property>
          <property name="text">
           <string>Editer</string>
          </property>
@@ -107,8 +110,14 @@
        </item>
        <item row="0" column="6">
         <widget class="QPushButton" name="sexeEdit">
+         <property name="whatsThis">
+          <string>Modifier le sexe du personnage</string>
+         </property>
          <property name="text">
           <string>Editer</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -233,6 +242,9 @@
            <width>100</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Modifier l'arme 1</string>
          </property>
          <property name="text">
           <string>Modifier</string>
@@ -391,6 +403,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="9">
         <widget class="QPushButton" name="armesEdit_2">
+         <property name="toolTip">
+          <string>Modifier l'arme 2</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -452,13 +467,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="9">
         <widget class="QPushButton" name="armesEdit_3">
-         <property name="text">
-          <string>Modifier</string>
+         <property name="toolTip">
+          <string>Modifier l'arme 3</string>
          </property>
-        </widget>
-       </item>
-       <item row="5" column="9">
-        <widget class="QPushButton" name="armesEdit_4">
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -498,19 +509,6 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="armesPi_4">
          <property name="text">
           <string>1D - 2</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0" colspan="10">
-        <widget class="QLabel" name="imgEpee4">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="../res/ressources.qrc">:/prog-data/img/epee.png</pixmap>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -580,6 +578,29 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="6" column="0" colspan="10">
+        <widget class="QLabel" name="imgEpee4">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="../res/ressources.qrc">:/prog-data/img/epee.png</pixmap>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="9">
+        <widget class="QPushButton" name="armesEdit_4">
+         <property name="toolTip">
+          <string>Modifier l'arme 4</string>
+         </property>
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item row="15" column="0" colspan="4">
@@ -591,6 +612,9 @@ p, li { white-space: pre-wrap; }
            <width>100</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Modifier le vêtement 1</string>
          </property>
          <property name="text">
           <string>Modifier</string>
@@ -686,6 +710,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="7">
         <widget class="QPushButton" name="vetEdit_2">
+         <property name="toolTip">
+          <string>Modifier le vêtement 2</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -727,6 +754,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="7">
         <widget class="QPushButton" name="vetEdit_3">
+         <property name="toolTip">
+          <string>Modifier le vêtement 3</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -734,6 +764,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="5" column="7">
         <widget class="QPushButton" name="vetEdit_4">
+         <property name="toolTip">
+          <string>Modifier le vêtement 4</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -830,6 +863,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="6" column="7">
         <widget class="QPushButton" name="vetEdit_5">
+         <property name="toolTip">
+          <string>Modifier le vêtement 5</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -1071,6 +1107,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter des pièces d'or au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -1083,6 +1122,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer des pièces d'or au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -1113,6 +1155,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter des pièces d'argent au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -1125,6 +1170,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer des pièces d'argent au personnage</string>
          </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
@@ -1158,6 +1206,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter des pièces de cuivre au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -1170,6 +1221,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer des pièces de cuivre au personnage</string>
          </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
@@ -1283,6 +1337,9 @@ p, li { white-space: pre-wrap; }
          <height>16777215</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Retirer un point de destin au personnage</string>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
        </property>
@@ -1315,6 +1372,9 @@ p, li { white-space: pre-wrap; }
          <width>40</width>
          <height>16777215</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Ajouter de l'expérience au personnage</string>
        </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
@@ -1353,6 +1413,16 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="12" column="0" colspan="4">
       <layout class="QGridLayout" name="layoutPr">
+       <item row="4" column="9">
+        <widget class="QPushButton" name="prEdit_2">
+         <property name="toolTip">
+          <string>Modifier la protection 2</string>
+         </property>
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="9">
         <widget class="QPushButton" name="prEdit_1">
          <property name="maximumSize">
@@ -1360,6 +1430,9 @@ p, li { white-space: pre-wrap; }
            <width>100</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Modifier la protection 1</string>
          </property>
          <property name="text">
           <string>Modifier</string>
@@ -1515,13 +1588,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="4" column="9">
-        <widget class="QPushButton" name="prEdit_2">
-         <property name="text">
-          <string>Modifier</string>
-         </property>
-        </widget>
-       </item>
        <item row="7" column="8">
         <widget class="QLabel" name="prRupt_5">
          <property name="text">
@@ -1612,6 +1678,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="5" column="9">
         <widget class="QPushButton" name="prEdit_3">
+         <property name="toolTip">
+          <string>Modifier la protection 3</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -1619,6 +1688,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="6" column="9">
         <widget class="QPushButton" name="prEdit_4">
+         <property name="toolTip">
+          <string>Modifier la protection 4</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -1726,6 +1798,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="7" column="9">
         <widget class="QPushButton" name="prEdit_5">
+         <property name="toolTip">
+          <string>Modifier la protection 5</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -1733,6 +1808,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="8" column="9">
         <widget class="QPushButton" name="prEdit_6">
+         <property name="toolTip">
+          <string>Modifier la protection 6</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -1971,6 +2049,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter de l'énergie vitale au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -1983,6 +2064,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer de l'énergie vitale au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -2038,6 +2122,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter de l'énergie astrale au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -2050,6 +2137,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer de l'énergie astrale au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -2410,6 +2500,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter 1 point de COU au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -2422,6 +2515,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer 1 point de COU au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -2453,6 +2549,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter 1 point d'INT au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -2465,6 +2564,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer 1 point d'INT au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -2496,6 +2598,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter 1 point de CHA au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -2508,6 +2613,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer 1 point de CHA au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -2539,6 +2647,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter 1 point d'AD au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -2551,6 +2662,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer 1 point d'AD au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -2574,19 +2688,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="14" column="7">
-        <widget class="QPushButton" name="foPlus">
-         <property name="maximumSize">
-          <size>
-           <width>40</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>+</string>
-         </property>
-        </widget>
-       </item>
        <item row="14" column="8">
         <widget class="QPushButton" name="foMoins">
          <property name="maximumSize">
@@ -2594,6 +2695,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer 1 point de FO au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -2625,6 +2729,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter 1 point d'AT au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -2637,6 +2744,9 @@ p, li { white-space: pre-wrap; }
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Retirer 1 point d'AT au personnage</string>
          </property>
          <property name="text">
           <string>-</string>
@@ -2668,6 +2778,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Ajouter 1 point de PRD au personnage</string>
+         </property>
          <property name="text">
           <string>+</string>
          </property>
@@ -2681,8 +2794,27 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Retirer 1 point de PRD au personnage</string>
+         </property>
          <property name="text">
           <string>-</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="7">
+        <widget class="QPushButton" name="foPlus">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Ajouter 1 point de FO au personnage</string>
+         </property>
+         <property name="text">
+          <string>+</string>
          </property>
         </widget>
        </item>
@@ -2708,6 +2840,9 @@ p, li { white-space: pre-wrap; }
       <layout class="QGridLayout" name="layoutEquips">
        <item row="1" column="1">
         <widget class="QPushButton" name="equipsEdit_1">
+         <property name="toolTip">
+          <string>Modifier l'équipement 1</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2746,6 +2881,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="2" column="1">
         <widget class="QPushButton" name="equipsEdit_2">
+         <property name="toolTip">
+          <string>Modifier l'équipement 2</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2760,6 +2898,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="1">
         <widget class="QPushButton" name="equipsEdit_3">
+         <property name="toolTip">
+          <string>Modifier l'équipement 3</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2774,6 +2915,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="1">
         <widget class="QPushButton" name="equipsEdit_4">
+         <property name="toolTip">
+          <string>Modifier l'équipement 4</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2788,6 +2932,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="5" column="1">
         <widget class="QPushButton" name="equipsEdit_5">
+         <property name="toolTip">
+          <string>Modifier l'équipement 5</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2795,6 +2942,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="9" column="1">
         <widget class="QPushButton" name="equipsEdit_9">
+         <property name="toolTip">
+          <string>Modifier l'équipement 9</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2802,6 +2952,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="7" column="1">
         <widget class="QPushButton" name="equipsEdit_7">
+         <property name="toolTip">
+          <string>Modifier l'équipement 7</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2809,6 +2962,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="6" column="1">
         <widget class="QPushButton" name="equipsEdit_6">
+         <property name="toolTip">
+          <string>Modifier l'équipement 6</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2823,6 +2979,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="10" column="1">
         <widget class="QPushButton" name="equipsEdit_10">
+         <property name="toolTip">
+          <string>Modifier l'équipement 10</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2830,6 +2989,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="8" column="1">
         <widget class="QPushButton" name="equipsEdit_8">
+         <property name="toolTip">
+          <string>Modifier l'équipement 8</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -2880,6 +3042,9 @@ p, li { white-space: pre-wrap; }
            <width>100</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Modifier le type de flèches 1</string>
          </property>
          <property name="text">
           <string>Modifier</string>
@@ -2975,6 +3140,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="3" column="9">
         <widget class="QPushButton" name="flechesEdit_2">
+         <property name="toolTip">
+          <string>Modifier le type de flèches 2</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -3016,6 +3184,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="4" column="9">
         <widget class="QPushButton" name="flechesEdit_3">
+         <property name="toolTip">
+          <string>Modifier le type de flèches 3</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -3023,6 +3194,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="5" column="9">
         <widget class="QPushButton" name="flechesEdit_4">
+         <property name="toolTip">
+          <string>Modifier le type de flèches 4</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>
@@ -3098,6 +3272,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="6" column="9">
         <widget class="QPushButton" name="flechesEdit_5">
+         <property name="toolTip">
+          <string>Modifier le type de flèches 5</string>
+         </property>
          <property name="text">
           <string>Modifier</string>
          </property>

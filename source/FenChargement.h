@@ -2,9 +2,10 @@
     #define FENCHARGEMENT_H
 
     #include <QtGui>
-    //#include "FenPrincipale.h"
+
+//#include "FenPrincipale.h"
+
     #include "Personnage.h"
-    #include "fonctions_diverses.h"
 
     namespace Ui {
         class FenChargement;
