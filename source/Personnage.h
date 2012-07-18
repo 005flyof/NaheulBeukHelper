@@ -7,26 +7,24 @@
     namespace Ui {
         class Personnage;
     }
-    namespace Perso {
-        class Arme;
-        class Caracteristiques;
-        class Fleche;
-        class Metier;
-        class Origine;
-        class Protection;
-        class Richesses;
-        class Vetement;
 
-        class Competence;
-    }
+    #define MAX_PROTECTION 6
+    #define MAX_ARME 4
+    #define MAX_FLECHE 5
+    #define MAX_VETEMENT 5
+    #define MAX_EQUIPEMENT 10
+
 
     class Personnage : public QScrollArea
     {
         Q_OBJECT
 
     public:
-        explicit Personnage(QString nom);
+        explicit Personnage(QString fichier);
         ~Personnage();
+
+        void chargerPerso();
+        void enregistrerPerso();
 
     private slots:
         void on_nomEdit_clicked(bool checked);
@@ -37,8 +35,10 @@
 
         // Fonctions
         void setAffichage();
+        Caracteristiques chargerCarac(QString ligne, bool AT_PRD, int numLigne);
 
         // Pour le programme
+        QFile *m_fichierPerso;
         QString m_cheminEnregistrement;
 
         // Pour le jeu
@@ -53,22 +53,22 @@
         int m_EA, m_EA_modif;
         QString m_typeEA;
 
-        Perso::Caracteristiques *m_carac;
-        Perso::Caracteristiques *m_carac_modif;
+        Caracteristiques *m_carac;
+        Caracteristiques *m_carac_modif;
 
         int m_ptsDestin;
         int m_niveau;
         int m_experience;
 
-        Perso::Richesses *m_richesses;
+        Richesses *m_richesses;
 
-        Perso::Vetement *m_vetements[5];
-        QString m_equipements[10];
-        Perso::Protection *m_protections[6];
-        Perso::Arme *m_armes[4];
-        Perso::Fleche *m_fleches[5];
+        Vetement *m_vetements[MAX_VETEMENT];
+        QString m_equipements[MAX_EQUIPEMENT];
+        Protection *m_protections[MAX_PROTECTION];
+        Arme *m_armes[MAX_ARME];
+        Fleche *m_fleches[MAX_FLECHE];
 
-        QVector<Perso::Competence*> m_competences;
+        QVector<Competence*> m_competences;
     };
 
 #endif // PERSONNAGE_H

@@ -38,6 +38,14 @@ void Vetement::setNom(QString nom)
 {
     m_nomVetement = nom;
 }
+void Vetement::setBonus(Caracteristiques carac)
+{
+    *m_bonus = carac;
+}
+void Vetement::setMalus(Caracteristiques carac)
+{
+    *m_malus = carac;
+}
 
 QString Vetement::getNom() const
 {
@@ -67,7 +75,7 @@ Caracteristiques Vetement::getMalus() const
 /*
  * Enregistrement
  */
-QString Vetement::getVetement() const
+QString Vetement::vetementEnregistrement() const
 {
     QString vetement = "";
 

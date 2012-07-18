@@ -41,18 +41,23 @@ void Arme::setNom(QString nom)
 {
     m_nomArme = nom;
 }
-
 void Arme::setDegats(int des, int degats)
 {
     m_nombreDes = des;
     m_degats = degats;
 }
-
+void Arme::setBonus(Caracteristiques carac)
+{
+    *m_bonus = carac;
+}
+void Arme::setMalus(Caracteristiques carac)
+{
+    *m_malus = carac;
+}
 void Arme::setRupture(int maximum)
 {
     m_rupture_max = maximum;
 }
-
 void Arme::setType(Arme::typeArme type)
 {
     m_type = type;

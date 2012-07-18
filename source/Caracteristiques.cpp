@@ -29,6 +29,10 @@ Caracteristiques::Caracteristiques(int COU, int INT, int CHA, int AD, int FO, in
     : m_courage(COU), m_intelligence(INT), m_charisme(CHA), m_adresse(AD), m_force(FO),
       utilisation_AT_PRD(true), m_attaque(AT), m_parade(PRD)
 {}
+Caracteristiques::Caracteristiques(Caracteristiques const& b)
+    : m_courage(b.m_courage), m_intelligence(b.m_intelligence), m_charisme(b.m_charisme), m_adresse(b.m_adresse), m_force(b.m_force),
+      utilisation_AT_PRD(b.utilisation_AT_PRD), m_attaque(b.m_attaque), m_parade(b.m_parade)
+{}
 
 
 /*

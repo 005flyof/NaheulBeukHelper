@@ -35,21 +35,21 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>-1291</y>
+     <y>-2207</y>
      <width>901</width>
-     <height>2491</height>
+     <height>3000</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>901</width>
-     <height>2491</height>
+     <height>3000</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>901</width>
-     <height>2491</height>
+     <height>3000</height>
     </size>
    </property>
    <property name="styleSheet">
@@ -61,7 +61,7 @@
       <x>10</x>
       <y>10</y>
       <width>864</width>
-      <height>2472</height>
+      <height>2976</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="layoutPrincipal">
@@ -2848,13 +2848,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLineEdit" name="equips_1">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="equipsLabel">
          <property name="maximumSize">
@@ -2872,13 +2865,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLineEdit" name="equips_2">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="1">
         <widget class="QPushButton" name="equipsEdit_2">
          <property name="toolTip">
@@ -2886,13 +2872,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="text">
           <string>Modifier</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLineEdit" name="equips_3">
-         <property name="readOnly">
-          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -2906,13 +2885,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLineEdit" name="equips_4">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item row="4" column="1">
         <widget class="QPushButton" name="equipsEdit_4">
          <property name="toolTip">
@@ -2920,13 +2892,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="text">
           <string>Modifier</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLineEdit" name="equips_5">
-         <property name="readOnly">
-          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -2970,13 +2935,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="8" column="0">
-        <widget class="QLineEdit" name="equips_8">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item row="10" column="1">
         <widget class="QPushButton" name="equipsEdit_10">
          <property name="toolTip">
@@ -2997,29 +2955,71 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="9" column="0">
-        <widget class="QLineEdit" name="equips_9">
+       <item row="1" column="0">
+        <widget class="QTextEdit" name="equips_1">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QTextEdit" name="equips_2">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QTextEdit" name="equips_3">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QTextEdit" name="equips_4">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QTextEdit" name="equips_5">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="6" column="0">
-        <widget class="QLineEdit" name="equips_6">
+        <widget class="QTextEdit" name="equips_6">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="7" column="0">
-        <widget class="QLineEdit" name="equips_7">
+        <widget class="QTextEdit" name="equips_7">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QTextEdit" name="equips_8">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QTextEdit" name="equips_9">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="10" column="0">
-        <widget class="QLineEdit" name="equips_10">
+        <widget class="QTextEdit" name="equips_10">
          <property name="readOnly">
           <bool>true</bool>
          </property>

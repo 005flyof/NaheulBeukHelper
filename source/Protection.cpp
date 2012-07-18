@@ -43,6 +43,15 @@ void Protection::setPR(int pr)
 {
     m_nombreProtection = pr;
 }
+void Protection::setBonus(Caracteristiques carac)
+{
+    *m_bonus = carac;
+}
+void Protection::setMalus(Caracteristiques carac)
+{
+    *m_malus = carac;
+}
+
 
 QString Protection::getNom() const
 {

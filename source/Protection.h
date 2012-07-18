@@ -31,6 +31,8 @@
 
         void setNom(QString nom);
         void setPR(int pr);
+        void setBonus(Caracteristiques carac);
+        void setMalus(Caracteristiques carac);
 
     // Récupérer pour afficher
         QString getNom() const;

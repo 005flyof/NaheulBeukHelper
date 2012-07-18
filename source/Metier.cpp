@@ -49,7 +49,7 @@ void Metier::setEA(QString typeEA, int EA)
     m_typeEA = typeEA;
     m_presenceEA = true;
 }
-/*
+
 void Metier::addCompetence(QString nom, QString description, bool obligatoire)
 {
     if (obligatoire)
@@ -57,7 +57,7 @@ void Metier::addCompetence(QString nom, QString description, bool obligatoire)
     else
         m_competenceChoisir.append(new Competence(nom, description));
 }
-*/
+
 
 QString Metier::getNom() const
 {
@@ -104,7 +104,7 @@ QString Metier::getTypeEA() const
 {
     return m_typeEA;
 }
-/*
+
 QVector<Competence *> Metier::getCompetences(bool obligatoire)
 {
     if (obligatoire)
@@ -112,4 +112,4 @@ QVector<Competence *> Metier::getCompetences(bool obligatoire)
     else
         return m_competenceChoisir;
 }
-*/
+

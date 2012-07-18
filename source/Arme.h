@@ -35,11 +35,10 @@
             MainNue, Tranchante, Contandante, Projectile
         };
 
-        void setBonus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup);
-        void setMalus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup, int AT_recup, int PRD_recup);
         void setNom(QString nom);
         void setDegats(int des, int degats);
-
+        void setBonus(Caracteristiques carac);
+        void setMalus(Caracteristiques carac);
         void setRupture(int maximum);
         void setType(Arme::typeArme type);
 

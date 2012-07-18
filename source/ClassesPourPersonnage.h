@@ -22,14 +22,11 @@
     #include "fonctions_diverses.h"
 
     #include "Arme.h"
-    #include "Caracteristiques.h"
     #include "Vetement.h"
     #include "Fleche.h"
     #include "Metier.h"
     #include "Origine.h"
     #include "Protection.h"
     #include "Richesses.h"
-
-    #include "Competence.h"
 
 #endif // CLASSESPOURPERSONNAGE_H

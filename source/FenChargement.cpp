@@ -45,7 +45,7 @@ FenChargement::FenChargement(char *argv[])
         log("Lancement de NBH", true);
 
     //fenetrePrincipale = new FenPrincipale;
-    Personnage *perso = new Personnage("Babar");
+    Personnage *perso = new Personnage("/media/CORSAIR/Projets/NaheulBeukHelper/enregistrements/Babar.perso");
 
     ui->progression->setValue(100);
     ui->label->setText("Interface chargée ! Fermeture de la fenêtre de chargement...");

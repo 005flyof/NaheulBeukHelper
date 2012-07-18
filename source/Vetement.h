@@ -29,9 +29,9 @@
                  int cou, int intel, int cha, int ad, int fo,
                  int COU, int INTEL, int CHA, int AD, int FO);
 
-        void setBonus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup);
-        void setMalus(int COU_recup, int INT_recup, int CHA_recup, int AD_recup, int FO_recup);
         void setNom(QString nom);
+        void setBonus(Caracteristiques carac);
+        void setMalus(Caracteristiques carac);
 
     // Récupérer pour afficher
         QString getNom() const;
@@ -39,7 +39,7 @@
         QString getMalusAffichage() const;
 
     // Récupérer pour enregistrer
-        QString getVetement() const;
+        QString vetementEnregistrement() const;
 
     // Récupérer les caractéristiques
         Caracteristiques getBonus() const;

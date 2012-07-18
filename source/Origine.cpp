@@ -28,7 +28,7 @@ Origine::Origine(QString nom, int EV, int AT,
     m_EV = EV;
     m_AT = AT;
 }
-/*
+
 void Origine::addCompetence(QString nom, QString description, bool obligatoire)
 {
     if (obligatoire)
@@ -36,7 +36,7 @@ void Origine::addCompetence(QString nom, QString description, bool obligatoire)
     else
         m_competenceChoisir.append(new Competence(nom, description));
 }
-*/
+
 QString Origine::getNom() const
 {
     return m_nom;
@@ -57,12 +57,12 @@ Caracteristiques Origine::getCaracMaxi() const
 {
     return *m_caracMax;
 }
-/*
-QVector<Competence *> Origine::getCompetences(bool obligatoire = true)
+
+QVector<Competence *> Origine::getCompetences(bool obligatoire)
 {
     if (obligatoire)
         return m_competenceObligatoires;
     else
         return m_competenceChoisir;
 }
-*/
+
