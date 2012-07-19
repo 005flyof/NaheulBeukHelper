@@ -49,6 +49,12 @@ void Personnage::setAffichage()
         ui->eaModif->setEnabled(false);
         ui->eaPlus->setEnabled(false);
         ui->eaMoins->setEnabled(false);
+
+        ui->ea->setText("-");
+        ui->eaModif->setText("-");
+        ui->typeEa->setText("-");
+        ui->magiePhys->setText("-");
+        ui->magiePsy->setText("-");
     }
     ui->resistMagie->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getCourage() + m_carac_modif->getForce() ) / 3));
 
