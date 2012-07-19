@@ -25,9 +25,6 @@
   <property name="windowTitle">
    <string>ScrollArea</string>
   </property>
-  <property name="horizontalScrollBarPolicy">
-   <enum>Qt::ScrollBarAsNeeded</enum>
-  </property>
   <property name="widgetResizable">
    <bool>false</bool>
   </property>
@@ -35,7 +32,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>-1391</y>
+     <y>-2498</y>
      <width>881</width>
      <height>3000</height>
     </rect>
@@ -59,9 +56,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>5</y>
       <width>864</width>
-      <height>2976</height>
+      <height>2981</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="layoutPrincipal">
@@ -3113,45 +3110,6 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="14" column="0" colspan="4">
       <layout class="QGridLayout" name="layoutFleches">
-       <item row="2" column="7">
-        <widget class="QPushButton" name="flechesEdit_1">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>100</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Modifier le type de flèches 1</string>
-         </property>
-         <property name="text">
-          <string>Modifier</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLabel" name="flechesBonus_1">
-         <property name="text">
-          <string>-</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="flechesNom_1">
-         <property name="text">
-          <string>Vide</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="flechesExplic">
          <property name="text">
@@ -3160,6 +3118,61 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Flèches :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="flechesNom_5">
+         <property name="text">
+          <string>Vide</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="flechesNom_3">
+         <property name="text">
+          <string>Vide</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="flechesNom_1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Vide</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="Line" name="flechesSepaH1">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="flechesNom_4">
+         <property name="text">
+          <string>Vide</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="flechesNom_2">
+         <property name="text">
+          <string>Vide</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" rowspan="7">
+        <widget class="Line" name="flechesSepaV1">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
@@ -3174,10 +3187,33 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="flechesNom_2">
+       <item row="0" column="3" rowspan="7">
+        <widget class="Line" name="flechesSepaV2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="Line" name="flechesSepaH1_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="flechesBonus_1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
-          <string>Vide</string>
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -3191,30 +3227,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="7">
-        <widget class="QPushButton" name="flechesEdit_2">
-         <property name="toolTip">
-          <string>Modifier le type de flèches 2</string>
-         </property>
-         <property name="text">
-          <string>Modifier</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="flechesNom_3">
-         <property name="text">
-          <string>Vide</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="flechesNom_4">
-         <property name="text">
-          <string>Vide</string>
-         </property>
-        </widget>
-       </item>
        <item row="4" column="2">
         <widget class="QLabel" name="flechesBonus_3">
          <property name="text">
@@ -3222,26 +3234,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="7">
-        <widget class="QPushButton" name="flechesEdit_3">
-         <property name="toolTip">
-          <string>Modifier le type de flèches 3</string>
-         </property>
-         <property name="text">
-          <string>Modifier</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="7">
-        <widget class="QPushButton" name="flechesEdit_4">
-         <property name="toolTip">
-          <string>Modifier le type de flèches 4</string>
-         </property>
-         <property name="text">
-          <string>Modifier</string>
          </property>
         </widget>
        </item>
@@ -3255,27 +3247,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="Line" name="flechesSepaH1">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="Line" name="flechesSepaH1_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="flechesNom_5">
-         <property name="text">
-          <string>Vide</string>
-         </property>
-        </widget>
-       </item>
        <item row="6" column="2">
         <widget class="QLabel" name="flechesBonus_5">
          <property name="text">
@@ -3286,17 +3257,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="6" column="7">
-        <widget class="QPushButton" name="flechesEdit_5">
-         <property name="toolTip">
-          <string>Modifier le type de flèches 5</string>
-         </property>
-         <property name="text">
-          <string>Modifier</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4" colspan="3">
+       <item row="0" column="4">
         <widget class="QLabel" name="flecheNbExplic">
          <property name="text">
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3307,15 +3268,15 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="4" colspan="3">
+       <item row="1" column="4">
         <widget class="Line" name="flechesSepaH1_3">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="2" column="5">
-        <widget class="QPushButton" name="flechesPlus_1">
+       <item row="3" column="6">
+        <widget class="QPushButton" name="flechesPlus_2">
          <property name="maximumSize">
           <size>
            <width>40</width>
@@ -3327,7 +3288,20 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="6">
+       <item row="3" column="8">
+        <widget class="QPushButton" name="flechesMoins_2">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>-</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="8">
         <widget class="QPushButton" name="flechesMoins_1">
          <property name="minimumSize">
           <size>
@@ -3346,8 +3320,105 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item row="2" column="6">
+        <widget class="QPushButton" name="flechesPlus_1">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="6">
+        <widget class="QPushButton" name="flechesPlus_3">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="6">
+        <widget class="QPushButton" name="flechesPlus_4">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="6">
+        <widget class="QPushButton" name="flechesPlus_5">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="8">
+        <widget class="QPushButton" name="flechesMoins_3">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>-</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="8">
+        <widget class="QPushButton" name="flechesMoins_4">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>-</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="8">
+        <widget class="QPushButton" name="flechesMoins_5">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>-</string>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="4">
         <widget class="QLineEdit" name="flechesNb_1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="maximumSize">
           <size>
            <width>100</width>
@@ -3369,32 +3440,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="readOnly">
           <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="5">
-        <widget class="QPushButton" name="flechesPlus_2">
-         <property name="maximumSize">
-          <size>
-           <width>40</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>+</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="6">
-        <widget class="QPushButton" name="flechesMoins_2">
-         <property name="maximumSize">
-          <size>
-           <width>40</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>-</string>
          </property>
         </widget>
        </item>
@@ -3424,32 +3469,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="5" column="5">
-        <widget class="QPushButton" name="flechesPlus_4">
-         <property name="maximumSize">
-          <size>
-           <width>40</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>+</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="6">
-        <widget class="QPushButton" name="flechesMoins_4">
-         <property name="maximumSize">
-          <size>
-           <width>40</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>-</string>
-         </property>
-        </widget>
-       </item>
        <item row="6" column="4">
         <widget class="QLineEdit" name="flechesNb_5">
          <property name="maximumSize">
@@ -3463,59 +3482,117 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="6" column="5">
-        <widget class="QPushButton" name="flechesPlus_5">
+       <item row="2" column="10">
+        <widget class="QPushButton" name="flechesEdit_1">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
-           <width>40</width>
+           <width>100</width>
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Modifier le type de flèches 1</string>
+         </property>
          <property name="text">
-          <string>+</string>
+          <string>Modifier</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="5">
-        <widget class="QPushButton" name="flechesPlus_3">
-         <property name="maximumSize">
+       <item row="3" column="10">
+        <widget class="QPushButton" name="flechesEdit_2">
+         <property name="toolTip">
+          <string>Modifier le type de flèches 2</string>
+         </property>
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="10">
+        <widget class="QPushButton" name="flechesEdit_3">
+         <property name="toolTip">
+          <string>Modifier le type de flèches 3</string>
+         </property>
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="10">
+        <widget class="QPushButton" name="flechesEdit_4">
+         <property name="toolTip">
+          <string>Modifier le type de flèches 4</string>
+         </property>
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="10">
+        <widget class="QPushButton" name="flechesEdit_5">
+         <property name="toolTip">
+          <string>Modifier le type de flèches 5</string>
+         </property>
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
-           <height>16777215</height>
+           <width>10</width>
+           <height>20</height>
           </size>
          </property>
-         <property name="text">
-          <string>+</string>
-         </property>
-        </widget>
+        </spacer>
        </item>
-       <item row="4" column="6">
-        <widget class="QPushButton" name="flechesMoins_3">
-         <property name="maximumSize">
+       <item row="2" column="9">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
-           <height>16777215</height>
+           <width>10</width>
+           <height>20</height>
           </size>
          </property>
-         <property name="text">
-          <string>-</string>
-         </property>
-        </widget>
+        </spacer>
        </item>
-       <item row="6" column="6">
-        <widget class="QPushButton" name="flechesMoins_5">
-         <property name="maximumSize">
+       <item row="2" column="7">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
-           <height>16777215</height>
+           <width>5</width>
+           <height>20</height>
           </size>
          </property>
-         <property name="text">
-          <string>-</string>
-         </property>
-        </widget>
+        </spacer>
        </item>
-       <item row="7" column="0" colspan="8">
+       <item row="7" column="0" colspan="11">
         <widget class="QLabel" name="imgEpee5">
          <property name="text">
           <string/>
@@ -3525,20 +3602,6 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" rowspan="7">
-        <widget class="Line" name="flechesSepaV1">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3" rowspan="7">
-        <widget class="Line" name="flechesSepaV2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
