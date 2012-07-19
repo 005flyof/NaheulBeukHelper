@@ -8,138 +8,133 @@ Guerrier / Gladiateur
 18_11_14_10_14_13_10
 12_18_18_14_18_15_10
 007020_000000_000000
-~!carac_sup_inf!~
-6
-1
-0
-6
-~!chapeau!~
+~!vetement!~
 Nu
-00_00_00_00_00
-00_00_00_00_00
-~!haut!~
+02_02_02_02_02
+02_02_02_02_02
+~!vetement!~
 Nu
-00_00_00_00_00
-00_00_00_00_00
-~!bas!~
+02_02_02_02_02
+02_02_02_02_02
+~!vetement!~
 1654
-06_13_03_00_01
-00_00_00_00_00
-~!chaussures!~
+06_13_03_02_02
+02_02_02_02_02
+~!vetement!~
 Nu
-00_00_00_00_00
-00_00_00_00_00
-~!divers!~
+02_02_02_02_02
+02_02_02_02_02
+~!vetement!~
 Nu
-00_00_00_00_00
-00_00_00_00_00
+02_02_02_02_02
+02_02_02_02_02
 ~!protection!~
 1564
 0
-11_01_02_02_03_06_09
-06_00_00_00_00_00_00
+11_02_02_02_03_06_09
+06_02_02_02_02_02_02
 ~!protection!~
 Pas de protection
 0
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
 ~!protection!~
 Pas de protection
 0
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
 ~!protection!~
 Pas de protection
 0
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
 ~!protection!~
 Pas de protection
 0
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
 ~!protection!~
 Pas de protection
 0
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
 ~!arme!~
 A mains nues
 1
 -2
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
-1781522592
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
+6684704
 4107120
 ~!arme!~
 Gourdin
 1
 2
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
 0
 0
 ~!arme!~
 A mains nues
 1
 -2
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
 0
 0
 ~!arme!~
 A mains nues
 1
 -2
-00_00_00_00_00_00_00
-00_00_00_00_00_00_00
+02_02_02_02_02_02_02
+02_02_02_02_02_02_02
 0
 0
 ~!fleche!~
-Pas de flËche
+Fl√®ches enchant√©es
 0
-0
-00
+2
+10
 ~!fleche!~
 5645
 61
 2
 00
 ~!fleche!~
-Pas de flËche
+Pas de fl√®ches
 0
 0
 00
 ~!fleche!~
-Pas de flËche
+Pas de fl√®ches
 0
 0
 00
 ~!fleche!~
-Pas de flËche
+Pas de fl√®ches
 0
 0
 00
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!equipement!~
-Pas d'Èquipement
+Pas d'√©quipement
 ~!competence!~
 123456789
 12354646

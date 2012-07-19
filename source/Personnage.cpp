@@ -17,9 +17,310 @@ Personnage::~Personnage()
 
 void Personnage::setAffichage()
 {
+// Informations générales
     ui->nom->setText(m_nom);
     ui->sexe->setText(m_sexe);
+    ui->origine->setText(m_origine);
+    ui->metier->setText(m_metier);
+
+    ui->lvl->setText("A faire !!!");
+    ui->xp->setText(QString::number(m_experience));
+    ui->destin->setText(QString::number(m_ptsDestin));
+
+// Richesses
+    ui->po->setText(QString::number(m_richesses->getOr()));
+    ui->pa->setText(QString::number(m_richesses->getArgent()));
+    ui->pc->setText(QString::number(m_richesses->getCuivre()));
+
+// Caractéristiques
+    ui->ev->setText(QString::number(m_EV));
+    ui->evModif->setText(QString::number(m_EV_modif));
+
+    if (m_presenceEA)
+    {
+        ui->ea->setText(QString::number(m_EA));
+        ui->eaModif->setText(QString::number(m_EA_modif));
+        ui->typeEa->setText(m_typeEA);
+        ui->magiePhys->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getAdresse() ) / 2));
+        ui->magiePsy->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getCharisme() ) / 2));
+    }
+    else
+    {
+        ui->eaModif->setEnabled(false);
+        ui->eaPlus->setEnabled(false);
+        ui->eaMoins->setEnabled(false);
+    }
+    ui->resistMagie->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getCourage() + m_carac_modif->getForce() ) / 3));
+
+    ui->cou->setText(QString::number(m_carac->getCourage()));
+    ui->couModif->setText(QString::number(m_carac_modif->getCourage()));
+    ui->intel->setText(QString::number(m_carac->getIntelligence()));
+    ui->intelModif->setText(QString::number(m_carac_modif->getIntelligence()));
+    ui->cha->setText(QString::number(m_carac->getCharisme()));
+    ui->chaModif->setText(QString::number(m_carac_modif->getCharisme()));
+    ui->ad->setText(QString::number(m_carac->getAdresse()));
+    ui->adModif->setText(QString::number(m_carac_modif->getAdresse()));
+    ui->fo->setText(QString::number(m_carac->getForce()));
+    ui->foModif->setText(QString::number(m_carac_modif->getForce()));
+    ui->at->setText(QString::number(m_carac->getAttaque()));
+    ui->atModif->setText(QString::number(m_carac_modif->getAttaque()));
+    ui->prd->setText(QString::number(m_carac->getParade()));
+    ui->prdModif->setText(QString::number(m_carac_modif->getParade()));
+
+// Protections
+    ui->prNom_1->setText(m_protections[0]->getNom());
+    ui->prBonus_1->setText(m_protections[0]->getBonusAffichage());
+    ui->prMalus_1->setText(m_protections[0]->getMalusAffichage());
+    ui->prPr_1->setText(QString::number(m_protections[0]->getNbPR()));
+    ui->prRupt_1->setText("A faire !!");
+
+    ui->prNom_2->setText(m_protections[1]->getNom());
+    ui->prBonus_2->setText(m_protections[1]->getBonusAffichage());
+    ui->prMalus_2->setText(m_protections[1]->getMalusAffichage());
+    ui->prPr_2->setText(QString::number(m_protections[1]->getNbPR()));
+    ui->prRupt_2->setText("A faire !!");
+
+    ui->prNom_3->setText(m_protections[2]->getNom());
+    ui->prBonus_3->setText(m_protections[2]->getBonusAffichage());
+    ui->prMalus_3->setText(m_protections[2]->getMalusAffichage());
+    ui->prPr_3->setText(QString::number(m_protections[2]->getNbPR()));
+    ui->prRupt_3->setText("A faire !!");
+
+    ui->prNom_4->setText(m_protections[3]->getNom());
+    ui->prBonus_4->setText(m_protections[3]->getBonusAffichage());
+    ui->prMalus_4->setText(m_protections[3]->getMalusAffichage());
+    ui->prPr_4->setText(QString::number(m_protections[3]->getNbPR()));
+    ui->prRupt_4->setText("A faire !!");
+
+    ui->prNom_5->setText(m_protections[4]->getNom());
+    ui->prBonus_5->setText(m_protections[4]->getBonusAffichage());
+    ui->prMalus_5->setText(m_protections[4]->getMalusAffichage());
+    ui->prPr_5->setText(QString::number(m_protections[4]->getNbPR()));
+    ui->prRupt_5->setText("A faire !!");
+
+    ui->prNom_6->setText(m_protections[5]->getNom());
+    ui->prBonus_6->setText(m_protections[5]->getBonusAffichage());
+    ui->prMalus_6->setText(m_protections[5]->getMalusAffichage());
+    ui->prPr_6->setText(QString::number(m_protections[5]->getNbPR()));
+    ui->prRupt_6->setText("A faire !!");
+
+    ui->prTotale->setText(QString::number(m_prTotale));
+
+// Armes
+    ui->armesNom_1->setText(m_armes[0]->getNom());
+    ui->armesBonus_1->setText(m_armes[0]->getBonusAffichage());
+    ui->armesMalus_1->setText(m_armes[0]->getMalusAffichage());
+    ui->armesPi_1->setText(m_armes[0]->getDegatsAffichage());
+    ui->armesRupt_1->setText("A faire !!");
+
+    ui->armesNom_2->setText(m_armes[1]->getNom());
+    ui->armesBonus_2->setText(m_armes[1]->getBonusAffichage());
+    ui->armesMalus_2->setText(m_armes[1]->getMalusAffichage());
+    ui->armesPi_2->setText(m_armes[1]->getDegatsAffichage());
+    ui->armesRupt_2->setText("A faire !!");
+
+    ui->armesNom_3->setText(m_armes[2]->getNom());
+    ui->armesBonus_3->setText(m_armes[2]->getBonusAffichage());
+    ui->armesMalus_3->setText(m_armes[2]->getMalusAffichage());
+    ui->armesPi_3->setText(m_armes[2]->getDegatsAffichage());
+    ui->armesRupt_3->setText("A faire !!");
+
+    ui->armesNom_4->setText(m_armes[3]->getNom());
+    ui->armesBonus_4->setText(m_armes[3]->getBonusAffichage());
+    ui->armesMalus_4->setText(m_armes[3]->getMalusAffichage());
+    ui->armesPi_4->setText(m_armes[3]->getDegatsAffichage());
+    ui->armesRupt_4->setText("A faire !!");
+
+// Flèches
+    ui->flechesNom_1->setText(m_fleches[0]->getNom());
+    ui->flechesBonus_1->setText(m_fleches[0]->getBonusAffichage());
+    ui->flechesNb_1->setText(QString::number(m_fleches[0]->getNombre()));
+    if (m_fleches[0]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_1->setEnabled(false);
+        ui->flechesPlus_1->setEnabled(false);
+        ui->flechesMoins_1->setEnabled(false);
+    }
+    else if (m_fleches[0]->getNombre() == 0)
+    {
+        ui->flechesNb_1->setEnabled(true);
+        ui->flechesPlus_1->setEnabled(true);
+        ui->flechesMoins_1->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_1->setEnabled(true);
+        ui->flechesPlus_1->setEnabled(true);
+        ui->flechesMoins_1->setEnabled(true);
+    }
+
+    ui->flechesNom_2->setText(m_fleches[1]->getNom());
+    ui->flechesBonus_2->setText(m_fleches[1]->getBonusAffichage());
+    ui->flechesNb_2->setText(QString::number(m_fleches[1]->getNombre()));
+    if (m_fleches[1]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_2->setEnabled(false);
+        ui->flechesPlus_2->setEnabled(false);
+        ui->flechesMoins_2->setEnabled(false);
+    }
+    else if (m_fleches[1]->getNombre() == 0)
+    {
+        ui->flechesNb_2->setEnabled(true);
+        ui->flechesPlus_2->setEnabled(true);
+        ui->flechesMoins_2->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_2->setEnabled(true);
+        ui->flechesPlus_2->setEnabled(true);
+        ui->flechesMoins_2->setEnabled(true);
+    }
+
+    ui->flechesNom_3->setText(m_fleches[2]->getNom());
+    ui->flechesBonus_3->setText(m_fleches[2]->getBonusAffichage());
+    ui->flechesNb_3->setText(QString::number(m_fleches[2]->getNombre()));
+    if (m_fleches[2]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_3->setEnabled(false);
+        ui->flechesPlus_3->setEnabled(false);
+        ui->flechesMoins_3->setEnabled(false);
+    }
+    else if (m_fleches[2]->getNombre() == 0)
+    {
+        ui->flechesNb_3->setEnabled(true);
+        ui->flechesPlus_3->setEnabled(true);
+        ui->flechesMoins_3->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_3->setEnabled(true);
+        ui->flechesPlus_3->setEnabled(true);
+        ui->flechesMoins_3->setEnabled(true);
+    }
+
+    ui->flechesNom_4->setText(m_fleches[3]->getNom());
+    ui->flechesBonus_4->setText(m_fleches[3]->getBonusAffichage());
+    ui->flechesNb_4->setText(QString::number(m_fleches[3]->getNombre()));
+    if (m_fleches[3]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_4->setEnabled(false);
+        ui->flechesPlus_4->setEnabled(false);
+        ui->flechesMoins_4->setEnabled(false);
+    }
+    else if (m_fleches[3]->getNombre() == 0)
+    {
+        ui->flechesNb_4->setEnabled(true);
+        ui->flechesPlus_4->setEnabled(true);
+        ui->flechesMoins_4->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_4->setEnabled(true);
+        ui->flechesPlus_4->setEnabled(true);
+        ui->flechesMoins_4->setEnabled(true);
+    }
+
+    ui->flechesNom_5->setText(m_fleches[4]->getNom());
+    ui->flechesBonus_5->setText(m_fleches[4]->getBonusAffichage());
+    ui->flechesNb_5->setText(QString::number(m_fleches[4]->getNombre()));
+    if (m_fleches[4]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_5->setEnabled(false);
+        ui->flechesPlus_5->setEnabled(false);
+        ui->flechesMoins_5->setEnabled(false);
+    }
+    else if (m_fleches[4]->getNombre() == 0)
+    {
+        ui->flechesNb_5->setEnabled(true);
+        ui->flechesPlus_5->setEnabled(true);
+        ui->flechesMoins_5->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_5->setEnabled(true);
+        ui->flechesPlus_5->setEnabled(true);
+        ui->flechesMoins_5->setEnabled(true);
+    }
+
+// Vêtements
+    ui->vetNom_1->setText(m_vetements[0]->getNom());
+    ui->vetBonus_1->setText(m_vetements[0]->getBonusAffichage());
+    ui->vetMalus_1->setText(m_vetements[0]->getMalusAffichage());
+    ui->vetVisible_1->setChecked(true);
+
+    ui->vetNom_2->setText(m_vetements[1]->getNom());
+    ui->vetBonus_2->setText(m_vetements[1]->getBonusAffichage());
+    ui->vetMalus_2->setText(m_vetements[1]->getMalusAffichage());
+    ui->vetVisible_2->setChecked(true);
+
+    ui->vetNom_3->setText(m_vetements[2]->getNom());
+    ui->vetBonus_3->setText(m_vetements[2]->getBonusAffichage());
+    ui->vetMalus_3->setText(m_vetements[2]->getMalusAffichage());
+    ui->vetVisible_3->setChecked(true);
+
+    ui->vetNom_4->setText(m_vetements[3]->getNom());
+    ui->vetBonus_4->setText(m_vetements[3]->getBonusAffichage());
+    ui->vetMalus_4->setText(m_vetements[3]->getMalusAffichage());
+    ui->vetVisible_4->setChecked(true);
+
+    ui->vetNom_5->setText(m_vetements[4]->getNom());
+    ui->vetBonus_5->setText(m_vetements[4]->getBonusAffichage());
+    ui->vetMalus_5->setText(m_vetements[4]->getMalusAffichage());
+    ui->vetVisible_5->setChecked(true);
+
+// Equipements
+    ui->equips_1->setText(m_equipements[0]);
+    ui->equips_2->setText(m_equipements[1]);
+    ui->equips_3->setText(m_equipements[2]);
+    ui->equips_4->setText(m_equipements[3]);
+    ui->equips_5->setText(m_equipements[4]);
+    ui->equips_6->setText(m_equipements[5]);
+    ui->equips_7->setText(m_equipements[6]);
+    ui->equips_8->setText(m_equipements[7]);
+    ui->equips_9->setText(m_equipements[8]);
+    ui->equips_10->setText(m_equipements[9]);
 }
+void Personnage::viderVariables()
+{
+    m_nom = "";
+    m_sexe = "";
+    m_origine = "";
+    m_metier = "";
+
+    m_EV = 0;
+    m_EV_modif = 0;
+
+    m_presenceEA = false;
+    m_EA = 0;
+    m_EA_modif = 0;
+    m_typeEA = "";
+
+    m_carac = 0;
+    m_carac_modif = 0;
+
+    m_ptsDestin = 0;
+    m_niveau = 0;
+    m_experience = 0;
+
+    m_richesses = 0;
+
+    for (int lecteur = 0; lecteur < MAX_VETEMENT; lecteur++)
+        m_vetements[lecteur] = 0;
+
+    for (int lecteur = 0; lecteur < MAX_EQUIPEMENT; lecteur++)
+        m_equipements[lecteur] = "";
+
+    for (int lecteur = 0; lecteur < MAX_PROTECTION; lecteur++)
+        m_protections[lecteur] = 0;
+    m_prTotale = 0;
+
+    for (int lecteur = 0; lecteur < MAX_ARME; lecteur++)
+        m_armes[lecteur] = 0;
+
+    for (int lecteur = 0; lecteur < MAX_FLECHE; lecteur++)
+        m_fleches[lecteur] = 0;
+}
+
 Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLigne)
 {
     if (AT_PRD)
@@ -29,9 +330,9 @@ Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLig
         while (lecteur < ligne.size())
         {
             QString carac("");
-            carac += ligne[lecteur];
-            carac += ligne[lecteur++];
-            switch (lecteur - 1)
+            carac += ligne.at(lecteur);
+            carac += ligne.at(lecteur + 1);
+            switch (lecteur)
             {
             case 0:
                 renvoyer.setCourage(carac.toInt());
@@ -66,7 +367,7 @@ Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLig
                 return renvoyer;
                 break;
             }
-            lecteur += 2;
+            lecteur += 3;
         }
 
         return renvoyer;
@@ -78,9 +379,9 @@ Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLig
         while (lecteur < ligne.size())
         {
             QString carac("");
-            carac += ligne[lecteur];
-            carac += ligne[lecteur++];
-            switch (lecteur - 1)
+            carac += ligne.at(lecteur);
+            carac += ligne.at(lecteur + 1);
+            switch (lecteur)
             {
             case 0:
                 renvoyer.setCourage(carac.toInt());
@@ -109,7 +410,7 @@ Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLig
                 return renvoyer;
                 break;
             }
-            lecteur += 2;
+            lecteur += 3;
         }
 
         return renvoyer;
@@ -118,6 +419,8 @@ Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLig
 
 void Personnage::chargerPerso()
 {
+    viderVariables();
+
     m_fichierPerso = new QFile(m_cheminEnregistrement);
     if (!m_fichierPerso->open(QIODevice::ReadOnly | QIODevice::Text))
         fatalError("Impossible d'ouvrir le fichier personnage suivant : " + m_cheminEnregistrement);
@@ -125,7 +428,7 @@ void Personnage::chargerPerso()
     log("Ouverture du personnage : '" + m_cheminEnregistrement + "'");
 
     QTextStream entree(m_fichierPerso);
-    int numLigne(0);
+    int numLigne(1);
 
 // Informations générales
     m_nom = entree.readLine();
@@ -137,15 +440,17 @@ void Personnage::chargerPerso()
     m_metier = entree.readLine();
     numLigne++;
 
+// Energie Vitale
+    m_EV = entree.readLine().toInt();
+    numLigne++;
+
+// Informations générales (suite)
     m_ptsDestin = entree.readLine().toInt();
     numLigne++;
     m_experience = entree.readLine().toInt();
     numLigne++;
 
 // Caractéristiques
-    m_EV = entree.readLine().toInt();
-    numLigne++;
-
     m_carac = new Caracteristiques(chargerCarac(entree.readLine(), true, numLigne++));
     m_carac_modif = new Caracteristiques(chargerCarac(entree.readLine(), true, numLigne++));
 
@@ -156,14 +461,14 @@ void Personnage::chargerPerso()
     while (lecteur < piecesLigne.size())
     {
         QString piecesString("");
-        piecesString += piecesLigne[lecteur];           // 1
-        piecesString += piecesLigne[lecteur++];         // 2
-        piecesString += piecesLigne[lecteur++];         // 3
-        piecesString += piecesLigne[lecteur++];         // 4
-        piecesString += piecesLigne[lecteur++];         // 5
-        piecesString += piecesLigne[lecteur++];         // 6
+        piecesString += piecesLigne.at(lecteur);
+        piecesString += piecesLigne.at(lecteur + 1);
+        piecesString += piecesLigne.at(lecteur + 2);
+        piecesString += piecesLigne.at(lecteur + 3);
+        piecesString += piecesLigne.at(lecteur + 4);
+        piecesString += piecesLigne.at(lecteur + 5);
 
-        switch (lecteur - 5)
+        switch (lecteur)
         {
         case 0:
             m_richesses->setOr(piecesString.toInt());
@@ -185,7 +490,7 @@ void Personnage::chargerPerso()
             return;
             break;
         }
-        lecteur += 2;
+        lecteur += 7;
     }
 
 // Ouverture des autres choses
@@ -512,7 +817,7 @@ void Personnage::enregistrerPerso()
         total += "~!magie!~\n" + QString::number(m_EA) + "\n" + m_typeEA + "\n";
 
     for (int lecteur = 0; lecteur < MAX_VETEMENT; lecteur++)
-        total += "~!vetement!~\n" + m_vetements[lecteur]->vetementEnregistrement() + "\n";
+        total += m_vetements[lecteur]->vetementEnregistrement() + "\n";
 
     for (int lecteur = 0; lecteur < MAX_PROTECTION; lecteur++)
         total += m_protections[lecteur]->protectionEnregistrement() + "\n";

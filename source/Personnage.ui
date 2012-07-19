@@ -26,7 +26,7 @@
    <string>ScrollArea</string>
   </property>
   <property name="horizontalScrollBarPolicy">
-   <enum>Qt::ScrollBarAlwaysOff</enum>
+   <enum>Qt::ScrollBarAsNeeded</enum>
   </property>
   <property name="widgetResizable">
    <bool>false</bool>
@@ -35,20 +35,20 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>-2207</y>
-     <width>901</width>
+     <y>-1391</y>
+     <width>881</width>
      <height>3000</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
-     <width>901</width>
+     <width>881</width>
      <height>3000</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>901</width>
+     <width>881</width>
      <height>3000</height>
     </size>
    </property>
@@ -1056,6 +1056,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -1075,6 +1078,9 @@ p, li { white-space: pre-wrap; }
            <height>16777215</height>
           </size>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -1093,6 +1099,9 @@ p, li { white-space: pre-wrap; }
            <width>110</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -1324,6 +1333,9 @@ p, li { white-space: pre-wrap; }
        <property name="enabled">
         <bool>true</bool>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
        <property name="readOnly">
         <bool>true</bool>
        </property>
@@ -1359,6 +1371,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QLineEdit" name="xp">
        <property name="enabled">
         <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
        <property name="readOnly">
         <bool>true</bool>
@@ -2030,6 +2045,9 @@ p, li { white-space: pre-wrap; }
          <height>16777215</height>
         </size>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
       </widget>
      </item>
      <item row="1" column="3" rowspan="11">
@@ -2038,6 +2056,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLineEdit" name="ev">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -2078,6 +2099,9 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>true</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -2102,12 +2126,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="4" column="5">
         <widget class="QLineEdit" name="eaModif">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -2158,12 +2188,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="6" column="3" colspan="3">
         <widget class="QLineEdit" name="magiePhys">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -2365,12 +2401,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="8" column="3" colspan="3">
         <widget class="QLineEdit" name="resistMagie">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -2480,12 +2522,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="10" column="5">
         <widget class="QLineEdit" name="couModif">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -2529,12 +2577,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="11" column="5">
         <widget class="QLineEdit" name="intelModif">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -2578,12 +2632,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="12" column="5">
         <widget class="QLineEdit" name="chaModif">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -2627,12 +2687,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="13" column="5">
         <widget class="QLineEdit" name="adModif">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -2676,12 +2742,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="14" column="5">
         <widget class="QLineEdit" name="foModif">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -2709,12 +2781,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="15" column="5">
         <widget class="QLineEdit" name="atModif">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -2758,12 +2836,18 @@ p, li { white-space: pre-wrap; }
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item row="16" column="5">
         <widget class="QLineEdit" name="prdModif">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -3029,7 +3113,7 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="14" column="0" colspan="4">
       <layout class="QGridLayout" name="layoutFleches">
-       <item row="2" column="9">
+       <item row="2" column="7">
         <widget class="QPushButton" name="flechesEdit_1">
          <property name="minimumSize">
           <size>
@@ -3051,18 +3135,8 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
-        <widget class="QLabel" name="flechesBonus_1">
-         <property name="text">
-          <string>-</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="2">
-        <widget class="QLabel" name="flechesDeg_1">
+        <widget class="QLabel" name="flechesBonus_1">
          <property name="text">
           <string>-</string>
          </property>
@@ -3090,24 +3164,13 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QLabel" name="flechesDegExplic">
-         <property name="text">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Dégâts en plus :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
         <widget class="QLabel" name="flechesBonusExplic">
          <property name="text">
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Bonus d'adresse :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline; color:#0000ff;&quot;&gt;Bonus :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -3119,16 +3182,6 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="3" column="2">
-        <widget class="QLabel" name="flechesDeg_2">
-         <property name="text">
-          <string>-</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="4">
         <widget class="QLabel" name="flechesBonus_2">
          <property name="text">
           <string>-</string>
@@ -3138,7 +3191,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="9">
+       <item row="3" column="7">
         <widget class="QPushButton" name="flechesEdit_2">
          <property name="toolTip">
           <string>Modifier le type de flèches 2</string>
@@ -3163,16 +3216,6 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="4" column="2">
-        <widget class="QLabel" name="flechesDeg_3">
-         <property name="text">
-          <string>-</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="4">
         <widget class="QLabel" name="flechesBonus_3">
          <property name="text">
           <string>-</string>
@@ -3182,7 +3225,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="4" column="9">
+       <item row="4" column="7">
         <widget class="QPushButton" name="flechesEdit_3">
          <property name="toolTip">
           <string>Modifier le type de flèches 3</string>
@@ -3192,7 +3235,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="5" column="9">
+       <item row="5" column="7">
         <widget class="QPushButton" name="flechesEdit_4">
          <property name="toolTip">
           <string>Modifier le type de flèches 4</string>
@@ -3202,18 +3245,8 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="5" column="4">
-        <widget class="QLabel" name="flechesBonus_4">
-         <property name="text">
-          <string>-</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="2">
-        <widget class="QLabel" name="flechesDeg_4">
+        <widget class="QLabel" name="flechesBonus_4">
          <property name="text">
           <string>-</string>
          </property>
@@ -3236,13 +3269,6 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
-        <widget class="Line" name="flechesSepaH1_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
        <item row="6" column="0">
         <widget class="QLabel" name="flechesNom_5">
          <property name="text">
@@ -3251,16 +3277,6 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="6" column="2">
-        <widget class="QLabel" name="flechesDeg_5">
-         <property name="text">
-          <string>-</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="4">
         <widget class="QLabel" name="flechesBonus_5">
          <property name="text">
           <string>-</string>
@@ -3270,7 +3286,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="6" column="9">
+       <item row="6" column="7">
         <widget class="QPushButton" name="flechesEdit_5">
          <property name="toolTip">
           <string>Modifier le type de flèches 5</string>
@@ -3280,7 +3296,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="0" column="6" colspan="3">
+       <item row="0" column="4" colspan="3">
         <widget class="QLabel" name="flecheNbExplic">
          <property name="text">
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3291,14 +3307,14 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="1" column="6" colspan="3">
-        <widget class="Line" name="flechesSepaH1_4">
+       <item row="1" column="4" colspan="3">
+        <widget class="Line" name="flechesSepaH1_3">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="2" column="7">
+       <item row="2" column="5">
         <widget class="QPushButton" name="flechesPlus_1">
          <property name="maximumSize">
           <size>
@@ -3311,7 +3327,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="8">
+       <item row="2" column="6">
         <widget class="QPushButton" name="flechesMoins_1">
          <property name="minimumSize">
           <size>
@@ -3330,7 +3346,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="6">
+       <item row="2" column="4">
         <widget class="QLineEdit" name="flechesNb_1">
          <property name="maximumSize">
           <size>
@@ -3343,7 +3359,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="6">
+       <item row="3" column="4">
         <widget class="QLineEdit" name="flechesNb_2">
          <property name="maximumSize">
           <size>
@@ -3356,7 +3372,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="7">
+       <item row="3" column="5">
         <widget class="QPushButton" name="flechesPlus_2">
          <property name="maximumSize">
           <size>
@@ -3369,7 +3385,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="8">
+       <item row="3" column="6">
         <widget class="QPushButton" name="flechesMoins_2">
          <property name="maximumSize">
           <size>
@@ -3382,7 +3398,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="4" column="6">
+       <item row="4" column="4">
         <widget class="QLineEdit" name="flechesNb_3">
          <property name="maximumSize">
           <size>
@@ -3395,7 +3411,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="5" column="6">
+       <item row="5" column="4">
         <widget class="QLineEdit" name="flechesNb_4">
          <property name="maximumSize">
           <size>
@@ -3408,7 +3424,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="5" column="7">
+       <item row="5" column="5">
         <widget class="QPushButton" name="flechesPlus_4">
          <property name="maximumSize">
           <size>
@@ -3421,7 +3437,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="5" column="8">
+       <item row="5" column="6">
         <widget class="QPushButton" name="flechesMoins_4">
          <property name="maximumSize">
           <size>
@@ -3434,7 +3450,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="6" column="6">
+       <item row="6" column="4">
         <widget class="QLineEdit" name="flechesNb_5">
          <property name="maximumSize">
           <size>
@@ -3447,7 +3463,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="6" column="7">
+       <item row="6" column="5">
         <widget class="QPushButton" name="flechesPlus_5">
          <property name="maximumSize">
           <size>
@@ -3460,7 +3476,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="4" column="7">
+       <item row="4" column="5">
         <widget class="QPushButton" name="flechesPlus_3">
          <property name="maximumSize">
           <size>
@@ -3473,7 +3489,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="4" column="8">
+       <item row="4" column="6">
         <widget class="QPushButton" name="flechesMoins_3">
          <property name="maximumSize">
           <size>
@@ -3486,7 +3502,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="6" column="8">
+       <item row="6" column="6">
         <widget class="QPushButton" name="flechesMoins_5">
          <property name="maximumSize">
           <size>
@@ -3499,7 +3515,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="7" column="0" colspan="10">
+       <item row="7" column="0" colspan="8">
         <widget class="QLabel" name="imgEpee5">
          <property name="text">
           <string/>
@@ -3521,13 +3537,6 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="0" column="3" rowspan="7">
         <widget class="Line" name="flechesSepaV2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5" rowspan="7">
-        <widget class="Line" name="flechesSepaV3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

@@ -79,6 +79,7 @@ QString Vetement::vetementEnregistrement() const
 {
     QString vetement = "";
 
+    vetement += "~!vetement!~\n";
     vetement += m_nomVetement + "\n";
     vetement += m_bonus->caracEnregistrement() + "\n";
     vetement += m_malus->caracEnregistrement();

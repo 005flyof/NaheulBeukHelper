@@ -36,6 +36,7 @@
         // Fonctions
         void setAffichage();
         Caracteristiques chargerCarac(QString ligne, bool AT_PRD, int numLigne);
+        void viderVariables();
 
         // Pour le programme
         QFile *m_fichierPerso;
@@ -65,6 +66,7 @@
         Vetement *m_vetements[MAX_VETEMENT];
         QString m_equipements[MAX_EQUIPEMENT];
         Protection *m_protections[MAX_PROTECTION];
+            int m_prTotale;
         Arme *m_armes[MAX_ARME];
         Fleche *m_fleches[MAX_FLECHE];
 
