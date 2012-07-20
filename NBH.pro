@@ -11,7 +11,8 @@ HEADERS += \
     source/FenChargement.h \
     source/Personnage.h \
     source/ClassesPourPersonnage.h \
-    source/Competence.h
+    source/Competence.h \
+    source/FenPrincipale.h
 
 SOURCES += \
     source/main.cpp \
@@ -26,7 +27,8 @@ SOURCES += \
     source/fonctions_diverses.cpp \
     source/FenChargement.cpp \
     source/Personnage.cpp \
-    source/Competence.cpp
+    source/Competence.cpp \
+    source/FenPrincipale.cpp
 
 QT += network
 
