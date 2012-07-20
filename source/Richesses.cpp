@@ -30,6 +30,10 @@ void Richesses::setOr(int value)
         QMessageBox::information(pb, "Information",
                                  "ATTENTION :\nLe nombre maximum de PO (= 999999) a été dépassé !\n\n"
                                  "Le nombre de PO n'a donc pas été modifié");
+    else if (value < -999999)
+        QMessageBox::information(pb, "Information",
+                                 "ATTENTION :\nLe nombre minimal de PO (= -999999) a été dépassé !\n\n"
+                                 "Le nombre de PO n'a donc pas été modifié");
     else
         m_or = value;
 
@@ -41,6 +45,10 @@ void Richesses::setArgent(int value)
         QMessageBox::information(pb, "Information",
                                  "ATTENTION :\nLe nombre maximum de PA (= 999999) a été dépassé !\n\n"
                                  "Le nombre de PA n'a donc pas été modifié");
+    else if (value < -999999)
+        QMessageBox::information(pb, "Information",
+                                 "ATTENTION :\nLe nombre minimal de PA (= -999999) a été dépassé !\n\n"
+                                 "Le nombre de PA n'a donc pas été modifié");
     else
         m_argent = value;
 
@@ -51,6 +59,10 @@ void Richesses::setCuivre(int value)
     if (value > 999999)
         QMessageBox::information(pb, "Information",
                                  "ATTENTION :\nLe nombre maximum de PC (= 999999) a été dépassé !\n\n"
+                                 "Le nombre de PC n'a donc pas été modifié");
+    else if (value < -999999)
+        QMessageBox::information(pb, "Information",
+                                 "ATTENTION :\nLe nombre minimal de PC (= -999999) a été dépassé !\n\n"
                                  "Le nombre de PC n'a donc pas été modifié");
     else
         m_cuivre = value;

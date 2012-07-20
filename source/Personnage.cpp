@@ -8,6 +8,7 @@ Personnage::Personnage(QString fichier)
 {
     ui->setupUi(this);
     chargerPerso();
+    setNiveau();
     setAffichage();
 }
 Personnage::~Personnage()
@@ -23,14 +24,12 @@ void Personnage::setAffichage()
     ui->origine->setText(m_origine);
     ui->metier->setText(m_metier);
 
-    ui->lvl->setText("A faire !!!");
+    ui->lvl->setText(QString::number(m_niveau));
     ui->xp->setText(QString::number(m_experience));
     ui->destin->setText(QString::number(m_ptsDestin));
 
 // Richesses
-    ui->po->setText(QString::number(m_richesses->getOr()));
-    ui->pa->setText(QString::number(m_richesses->getArgent()));
-    ui->pc->setText(QString::number(m_richesses->getCuivre()));
+    rafraichirRichesses();
 
 // Caractéristiques
     ui->ev->setText(QString::number(m_EV));
@@ -325,6 +324,62 @@ void Personnage::viderVariables()
 
     for (int lecteur = 0; lecteur < MAX_FLECHE; lecteur++)
         m_fleches[lecteur] = 0;
+}
+void Personnage::rafraichirRichesses()
+{
+// PO
+    ui->po->setText(QString::number(m_richesses->getOr()));
+    if (m_richesses->getOr() == -999999)
+    {
+        ui->poMoins->setEnabled(false);
+        ui->poPlus->setEnabled(true);
+    }
+    else if (m_richesses->getOr() == 999999)
+    {
+        ui->poMoins->setEnabled(true);
+        ui->poPlus->setEnabled(false);
+    }
+    else
+    {
+        ui->poMoins->setEnabled(true);
+        ui->poPlus->setEnabled(true);
+    }
+
+// PA
+    ui->pa->setText(QString::number(m_richesses->getArgent()));
+    if (m_richesses->getArgent() == -999999)
+    {
+        ui->paMoins->setEnabled(false);
+        ui->paPlus->setEnabled(true);
+    }
+    else if (m_richesses->getArgent() == 999999)
+    {
+        ui->paMoins->setEnabled(true);
+        ui->paPlus->setEnabled(false);
+    }
+    else
+    {
+        ui->paMoins->setEnabled(true);
+        ui->paPlus->setEnabled(true);
+    }
+
+// PC
+    ui->pc->setText(QString::number(m_richesses->getCuivre()));
+    if (m_richesses->getCuivre() == -999999)
+    {
+        ui->pcMoins->setEnabled(false);
+        ui->pcPlus->setEnabled(true);
+    }
+    else if (m_richesses->getCuivre() == 999999)
+    {
+        ui->pcMoins->setEnabled(true);
+        ui->pcPlus->setEnabled(false);
+    }
+    else
+    {
+        ui->pcMoins->setEnabled(true);
+        ui->pcPlus->setEnabled(true);
+    }
 }
 
 Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLigne)
@@ -862,6 +917,506 @@ void Personnage::enregistrerPerso()
     m_fichierPerso->close();
 }
 
+bool Personnage::setNiveau()
+{
+    int niveauAncien = m_niveau;
+
+    if (m_experience == 0 || m_experience < 100)
+    {
+        m_niveau = 1;
+    }
+    else if (m_experience == 100 || m_experience < 300)
+    {
+        m_niveau = 2;
+    }
+    else if (m_experience == 300 || m_experience < 600)
+    {
+        m_niveau = 3;
+    }
+    else if (m_experience == 600 || m_experience < 1000)
+    {
+        m_niveau = 4;
+    }
+    else if (m_experience == 1000 || m_experience < 1500)
+    {
+        m_niveau = 5;
+    }
+    else if (m_experience == 1500 || m_experience < 2100)
+    {
+        m_niveau = 6;
+    }
+    else if (m_experience == 2100 || m_experience < 2800)
+    {
+        m_niveau = 7;
+    }
+    else if (m_experience == 2800 || m_experience < 3600)
+    {
+        m_niveau = 8;
+    }
+    else if (m_experience == 3600 || m_experience < 4500)
+    {
+        m_niveau = 9;
+    }
+    else if (m_experience == 4500 || m_experience < 5500)
+    {
+        m_niveau = 10;
+    }
+    else if (m_experience == 5500 || m_experience < 6600)
+    {
+        m_niveau = 11;
+    }
+    else if (m_experience == 6600 || m_experience < 7800)
+    {
+        m_niveau = 12;
+    }
+    else if (m_experience == 7800 || m_experience < 9100)
+    {
+        m_niveau = 13;
+    }
+    else if (m_experience == 9100 || m_experience < 10500)
+    {
+        m_niveau = 14;
+    }
+    else if (m_experience == 10500 || m_experience < 12000)
+    {
+        m_niveau = 15;
+    }
+    else if (m_experience == 12000 || m_experience < 13600)
+    {
+        m_niveau = 16;
+    }
+    else if (m_experience == 13600 || m_experience < 15300)
+    {
+        m_niveau = 17;
+    }
+    else if (m_experience == 15300 || m_experience < 17100)
+    {
+        m_niveau = 18;
+    }
+    else if (m_experience == 17100 || m_experience < 19000)
+    {
+        m_niveau = 19;
+    }
+    else if (m_experience == 19000 || m_experience < 21000)
+    {
+        m_niveau = 20;
+    }
+    else if (m_experience == 21000 || m_experience < 24000)
+    {
+        m_niveau = 21;
+    }
+    else if (m_experience == 24000 || m_experience < 29000)
+    {
+        m_niveau = 22;
+    }
+    else if (m_experience == 29000 || m_experience < 35000)
+    {
+        m_niveau = 23;
+    }
+    else if (m_experience == 35000 || m_experience < 45000)
+    {
+        m_niveau = 24;
+    }
+    else if (m_experience == 45000 || m_experience < 60000)
+    {
+        m_niveau = 25;
+    }
+    else if (m_experience >= 6000)
+    {
+        m_niveau = 26;
+    }
+
+    ui->lvl->setText(QString::number(m_niveau));
+
+    // Si le niveau est modifié, on renvoie 'true'
+    if (niveauAncien != m_niveau)
+        return true;
+    else
+        return false;
+}
+
+// Slots perso
+void Personnage::ajouterXP(int value)
+{
+    if (value == 0)
+    {
+        bool ok(false);
+
+        int XP_EnPlus = QInputDialog::getInteger(ui->nom, "Ajouter de l'expérience", "Ajouter de l'expérience à " + m_nom, 1, 1, 999999, 1, &ok);
+
+        if (ok)
+        {
+            m_experience += XP_EnPlus;
+
+            log(m_nom + " gagne de l'expérience : " + QString::number(XP_EnPlus) + " point(s) !");
+        }
+    }
+    else
+    {
+        m_experience += value;
+
+        log(m_nom + " gagne de l'expérience : " + QString::number(value) + " point(s) !");
+    }
+
+    if (setNiveau())
+    {
+    // On informe le MJ que le perso a gagné un niveau
+        QString D;
+        QMessageBox::information(this, "Niveau", m_nom + " a gagné un niveau, nous allons voir les modifications...");
+        log(m_nom + "a gagné un niveau ! Les modifications faites en raison de ce nouveau niveau sont citées en dessous...");
+
+
+    // On demande de quelle type est l'origine pour l'ajout d'EV
+        QStringList D6_D4;
+        D6_D4 << "D6" << "D4";
+        D = QInputDialog::getItem(this, m_nom + " -> Passage d'un niveau -> EV",
+                                  "De quel type de dé l'origine de ce personnage a besoin pour l'ajout d'EV ?",
+                                  D6_D4);
+        int ev;
+        if (D == "D6")
+        {
+            ev = QInputDialog::getInt(this, m_nom + " -> Passage d'un niveau -> EV",
+                                      "Quel score le D6 indique-t-il ?", 1, 1, 6);
+            m_EV += ev;
+            QMessageBox::information(this, "Information sur l'EV de " + m_nom,
+                                     "Ce personnage gagne " + QString::number(ev) + " point(s) d'EV en plus");
+            log(m_nom + " gagne " + QString::number(ev) + " point(s) d'EV en plus à cause de son nouveau niveau.");
+        }
+        else if (D == "D4")
+        {
+            ev = QInputDialog::getInt(this, m_nom + " -> Passage d'un niveau -> EV",
+                                      "Quel score le D4 indique-t-il ?", 1, 1, 4);
+            m_EV += ev;
+            QMessageBox::information(this, "Information sur l'EV de " + m_nom,
+                                     "Ce personnage gagne " + QString::number(ev) + " point(s) d'EV en plus");
+            log(m_nom + " gagne " + QString::number(ev) + " point(s) d'EV en plus à cause de son nouveau niveau.");
+        }
+
+
+    // Si le perso est un sorcier il peut recevoir de l'EA en plus
+        if (m_presenceEA)
+        {
+            int ea = QInputDialog::getInt(this, m_nom + " -> Passage d'un niveau -> EA",
+                                          "EA -> Quel score le D6 indique-t-il ?", 1, 1, 6);
+            m_EA += ea;
+            QMessageBox::information(this, "Information sur l'EA de " + m_nom,
+                                     "Ce personnage gagne " + QString::number(ea) + " point(s) d'EA en plus");
+
+            log(m_nom + " gagne " + QString::number(ea) + " point(s) d'EA en plus à cause de son nouveau niveau.");
+        }
+
+
+    // Ajout de  pt sur une carac au choix du joueur
+        QStringList carac;
+        if (m_carac->getCourage() < 18)
+            carac << "COU (" + QString::number(m_carac->getCourage()) + ")";
+        if (m_carac->getIntelligence() < 18)
+            carac << "INT (" + QString::number(m_carac->getIntelligence()) + ")";
+        if (m_carac->getAdresse() < 18)
+            carac << "AD (" + QString::number(m_carac->getAdresse()) + ")";
+        if (m_carac->getForce() < 18)
+            carac << "FO (" + QString::number(m_carac->getForce()) + ")";
+        D = QInputDialog::getItem(this, m_nom + " -> Passage d'un niveau -> Caractéristiques",
+                                  "Ce personnage a droit à un point en plus sur les caractéristiques suivantes.\n"
+                                  "Choisissez en une !",
+                                  carac);
+        if (D == "COU (" + QString::number(m_carac->getCourage()) + ")")
+        {
+            if (m_carac->getCourage() <= 18)
+            {
+                QMessageBox::information(this, "Information sur le COU de " + m_nom,
+                                         "Ce personnage gagne 1 point de COU en plus, en raison de son nouveau niveau");
+                m_carac->setCourage(m_carac->getCourage() + 1);
+                log(m_nom + " gagne 1 point de COU à cause de son nouveau niveau.");
+            }
+            else
+                QMessageBox::information(this, "Information sur le COU de " + m_nom,
+                                         m_nom + " était censé gagner un point de COU en raison de son nouveau niveau\n"
+                                         "mais il est déjà au maximum possible : 18 points.");
+        }
+        else if (D == "INT (" + QString::number(m_carac->getIntelligence()) + ")")
+        {
+            if (m_carac->getIntelligence() <= 18)
+            {
+                QMessageBox::information(this, "Information sur l'INT de " + m_nom,
+                                         "Ce personnage gagne 1 point d'INT en plus en raison de son nouveau niveau.");
+                m_carac->setIntelligence(m_carac->getIntelligence() + 1);
+                log(m_nom + " gagne 1 point d'INT à cause de son nouveau niveau.");
+            }
+            else
+                QMessageBox::information(this, "Information sur l'INT de " + m_nom,
+                                         m_nom + " était censé gagner un point d'INT en raison de son nouveau niveau\n"
+                                         "mais il est déjà au maximum possible : 18 points.");
+        }
+        else if (D == "AD (" + QString::number(m_carac->getAdresse()) + ")")
+        {
+            if (m_carac->getAdresse() <= 18)
+            {
+                QMessageBox::information(this, "Information sur l'AD de " + m_nom,
+                                         "Ce personnage gagne 1 point d'AD en plus en raison de son nouveau niveau.");
+                m_carac->setAdresse(m_carac->getAdresse() + 1);
+                log(m_nom + " gagne 1 point d'AD à cause de son nouveau niveau.");
+            }
+            else
+                QMessageBox::information(this, "Information sur l'AD de " + m_nom,
+                                         m_nom + " était censé gagner un point d'AD en raison de son nouveau niveau\n"
+                                         "mais il est déjà au maximum possible : 18 points.");
+        }
+        else if (D == "FO (" + QString::number(m_carac->getForce()) + ")")
+        {
+            if (m_carac->getForce() <= 18)
+            {
+                QMessageBox::information(this, "Information sur la FO de " + m_nom,
+                                         "Ce personnage gagne 1 point de FO en plus, en raison de son nouveau niveau");
+                m_carac->setForce(m_carac->getForce() + 1);
+                log(m_nom + " gagne 1 point de FO à cause de son nouveau niveau.");
+            }
+            else
+                QMessageBox::information(this, "Information sur la FO de " + m_nom,
+                                         m_nom + " était censé gagner un point de FO en raison de son nouveau niveau\n"
+                                         "mais il est déjà au maximum possible : 18 points.");
+        }
+
+
+    // si le joueur peut gagner un point de CHA
+        if (m_origine == "Elfe Sylvain" || m_origine == "Haut-elfe")
+        {
+            if (m_carac->getCharisme() <= 18)
+            {
+                QMessageBox::information(this, "Information sur le CHA de " + m_nom,
+                                         "Ce personnage gagne 1 point de CHA en plus, en raison de son origine et de son nouveau niveau");
+                m_carac->setCharisme(m_carac->getCharisme() + 1);
+                log(m_nom + " gagne 1 point de CHA à cause de son nouveau niveau et de son origine.");
+            }
+            else
+                QMessageBox::information(this, "Information sur le CHA de " + m_nom,
+                                         m_nom + " était censé gagner un point de CHA en raison de son origine et de son nouveau niveau\n"
+                                         "mais il est déjà au maximum possible : 18 points.");
+        }
+
+
+    // Ajout de points sur l'attaque ou la parade
+        if (m_carac->getAttaque() < 18 && m_carac->getParade() < 17)
+        {
+            QStringList At_Prd;
+            At_Prd << "AT (" + QString::number(m_carac->getAttaque()) + ")"
+                   << "PRD (" + QString::number(m_carac->getParade()) + ")";
+            D = QInputDialog::getItem(this, m_nom + " -> Passage d'un niveau -> AT / PRD",
+                                      "Ce personnage a droit à un point en plus sur les caractéristiques suivantes.\n"
+                                      "Choisissez en une !",
+                                      At_Prd);
+            if (D == "AT (" + QString::number(m_carac->getAttaque()) + ")")
+            {
+                QMessageBox::information(this, "Gain d'un point d'AT",
+                                         m_nom + " gagne un point d'AT en raison de son nouveau niveau.");
+                log(m_nom + "gagne un point d'AT en raison de son nouveau niveau");
+                m_carac->setAttaque(m_carac->getAttaque() + 1);
+            }
+            else if (D == "PRD (" + QString::number(m_carac->getParade()) + ")")
+            {
+                QMessageBox::information(this, "Gain d'un point de PRD",
+                                         m_nom + " gagne un point de PRD en raison de son nouveau niveau.");
+                log(m_nom + "gagne un point de PRD en raison de son nouveau niveau");
+                m_carac->setParade(m_carac->getParade() + 1);
+            }
+        }
+        else if (m_carac->getAttaque() < 18 && m_carac->getParade() == 17)
+        {
+            QMessageBox::information(this, "Gain d'un point d'AT",
+                                     m_nom + " gagne un point d'AT car il passe un niveau !");
+            log(m_nom + "gagne un point d'AT en raison de son nouveau niveau");
+            m_carac->setAttaque(m_carac->getAttaque() + 1);
+        }
+        else if (m_carac->getAttaque() == 18 && m_carac->getParade() < 17)
+        {
+            QMessageBox::information(this, "Gain d'un point de PRD",
+                                     m_nom + " gagne un point de PRD car il passe un niveau !");
+            log(m_nom + "gagne un point de PRD en raison de son nouveau niveau");
+            m_carac->setParade(m_carac->getParade() + 1);
+        }
+
+    // Autres modifications
+        if (m_niveau == 3)
+        {
+            QMessageBox::information(this, "Choix d'une compétence supplémentaire",
+                                     m_nom + " doit choisir une compétence supplémentaire.");
+        }
+        else if (m_niveau == 5 && m_presenceEA)
+        {
+            QMessageBox::information(this, "Choix d'une spécialisation supplémentaire",
+                                     m_nom + " doit choisir une spécialisation supplémentaire");
+        }
+        else if (m_niveau == 6)
+        {
+            QMessageBox::information(this, "Choix d'une compétence supplémentaire",
+                                     m_nom + " doit choisir une compétence supplémentaire.");
+        }
+        else if (m_niveau == 10)
+        {
+            QMessageBox::information(this, "Choix d'une compétence supplémentaire",
+                                     m_nom + " doit choisir une compétence supplémentaire.");
+        }
+        else if (m_niveau == 15 && m_presenceEA)
+        {
+            QMessageBox::information(this, "Choix d'une spécialisation supplémentaire",
+                                     m_nom + " doit choisir une spécialisation supplémentaire");
+        }
+    }
+}
+
+void Personnage::ajouterPO(int value)
+{
+    if (value == 0)
+    {
+        bool ok(false);
+
+        int value = QInputDialog::getInteger(this,
+                                             "Ajouter des PO",
+                                             "Ajouter des Pièces d'Or à " + m_nom,
+                                             1, 0, 999999 - m_richesses->getOr(), 1, &ok);
+
+        if (ok)
+        {
+            m_richesses->setOr(m_richesses->getOr() + value);
+            log(m_nom + " gagne " + QString::number(value) + " PO ; nouveau solde : " + QString::number(m_richesses->getOr()) + " PO.");
+        }
+    }
+    else
+    {
+        m_richesses->setOr(m_richesses->getOr() + value);
+        log(m_nom + " gagne " + QString::number(value) + " PO ; nouveau solde : " + QString::number(m_richesses->getOr()) + " PO.");
+    }
+
+    rafraichirRichesses();
+}
+void Personnage::retirerPO(int value)
+{
+    if (value == 0)
+    {
+        bool ok(false);
+
+        int value = QInputDialog::getInteger(this,
+                                             "Retirer des PO",
+                                             "Retirer des Pièces d'Or à " + m_nom,
+                                             1, 0, 1999998 - m_richesses->getOr(), 1, &ok);
+
+        if (ok)
+        {
+            m_richesses->setOr(m_richesses->getOr() - value);
+            log(m_nom + " perd " + QString::number(value) + " PO ; nouveau solde : " + QString::number(m_richesses->getOr()) + " PO.");
+        }
+    }
+    else
+    {
+        m_richesses->setOr(m_richesses->getOr() - value);
+        log(m_nom + " perd " + QString::number(value) + " PO ; nouveau solde : " + QString::number(m_richesses->getOr()) + " PO.");
+    }
+
+    rafraichirRichesses();
+}
+void Personnage::ajouterPA(int value)
+{
+    if (value == 0)
+    {
+        bool ok(false);
+
+        int value = QInputDialog::getInteger(this,
+                                             "Ajouter des PA",
+                                             "Ajouter des Pièces d'Argent à " + m_nom,
+                                             1, 0, 999999 - m_richesses->getArgent(), 1, &ok);
+
+        if (ok)
+        {
+            m_richesses->setArgent(m_richesses->getArgent() - value);
+            log(m_nom + " gagne " + QString::number(value) + " PA ; nouveau solde : " + QString::number(m_richesses->getArgent()) + " PA.");
+        }
+    }
+    else
+    {
+        m_richesses->setArgent(m_richesses->getArgent() - value);
+        log(m_nom + " gagne " + QString::number(value) + " PA ; nouveau solde : " + QString::number(m_richesses->getArgent()) + " PA.");
+    }
+
+    rafraichirRichesses();
+}
+void Personnage::retirerPA(int value)
+{
+    if (value == 0)
+    {
+        bool ok(false);
+
+        int value = QInputDialog::getInteger(this,
+                                             "Retirer des PA",
+                                             "Retirer des Pièces d'Argent à " + m_nom,
+                                             1, 0, 1999998 - m_richesses->getArgent(), 1, &ok);
+
+        if (ok)
+        {
+            m_richesses->setArgent(m_richesses->getArgent() - value);
+            log(m_nom + " perd " + QString::number(value) + " PA ; nouveau solde : " + QString::number(m_richesses->getArgent()) + " PA.");
+        }
+    }
+    else
+    {
+        m_richesses->setArgent(m_richesses->getArgent() - value);
+        log(m_nom + " perd " + QString::number(value) + " PA ; nouveau solde : " + QString::number(m_richesses->getArgent()) + " PA.");
+    }
+
+    rafraichirRichesses();
+}
+void Personnage::ajouterPC(int value)
+{
+    if (value == 0)
+    {
+        bool ok(false);
+
+        int value = QInputDialog::getInteger(this,
+                                             "Ajouter des PC",
+                                             "Ajouter des Pièces de Cuivre à " + m_nom,
+                                             1, 0, 999999 - m_richesses->getCuivre(), 1, &ok);
+
+        if (ok)
+        {
+            m_richesses->setCuivre(m_richesses->getCuivre() + value);
+            log(m_nom + " gagne " + QString::number(value) + " PC ; nouveau solde : " + QString::number(m_richesses->getCuivre()) + " PC.");
+        }
+    }
+    else
+    {
+        m_richesses->setCuivre(m_richesses->getCuivre() + value);
+        log(m_nom + " gagne " + QString::number(value) + " PC ; nouveau solde : " + QString::number(m_richesses->getCuivre()) + " PC.");
+    }
+
+    rafraichirRichesses();
+}
+void Personnage::retirerPC(int value)
+{
+    if (value == 0)
+    {
+        bool ok(false);
+
+        int value = QInputDialog::getInteger(this,
+                                             "Retirer des PC",
+                                             "Retirer des Pièces de Cuivre à " + m_nom,
+                                             1, 1, 1999998 - m_richesses->getCuivre(), 1, &ok);
+
+        if (ok)
+        {
+            m_richesses->setCuivre(m_richesses->getCuivre() - value);
+            log(m_nom + " perd " + QString::number(value) + " PC ; nouveau solde : " + QString::number(m_richesses->getCuivre()) + " PC.");
+        }
+    }
+    else
+    {
+        m_richesses->setCuivre(m_richesses->getCuivre() - value);
+        log(m_nom + " perd " + QString::number(value) + " PC ; nouveau solde : " + QString::number(m_richesses->getCuivre()) + " PC.");
+    }
+
+    rafraichirRichesses();
+}
+
+
+// Slots automatiques de Qt
 void Personnage::on_nomEdit_clicked(bool checked)
 {
     if (!checked)
@@ -879,4 +1434,75 @@ void Personnage::on_sexeEdit_clicked(bool checked)
         ui->sexe->setText(m_sexe);
 
     ui->sexe->setEnabled(checked);
+}
+void Personnage::on_xpPlus_clicked()
+{
+    ajouterXP();
+}
+void Personnage::on_destinMoins_clicked()
+{
+    if (m_ptsDestin > 1)
+    {
+        m_ptsDestin--;
+        ui->destin->setText(QString::number(m_ptsDestin));
+
+        log(m_nom + " perd 1 point de destin");
+    }
+    else if (m_ptsDestin == 1)
+    {
+        m_ptsDestin--;
+        ui->destin->setText(QString::number(m_ptsDestin));
+        ui->destinMoins->setEnabled(false);
+
+        log(m_nom + " perd 1 point de destin");
+    }
+    else
+        QMessageBox::information(this, "Erreur !",
+                                 m_nom + " ne peut pas perdre de points de destin : il n'en a déjà plus !");
+}
+
+void Personnage::on_poPlus_clicked()
+{
+    ajouterPO();
+}
+void Personnage::on_poMoins_clicked()
+{
+    retirerPO();
+}
+void Personnage::on_paPlus_clicked()
+{
+    ajouterPA();
+}
+void Personnage::on_paMoins_clicked()
+{
+    retirerPA();
+}
+void Personnage::on_pcPlus_clicked()
+{
+    ajouterPC();
+}
+void Personnage::on_pcMoins_clicked()
+{
+    retirerPC();
+}
+
+void Personnage::on_conversionPA_et_PC_en_PO_clicked()
+{
+    m_richesses->convertir(Richesses::PA_PC_en_PO);
+    rafraichirRichesses();
+}
+void Personnage::on_conversionPO_en_PA_clicked()
+{
+    m_richesses->convertir(Richesses::PO_en_PA);
+    rafraichirRichesses();
+}
+void Personnage::on_conversionPO_en_PC_clicked()
+{
+    m_richesses->convertir(Richesses::PO_en_PC);
+    rafraichirRichesses();
+}
+void Personnage::on_conversionPA_en_PC_clicked()
+{
+    m_richesses->convertir(Richesses::PA_en_PC);
+    rafraichirRichesses();
 }

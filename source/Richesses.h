@@ -36,7 +36,10 @@
 
         enum conversion
         {
-            PO_en_PA, PO_en_PC, PA_en_PC, PA_PC_en_PO
+            PO_en_PA,
+            PO_en_PC,
+            PA_en_PC,
+            PA_PC_en_PO
         };
         void convertir(conversion convert);
 

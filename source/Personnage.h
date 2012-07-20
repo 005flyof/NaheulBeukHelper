@@ -26,18 +26,50 @@
         void chargerPerso();
         void enregistrerPerso();
 
+    public slots:
+        void ajouterXP(int value = 0);
+        void ajouterPO(int value = 0);
+        void retirerPO(int value = 0);
+        void ajouterPA(int value = 0);
+        void retirerPA(int value = 0);
+        void ajouterPC(int value = 0);
+        void retirerPC(int value = 0);
+
     private slots:
+        // Informations générales
         void on_nomEdit_clicked(bool checked);
         void on_sexeEdit_clicked(bool checked);
+
+        void on_xpPlus_clicked();
+        void on_destinMoins_clicked();
+
+        // Richesses
+        void on_poPlus_clicked();
+        void on_poMoins_clicked();
+        void on_paPlus_clicked();
+        void on_paMoins_clicked();
+        void on_pcPlus_clicked();
+        void on_pcMoins_clicked();
+
+        void on_conversionPA_et_PC_en_PO_clicked();
+        void on_conversionPO_en_PA_clicked();
+        void on_conversionPO_en_PC_clicked();
+        void on_conversionPA_en_PC_clicked();
+
+        // Caractéristiques
 
     private:
         Ui::Personnage *ui;
 
-        // Fonctions
+    // Fonctions
+        bool setNiveau();
         void setAffichage();
         Caracteristiques chargerCarac(QString ligne, bool AT_PRD, int numLigne);
         void viderVariables();
 
+        void rafraichirRichesses();
+
+    // Variables
         // Pour le programme
         QFile *m_fichierPerso;
         QString m_cheminEnregistrement;

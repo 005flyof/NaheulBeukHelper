@@ -32,7 +32,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>-2668</y>
+     <y>-381</y>
      <width>881</width>
      <height>3170</height>
     </rect>
@@ -2997,6 +2997,36 @@ p, li { white-space: pre-wrap; }
           <string>+</string>
          </property>
         </widget>
+       </item>
+       <item row="18" column="1" colspan="8">
+        <widget class="QPushButton" name="remiseAZero">
+         <property name="toolTip">
+          <string>Lorsque le bouton est enfoncé, les caractéristiques modifiées sont calculées automatiquement en fonction des bonus et malus des équipements.
+Lorsqu'il n'est pas enfoncé, les caractéristiques modifiées ne sont plus calculés automatiquement.</string>
+         </property>
+         <property name="text">
+          <string>Caractéristiques modifiées synchronisées avec les caractéristiques initiales</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="17" column="1" colspan="8">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>
