@@ -57,14 +57,25 @@
         void on_conversionPA_en_PC_clicked();
 
         // Caractéristiques
+        void on_equipsEdit_1_clicked(bool checked);
+        void on_equipsEdit_2_clicked(bool checked);
+        void on_equipsEdit_3_clicked(bool checked);
+        void on_equipsEdit_4_clicked(bool checked);
+        void on_equipsEdit_5_clicked(bool checked);
+        void on_equipsEdit_6_clicked(bool checked);
+        void on_equipsEdit_7_clicked(bool checked);
+        void on_equipsEdit_8_clicked(bool checked);
+        void on_equipsEdit_9_clicked(bool checked);
+        void on_equipsEdit_10_clicked(bool checked);
 
     private:
         Ui::Personnage *ui;
 
     // Fonctions
+        Caracteristiques chargerCarac(QString ligne, bool AT_PRD, int numLigne);
+
         bool setNiveau();
         void setAffichage();
-        Caracteristiques chargerCarac(QString ligne, bool AT_PRD, int numLigne);
         void viderVariables();
 
         void rafraichirRichesses();

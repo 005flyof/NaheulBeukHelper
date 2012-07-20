@@ -1417,6 +1417,7 @@ void Personnage::retirerPC(int value)
 
 
 // Slots automatiques de Qt
+// Informations générales
 void Personnage::on_nomEdit_clicked(bool checked)
 {
     if (!checked)
@@ -1461,6 +1462,7 @@ void Personnage::on_destinMoins_clicked()
                                  m_nom + " ne peut pas perdre de points de destin : il n'en a déjà plus !");
 }
 
+// Richesses
 void Personnage::on_poPlus_clicked()
 {
     ajouterPO();
@@ -1505,4 +1507,96 @@ void Personnage::on_conversionPA_en_PC_clicked()
 {
     m_richesses->convertir(Richesses::PA_en_PC);
     rafraichirRichesses();
+}
+
+// Equipements
+void Personnage::on_equipsEdit_1_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[0] = ui->equips_1->toPlainText();
+    else
+        ui->equips_1->setPlainText(m_equipements[0]);
+
+    ui->equips_1->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_2_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[1] = ui->equips_2->toPlainText();
+    else
+        ui->equips_2->setPlainText(m_equipements[1]);
+
+    ui->equips_2->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_3_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[2] = ui->equips_3->toPlainText();
+    else
+        ui->equips_3->setPlainText(m_equipements[2]);
+
+    ui->equips_3->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_4_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[3] = ui->equips_4->toPlainText();
+    else
+        ui->equips_4->setPlainText(m_equipements[3]);
+
+    ui->equips_4->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_5_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[4] = ui->equips_5->toPlainText();
+    else
+        ui->equips_5->setPlainText(m_equipements[4]);
+
+    ui->equips_5->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_6_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[5] = ui->equips_6->toPlainText();
+    else
+        ui->equips_6->setPlainText(m_equipements[5]);
+
+    ui->equips_6->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_7_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[6] = ui->equips_7->toPlainText();
+    else
+        ui->equips_7->setPlainText(m_equipements[6]);
+
+    ui->equips_7->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_8_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[7] = ui->equips_8->toPlainText();
+    else
+        ui->equips_8->setPlainText(m_equipements[7]);
+
+    ui->equips_8->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_9_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[8] = ui->equips_9->toPlainText();
+    else
+        ui->equips_9->setPlainText(m_equipements[8]);
+
+    ui->equips_9->setReadOnly(!checked);
+}
+void Personnage::on_equipsEdit_10_clicked(bool checked)
+{
+    if (!checked)
+        m_equipements[9] = ui->equips_10->toPlainText();
+    else
+        ui->equips_10->setPlainText(m_equipements[9]);
+
+    ui->equips_10->setReadOnly(!checked);
 }
