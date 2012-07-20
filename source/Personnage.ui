@@ -32,7 +32,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>-1625</y>
+     <y>-960</y>
      <width>881</width>
      <height>3170</height>
     </rect>
@@ -3023,6 +3023,9 @@ Lorsqu'il n'est pas enfoncé, les caractéristiques modifiées ne sont plus calc
           <string>Caractéristiques modifiées synchronisées avec les caractéristiques initiales</string>
          </property>
          <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
           <bool>true</bool>
          </property>
         </widget>
