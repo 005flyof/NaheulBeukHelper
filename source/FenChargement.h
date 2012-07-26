@@ -2,10 +2,7 @@
     #define FENCHARGEMENT_H
 
     #include <QtGui>
-
-//#include "FenPrincipale.h"
-
-    #include "Personnage.h"
+    #include "FenPrincipale.h"
 
     namespace Ui {
         class FenChargement;
@@ -25,8 +22,8 @@
     private:
         Ui::FenChargement *ui;
 
-        /*FenPrincipale *fenetrePrincipale;
-        QMap<QString, Origine*> m_origines;
+        FenPrincipale *fenetrePrincipale;
+        /*QMap<QString, Origine*> m_origines;
         QMap<QString, Metier*> m_metiers;*/
     };
 

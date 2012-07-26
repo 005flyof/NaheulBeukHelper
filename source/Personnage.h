@@ -26,6 +26,13 @@
         void chargerPerso();
         void enregistrerPerso();
 
+        // Accesseurs
+        QString getNom() const;
+        bool getModif() const;
+
+    signals:
+        void persoModifie();
+
     public slots:
         void ajouterXP(int value = 0);
         void ajouterPO(int value = 0);
@@ -36,6 +43,8 @@
         void retirerPC(int value = 0);
 
     private slots:
+        void modifierPerso();
+
         // Informations générales
         void on_nomEdit_clicked(bool checked);
         void on_sexeEdit_clicked(bool checked);
@@ -84,6 +93,8 @@
         // Pour le programme
         QFile *m_fichierPerso;
         QString m_cheminEnregistrement;
+
+        bool modifNonRec;
 
         // Pour le jeu
         QString m_nom;

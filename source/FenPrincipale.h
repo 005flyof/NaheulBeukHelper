@@ -26,7 +26,6 @@
     #include "FenMAJ.h"
     #include "FenOrdreMarche.h"
     #include "FenAttaque.h"
-    #include "Monstre.h"
 
     class FenPrincipale : public QMainWindow
     {
@@ -37,27 +36,19 @@
 
     public slots:
         void creerNouveauPersonnage();
-        void creerNouveauPersonnage_close();
-        void creerNouveauPersonnage_Origine();
-        void creerNouveauPersonnage_Origine_close();
-        void creerNouveauPersonnage_Metier();
-        void creerNouveauPersonnage_Metier_close();
-        void creerNouveauPersonnage_Set();
         void creerNouveauGroupe();
         void ajouterPersonnage();
-        void ajouterPersonnage_Save();
         void ouvrir();
         void enregistrerTout();
         void fermerGroupe();
         void fermerOnglets();
-        void quitterNBH();
 
         void modeAttaque();
         void modePassif();
 
         void attaquer();
 
-        void xp();
+        /*void xp();
         void PO();
         void PA();
         void PC();
@@ -65,13 +56,13 @@
         void pa();
         void pc();
 
-        void ATPRD();
+        /*void ATPRD();
         void INT();
         void CHA();
         void FO();
         void COU();
         void EV();
-        void EA();
+        void EA();*/
 
         void afficherFichier(bool affiche);
         void afficherAction(bool affiche);
@@ -82,7 +73,8 @@
         void MAJ();
         void help();
 
-        bool testOuverture(QString const& cheminFichier);
+    private slots:
+        void persoModifie();
 
     protected:
         void closeEvent(QCloseEvent *e);
@@ -90,6 +82,8 @@
     private:
         void initMenus_ToolBars();
         void initWidget();
+
+        void enregistrerNotes();
 
         // ToolBars
         QToolBar *fichierToolBar;
@@ -123,75 +117,26 @@
         QAction *afficher_action;
         QAction *afficher_achat;
 
-        // Pour les blagues
-        QPushButton *merci, *ohNon;
-
-        // Nécessaire partout
-        QString noteAdresse;
+    // Pour le programme
+        QVector<Personnage*> m_personnages;
+        // Pour le groupe
+        QFile *m_fichierGroupe;
+        // Pour les notes
+        QFile *m_fichierNotes;
         QTextEdit *notes_txt;
-        QTabWidget *monstres;
+        // Docks
         FenOrdreMarche *ordreMarche;
         FenAttaque *attaque_fen;
         QDockWidget *attaque_dock;
 
+        ///////////////////////////////////////////////////
         int compteurOnglets;
         QMdiArea *zoneCentrale;
         QStatusBar *statusBar;
             QProgressBar *progressBar_status;
 
-        QMap<QString, Personnage> tableauDePersonnages;
         QList<QString> fichiersOuverts;
         QStringList nomPersoOuverts;
-
-        QSpacerItem *spacer[NB_SPACER_FENPRINCIPALE];
-
-        // Pour la création d'un nouveau personnage
-        QDialog *nouveau_fenetre, *nouveau_fenetre2, *nouveau_fenetre3;
-
-        QMap<QString, Origine*> tableauDOrigines;
-        QVector<QRadioButton*> tableauDeRadioButton_Origine;
-
-        QVector<Metier*> tableauDeMetiers;
-        QVector<QRadioButton*> tableauDeRadioButton_Metier;
-
-        QLineEdit *nouveau_nom;
-        QLineEdit *nouveau_sexe;
-
-        QSpinBox *nouveau_ptsDestin;
-        QSpinBox *nouveau_PO;
-
-        QSpinBox *nouveau_COU;
-        QSpinBox *nouveau_INT;
-        QSpinBox *nouveau_CHA;
-        QSpinBox *nouveau_AD;
-        QSpinBox *nouveau_FO;
-
-        // Pour ajouter un personnage
-        QDialog *ajouter_fenetre;
-
-        QLineEdit *ajouter_nom;
-        QLineEdit *ajouter_sexe;
-        QLineEdit *ajouter_origineNom;
-        QLineEdit *ajouter_metierNom;
-
-        QSpinBox *ajouter_COU;
-        QSpinBox *ajouter_INT;
-        QSpinBox *ajouter_CHA;
-        QSpinBox *ajouter_AD;
-        QSpinBox *ajouter_FO;
-        QSpinBox *ajouter_AT;
-        QSpinBox *ajouter_PRD;
-
-        QSpinBox *ajouter_XP;
-        QSpinBox *ajouter_ptsDestin;
-
-        QSpinBox *ajouter_EV;
-        QSpinBox *ajouter_EA;
-        QLineEdit *ajouter_EA_type;
-
-        QSpinBox *ajouter_PO;
-        QSpinBox *ajouter_PA;
-        QSpinBox *ajouter_PC;
     };
 
     class MdiSubWindow : public QMdiSubWindow

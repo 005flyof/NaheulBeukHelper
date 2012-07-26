@@ -25,18 +25,22 @@
                    "Merci d'utiliser ce programme !\n\n" \
                    "	------------\n\n" \
                    "Pour commencer :\n" \
-                      "* créer un groupe\n" \
-                      "* créer / ajouter un personnage au groupe créé\n" \
-                      "* ouvrir le groupe\n" \
+                      "* créez un groupe\n" \
+                      "* créez / ajouter un personnage au groupe créé\n" \
+                      "* ouvrez le groupe\n" \
                       "* enjoy the features of this program !!!\n\n" \
                    "	------------\n\n" \
                    "Vous utilisez la version " VERSION " de ce programme.\n" \
-                   "Ce programme est développé en C++ avec QtCreator, par Florent Fayollas.\n"
+                   "Ce programme est développé en C++ avec QtCreator, par Florent Fayollas.\n" \
+                   "NaheulBeuk Helper utilise la bibliothèque Qt développée par Nokia."
 
 using namespace std;
 
 // Fenêtre principale
-FenPrincipale::FenPrincipale() : QMainWindow(), compteurOnglets(0)
+FenPrincipale::FenPrincipale() :
+    QMainWindow(),
+    m_fichierGroupe(0), m_fichierNotes(0),
+    compteurOnglets(0)
 {
 // On s'occupe de la fenêtre
     setWindowTitle("NBH     --     NaheulBeuk Helper");
@@ -253,7 +257,7 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(ouvrirPersos, SIGNAL(triggered()), this, SLOT(ouvrir()));
     QObject::connect(enregistrer, SIGNAL(triggered()), this, SLOT(enregistrerTout()));
     QObject::connect(quitterGroupe, SIGNAL(triggered()), this, SLOT(fermerGroupe()));
-    QObject::connect(quitter, SIGNAL(triggered()), this, SLOT(quitterNBH()));
+    QObject::connect(quitter, SIGNAL(triggered()), this, SLOT(close()));
 
     QObject::connect(attaque, SIGNAL(triggered()), this, SLOT(modeAttaque()));
     QObject::connect(passif, SIGNAL(triggered()), this, SLOT(modePassif()));
@@ -419,380 +423,7 @@ FenPrincipale::~FenPrincipale()
 
 // Fenêtre de création des personnages
 void FenPrincipale::creerNouveauPersonnage()
-{
-    progressBar_status = new QProgressBar();
-    statusBar->addWidget(progressBar_status);
-
-    int lecteur_spacer(0);
-    for (int i = 0; i < NB_SPACER_FENPRINCIPALE; i++)
-        spacer[i] = new QSpacerItem(30, 10);
-
-    nouveau_fenetre = new QDialog(this, Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
-    nouveau_fenetre->setWindowTitle("Créer un personnage -> informations génériques");
-    nouveau_fenetre->setModal(true);
-    setIcone(nouveau_fenetre);
-
-// On rempli la fenêtre
-    nouveau_nom = new QLineEdit;
-    nouveau_sexe = new QLineEdit;
-
-    nouveau_ptsDestin = new QSpinBox;
-        nouveau_ptsDestin->setMinimum(0);
-        nouveau_ptsDestin->setMaximum(3);
-        nouveau_ptsDestin->setSingleStep(1);
-
-    nouveau_PO = new QSpinBox;
-        nouveau_PO->setMinimum(20);
-        nouveau_PO->setMaximum(120);
-        nouveau_PO->setSingleStep(10);
-
-    nouveau_COU = new QSpinBox;
-        nouveau_COU->setMinimum(8);
-        nouveau_COU->setMaximum(13);
-        nouveau_COU->setSingleStep(1);
-    nouveau_INT = new QSpinBox;
-        nouveau_INT->setMinimum(8);
-        nouveau_INT->setMaximum(13);
-        nouveau_INT->setSingleStep(1);
-    nouveau_CHA = new QSpinBox;
-        nouveau_CHA->setMinimum(8);
-        nouveau_CHA->setMaximum(13);
-        nouveau_CHA->setSingleStep(1);
-    nouveau_AD = new QSpinBox;
-        nouveau_AD->setMinimum(8);
-        nouveau_AD->setMaximum(13);
-        nouveau_AD->setSingleStep(1);
-    nouveau_FO = new QSpinBox;
-        nouveau_FO->setMinimum(8);
-        nouveau_FO->setMaximum(13);
-        nouveau_FO->setSingleStep(1);
-
-    QFormLayout *nouveau_layout1 = new QFormLayout();
-        nouveau_layout1->addRow("Nom du personnage :", nouveau_nom);
-        nouveau_layout1->addRow("Sexe :", nouveau_sexe);
-        nouveau_layout1->addItem(spacer[lecteur_spacer]);
-        lecteur_spacer++;
-
-        nouveau_layout1->addRow("Points de destin :\n"
-                               "(1D4 - 1)", nouveau_ptsDestin);
-        nouveau_layout1->addItem(spacer[lecteur_spacer]);
-        lecteur_spacer++;
-
-        nouveau_layout1->addRow("PO (pièces d'or) :\n"
-                               "(2D6 x 10)", nouveau_PO);
-        nouveau_layout1->addItem(spacer[lecteur_spacer]);
-        lecteur_spacer++;
-
-    QFormLayout *nouveau_layout2 = new QFormLayout();
-        nouveau_layout2->addRow("COU (courage) :\n"
-                               "(1D6 + 7)", nouveau_COU);
-        nouveau_layout2->addRow("INT (intelligence) :\n"
-                               "(1D6 + 7)", nouveau_INT);
-        nouveau_layout2->addRow("CHA (charisme) :\n"
-                               "(1D6 + 7)", nouveau_CHA);
-        nouveau_layout2->addRow("AD (adresse) :\n"
-                               "(1D6 + 7)", nouveau_AD);
-        nouveau_layout2->addRow("FO (force) :\n"
-                               "(1D6 + 7)", nouveau_FO);
-        nouveau_layout2->addItem(spacer[lecteur_spacer]);
-        lecteur_spacer++;
-
-    QHBoxLayout *nouveau_layout_sansBox = new QHBoxLayout();
-        nouveau_layout_sansBox->addLayout(nouveau_layout1);
-        nouveau_layout_sansBox->addItem(spacer[lecteur_spacer]);
-        lecteur_spacer++;
-        nouveau_layout_sansBox->addLayout(nouveau_layout2);
-
-    QVBoxLayout *nouveau_layout_total = new QVBoxLayout();
-        nouveau_layout_total->addLayout(nouveau_layout_sansBox);
-
-        QDialogButtonBox *nouveau_boutonsBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-            QObject::connect(nouveau_boutonsBox, SIGNAL(accepted()), this, SLOT(creerNouveauPersonnage_Origine()));
-            QObject::connect(nouveau_boutonsBox, SIGNAL(rejected()), this, SLOT(creerNouveauPersonnage_close()));
-
-        nouveau_layout_total->addWidget(nouveau_boutonsBox);
-
-// On ajoute les pages
-    nouveau_fenetre->setLayout(nouveau_layout_total);
-    nouveau_fenetre->show();
-}
-void FenPrincipale::creerNouveauPersonnage_close()
-{
-    nouveau_fenetre->close();
-
-    statusBar->removeWidget(progressBar_status);
-    delete progressBar_status;
-    progressBar_status = 0;
-}
-void FenPrincipale::creerNouveauPersonnage_Origine()
-{
-    progressBar_status->setValue(20);
-
-    QVBoxLayout *layout_vertical = new QVBoxLayout();
-    QHBoxLayout *layout = new QHBoxLayout();
-        QLabel *explication = new QLabel("Voici les origines que vous pouvez utiliser :");
-        layout_vertical->addWidget(explication);
-
-    int totalOrigine = 0;
-// On crée le personnage !
-    tableauDePersonnages[nouveau_nom->text()] = Personnage(nouveau_nom->text(), nouveau_sexe->text(),
-                                                           "Origine à définir !", "Métier à définr",
-                                                           nouveau_COU->value(), nouveau_INT->value(), nouveau_CHA->value(),
-                                                           nouveau_AD->value(), nouveau_FO->value(), 8, 10,
-                                                           nouveau_COU->value(), nouveau_INT->value(), nouveau_CHA->value(),
-                                                           nouveau_AD->value(), nouveau_FO->value(), 8, 10,
-                                                           nouveau_ptsDestin->value(), 0,
-                                                           0, nouveau_PO->value(), 0, 0);
-
-// On affiche la fenêtre proposant les origines possibles
-    nouveau_fenetre2 = new QDialog(this, Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
-    nouveau_fenetre2->setWindowTitle("Créer un personnage -> choix de l'origine");
-    nouveau_fenetre2->setModal(true);
-    setIcone(nouveau_fenetre2);
-
-    layout_vertical->addLayout(layout);
-
-    QDialogButtonBox *nouveau_boutonsBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-        QObject::connect(nouveau_boutonsBox, SIGNAL(accepted()), this, SLOT(creerNouveauPersonnage_Metier()));
-        QObject::connect(nouveau_boutonsBox, SIGNAL(rejected()), this, SLOT(creerNouveauPersonnage_Origine_close()));
-
-    layout_vertical->addWidget(nouveau_boutonsBox);
-
-    nouveau_fenetre2->setLayout(layout_vertical);
-    nouveau_fenetre2->show();
-}
-void FenPrincipale::creerNouveauPersonnage_Origine_close()
-{
-    progressBar_status->setValue(0);
-
-    nouveau_fenetre2->close();
-    tableauDOrigines.clear();
-    tableauDeRadioButton_Origine.clear();
-}
-void FenPrincipale::creerNouveauPersonnage_Metier()
-{
-    progressBar_status->setValue(40);
-
-    QVBoxLayout *layout_vertical = new QVBoxLayout();
-    QHBoxLayout *layout = new QHBoxLayout();
-        QLabel *explication = new QLabel("Voici les métiers que vous pouvez choisir :");
-        layout_vertical->addWidget(explication);
-
-    int totalMetiers = 0;
-
-// Test de la capacité du personnage à faire ce métier
-    ///////////////////////////////////////////////////////////////////////////
-    for (int i = 0; i < tableauDeMetiers.size(); i++)
-    {
-        bool possible = tableauDePersonnages[nouveau_nom->text()].testMetier(tableauDeMetiers.at(i));
-
-        if (possible)
-        {
-            QRadioButton *temp = new QRadioButton(tableauDeMetiers.at(i)->getNom());
-            tableauDeRadioButton_Metier.push_back(temp);
-
-            QVector<QRadioButton>::iterator it = tableauDeRadioButton_Metier.at(totalMetiers);
-            layout->addWidget(&*it);
-            totalMetiers++;
-        }
-    }
-
-// On affiche la fenêtre proposant les métiers possibles
-    nouveau_fenetre3 = new QDialog(this, Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
-    nouveau_fenetre3->setWindowTitle("Créer un personnage -> choix du métier");
-    nouveau_fenetre3->setModal(true);
-    setIcone(nouveau_fenetre3);
-
-    layout_vertical->addLayout(layout);
-
-    QDialogButtonBox *nouveau_boutonsBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-        QObject::connect(nouveau_boutonsBox, SIGNAL(accepted()), this, SLOT(creerNouveauPersonnage_Set()));
-        QObject::connect(nouveau_boutonsBox, SIGNAL(rejected()), this, SLOT(creerNouveauPersonnage_Metier_close()));
-
-    layout_vertical->addWidget(nouveau_boutonsBox);
-
-    nouveau_fenetre3->setLayout(layout_vertical);
-    nouveau_fenetre3->show();
-}
-void FenPrincipale::creerNouveauPersonnage_Metier_close()
-{
-    progressBar_status->setValue(20);
-
-    nouveau_fenetre3->close();
-    tableauDeMetiers.clear();
-    tableauDeRadioButton_Metier.clear();
-}
-void FenPrincipale::creerNouveauPersonnage_Set()
-{
-    progressBar_status->setValue(60);
-
-    for (int i = 0; i < tableauDeRadioButton_Origine.size(); i++)
-    {
-        if (tableauDeRadioButton_Origine[i]->isChecked())
-        {
-        // On capte le nom du métier
-            QString nomOrigine = tableauDeRadioButton_Origine[i]->text();
-        // On crée un iterator sur le métier
-            QMap<QString, Origine*>::iterator it = tableauDOrigines.find(nomOrigine);
-        // On valide le métier
-            tableauDePersonnages[nouveau_nom->text()].setOrigine(*it);
-        }
-    }
-    for (int i = 0; i < tableauDeRadioButton_Metier.size(); i++)
-    {
-        if (tableauDeRadioButton_Metier[i]->isChecked())
-        {
-        // On capte le nom du métier
-            QString nomMetier = tableauDeRadioButton_Metier[i]->text();
-        // On valide le métier
-            for (int i = 0; i < tableauDeMetiers.size(); i++)
-                if (tableauDeMetiers.at(i)->getNom() == nomMetier)
-                    tableauDePersonnages[nouveau_nom->text()].setMetier(*it);
-        }
-    }
-
-// On demande où l'enregistrer et on ouvre le fichier
-    QString cheminPerso = QFileDialog::getSaveFileName(zoneCentrale, "Enregistrer un personnage",
-                                                       QString("enregistrements"), "Personnages (*.perso)");
-
-    if (cheminPerso.isEmpty())
-    {
-        QMap<QString, Personnage>::Iterator iterateurPerso = tableauDePersonnages.find(nouveau_nom->text());
-        tableauDePersonnages.erase(iterateurPerso);
-
-        return;
-    }
-
-    // On modifie le chemin de l'application si win32
-    if (OS == 0)
-        cheminPerso.replace("/", "\\");
-
-    bool ouvert = testOuverture(cheminPerso);
-    if (ouvert)
-    {
-        QMessageBox::critical(this, "Erreur",
-                              "ERREUR :\nVous essayez d'enregistrer le nouveau personnage "
-                              "sur un autre déjà créé et ouvert !");
-
-        QMessageBox *msgBox1 = new QMessageBox(QMessageBox::Information, "Information",
-                                               "Si vous voulez recréer ce personnage,"
-                                               "il va falloir re-rentrer toutes les caractéristiques de celui-ci !\n\n"
-                                               "C'est votre punition !");
-            merci = msgBox1->addButton("Oh non !", QMessageBox::AcceptRole);
-            setIcone(msgBox1);
-            msgBox1->exec();
-
-        QMessageBox *msgBox2 = new QMessageBox(QMessageBox::Information, "Information",
-                                               "Alors, vous enragez ?\n\n"
-                                               "Eh ben, vous avez de la chance, je suis de bonne humeur aujourd'hui !\n"
-                                               "En conséquent, vous n'aurez pas besoin de re-remplir ce formulaire !\n\n"
-                                               "Qu'est-ce qu'on dit ?");
-            ohNon = msgBox2->addButton("Merci !", QMessageBox::AcceptRole);
-            setIcone(msgBox2);
-            msgBox2->exec();
-
-        QMap<QString, Personnage>::Iterator iterateurPerso = tableauDePersonnages.find(nouveau_nom->text());
-        tableauDePersonnages.erase(iterateurPerso);
-
-        return;
-    }
-    // On dit au prog que ce perso est ouvert
-    nomPersoOuverts << nouveau_nom->text();
-
-    QFile persoRec(cheminPerso);
-    if (!persoRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de créer le fichier personnage sélectionné. C'est une erreur impossible normalement. Réessayez d'ajouter le personnage.");
-
-    log("Enregistrement du personnage créé précédemment.");
-    QTextStream sortie(&persoRec);
-    sortie << tableauDePersonnages[nouveau_nom->text()].getPersoEntier();
-
-    tableauDePersonnages[nouveau_nom->text()].setAdresse(cheminPerso);
-
-    progressBar_status->setValue(80);
-
-// On ajoute le fichier personnage au groupe
-    bool erreur(false);
-    QString cheminGroupe;
-    while (!erreur)
-    {
-        cheminGroupe = QFileDialog::getOpenFileName(zoneCentrale, "Modifier un groupe",
-                                                    QString("enregistrements"), "Groupes de personnages (*.nbh)");
-
-        if (cheminGroupe.isEmpty())
-            QMessageBox::critical(zoneCentrale, "ERREUR !", "Erreur :\nVous devez choisir un groupe à modifier !");
-        else
-            erreur = true;
-    }
-
-    if (OS == 0)
-        cheminGroupe.replace("/", "\\");
-    QFile groupeRec(cheminGroupe);
-    if (!groupeRec.open(QIODevice::Append | QIODevice::Text))
-        fatalError("Impossible d'ouvrir le fichier de groupe sélectionné. C'est une erreur impossible normalement. Réessayez de créer le personnage.");
-
-    log("Ajout du personnage à un groupe !");
-
-    QTextStream groupe(&groupeRec);
-
-    QString cheminApp = QCoreApplication::applicationDirPath();
-    cheminApp.remove("/debug");
-    cheminApp.remove("/release");
-    if (OS == 0)
-        cheminApp.replace("/", "\\");
-    cheminPerso = cheminPerso.remove(cheminApp);
-    groupe << cheminPerso + "\n";
-
-    progressBar_status->setValue(100);
-
-// On ferme le dialogue d'ouverture
-    nouveau_fenetre->close();
-    nouveau_fenetre2->close();
-    nouveau_fenetre3->close();
-
-// On l'affiche
-    if (compteurOnglets != 0)
-    {
-        QTabWidget *nouveauWidget = tableauDePersonnages[nouveau_nom->text()].afficher();
-        QString nouveauNom = tableauDePersonnages[nouveau_nom->text()].getNom();
-
-        MdiSubWindow *sousFenetre = new MdiSubWindow();
-        sousFenetre->setWidget(nouveauWidget);
-        sousFenetre->setWindowTitle(nouveauNom);
-        sousFenetre->setAttribute(Qt::WA_DeleteOnClose);
-        zoneCentrale->addSubWindow(sousFenetre)->show();
-
-        ordreMarche->setNomPersos(nomPersoOuverts);
-        ordreMarche->setEnabled(true);
-    }
-
-    if (compteurOnglets == 0)
-    {
-        for (QList<QString>::iterator it = fichiersOuverts.begin(); it < fichiersOuverts.end(); it++)
-        {
-            if (*it == cheminPerso)
-            {
-                fichiersOuverts.erase(it);
-            }
-        }
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it < nomPersoOuverts.end(); it++)
-        {
-            if (*it == nouveau_nom->text())
-            {
-                nomPersoOuverts.erase(it);
-            }
-        }
-    }
-
-    statusBar->removeWidget(progressBar_status);
-    delete progressBar_status;
-    progressBar_status = 0;
-    statusBar->showMessage("Personnage créé et ajouté au groupe", 2000);
-
-    QMessageBox::information(this, "Compétences",
-                             "Les compétences acquises de naissance par le personnage ont été ajoutées au personnage, mais pas celle qu'il peut développer.\n\n"
-                             "Merci de les ajouter par vous-même, la fonction d'ajout automatique est en développement.");
-}
+{}
 
 // Créer un nouveau groupe
 void FenPrincipale::creerNouveauGroupe()
@@ -820,6 +451,14 @@ void FenPrincipale::creerNouveauGroupe()
             erreur = true;
     }
 
+
+// Modification des chemins pour que ça marche sous linux
+    if (OS == 1)
+    {
+        cheminGroupe += ".nbh";
+        cheminNotes += ".notes";
+    }
+
 // Enregistrement
     QFile notesRec(cheminNotes);
     if (!notesRec.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -836,12 +475,10 @@ void FenPrincipale::creerNouveauGroupe()
     QTextStream sortie(&groupeRec);
 
     if (OS == 0)
+    {
         cheminNotes.replace("/", "\\");
-    QString cheminApp = QCoreApplication::applicationDirPath();
-        cheminApp.remove("/debug");
-        cheminApp.remove("/release");
-        if (OS == 0)
-            cheminApp.replace("/", "\\");
+        cheminApp.replace("/", "\\");
+    }
     cheminNotes = cheminNotes.remove(cheminApp);
     sortie << cheminNotes + "\n";
 
@@ -851,287 +488,13 @@ void FenPrincipale::creerNouveauGroupe()
 
 // Ajouter un personnage
 void FenPrincipale::ajouterPersonnage()
-{
-    progressBar_status = new QProgressBar();
-    statusBar->addWidget(progressBar_status);
-
-    int lecteur_spacer(0);
-    for (int i = 0; i < NB_SPACER_FENPRINCIPALE; i++)
-        spacer[i] = new QSpacerItem(30, 10);
-
-// On crée la fenêtre !
-    ajouter_fenetre = new QDialog(this, Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
-        setIcone(ajouter_fenetre);
-        ajouter_fenetre->setWindowTitle("Ajouter un personnage créé auparavant");
-        ajouter_fenetre->setModal(true);
-
-        ajouter_nom = new QLineEdit();
-        ajouter_sexe = new QLineEdit();
-        ajouter_origineNom = new QLineEdit();
-        ajouter_metierNom = new QLineEdit();
-
-        ajouter_COU = new QSpinBox();
-            ajouter_COU->setMaximum(20);
-        ajouter_INT = new QSpinBox();
-            ajouter_INT->setMaximum(20);
-        ajouter_CHA = new QSpinBox();
-            ajouter_CHA->setMaximum(20);
-        ajouter_AD = new QSpinBox();
-            ajouter_AD->setMaximum(20);
-        ajouter_FO = new QSpinBox();
-            ajouter_FO->setMaximum(20);
-        ajouter_AT = new QSpinBox();
-            ajouter_AT->setMaximum(20);
-        ajouter_PRD = new QSpinBox();
-            ajouter_PRD->setMaximum(20);
-
-        ajouter_XP = new QSpinBox();
-            ajouter_XP->setMaximum(999999999);
-        ajouter_ptsDestin = new QSpinBox();
-            ajouter_ptsDestin->setMaximum(3);
-
-        ajouter_EV = new QSpinBox();
-        ajouter_EA = new QSpinBox();
-        ajouter_EA_type = new QLineEdit();
-
-        ajouter_PO = new QSpinBox();
-            ajouter_PO->setMaximum(999999);
-        ajouter_PA = new QSpinBox();
-            ajouter_PA->setMaximum(999999);
-        ajouter_PC = new QSpinBox();
-            ajouter_PC->setMaximum(999999);
-
-        QFormLayout *ajouter_layout1 = new QFormLayout();
-            ajouter_layout1->addRow("Nom du personnage à ajouter :", ajouter_nom);
-            ajouter_layout1->addRow("Sexe :", ajouter_sexe);
-            ajouter_layout1->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-
-            ajouter_layout1->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-            ajouter_layout1->addRow("EV :", ajouter_EV);
-            ajouter_layout1->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-            ajouter_layout1->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-
-            ajouter_layout1->addRow("COU :", ajouter_COU);
-            ajouter_layout1->addRow("INT :", ajouter_INT);
-            ajouter_layout1->addRow("CHA :", ajouter_CHA);
-            ajouter_layout1->addRow("AD :", ajouter_AD);
-            ajouter_layout1->addRow("FO :", ajouter_FO);
-            ajouter_layout1->addRow("AT :", ajouter_AT);
-            ajouter_layout1->addRow("PRD :", ajouter_PRD);
-            ajouter_layout1->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-
-        QFormLayout *ajouter_layout2 = new QFormLayout();
-            ajouter_layout2->addRow("Nom de l'origine", ajouter_origineNom);
-            ajouter_layout2->addRow("Nom du métier :", ajouter_metierNom);
-            ajouter_layout2->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-
-            ajouter_layout2->addRow("EA :", ajouter_EA);
-            ajouter_layout2->addRow("Type d'énergie astrale :", ajouter_EA_type);
-            ajouter_layout2->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-
-            ajouter_layout2->addRow("Expérience déjà acquise :", ajouter_XP);
-            ajouter_layout2->addRow("Points de destin :", ajouter_ptsDestin);
-            ajouter_layout2->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-
-            ajouter_layout2->addRow("PO :", ajouter_PO);
-            ajouter_layout2->addRow("PA :", ajouter_PA);
-            ajouter_layout2->addRow("PC :", ajouter_PC);
-            ajouter_layout2->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-
-        QHBoxLayout *ajouter_layout = new QHBoxLayout();
-            ajouter_layout->addLayout(ajouter_layout1);
-            ajouter_layout->addItem(spacer[lecteur_spacer]);
-            lecteur_spacer++;
-            ajouter_layout->addLayout(ajouter_layout2);
-
-        QLabel *explication = new QLabel("- Si le personnage n'est pas magicien, laisser à zéro l'EA et laisser vide le champs \"Type d'énergie astrale\".\n"
-                                         "- Vous pourrez habiller le personnage, lui donner des protections, des armes, et des flèches lorsque celui-ci sera ouvert.");
-
-        QDialogButtonBox *ajouter_boutonsBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-            QObject::connect(ajouter_boutonsBox, SIGNAL(accepted()), this, SLOT(ajouterPersonnage_Save()));
-            QObject::connect(ajouter_boutonsBox, SIGNAL(rejected()), ajouter_fenetre, SLOT(close()));
-
-        QVBoxLayout *ajouter_layoutTotal = new QVBoxLayout();
-            ajouter_layoutTotal->addLayout(ajouter_layout);
-            ajouter_layoutTotal->addWidget(explication);
-            ajouter_layoutTotal->addItem(spacer[lecteur_spacer]);
-            ajouter_layoutTotal->addWidget(ajouter_boutonsBox);
-
-        ajouter_fenetre->setLayout(ajouter_layoutTotal);
-
-// On affiche la fenêtre
-    ajouter_fenetre->show();
-}
-void FenPrincipale::ajouterPersonnage_Save()
-{
-    progressBar_status->setValue(50);
-
-// On crée le personnage !
-    tableauDePersonnages[ajouter_nom->text()] = Personnage(ajouter_nom->text(), ajouter_sexe->text(),
-                                                           ajouter_origineNom->text(), ajouter_metierNom->text(),
-                                                           ajouter_COU->value(), ajouter_INT->value(), ajouter_CHA->value(), ajouter_AD->value(),
-                                                           ajouter_FO->value(), ajouter_AT->value(), ajouter_PRD->value(),
-                                                           ajouter_COU->value(), ajouter_INT->value(), ajouter_CHA->value(), ajouter_AD->value(),
-                                                           ajouter_FO->value(), ajouter_AT->value(), ajouter_PRD->value(),
-                                                           ajouter_ptsDestin->value(), ajouter_XP->value(),
-                                                           ajouter_EV->value(),
-                                                           ajouter_PO->value(), ajouter_PA->value(), ajouter_PC->value());
-
-// Si le personnage ajouté est mage
-    if (ajouter_EA_type->text() != "" && ajouter_EA->value() != 0)
-        tableauDePersonnages[ajouter_nom->text()].setEA(ajouter_EA->value(), ajouter_EA_type->text());
-
-// On demande où l'enregistrer et on ouvre le fichier
-    QString cheminPerso = QFileDialog::getSaveFileName(zoneCentrale, "Enregistrer un personnage",
-                                                       QString("enregistrements"), "Personnages (*.perso)");
-    if (cheminPerso.isEmpty())
-    {
-        QMap<QString, Personnage>::Iterator iterateurPerso = tableauDePersonnages.find(ajouter_nom->text());
-        tableauDePersonnages.erase(iterateurPerso);
-
-        return;
-    }
-
-    cheminPerso = cheminPerso.remove(QCoreApplication::applicationDirPath());
-    if (OS == 0)
-        cheminPerso.replace("/", "\\");
-
-    bool ouvert = testOuverture(cheminPerso);
-    if (ouvert)
-    {
-        QMessageBox::critical(this, "Erreur",
-                              "ERREUR :\nVous essayez d'enregistrer le nouveau personnage\nsur un autre déjà créé et ouvert !");
-
-        QMessageBox *msgBox1 = new QMessageBox(QMessageBox::Information, "Information",
-                                               "Si vous voulez recréer ce personnage,"
-                                               "il va falloir re-rentrer toutes les caractéristiques de celui-ci !\n\n"
-                                               "C'est votre punition !");
-            merci = msgBox1->addButton("Oh non !", QMessageBox::AcceptRole);
-            setIcone(msgBox1);
-            msgBox1->exec();
-
-        QMessageBox *msgBox2 = new QMessageBox(QMessageBox::Information, "Information",
-                                               "Alors, vous enragez ?\n\n"
-                                               "Eh ben, vous avez de la chance, je suis de bonne humeur aujourd'hui !\n"
-                                               "En conséquent, vous n'aurez pas besoin de re-remplir ce formulaire !\n\n"
-                                               "Qu'est-ce qu'on dit ?");
-            ohNon = msgBox2->addButton("Merci !", QMessageBox::AcceptRole);
-            setIcone(msgBox2);
-            msgBox2->exec();
-
-        QMap<QString, Personnage>::Iterator iterateurPerso = tableauDePersonnages.find(ajouter_nom->text());
-        tableauDePersonnages.erase(iterateurPerso);
-
-        return;
-    }
-
-    // On dit au prog que ce perso est ouvert
-    nomPersoOuverts << ajouter_nom->text();
-
-    QFile persoRec(cheminPerso);
-    if (!persoRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de créer le fichier personnage sélectionné. C'est une erreur impossible normalement. Réessayez d'ajouter le personnage.");
-
-    log("Enregistrement du personnage ajouté !");
-
-    QTextStream sortie(&persoRec);
-
-    sortie << tableauDePersonnages[ajouter_nom->text()].getPersoEntier();
-
-    tableauDePersonnages[ajouter_nom->text()].setAdresse(cheminPerso);
-
-    progressBar_status->setValue(75);
-
-// On ajoute le fichier personnage au groupe
-    bool erreur(false);
-    QString cheminGroupe;
-    while (!erreur)
-    {
-        cheminGroupe = QFileDialog::getOpenFileName(zoneCentrale, "Modifier un groupe",
-                                                    QString("enregistrements"), "Groupes de personnages (*.nbh)");
-
-        if (cheminGroupe.isEmpty())
-            QMessageBox::critical(zoneCentrale, "ERREUR !", "Erreur :\nVous devez choisir un groupe à modifier !");
-        else
-            erreur = true;
-    }
-
-    if (OS == 0)
-        cheminGroupe.replace("/", "\\");
-    QFile groupeRec(cheminGroupe);
-    if (!groupeRec.open(QIODevice::Append | QIODevice::Text))
-        fatalError("Impossible d'ouvrir le fichier de groupe sélectionné. Réessayez d'ajouter le personnage au groupe.");
-
-    log("Ajout du personnage à un groupe !");
-
-    QTextStream groupe(&groupeRec);
-
-    QString cheminApp = QCoreApplication::applicationDirPath();
-        cheminApp.remove("/debug");
-        cheminApp.remove("/release");
-        if (OS == 0)
-            cheminApp.replace("/", "\\");
-    cheminPerso = cheminPerso.remove(cheminApp);
-    groupe << cheminPerso + "\n";
-
-    progressBar_status->setValue(100);
-
-// On ferme le dialogue d'ouverture
-    ajouter_fenetre->close();
-
-// On l'affiche
-    if (compteurOnglets != 0)
-    {
-        QTabWidget *ajouterWidget = tableauDePersonnages[ajouter_nom->text()].afficher();
-        QString ajouterNom = tableauDePersonnages[ajouter_nom->text()].getNom();
-
-        MdiSubWindow *sousFenetre = new MdiSubWindow();
-        sousFenetre->setWidget(ajouterWidget);
-        sousFenetre->setWindowTitle(ajouterNom);
-        sousFenetre->setAttribute(Qt::WA_DeleteOnClose);
-        zoneCentrale->addSubWindow(sousFenetre)->show();
-
-        ordreMarche->setNomPersos(nomPersoOuverts);
-        ordreMarche->setEnabled(true);
-    }
-
-    if (compteurOnglets == 0)
-    {
-        for (QList<QString>::iterator it = fichiersOuverts.begin(); it < fichiersOuverts.end(); it++)
-        {
-            if (*it == cheminPerso)
-            {
-                fichiersOuverts.erase(it);
-            }
-        }
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it < nomPersoOuverts.end(); it++)
-        {
-            if (*it == ajouter_nom->text())
-            {
-                nomPersoOuverts.erase(it);
-            }
-        }
-    }
-
-    statusBar->removeWidget(progressBar_status);
-    delete progressBar_status;
-    progressBar_status = 0;
-    statusBar->showMessage("Personnage créé et ajouté au groupe", 2000);
-}
+{}
 
 // Ouvrir
 void FenPrincipale::ouvrir()
 {
-    if (groupeAdresse != "")
+// Si un groupe est déjà ouvert
+    if (m_fichierGroupe != 0)
     {
         QMessageBox::information(zoneCentrale, "Attention",
                                  "Attention :\nVous ne pouves pas ouvrir 2 groupes de clampins !");
@@ -1139,30 +502,33 @@ void FenPrincipale::ouvrir()
     }
 
 // On demande à l'utilisateur de choisir le fichier contenant le groupe
-    groupeAdresse = QFileDialog::getOpenFileName(zoneCentrale,
-                                          "Ouvrir un groupe",
-                                          "enregistrements",
-                                          "Groupes de personnages (*.nbh)");
+    QString groupeAdresse = QFileDialog::getOpenFileName(zoneCentrale,
+                                                         "Ouvrir un groupe",
+                                                         "enregistrements",
+                                                         "Groupes de personnages (*.nbh)");
 
-    // Si l'utilisateur annule
+    // Si l'utilisateur annule, on annule le chargement du groupe
     if (groupeAdresse.isEmpty())
         return;
 
-    QFile groupeOuverture(groupeAdresse);
-    if (!groupeOuverture.open(QIODevice::ReadOnly | QIODevice::Text))
+    m_fichierGroupe = new QFile(groupeAdresse);
+    if (!m_fichierGroupe->open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QMessageBox::critical(this, "Erreur lors de l'ouverture du groupe !",
                               "Impossible d'ouvrir le fichier de groupe.\n"
                               "Veuillez réessayer !");
         log("Erreur lors de l'ouverture du groupe : '" + groupeAdresse + "'\n"
             "Annulation du chargement du groupe.");
-        groupeAdresse = "";
+
+        m_fichierGroupe->close();
+        delete m_fichierGroupe;
+        m_fichierGroupe = 0;
         return;
     }
 
     log("Ouverture du groupe : '" + groupeAdresse + "'");
 
-    QTextStream groupeTxt(&groupeOuverture);
+    QTextStream groupeTxt(m_fichierGroupe);
 
     QStringList chemins;
     QString ligne = groupeTxt.readLine();
@@ -1180,26 +546,33 @@ void FenPrincipale::ouvrir()
     QStringList::Iterator cheminPersoOuverture = chemins.begin();
 
     // On ouvre le fichier "notes"
-    noteAdresse = *cheminPersoOuverture;
-    QFile notes_fichier(noteAdresse);
-    if (!notes_fichier.open(QIODevice::ReadOnly | QIODevice::Text))
+    m_fichierNotes = new QFile(*cheminPersoOuverture);
+    if (!m_fichierNotes->open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QMessageBox::critical(this, "Erreur lors de l'ouverture de notes !",
                               "Impossible d'ouvrir le fichier de notes.\n"
                               "Veuillez réessayer !");
-        log("Erreur lors de l'ouverture du fichier de note : '" + noteAdresse + "'\n"
+        log("Erreur lors de l'ouverture du fichier de note : '" + m_fichierNotes->fileName() + "'\n"
             "Annulation du chargement du groupe.");
-        groupeAdresse = "";
-        noteAdresse = "";
+
+        m_fichierGroupe->close();
+        delete m_fichierGroupe;
+        m_fichierGroupe = 0;
+
+        m_fichierNotes->close();
+        delete m_fichierNotes;
+        m_fichierNotes = 0;
+
         return;
     }
 
-    log("Ouverture du fichier de notes : '" + noteAdresse + "'");
+    log("Ouverture du fichier de notes : '" + m_fichierNotes->fileName() + "'");
 
-    QTextStream notes_flux(&notes_fichier);
-    QString notes_string = notes_flux.readAll();
+    QTextStream notes_flux(m_fichierNotes);
+    QString notes = notes_flux.readAll();
+    m_fichierNotes->close();
 
-    notes_txt->setText(notes_string);
+    notes_txt->setText(notes);
     notes_txt->setEnabled(true);
     notes_txt->setUndoRedoEnabled(true);
 // On ajoute 1 à l'itérateur
@@ -1215,19 +588,16 @@ void FenPrincipale::ouvrir()
             progressBar_status->setValue(100);
         else
             progressBar_status->setValue(progressBar_status->value() + valeurProgression);
-// renvoie un personnage
-        Personnage temp = chargerPerso(*cheminPersoOuverture);
-        QString nom = temp.getNom();
-        tableauDePersonnages.insert(nom, temp);
 
-        QTabWidget *ouvrirWidget = tableauDePersonnages[nom].afficher();
-        QString ouvrirNom = tableauDePersonnages[nom].getNom();
+        m_personnages.push_back(new Personnage(*cheminPersoOuverture));
 
-        MdiSubWindow *sousFenetre = new MdiSubWindow();
-        sousFenetre->setWidget(ouvrirWidget);
-        sousFenetre->setWindowTitle(ouvrirNom);
-        sousFenetre->setAttribute(Qt::WA_DeleteOnClose);
-        zoneCentrale->addSubWindow(sousFenetre)->show();
+        MdiSubWindow *sousFen = new MdiSubWindow();
+        sousFen->setWidget(m_personnages.at(compteurOnglets));
+        sousFen->setWindowTitle(m_personnages.at(compteurOnglets)->getNom());
+        zoneCentrale->addSubWindow(sousFen)->show();
+
+        // On connecte le changement d'affichage des onglets
+        QObject::connect(m_personnages.at(compteurOnglets), SIGNAL(persoModifie()), this, SLOT(persoModifie()));
 
         cheminPersoOuverture++;
         compteurOnglets++;
@@ -1237,7 +607,7 @@ void FenPrincipale::ouvrir()
     delete progressBar_status;
     progressBar_status = 0;
 
-    statusBar->showMessage("Groupe ouvert avec succèes", 2000);
+    statusBar->showMessage("Groupe ouvert avec succès", 2000);
     log("Groupe ouvert avec succès !");
 
 
@@ -1270,63 +640,62 @@ void FenPrincipale::ouvrir()
     achatCOU->setEnabled(true);
     achatEV->setEnabled(true);
     achatEA->setEnabled(true);
-
-// Activation de l'enregistrement auto
-    QTimer *auto_save = new QTimer(this);
-    QObject::connect(auto_save, SIGNAL(timeout()), this, SLOT(enregistrerTout()));
-    auto_save->start(600000);
-
-// Synchronisation des onglets de chaque personnage
-    for (QStringList::iterator iterateurSignal = nomPersoOuverts.begin();
-         iterateurSignal != nomPersoOuverts.end();
-         iterateurSignal++)
-    {
-        for (QStringList::iterator iterateurSlot = nomPersoOuverts.begin();
-             iterateurSlot != nomPersoOuverts.end();
-             iterateurSlot++)
-        {
-            if (*iterateurSignal != *iterateurSlot)
-                QObject::connect(tableauDePersonnages[*iterateurSignal].getAffichage(), SIGNAL(currentChanged(int)),
-                                 tableauDePersonnages[*iterateurSlot].getAffichage(), SLOT(setCurrentIndex(int)));
-        }
-    }
 }
 
-// Enregistrer tout
+// Enregistrement
 void FenPrincipale::enregistrerTout()
 {
-// Enregistrement des notes
-    if (!noteAdresse.isEmpty())
+    if (m_fichierGroupe != 0)
     {
-        QFile notesRec(noteAdresse);
-        if (!notesRec.open(QIODevice::WriteOnly | QIODevice::Text))
-            fatalError("Impossible d'enregistrer le fichier de note. Réessayez d'enregistrer le groupe.");
+    // Enregistrement des notes
+        if (m_fichierNotes != 0)
+        {
+            if (!m_fichierNotes->open(QIODevice::WriteOnly | QIODevice::Text))
+                fatalError("Impossible d'enregistrer le fichier de note. Réessayez d'enregistrer le groupe.");
 
-        QTextStream sortie(&notesRec);
-        sortie << notes_txt->toHtml();
+            QTextStream sortie(m_fichierNotes);
+            sortie << notes_txt->toHtml();
 
-        notesRec.close();
+            m_fichierNotes->close();
+
+            log("Enregistrement des notes !");
+        }
+        else
+            fatalError("Impossible d'accéder à la variable de fichier de notes !");
+
+    // Enregistrement des personnages
+        for (int i = 0; i < m_personnages.count(); i++)
+            m_personnages.at(i)->enregistrerPerso();
+
+    // Réinitialisation des noms des onglets
+        for (int i = 0; i < zoneCentrale->subWindowList().count(); i++)
+            zoneCentrale->subWindowList().at(i)->setWindowTitle(m_personnages.at(i)->getNom());
+
+
+        log("Enregistrement effectué !");
+        statusBar->showMessage("Enregistrement effectué", 2000);
     }
-
-// Enregistrement des personnages
-    for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
+}
+void FenPrincipale::enregistrerNotes()
+{
+    if (m_fichierGroupe != 0)
     {
-        QString adresse = tableauDePersonnages[*it].getAdresse();
+    // Enregistrement des notes
+        if (m_fichierNotes != 0)
+        {
+            if (!m_fichierNotes->open(QIODevice::WriteOnly | QIODevice::Text))
+                fatalError("Impossible d'enregistrer le fichier de note. Réessayez d'enregistrer le groupe.");
 
-        QFile persoRec(adresse);
-        if (!persoRec.open(QIODevice::WriteOnly | QIODevice::Text))
-            fatalError("Impossible d'enregistrer le fichier de personnage sélectionné. Réessayez d'enregistrer le groupe.");
+            QTextStream sortie(m_fichierNotes);
+            sortie << notes_txt->toHtml();
 
-        QTextStream sortie(&persoRec);
+            m_fichierNotes->close();
 
-        // On enregistre
-        sortie << tableauDePersonnages[*it].getPersoEntier();
-
-        persoRec.close();
+            log("Enregistrement des notes !");
+        }
+        else
+            fatalError("Impossible d'accéder à la variable de fichier de notes !");
     }
-
-    log("Enregistrement effectué !");
-    statusBar->showMessage("Enregistrement effectué", 2000);
 }
 
 // Fermer le groupe en cours
@@ -1335,44 +704,47 @@ void FenPrincipale::fermerGroupe()
     enregistrerTout();
 
 // On relance NBH
-    QString nbh("NBH");
-    if (OS == 0)
-        nbh += ".exe";
-    QProcess::startDetached(nbh, QStringList("-fermer_gr"));
+    QProcess::startDetached(QApplication::applicationFilePath(), QStringList("-fermer_gr"));
 
     qApp->quit();
 }
 void FenPrincipale::fermerOnglets()
 {
 // On relance NBH
-    QString nbh("NBH");
-    if (OS == 0)
-        nbh += ".exe";
-    QProcess::startDetached(nbh, QStringList("-fermer_onglets"));
+    QProcess::startDetached(QApplication::applicationFilePath(), QStringList("-fermer_onglets"));
 
     qApp->quit();
 }
 
 // Quitter NBH
-void FenPrincipale::quitterNBH()
-{
-    close();
-}
 void FenPrincipale::closeEvent(QCloseEvent *e)
 {
-// On vérifie que l'utilisateur veut vraiment fermer
-    int reponse = QMessageBox::question(zoneCentrale, "Quitter NaheulBeuk Helper ?",
-                                        "Êtes-vous sûr(e) de vouloir quitter NaheulBeuk Helper ?",
-                                        QMessageBox::Yes | QMessageBox::No);
+    bool modifNonRec(false);
+    for (int i = 0; i < m_personnages.count(); i++)
+        if (m_personnages.at(i)->getModif())
+            modifNonRec = true;
 
-// Si "oui", on enregistre puis on ferme
-    if (reponse == QMessageBox::Yes)
+// S'il y a des modifications non enregistrées, on demande que faire
+    if (modifNonRec)
     {
-    // On enregistre tout
-        enregistrerTout();
+        QMessageBox question;
+        question.setWindowTitle("Quitter NaheulBeuk Helper ?");
+        question.setText("Il y a des modifications non enregistrées");
+        question.setInformativeText("Voulez-vous enregistrer les modifications ?");
+        question.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        question.setDefaultButton(QMessageBox::Save);
+        int reponse = question.exec();
 
-    // Enregistrement des options/positions
-        QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
+        if (reponse == QMessageBox::Save)
+        {
+            log("Fermeture de NBH :");
+            log("Enregistrement du groupe :");
+            enregistrerTout();
+
+            log("Enregistrement des préférences !");
+
+        // Enregistrement des options/positions
+            QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
             settings->beginGroup("FenPrincipale");
                 settings->setValue("geometry", saveGeometry());
                 settings->setValue("windowState", saveState());
@@ -1383,15 +755,59 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
                     settings->setValue("Achat", afficher_achat->isChecked());
                 settings->endGroup();
             settings->endGroup();
-        log("Enregistrement des préférences !");
-        log("Fermeture de NBH.");
 
-    // On ferme NBH (fen)
+            // On ferme NBH
+            e->accept();
+        }
+        else if (reponse == QMessageBox::Discard)
+        {
+            log("Fermeture de NBH !");
+            log("Enregistrement des préférences !");
+
+        // Enregistrement des options/positions
+            QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
+            settings->beginGroup("FenPrincipale");
+                settings->setValue("geometry", saveGeometry());
+                settings->setValue("windowState", saveState());
+
+                settings->beginGroup("toolBar");
+                    settings->setValue("Fichier", afficher_fichier->isChecked());
+                    settings->setValue("Action", afficher_action->isChecked());
+                    settings->setValue("Achat", afficher_achat->isChecked());
+                settings->endGroup();
+            settings->endGroup();
+
+            // On ferme NBH
+            e->accept();
+        }
+        else if (reponse == QMessageBox::Cancel)
+            e->ignore();
+    }
+// Sinon, on quitte normalement, sans enregistrer (pas de calculs process en plus)
+    else
+    {
+        log("Fermeture de NBH :");
+        log("Enregistrement du groupe :");
+        enregistrerNotes();
+
+        log("Enregistrement des préférences !");
+
+    // Enregistrement des options/positions
+        QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
+        settings->beginGroup("FenPrincipale");
+            settings->setValue("geometry", saveGeometry());
+            settings->setValue("windowState", saveState());
+
+            settings->beginGroup("toolBar");
+                settings->setValue("Fichier", afficher_fichier->isChecked());
+                settings->setValue("Action", afficher_action->isChecked());
+                settings->setValue("Achat", afficher_achat->isChecked());
+            settings->endGroup();
+        settings->endGroup();
+
+        // On ferme NBH
         e->accept();
     }
-// Sinon, on ignore la fermeture
-    else
-        e->ignore();
 }
 
 // Mode d'attaque
@@ -1431,7 +847,7 @@ void FenPrincipale::attaquer()
     QMessageBox::information(this, "En dévelopemment",
                              "Cette fonction est encore en développement.");
 }
-
+/*
 // XP de groupe
 void FenPrincipale::xp()
 {
@@ -1546,9 +962,9 @@ void FenPrincipale::pc()
         log("Retrait de PC de groupe : " + QString::number(pcMoins));
     }
 }
-
+*/
 // Achat
-void FenPrincipale::ATPRD()
+/*void FenPrincipale::ATPRD()
 {
     tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatATPRD();
 }
@@ -1576,7 +992,7 @@ void FenPrincipale::EA()
 {
     tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatEA();
 }
-
+*/
 // Afficher les barres d'outils
 void FenPrincipale::afficherFichier(bool affiche)
 {
@@ -1651,8 +1067,6 @@ void FenPrincipale::licence()
 // Vérification de MAJ
 void FenPrincipale::MAJ()
 {
-    enregistrerTout();
-
 // On crée la fenêtre
     FenMAJ *maj = new FenMAJ(this);
 
@@ -1666,33 +1080,21 @@ void FenPrincipale::help()
     QDesktopServices::openUrl(QUrl::fromLocalFile(QApplication::applicationDirPath().replace("\\", "/").remove("/debug").remove("/release") + "/aide/index.html"));
 }
 
-// Test pour l'ouverture
-bool FenPrincipale::testOuverture(QString const& cheminFichier)
+// Modification d'un personnage
+void FenPrincipale::persoModifie()
 {
-    bool ouvert = false;
-
-    for (int lecteurListe = 0; lecteurListe < fichiersOuverts.size(); lecteurListe++)
+    for (int i = 0; i < zoneCentrale->subWindowList().count(); i++)
     {
-        if (fichiersOuverts.at(lecteurListe) == cheminFichier)
-        {
-            ouvert = true;
-            return ouvert;
-        }
+        if (m_personnages.at(i)->getModif())
+            zoneCentrale->subWindowList().at(i)->setWindowTitle("* " + m_personnages.at(i)->getNom());
     }
-
-    if (!ouvert)
-        fichiersOuverts << cheminFichier;
-
-    return ouvert;
 }
 
 // MdiSubWindow modifiée
 MdiSubWindow::MdiSubWindow()
-{
+{}
 
-}
-
-// Fermeture d'un onglet
+// Annulation de la fermeture d'un onglet
 void MdiSubWindow::closeEvent(QCloseEvent *e)
 {
     e->ignore();

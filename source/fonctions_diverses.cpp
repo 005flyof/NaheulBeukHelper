@@ -62,6 +62,25 @@ void log(QString const& message, bool vider)
     }
 
     QTextStream entree(&log);
-    entree << QDate::currentDate().day() << "/" << QDate::currentDate().month() << "/" << QDate::currentDate().year() << " ";
-    entree << QTime::currentTime().hour() << ":" << QTime::currentTime().minute() << " -> " << message << "\n";
+    // si le nombre de minute est inf à 10
+    if (QTime::currentTime().minute() < 10)
+    {
+        if (QDate::currentDate().month() < 10)
+            entree << QDate::currentDate().day() << "/0" << QDate::currentDate().month() << "/" << QDate::currentDate().year() << " ";
+        else
+            entree << QDate::currentDate().day() << "/" << QDate::currentDate().month() << "/" << QDate::currentDate().year() << " ";
+
+        entree << QTime::currentTime().hour() << ":0" << QTime::currentTime().minute() << " -> " << message << "\n";
+    }
+    else
+    {
+        if (QDate::currentDate().month() < 10)
+            entree << QDate::currentDate().day() << "/0" << QDate::currentDate().month() << "/" << QDate::currentDate().year() << " ";
+        else
+            entree << QDate::currentDate().day() << "/" << QDate::currentDate().month() << "/" << QDate::currentDate().year() << " ";
+
+        entree << QTime::currentTime().hour() << ":" << QTime::currentTime().minute() << " -> " << message << "\n";
+    }
+
+    log.close();
 }

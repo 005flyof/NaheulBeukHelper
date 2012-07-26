@@ -4,16 +4,25 @@
 Personnage::Personnage(QString fichier)
     : QScrollArea(), ui(new Ui::Personnage),
       m_fichierPerso(0),
-      m_cheminEnregistrement(fichier)
+      m_cheminEnregistrement(fichier),
+      modifNonRec(false)
 {
     ui->setupUi(this);
     chargerPerso();
     setNiveau();
     setAffichage();
+
+    QObject::connect(this, SIGNAL(persoModifie()), this, SLOT(modifierPerso()));
 }
 Personnage::~Personnage()
 {
     delete ui;
+}
+
+
+QString Personnage::getNom() const
+{
+    return m_nom;
 }
 
 void Personnage::setAffichage()
@@ -486,8 +495,6 @@ void Personnage::chargerPerso()
     if (!m_fichierPerso->open(QIODevice::ReadOnly | QIODevice::Text))
         fatalError("Impossible d'ouvrir le fichier personnage suivant : " + m_cheminEnregistrement);
 
-    log("Ouverture du personnage : '" + m_cheminEnregistrement + "'");
-
     QTextStream entree(m_fichierPerso);
     int numLigne(1);
 
@@ -848,11 +855,14 @@ void Personnage::chargerPerso()
         }
     }
 
-    log("Personnage chargé !");
+    log("Personnage chargé !    (" + m_cheminEnregistrement + ")");
     m_fichierPerso->close();
 }
 void Personnage::enregistrerPerso()
 {
+    if (!modifNonRec)
+        return;
+
     QString total = "";
 
     total += m_nom + "\n";
@@ -915,6 +925,8 @@ void Personnage::enregistrerPerso()
 
     log("'" + m_nom + "' a été enregistré !");
     m_fichierPerso->close();
+
+    modifNonRec = false;
 }
 
 bool Personnage::setNiveau()
@@ -1416,12 +1428,25 @@ void Personnage::retirerPC(int value)
 }
 
 
+
+void Personnage::modifierPerso()
+{
+    modifNonRec = true;
+}
+bool Personnage::getModif() const
+{
+    return modifNonRec;
+}
+
 // Slots automatiques de Qt
 // Informations générales
 void Personnage::on_nomEdit_clicked(bool checked)
 {
     if (!checked)
+    {
         m_nom = ui->nom->text();
+        emit persoModifie();
+    }
     else
         ui->nom->setText(m_nom);
 
@@ -1430,7 +1455,10 @@ void Personnage::on_nomEdit_clicked(bool checked)
 void Personnage::on_sexeEdit_clicked(bool checked)
 {
     if (!checked)
+    {
         m_sexe = ui->sexe->text();
+        emit persoModifie();
+    }
     else
         ui->sexe->setText(m_sexe);
 

@@ -22,16 +22,22 @@ FenChargement::FenChargement(char *argv[])
     ui->progression->setValue(20);
     ui->label->setText("Fichier d'erreur supprimé !");
 
+// Suppression du fichier d'erreur
+    ui->label->setText("Vérification des mises à jour...");
+    FenMAJ test(this, true);
+    ui->progression->setValue(30);
+    ui->label->setText("Mises à jour vérifiées.");
+
 // Chargement des origines
     ui->label->setText("Chargement des origines...");
     //ouvrirOrigines();
-    ui->progression->setValue(50);
+    ui->progression->setValue(55);
     ui->label->setText("Origines chargées !");
 
 // Chargement des métiers
     ui->label->setText("Chargement des métiers...");
     //ouvrirMetiers();
-    ui->progression->setValue(80);
+    ui->progression->setValue(90);
     ui->label->setText("Métiers chargés !");
 
 // Création de l'interface graphique
@@ -44,21 +50,21 @@ FenChargement::FenChargement(char *argv[])
     else
         log("Lancement de NBH", true);
 
-    //fenetrePrincipale = new FenPrincipale;
-    Personnage *perso = new Personnage("/media/CORSAIR/Projets/NaheulBeukHelper/enregistrements/Babar.perso");
+    fenetrePrincipale = new FenPrincipale;
 
     ui->progression->setValue(100);
     ui->label->setText("Interface chargée ! Fermeture de la fenêtre de chargement...");
 
     close();
-    //fenetrePrincipale->show();
-    perso->show();
+    fenetrePrincipale->show();
 }
 
 FenChargement::~FenChargement()
 {
     delete ui;
 }
+
+
 /*
 void FenChargement::ouvrirOrigines()
 {
