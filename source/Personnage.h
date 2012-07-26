@@ -23,7 +23,7 @@
         explicit Personnage(QString fichier);
         ~Personnage();
 
-        void chargerPerso();
+        bool chargerPerso();
         void enregistrerPerso();
 
         // Accesseurs
@@ -81,7 +81,7 @@
         Ui::Personnage *ui;
 
     // Fonctions
-        Caracteristiques chargerCarac(QString ligne, bool AT_PRD, int numLigne);
+        Caracteristiques chargerCarac(bool *erreur, QString ligne, bool AT_PRD, int numLigne);
 
         bool setNiveau();
         void setAffichage();

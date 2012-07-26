@@ -41,7 +41,6 @@
         void ouvrir();
         void enregistrerGroupe();
         void fermerGroupe();
-        void fermerOnglets();
 
         void modeAttaque();
         void modePassif();
@@ -120,24 +119,24 @@
 
     // Pour le programme
         QVector<Personnage*> m_personnages;
+        QStringList m_nomPersos;
+
         // Pour le groupe
         QFile *m_fichierGroupe;
+
         // Pour les notes
         QFile *m_fichierNotes;
         QTextEdit *notes_txt;
-        // Docks
-        FenOrdreMarche *ordreMarche;
-        FenAttaque *attaque_fen;
-        QDockWidget *attaque_dock;
 
-        ///////////////////////////////////////////////////
-        int compteurOnglets;
+        // Affichage
         QMdiArea *zoneCentrale;
         QStatusBar *statusBar;
             QProgressBar *progressBar_status;
 
-        QList<QString> fichiersOuverts;
-        QStringList nomPersoOuverts;
+            // Docks
+            FenOrdreMarche *ordreMarche;
+            FenAttaque *attaque_fen;
+            QDockWidget *attaque_dock;
     };
 
     class MdiSubWindow : public QMdiSubWindow

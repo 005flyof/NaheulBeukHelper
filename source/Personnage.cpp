@@ -8,9 +8,6 @@ Personnage::Personnage(QString fichier)
       modifNonRec(false)
 {
     ui->setupUi(this);
-    chargerPerso();
-    setNiveau();
-    setAffichage();
 
     QObject::connect(this, SIGNAL(persoModifie()), this, SLOT(modifierPerso()));
 }
@@ -391,7 +388,7 @@ void Personnage::rafraichirRichesses()
     }
 }
 
-Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLigne)
+Caracteristiques Personnage::chargerCarac(bool *erreur, QString ligne, bool AT_PRD, int numLigne)
 {
     if (AT_PRD)
     {
@@ -431,9 +428,9 @@ Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLig
                                       "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
                                       "Caractéristiques non valides !\n"
                                       "Pour plus d'informations : regardez le fichier de log");
-                //////////////////////////////////////////////////////////////////////////////////////////////fermerOnglets();
-                log("Personnage non ouvert : il y a des caractéristiques invalides à la ligne " + QString::number(numLigne) + " !");
-                log("Annulation du chargement du groupe !");
+                log("Personnage non ouvert : il y a des caractéristiques invalides à la ligne " + QString::number(numLigne) + " !", 2);
+                log("Annulation du chargement du groupe !", 1);
+                *erreur = true;
                 return renvoyer;
                 break;
             }
@@ -474,9 +471,9 @@ Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLig
                                       "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
                                       "Caractéristiques initiales non valides !\n"
                                       "Pour plus d'informations : regardez le fichier de log");
-                //////////////////////////////////////////////////////////////////////////////////////////////fermerOnglets();
-                log("Personnage non ouvert : il y a des caractéristiques invalides à la ligne " + QString::number(numLigne) + " !");
-                log("Annulation du chargement du groupe !");
+                log("Personnage non ouvert : il y a des caractéristiques invalides à la ligne " + QString::number(numLigne) + " !", 2);
+                log("Annulation du chargement du groupe !", 1);
+                *erreur = true;
                 return renvoyer;
                 break;
             }
@@ -487,7 +484,7 @@ Caracteristiques Personnage::chargerCarac(QString ligne, bool AT_PRD, int numLig
     }
 }
 
-void Personnage::chargerPerso()
+bool Personnage::chargerPerso()
 {
     viderVariables();
 
@@ -519,8 +516,11 @@ void Personnage::chargerPerso()
     numLigne++;
 
 // Caractéristiques
-    m_carac = new Caracteristiques(chargerCarac(entree.readLine(), true, numLigne++));
-    m_carac_modif = new Caracteristiques(chargerCarac(entree.readLine(), true, numLigne++));
+    bool erreur(false);
+    m_carac = new Caracteristiques(chargerCarac(&erreur, entree.readLine(), true, numLigne++));
+    if (erreur)
+        return true;
+    m_carac_modif = new Caracteristiques(chargerCarac(&erreur, entree.readLine(), true, numLigne++));
 
 // Richesses
     m_richesses = new Richesses(0, 0, 0);
@@ -552,11 +552,9 @@ void Personnage::chargerPerso()
                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                   "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
                                   "Richesses non valides !\n");
-            //////////////////////////////////////////////////////////////////////////////////////////////////////fermerOnglets();
-            log("Personnage non ouvert : richesses invalides à la ligne " + QString::number(numLigne++) + " !");
-            log("Annulation du chargement du groupe !");
-            return;
-            break;
+            log("Personnage non ouvert : richesses invalides à la ligne " + QString::number(numLigne++) + " !", 2);
+            log("Annulation du chargement du groupe !", 1);
+            return true;
         }
         lecteur += 7;
     }
@@ -619,9 +617,9 @@ void Personnage::chargerPerso()
                                       "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
                                       "Trop de vêtements\n"
                                       "Pour plus d'informations : regarder le fichier de log");
-                //////////////////////////////////////////////////////////////////////////////////////////////fermerOnglets();
-                log("Personnage non ouvert : il y a trop de vêtements pour ce personnage (nombre max de vêtements : " + QString::number(MAX_VETEMENT) + ") !");
-                log("Annulation du chargement du groupe !");
+                log("Personnage non ouvert : il y a trop de vêtements pour ce personnage (nombre max de vêtements : " + QString::number(MAX_VETEMENT) + ") !", 2);
+                log("Annulation du chargement du groupe !", 1);
+                return true;
             }
             else
             {
@@ -629,9 +627,13 @@ void Personnage::chargerPerso()
                                                                    0, 0, 0, 0, 0,
                                                                    0, 0, 0, 0, 0);
                 numLigne++;
-                m_vetements[lecteurTableauVetement]->setBonus(chargerCarac(entree.readLine(), false, numLigne));
+                m_vetements[lecteurTableauVetement]->setBonus(chargerCarac(&erreur, entree.readLine(), false, numLigne));
+                    if (erreur)
+                        return true;
                 numLigne++;
-                m_vetements[lecteurTableauVetement]->setMalus(chargerCarac(entree.readLine(), false, numLigne));
+                m_vetements[lecteurTableauVetement]->setMalus(chargerCarac(&erreur, entree.readLine(), false, numLigne));
+                    if (erreur)
+                        return true;
                 numLigne++;
 
                 lecteurTableauVetement++;
@@ -648,9 +650,9 @@ void Personnage::chargerPerso()
                                       "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
                                       "Trop de protections\n"
                                       "Pour plus d'informations : regarder le fichier de log");
-                //////////////////////////////////////////////////////////////////////////////////////////////fermerOnglets();
-                log("Personnage non ouvert : il y a trop de protections pour ce personnage (nombre max de protections : " + QString::number(MAX_PROTECTION) + ") !");
-                log("Annulation du chargement du groupe !");
+                log("Personnage non ouvert : il y a trop de protections pour ce personnage (nombre max de protections : " + QString::number(MAX_PROTECTION) + ") !", 2);
+                log("Annulation du chargement du groupe !", 1);
+                return true;
             }
             else
             {
@@ -659,9 +661,13 @@ void Personnage::chargerPerso()
                                                                          0, 0, 0, 0, 0, 0, 0);
                 numLigne++;
                 numLigne++;
-                m_protections[lecteurTableauProtection]->setBonus(chargerCarac(entree.readLine(), true, numLigne));
+                m_protections[lecteurTableauProtection]->setBonus(chargerCarac(&erreur, entree.readLine(), true, numLigne));
+                    if (erreur)
+                        return true;
                 numLigne++;
-                m_protections[lecteurTableauProtection]->setMalus(chargerCarac(entree.readLine(), true, numLigne));
+                m_protections[lecteurTableauProtection]->setMalus(chargerCarac(&erreur, entree.readLine(), true, numLigne));
+                    if (erreur)
+                        return true;
                 numLigne++;
 
                 lecteurTableauProtection++;
@@ -678,9 +684,9 @@ void Personnage::chargerPerso()
                                       "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
                                       "Trop d'armes\n"
                                       "Pour plus d'informations : regarder le fichier de log");
-                //////////////////////////////////////////////////////////////////////////////////////////////fermerOnglets();
-                log("Personnage non ouvert : il y a trop d'armes pour ce personnage (nombre max d'armes : " + QString::number(MAX_ARME) + ") !");
-                log("Annulation du chargement du groupe !");
+                log("Personnage non ouvert : il y a trop d'armes pour ce personnage (nombre max d'armes : " + QString::number(MAX_ARME) + ") !", 2);
+                log("Annulation du chargement du groupe !", 1);
+                return true;
             }
             else
             {
@@ -692,9 +698,13 @@ void Personnage::chargerPerso()
                 numLigne++;
                 numLigne++;
                 numLigne++;
-                m_armes[lecteurTableauArme]->setBonus(chargerCarac(entree.readLine(), true, numLigne));
+                m_armes[lecteurTableauArme]->setBonus(chargerCarac(&erreur, entree.readLine(), true, numLigne));
+                    if (erreur)
+                        return true;
                 numLigne++;
-                m_armes[lecteurTableauArme]->setMalus(chargerCarac(entree.readLine(), true, numLigne));
+                m_armes[lecteurTableauArme]->setMalus(chargerCarac(&erreur, entree.readLine(), true, numLigne));
+                    if (erreur)
+                        return true;
                 numLigne++;
                 int type = entree.readLine().toInt();
                 numLigne++;
@@ -728,11 +738,11 @@ void Personnage::chargerPerso()
                 QMessageBox::critical(ui->nom, "Erreur réparable !",
                                       "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                       "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
-                                      "Trop de flèches"
+                                      "Trop de flèches\n"
                                       "Pour plus d'informations : regarder le fichier de log");
-                //////////////////////////////////////////////////////////////////////////////////////////////fermerOnglets();
-                log("Personnage non ouvert : il y a trop de flèches pour ce personnage (nombre max de flèches : " + QString::number(MAX_FLECHE) + ") !");
-                log("Annulation du chargement du groupe !");
+                log("Personnage non ouvert : il y a trop de flèches pour ce personnage (nombre max de flèches : " + QString::number(MAX_FLECHE) + ") !", 2);
+                log("Annulation du chargement du groupe !", 1);
+                return true;
             }
             else
             {
@@ -759,9 +769,9 @@ void Personnage::chargerPerso()
                                       "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
                                       "Trop d'équipements\n"
                                       "Pour plus d'informations : regarder le fichier de log");
-                //////////////////////////////////////////////////////////////////////////////////////////////fermerOnglets();
-                log("Personnage non ouvert : il y a trop d'équipements pour ce personnage (nombre max d'équipements : " + QString::number(MAX_EQUIPEMENT) + ") !");
-                log("Annulation du chargement du groupe !");
+                log("Personnage non ouvert : il y a trop d'équipements pour ce personnage (nombre max d'équipements : " + QString::number(MAX_EQUIPEMENT) + ") !", 2);
+                log("Annulation du chargement du groupe !", 1);
+                return true;
             }
             else
             {
@@ -848,15 +858,19 @@ void Personnage::chargerPerso()
                                   "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                   "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
                                   "Elément inconnu !\n");
-            log("Personnage non ouvert : élément inconnu à la ligne " + QString::number(numLigne) + " !");
-            log("Annulation du chargement du groupe !");
-            /////////////////////////////////////////////////////////////////////////fermerOnglets();
-            return;
+            log("Personnage non ouvert : élément inconnu à la ligne " + QString::number(numLigne) + " !", 2);
+            log("Annulation du chargement du groupe !", 1);
+            return true;
         }
     }
 
     log("Personnage chargé !    (" + m_cheminEnregistrement + ")", 1);
     m_fichierPerso->close();
+
+    setNiveau();
+    setAffichage();
+
+    return false;
 }
 void Personnage::enregistrerPerso()
 {

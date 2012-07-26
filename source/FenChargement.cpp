@@ -42,13 +42,7 @@ FenChargement::FenChargement(char *argv[])
 
 // Création de l'interface graphique
     ui->label->setText("Création de l'interface graphique...");
-
-    if (QString(argv[1]) == "-fermer_gr")
-        log("Fermeture du groupe");
-    else if (QString(argv[1]) == "-fermer_onglets")
-        log("Fermeture du groupe dûe à une erreur dans un des fichiers.");
-    else
-        log("Lancement de NBH", true);
+    log("Lancement de NBH", true);
 
     fenetrePrincipale = new FenPrincipale;
 

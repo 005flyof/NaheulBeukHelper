@@ -39,8 +39,7 @@ using namespace std;
 // Fenêtre principale
 FenPrincipale::FenPrincipale() :
     QMainWindow(),
-    m_fichierGroupe(0), m_fichierNotes(0),
-    compteurOnglets(0)
+    m_fichierGroupe(0), m_fichierNotes(0)
 {
 // On s'occupe de la fenêtre
     setWindowTitle("NBH     --     NaheulBeuk Helper");
@@ -347,7 +346,7 @@ void FenPrincipale::initWidget()
 // Création du widget central
     zoneCentrale = new QMdiArea(this);
     zoneCentrale->setViewMode(QMdiArea::TabbedView);
-    zoneCentrale->setTabsMovable(true); // pour Qt 4.8 et sup
+    zoneCentrale->setTabsMovable(true);
 
     // On valide le widget "zoneCentrale"
     setCentralWidget(zoneCentrale);
@@ -368,22 +367,6 @@ void FenPrincipale::initWidget()
     notes->setMinimumWidth(170);
     notes->setMaximumWidth(250);
     addDockWidget(Qt::LeftDockWidgetArea, notes);
-
-
-// Création du widget pour les monstres
-//    QDockWidget *monstres_dock = new QDockWidget("Monstres :");
-//    monstres_dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
-//    monstres_dock->setObjectName("dock-monstres");
-
-//    monstres = new QTabWidget();
-//    monstres_dock->setWidget(monstres);
-//    monstres_dock->setMinimumWidth(130);
-//    monstres_dock->setMaximumWidth(180);
-
-//    addDockWidget(Qt::RightDockWidgetArea, monstres_dock);
-
-//    Monstre *fenetre = new Monstre("Mendiant 1", 5, 5, 5, 15, 1, 0, 2, 5, "Combat à mains nues");
-//    monstres->addTab(fenetre->afficher(), fenetre->nom());
 
 
 // Création du widget pour l'ordre de marche
@@ -414,8 +397,6 @@ void FenPrincipale::initWidget()
     attaque_dock->setMaximumWidth(180);
 
     addDockWidget(Qt::RightDockWidgetArea, attaque_dock);
-//        passif->setChecked(false);
-//        attaque->setChecked(true);
 }
 
 FenPrincipale::~FenPrincipale()
@@ -583,6 +564,8 @@ void FenPrincipale::ouvrir()
     progressBar_status->setValue(0);
     statusBar->addWidget(progressBar_status);
     int valeurProgression = static_cast<int>(100 / chemins.size());
+
+    int compteurOnglets(0);
     while(cheminPersoOuverture != chemins.end())
     {
         if (progressBar_status->value() + valeurProgression >= 100)
@@ -590,14 +573,81 @@ void FenPrincipale::ouvrir()
         else
             progressBar_status->setValue(progressBar_status->value() + valeurProgression);
 
+        // On crée le personnage
         m_personnages.push_back(new Personnage(*cheminPersoOuverture));
 
+        // On charge le personnage
+        bool erreur = m_personnages.at(compteurOnglets)->chargerPerso();
+            // si erreur, on ferme tout
+        if (erreur)
+        {
+            for (int i = 0; i < m_personnages.count(); i++)
+                zoneCentrale->removeSubWindow(m_personnages.at(i));
+            m_personnages.clear();
+            m_nomPersos.clear();
+
+            zoneCentrale->deleteLater();
+            zoneCentrale = new QMdiArea(this);
+            zoneCentrale->setViewMode(QMdiArea::TabbedView);
+            zoneCentrale->setTabsMovable(true);
+            setCentralWidget(zoneCentrale);
+
+            m_fichierGroupe->close();
+            delete m_fichierGroupe;
+            m_fichierGroupe = 0;
+            m_fichierNotes->close();
+            delete m_fichierNotes;
+            m_fichierNotes = 0;
+
+            notes_txt->setPlainText(NOTES_BASE);
+            notes_txt->setEnabled(false);
+            notes_txt->setUndoRedoEnabled(true);
+
+            ordreMarche->setNomPersos(QStringList("Pas de groupe ouvert"));
+            ordreMarche->setEnabled(false);
+
+            attaque_fen->setNomPersos(QStringList("Pas de groupe ouvert"));
+            attaque_fen->setEnabled(false);
+
+            quitterGroupe->setEnabled(false);
+
+            attaque->setEnabled(false);
+            passif->setEnabled(false);
+
+            xpGroupe->setEnabled(false);
+            POGroupe->setEnabled(false);
+            PAGroupe->setEnabled(false);
+            PCGroupe->setEnabled(false);
+            poGroupe->setEnabled(false);
+            paGroupe->setEnabled(false);
+            pcGroupe->setEnabled(false);
+
+            achatATPRD->setEnabled(false);
+            achatINT->setEnabled(false);
+            achatCHA->setEnabled(false);
+            achatFO->setEnabled(false);
+            achatCOU->setEnabled(false);
+            achatEV->setEnabled(false);
+            achatEA->setEnabled(false);
+
+            statusBar->removeWidget(progressBar_status);
+            delete progressBar_status;
+            progressBar_status = 0;
+
+            return;
+        }
+
+
+        // On ajoute le nom du personnage à la liste
+        m_nomPersos << m_personnages.at(compteurOnglets)->getNom();
+
+        // On crée l'affichage
         MdiSubWindow *sousFen = new MdiSubWindow();
         sousFen->setWidget(m_personnages.at(compteurOnglets));
         sousFen->setWindowTitle(m_personnages.at(compteurOnglets)->getNom());
         zoneCentrale->addSubWindow(sousFen)->show();
 
-        // On connecte le changement d'affichage des onglets
+        // On connecte le changement de nom des onglets
         QObject::connect(m_personnages.at(compteurOnglets), SIGNAL(persoModifie()), this, SLOT(persoModifie()));
 
         cheminPersoOuverture++;
@@ -613,10 +663,10 @@ void FenPrincipale::ouvrir()
 
 
 // On "enable" l'ordre de marche et la gestion de l'attaque
-    ordreMarche->setNomPersos(nomPersoOuverts);
+    ordreMarche->setNomPersos(m_nomPersos);
     ordreMarche->setEnabled(true);
 
-    attaque_fen->setNomPersos(nomPersoOuverts);
+    attaque_fen->setNomPersos(m_nomPersos);
     attaque_fen->setEnabled(true);
 
 // On "enable" les boutons
@@ -707,19 +757,189 @@ void FenPrincipale::enregistrerNotes()  // Pour juste les notes
 // Fermer le groupe en cours
 void FenPrincipale::fermerGroupe()
 {
-    enregistrerTout();
+    bool modifNonRec(false);
+    for (int i = 0; i < m_personnages.count(); i++)
+        if (m_personnages.at(i)->getModif())
+            modifNonRec = true;
 
-// On relance NBH
-    QProcess::startDetached(QApplication::applicationFilePath(), QStringList("-fermer_gr"));
+// S'il y a des modifications non enregistrées, on demande que faire
+    if (modifNonRec)
+    {
+        QMessageBox question;
+        question.setWindowTitle("Fermer le groupe actuel ?");
+        question.setText("Il y a des modifications non enregistrées");
+        question.setInformativeText("Voulez-vous enregistrer les modifications ?");
+        question.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        question.setDefaultButton(QMessageBox::Save);
+        int reponse = question.exec();
 
-    qApp->quit();
-}
-void FenPrincipale::fermerOnglets()
-{
-// On relance NBH
-    QProcess::startDetached(QApplication::applicationFilePath(), QStringList("-fermer_onglets"));
+        if (reponse == QMessageBox::Save)
+        {
+            log("Fermeture du groupe :");
+            log("Enregistrement du groupe :", 1);
+            enregistrerTout();
 
-    qApp->quit();
+            for (int i = 0; i < m_personnages.count(); i++)
+                zoneCentrale->removeSubWindow(m_personnages.at(i));
+            m_personnages.clear();
+            m_nomPersos.clear();
+
+            zoneCentrale->deleteLater();
+            zoneCentrale = new QMdiArea(this);
+            zoneCentrale->setViewMode(QMdiArea::TabbedView);
+            zoneCentrale->setTabsMovable(true);
+            setCentralWidget(zoneCentrale);
+
+            m_fichierGroupe->close();
+            delete m_fichierGroupe;
+            m_fichierGroupe = 0;
+            m_fichierNotes->close();
+            delete m_fichierNotes;
+            m_fichierNotes = 0;
+
+            notes_txt->setPlainText(NOTES_BASE);
+            notes_txt->setEnabled(false);
+            notes_txt->setUndoRedoEnabled(true);
+
+            ordreMarche->setNomPersos(QStringList("Pas de groupe ouvert"));
+            ordreMarche->setEnabled(false);
+
+            attaque_fen->setNomPersos(QStringList("Pas de groupe ouvert"));
+            attaque_fen->setEnabled(false);
+
+            quitterGroupe->setEnabled(false);
+
+            attaque->setEnabled(false);
+            passif->setEnabled(false);
+
+            xpGroupe->setEnabled(false);
+            POGroupe->setEnabled(false);
+            PAGroupe->setEnabled(false);
+            PCGroupe->setEnabled(false);
+            poGroupe->setEnabled(false);
+            paGroupe->setEnabled(false);
+            pcGroupe->setEnabled(false);
+
+            achatATPRD->setEnabled(false);
+            achatINT->setEnabled(false);
+            achatCHA->setEnabled(false);
+            achatFO->setEnabled(false);
+            achatCOU->setEnabled(false);
+            achatEV->setEnabled(false);
+            achatEA->setEnabled(false);
+
+            log("Groupe fermé !", 1);
+        }
+        else if (reponse == QMessageBox::Discard)
+        {
+            log("Fermeture du groupe !");
+
+            for (int i = 0; i < m_personnages.count(); i++)
+                zoneCentrale->removeSubWindow(m_personnages.at(i));
+            m_personnages.clear();
+            m_nomPersos.clear();
+
+            zoneCentrale->deleteLater();
+            zoneCentrale = new QMdiArea(this);
+            zoneCentrale->setViewMode(QMdiArea::TabbedView);
+            zoneCentrale->setTabsMovable(true);
+            setCentralWidget(zoneCentrale);
+
+            m_fichierGroupe->close();
+            delete m_fichierGroupe;
+            m_fichierGroupe = 0;
+            m_fichierNotes->close();
+            delete m_fichierNotes;
+            m_fichierNotes = 0;
+
+            notes_txt->setPlainText(NOTES_BASE);
+            notes_txt->setEnabled(false);
+            notes_txt->setUndoRedoEnabled(true);
+
+            ordreMarche->setNomPersos(QStringList("Pas de groupe ouvert"));
+            ordreMarche->setEnabled(false);
+
+            attaque_fen->setNomPersos(QStringList("Pas de groupe ouvert"));
+            attaque_fen->setEnabled(false);
+
+            quitterGroupe->setEnabled(false);
+
+            attaque->setEnabled(false);
+            passif->setEnabled(false);
+
+            xpGroupe->setEnabled(false);
+            POGroupe->setEnabled(false);
+            PAGroupe->setEnabled(false);
+            PCGroupe->setEnabled(false);
+            poGroupe->setEnabled(false);
+            paGroupe->setEnabled(false);
+            pcGroupe->setEnabled(false);
+
+            achatATPRD->setEnabled(false);
+            achatINT->setEnabled(false);
+            achatCHA->setEnabled(false);
+            achatFO->setEnabled(false);
+            achatCOU->setEnabled(false);
+            achatEV->setEnabled(false);
+            achatEA->setEnabled(false);
+        }
+        else if (reponse == QMessageBox::Cancel)
+            return;
+    }
+// Sinon, on ferme le groupe
+    else
+    {
+        log("Fermeture du groupe !");
+
+        for (int i = 0; i < m_personnages.count(); i++)
+            zoneCentrale->removeSubWindow(m_personnages.at(i));
+        m_personnages.clear();
+        m_nomPersos.clear();
+
+        zoneCentrale->deleteLater();
+        zoneCentrale = new QMdiArea(this);
+        zoneCentrale->setViewMode(QMdiArea::TabbedView);
+        zoneCentrale->setTabsMovable(true);
+        setCentralWidget(zoneCentrale);
+
+        m_fichierGroupe->close();
+        delete m_fichierGroupe;
+        m_fichierGroupe = 0;
+        m_fichierNotes->close();
+        delete m_fichierNotes;
+        m_fichierNotes = 0;
+
+        notes_txt->setPlainText(NOTES_BASE);
+        notes_txt->setEnabled(false);
+        notes_txt->setUndoRedoEnabled(true);
+
+        ordreMarche->setNomPersos(QStringList("Pas de groupe ouvert"));
+        ordreMarche->setEnabled(false);
+
+        attaque_fen->setNomPersos(QStringList("Pas de groupe ouvert"));
+        attaque_fen->setEnabled(false);
+
+        quitterGroupe->setEnabled(false);
+
+        attaque->setEnabled(false);
+        passif->setEnabled(false);
+
+        xpGroupe->setEnabled(false);
+        POGroupe->setEnabled(false);
+        PAGroupe->setEnabled(false);
+        PCGroupe->setEnabled(false);
+        poGroupe->setEnabled(false);
+        paGroupe->setEnabled(false);
+        pcGroupe->setEnabled(false);
+
+        achatATPRD->setEnabled(false);
+        achatINT->setEnabled(false);
+        achatCHA->setEnabled(false);
+        achatFO->setEnabled(false);
+        achatCOU->setEnabled(false);
+        achatEV->setEnabled(false);
+        achatEA->setEnabled(false);
+    }
 }
 
 // Quitter NBH
@@ -864,7 +1084,7 @@ void FenPrincipale::xp()
 
     if (ok)
     {
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
+        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
             tableauDePersonnages[*it].plus_xp(xpPlus);
 
         log("Ajout d'expérience de groupe : " + QString::number(xpPlus));
@@ -881,7 +1101,7 @@ void FenPrincipale::PO()
 
     if (ok)
     {
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
+        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
             tableauDePersonnages[*it].plus_po(poPlus);
 
         log("Ajout de PO de groupe : " + QString::number(poPlus));
@@ -897,7 +1117,7 @@ void FenPrincipale::PA()
 
     if (ok)
     {
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
+        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
             tableauDePersonnages[*it].plus_pa(paPlus);
 
         log("Ajout de PA de groupe : " + QString::number(paPlus));
@@ -913,7 +1133,7 @@ void FenPrincipale::PC()
 
     if (ok)
     {
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
+        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
             tableauDePersonnages[*it].plus_pc(pcPlus);
 
         log("Ajout de PC de groupe : " + QString::number(pcPlus));
@@ -930,7 +1150,7 @@ void FenPrincipale::po()
 
     if (ok)
     {
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
+        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
             tableauDePersonnages[*it].moins_po(poMoins);
 
         log("Retrait de PO de groupe : " + QString::number(poMoins));
@@ -946,7 +1166,7 @@ void FenPrincipale::pa()
 
     if (ok)
     {
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
+        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
             tableauDePersonnages[*it].moins_pa(paMoins);
 
         log("Retrait de PA de groupe : " + QString::number(paMoins));
@@ -962,7 +1182,7 @@ void FenPrincipale::pc()
 
     if (ok)
     {
-        for (QStringList::iterator it = nomPersoOuverts.begin(); it != nomPersoOuverts.end(); it++)
+        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
             tableauDePersonnages[*it].moins_pc(pcMoins);
 
         log("Retrait de PC de groupe : " + QString::number(pcMoins));

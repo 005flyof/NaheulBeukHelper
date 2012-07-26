@@ -67,5 +67,4 @@ int main(int argc, char *argv[])
     22	- chargement des origines/métiers au démarrage				(22)	-
     - modifier les caractéristiques -> <2 et >18 pour bonus et malus
     - modifier la fermeture des groupe
-    - modifier la gestion du log => plus joli
 */
