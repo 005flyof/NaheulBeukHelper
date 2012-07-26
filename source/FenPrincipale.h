@@ -47,7 +47,7 @@
 
         void attaquer();
 
-        /*void xp();
+        void xp();
         void PO();
         void PA();
         void PC();

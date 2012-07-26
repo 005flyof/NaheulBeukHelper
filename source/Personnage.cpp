@@ -17,11 +17,14 @@ Personnage::~Personnage()
 }
 
 
+// Accesseurs
 QString Personnage::getNom() const
 {
     return m_nom;
 }
 
+
+// Affichage
 void Personnage::setAffichage()
 {
 // Informations générales
@@ -291,46 +294,6 @@ void Personnage::setAffichage()
     ui->equips_9->setText(m_equipements[8]);
     ui->equips_10->setText(m_equipements[9]);
 }
-void Personnage::viderVariables()
-{
-    m_nom = "";
-    m_sexe = "";
-    m_origine = "";
-    m_metier = "";
-
-    m_EV = 0;
-    m_EV_modif = 0;
-
-    m_presenceEA = false;
-    m_EA = 0;
-    m_EA_modif = 0;
-    m_typeEA = "";
-
-    m_carac = 0;
-    m_carac_modif = 0;
-
-    m_ptsDestin = 0;
-    m_niveau = 0;
-    m_experience = 0;
-
-    m_richesses = 0;
-
-    for (int lecteur = 0; lecteur < MAX_VETEMENT; lecteur++)
-        m_vetements[lecteur] = 0;
-
-    for (int lecteur = 0; lecteur < MAX_EQUIPEMENT; lecteur++)
-        m_equipements[lecteur] = "";
-
-    for (int lecteur = 0; lecteur < MAX_PROTECTION; lecteur++)
-        m_protections[lecteur] = 0;
-    m_prTotale = 0;
-
-    for (int lecteur = 0; lecteur < MAX_ARME; lecteur++)
-        m_armes[lecteur] = 0;
-
-    for (int lecteur = 0; lecteur < MAX_FLECHE; lecteur++)
-        m_fleches[lecteur] = 0;
-}
 void Personnage::rafraichirRichesses()
 {
 // PO
@@ -388,6 +351,167 @@ void Personnage::rafraichirRichesses()
     }
 }
 
+
+// Diverses
+void Personnage::viderVariables()
+{
+    m_nom = "";
+    m_sexe = "";
+    m_origine = "";
+    m_metier = "";
+
+    m_EV = 0;
+    m_EV_modif = 0;
+
+    m_presenceEA = false;
+    m_EA = 0;
+    m_EA_modif = 0;
+    m_typeEA = "";
+
+    m_carac = 0;
+    m_carac_modif = 0;
+
+    m_ptsDestin = 0;
+    m_niveau = 0;
+    m_experience = 0;
+
+    m_richesses = 0;
+
+    for (int lecteur = 0; lecteur < MAX_VETEMENT; lecteur++)
+        m_vetements[lecteur] = 0;
+
+    for (int lecteur = 0; lecteur < MAX_EQUIPEMENT; lecteur++)
+        m_equipements[lecteur] = "";
+
+    for (int lecteur = 0; lecteur < MAX_PROTECTION; lecteur++)
+        m_protections[lecteur] = 0;
+    m_prTotale = 0;
+
+    for (int lecteur = 0; lecteur < MAX_ARME; lecteur++)
+        m_armes[lecteur] = 0;
+
+    for (int lecteur = 0; lecteur < MAX_FLECHE; lecteur++)
+        m_fleches[lecteur] = 0;
+}
+bool Personnage::setNiveau()
+{
+    int niveauAncien = m_niveau;
+
+    if (m_experience == 0 || m_experience < 100)
+    {
+        m_niveau = 1;
+    }
+    else if (m_experience == 100 || m_experience < 300)
+    {
+        m_niveau = 2;
+    }
+    else if (m_experience == 300 || m_experience < 600)
+    {
+        m_niveau = 3;
+    }
+    else if (m_experience == 600 || m_experience < 1000)
+    {
+        m_niveau = 4;
+    }
+    else if (m_experience == 1000 || m_experience < 1500)
+    {
+        m_niveau = 5;
+    }
+    else if (m_experience == 1500 || m_experience < 2100)
+    {
+        m_niveau = 6;
+    }
+    else if (m_experience == 2100 || m_experience < 2800)
+    {
+        m_niveau = 7;
+    }
+    else if (m_experience == 2800 || m_experience < 3600)
+    {
+        m_niveau = 8;
+    }
+    else if (m_experience == 3600 || m_experience < 4500)
+    {
+        m_niveau = 9;
+    }
+    else if (m_experience == 4500 || m_experience < 5500)
+    {
+        m_niveau = 10;
+    }
+    else if (m_experience == 5500 || m_experience < 6600)
+    {
+        m_niveau = 11;
+    }
+    else if (m_experience == 6600 || m_experience < 7800)
+    {
+        m_niveau = 12;
+    }
+    else if (m_experience == 7800 || m_experience < 9100)
+    {
+        m_niveau = 13;
+    }
+    else if (m_experience == 9100 || m_experience < 10500)
+    {
+        m_niveau = 14;
+    }
+    else if (m_experience == 10500 || m_experience < 12000)
+    {
+        m_niveau = 15;
+    }
+    else if (m_experience == 12000 || m_experience < 13600)
+    {
+        m_niveau = 16;
+    }
+    else if (m_experience == 13600 || m_experience < 15300)
+    {
+        m_niveau = 17;
+    }
+    else if (m_experience == 15300 || m_experience < 17100)
+    {
+        m_niveau = 18;
+    }
+    else if (m_experience == 17100 || m_experience < 19000)
+    {
+        m_niveau = 19;
+    }
+    else if (m_experience == 19000 || m_experience < 21000)
+    {
+        m_niveau = 20;
+    }
+    else if (m_experience == 21000 || m_experience < 24000)
+    {
+        m_niveau = 21;
+    }
+    else if (m_experience == 24000 || m_experience < 29000)
+    {
+        m_niveau = 22;
+    }
+    else if (m_experience == 29000 || m_experience < 35000)
+    {
+        m_niveau = 23;
+    }
+    else if (m_experience == 35000 || m_experience < 45000)
+    {
+        m_niveau = 24;
+    }
+    else if (m_experience == 45000 || m_experience < 60000)
+    {
+        m_niveau = 25;
+    }
+    else if (m_experience >= 6000)
+    {
+        m_niveau = 26;
+    }
+
+    ui->lvl->setText(QString::number(m_niveau));
+
+    // Si le niveau est modifié, on renvoie 'true'
+    if (niveauAncien != m_niveau)
+        return true;
+    else
+        return false;
+}
+
+// Fonctions de chargement
 Caracteristiques Personnage::chargerCarac(bool *erreur, QString ligne, bool AT_PRD, int numLigne)
 {
     if (AT_PRD)
@@ -943,123 +1067,17 @@ void Personnage::enregistrerPerso()
     modifNonRec = false;
 }
 
-bool Personnage::setNiveau()
+
+// Lors de la modification
+void Personnage::modifierPerso()
 {
-    int niveauAncien = m_niveau;
-
-    if (m_experience == 0 || m_experience < 100)
-    {
-        m_niveau = 1;
-    }
-    else if (m_experience == 100 || m_experience < 300)
-    {
-        m_niveau = 2;
-    }
-    else if (m_experience == 300 || m_experience < 600)
-    {
-        m_niveau = 3;
-    }
-    else if (m_experience == 600 || m_experience < 1000)
-    {
-        m_niveau = 4;
-    }
-    else if (m_experience == 1000 || m_experience < 1500)
-    {
-        m_niveau = 5;
-    }
-    else if (m_experience == 1500 || m_experience < 2100)
-    {
-        m_niveau = 6;
-    }
-    else if (m_experience == 2100 || m_experience < 2800)
-    {
-        m_niveau = 7;
-    }
-    else if (m_experience == 2800 || m_experience < 3600)
-    {
-        m_niveau = 8;
-    }
-    else if (m_experience == 3600 || m_experience < 4500)
-    {
-        m_niveau = 9;
-    }
-    else if (m_experience == 4500 || m_experience < 5500)
-    {
-        m_niveau = 10;
-    }
-    else if (m_experience == 5500 || m_experience < 6600)
-    {
-        m_niveau = 11;
-    }
-    else if (m_experience == 6600 || m_experience < 7800)
-    {
-        m_niveau = 12;
-    }
-    else if (m_experience == 7800 || m_experience < 9100)
-    {
-        m_niveau = 13;
-    }
-    else if (m_experience == 9100 || m_experience < 10500)
-    {
-        m_niveau = 14;
-    }
-    else if (m_experience == 10500 || m_experience < 12000)
-    {
-        m_niveau = 15;
-    }
-    else if (m_experience == 12000 || m_experience < 13600)
-    {
-        m_niveau = 16;
-    }
-    else if (m_experience == 13600 || m_experience < 15300)
-    {
-        m_niveau = 17;
-    }
-    else if (m_experience == 15300 || m_experience < 17100)
-    {
-        m_niveau = 18;
-    }
-    else if (m_experience == 17100 || m_experience < 19000)
-    {
-        m_niveau = 19;
-    }
-    else if (m_experience == 19000 || m_experience < 21000)
-    {
-        m_niveau = 20;
-    }
-    else if (m_experience == 21000 || m_experience < 24000)
-    {
-        m_niveau = 21;
-    }
-    else if (m_experience == 24000 || m_experience < 29000)
-    {
-        m_niveau = 22;
-    }
-    else if (m_experience == 29000 || m_experience < 35000)
-    {
-        m_niveau = 23;
-    }
-    else if (m_experience == 35000 || m_experience < 45000)
-    {
-        m_niveau = 24;
-    }
-    else if (m_experience == 45000 || m_experience < 60000)
-    {
-        m_niveau = 25;
-    }
-    else if (m_experience >= 6000)
-    {
-        m_niveau = 26;
-    }
-
-    ui->lvl->setText(QString::number(m_niveau));
-
-    // Si le niveau est modifié, on renvoie 'true'
-    if (niveauAncien != m_niveau)
-        return true;
-    else
-        return false;
+    modifNonRec = true;
 }
+bool Personnage::getModif() const
+{
+    return modifNonRec;
+}
+
 
 // Slots perso
 void Personnage::ajouterXP(int value)
@@ -1288,6 +1306,9 @@ void Personnage::ajouterXP(int value)
                                      m_nom + " doit choisir une spécialisation supplémentaire");
         }
     }
+    emit persoModifie();
+
+    ui->xp->setText(QString::number(m_experience));
 }
 
 void Personnage::ajouterPO(int value)
@@ -1314,6 +1335,7 @@ void Personnage::ajouterPO(int value)
     }
 
     rafraichirRichesses();
+    emit persoModifie();
 }
 void Personnage::retirerPO(int value)
 {
@@ -1339,6 +1361,7 @@ void Personnage::retirerPO(int value)
     }
 
     rafraichirRichesses();
+    emit persoModifie();
 }
 void Personnage::ajouterPA(int value)
 {
@@ -1364,6 +1387,7 @@ void Personnage::ajouterPA(int value)
     }
 
     rafraichirRichesses();
+    emit persoModifie();
 }
 void Personnage::retirerPA(int value)
 {
@@ -1389,6 +1413,7 @@ void Personnage::retirerPA(int value)
     }
 
     rafraichirRichesses();
+    emit persoModifie();
 }
 void Personnage::ajouterPC(int value)
 {
@@ -1414,6 +1439,7 @@ void Personnage::ajouterPC(int value)
     }
 
     rafraichirRichesses();
+    emit persoModifie();
 }
 void Personnage::retirerPC(int value)
 {
@@ -1439,18 +1465,9 @@ void Personnage::retirerPC(int value)
     }
 
     rafraichirRichesses();
+    emit persoModifie();
 }
 
-
-
-void Personnage::modifierPerso()
-{
-    modifNonRec = true;
-}
-bool Personnage::getModif() const
-{
-    return modifNonRec;
-}
 
 // Slots automatiques de Qt
 // Informations générales
@@ -1502,6 +1519,7 @@ void Personnage::on_destinMoins_clicked()
     else
         QMessageBox::information(this, "Erreur !",
                                  m_nom + " ne peut pas perdre de points de destin : il n'en a déjà plus !");
+    emit persoModifie();
 }
 
 // Richesses
@@ -1534,21 +1552,25 @@ void Personnage::on_conversionPA_et_PC_en_PO_clicked()
 {
     m_richesses->convertir(Richesses::PA_PC_en_PO);
     rafraichirRichesses();
+    emit persoModifie();
 }
 void Personnage::on_conversionPO_en_PA_clicked()
 {
     m_richesses->convertir(Richesses::PO_en_PA);
     rafraichirRichesses();
+    emit persoModifie();
 }
 void Personnage::on_conversionPO_en_PC_clicked()
 {
     m_richesses->convertir(Richesses::PO_en_PC);
     rafraichirRichesses();
+    emit persoModifie();
 }
 void Personnage::on_conversionPA_en_PC_clicked()
 {
     m_richesses->convertir(Richesses::PA_en_PC);
     rafraichirRichesses();
+    emit persoModifie();
 }
 
 // Equipements
@@ -1560,6 +1582,7 @@ void Personnage::on_equipsEdit_1_clicked(bool checked)
         ui->equips_1->setPlainText(m_equipements[0]);
 
     ui->equips_1->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_2_clicked(bool checked)
 {
@@ -1569,6 +1592,7 @@ void Personnage::on_equipsEdit_2_clicked(bool checked)
         ui->equips_2->setPlainText(m_equipements[1]);
 
     ui->equips_2->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_3_clicked(bool checked)
 {
@@ -1578,6 +1602,7 @@ void Personnage::on_equipsEdit_3_clicked(bool checked)
         ui->equips_3->setPlainText(m_equipements[2]);
 
     ui->equips_3->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_4_clicked(bool checked)
 {
@@ -1587,6 +1612,7 @@ void Personnage::on_equipsEdit_4_clicked(bool checked)
         ui->equips_4->setPlainText(m_equipements[3]);
 
     ui->equips_4->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_5_clicked(bool checked)
 {
@@ -1596,6 +1622,7 @@ void Personnage::on_equipsEdit_5_clicked(bool checked)
         ui->equips_5->setPlainText(m_equipements[4]);
 
     ui->equips_5->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_6_clicked(bool checked)
 {
@@ -1605,6 +1632,7 @@ void Personnage::on_equipsEdit_6_clicked(bool checked)
         ui->equips_6->setPlainText(m_equipements[5]);
 
     ui->equips_6->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_7_clicked(bool checked)
 {
@@ -1614,6 +1642,7 @@ void Personnage::on_equipsEdit_7_clicked(bool checked)
         ui->equips_7->setPlainText(m_equipements[6]);
 
     ui->equips_7->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_8_clicked(bool checked)
 {
@@ -1623,6 +1652,7 @@ void Personnage::on_equipsEdit_8_clicked(bool checked)
         ui->equips_8->setPlainText(m_equipements[7]);
 
     ui->equips_8->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_9_clicked(bool checked)
 {
@@ -1632,6 +1662,7 @@ void Personnage::on_equipsEdit_9_clicked(bool checked)
         ui->equips_9->setPlainText(m_equipements[8]);
 
     ui->equips_9->setReadOnly(!checked);
+    emit persoModifie();
 }
 void Personnage::on_equipsEdit_10_clicked(bool checked)
 {
@@ -1641,4 +1672,5 @@ void Personnage::on_equipsEdit_10_clicked(bool checked)
         ui->equips_10->setPlainText(m_equipements[9]);
 
     ui->equips_10->setReadOnly(!checked);
+    emit persoModifie();
 }

@@ -399,13 +399,14 @@ void FenPrincipale::initWidget()
     addDockWidget(Qt::RightDockWidgetArea, attaque_dock);
 }
 
+
 FenPrincipale::~FenPrincipale()
 {}
+
 
 // Fenêtre de création des personnages
 void FenPrincipale::creerNouveauPersonnage()
 {}
-
 // Créer un nouveau groupe
 void FenPrincipale::creerNouveauGroupe()
 {
@@ -467,7 +468,6 @@ void FenPrincipale::creerNouveauGroupe()
     log("Groupe bien crée !");
     statusBar->showMessage("Groupe bien créé", 2000);
 }
-
 // Ajouter un personnage
 void FenPrincipale::ajouterPersonnage()
 {}
@@ -754,6 +754,7 @@ void FenPrincipale::enregistrerNotes()  // Pour juste les notes
     }
 }
 
+
 // Fermer le groupe en cours
 void FenPrincipale::fermerGroupe()
 {
@@ -941,7 +942,6 @@ void FenPrincipale::fermerGroupe()
         achatEA->setEnabled(false);
     }
 }
-
 // Quitter NBH
 void FenPrincipale::closeEvent(QCloseEvent *e)
 {
@@ -1036,6 +1036,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
     }
 }
 
+
 // Mode d'attaque
 void FenPrincipale::modeAttaque()
 {
@@ -1073,7 +1074,8 @@ void FenPrincipale::attaquer()
     QMessageBox::information(this, "En dévelopemment",
                              "Cette fonction est encore en développement.");
 }
-/*
+
+
 // XP de groupe
 void FenPrincipale::xp()
 {
@@ -1084,8 +1086,8 @@ void FenPrincipale::xp()
 
     if (ok)
     {
-        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
-            tableauDePersonnages[*it].plus_xp(xpPlus);
+        for (int i = 0; i < m_personnages.count(); i++)
+            m_personnages.at(i)->ajouterXP(xpPlus);
 
         log("Ajout d'expérience de groupe : " + QString::number(xpPlus));
     }
@@ -1101,8 +1103,8 @@ void FenPrincipale::PO()
 
     if (ok)
     {
-        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
-            tableauDePersonnages[*it].plus_po(poPlus);
+        for (int i = 0; i < m_personnages.count(); i++)
+            m_personnages.at(i)->ajouterPO(poPlus);
 
         log("Ajout de PO de groupe : " + QString::number(poPlus));
     }
@@ -1117,8 +1119,8 @@ void FenPrincipale::PA()
 
     if (ok)
     {
-        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
-            tableauDePersonnages[*it].plus_pa(paPlus);
+        for (int i = 0; i < m_personnages.count(); i++)
+            m_personnages.at(i)->ajouterPA(paPlus);
 
         log("Ajout de PA de groupe : " + QString::number(paPlus));
     }
@@ -1133,8 +1135,8 @@ void FenPrincipale::PC()
 
     if (ok)
     {
-        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
-            tableauDePersonnages[*it].plus_pc(pcPlus);
+        for (int i = 0; i < m_personnages.count(); i++)
+            m_personnages.at(i)->ajouterPC(pcPlus);
 
         log("Ajout de PC de groupe : " + QString::number(pcPlus));
     }
@@ -1150,8 +1152,8 @@ void FenPrincipale::po()
 
     if (ok)
     {
-        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
-            tableauDePersonnages[*it].moins_po(poMoins);
+        for (int i = 0; i < m_personnages.count(); i++)
+            m_personnages.at(i)->retirerPO(poMoins);
 
         log("Retrait de PO de groupe : " + QString::number(poMoins));
     }
@@ -1166,8 +1168,8 @@ void FenPrincipale::pa()
 
     if (ok)
     {
-        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
-            tableauDePersonnages[*it].moins_pa(paMoins);
+        for (int i = 0; i < m_personnages.count(); i++)
+            m_personnages.at(i)->retirerPA(paMoins);
 
         log("Retrait de PA de groupe : " + QString::number(paMoins));
     }
@@ -1182,13 +1184,14 @@ void FenPrincipale::pc()
 
     if (ok)
     {
-        for (QStringList::iterator it = m_nomPersos.begin(); it != m_nomPersos.end(); it++)
-            tableauDePersonnages[*it].moins_pc(pcMoins);
+        for (int i = 0; i < m_personnages.count(); i++)
+            m_personnages.at(i)->retirerPC(pcMoins);
 
         log("Retrait de PC de groupe : " + QString::number(pcMoins));
     }
 }
-*/
+
+
 // Achat
 /*void FenPrincipale::ATPRD()
 {
@@ -1219,6 +1222,8 @@ void FenPrincipale::EA()
     tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatEA();
 }
 */
+
+
 // Afficher les barres d'outils
 void FenPrincipale::afficherFichier(bool affiche)
 {
@@ -1242,6 +1247,7 @@ void FenPrincipale::afficherAchat(bool affiche)
         achatToolBar->setVisible(true);
 }
 
+
 // A propos
 void FenPrincipale::aProposDeNBH()
 {
@@ -1252,8 +1258,7 @@ void FenPrincipale::aProposDeNBH()
                        "Vous utilisez la version " VERSION ".\n\n"
                        "Ce programme est développé en C++, avec QtCreator et utilise la bibliothèque graphique open source Qt.");
 }
-
-// Affichage de la licence
+// Licence
 void FenPrincipale::licence()
 {
 // On ouvre le fichier contenant la licence
@@ -1289,7 +1294,6 @@ void FenPrincipale::licence()
     licenceDialog->setLayout(layout);
     licenceDialog->show();
 }
-
 // Vérification de MAJ
 void FenPrincipale::MAJ()
 {
@@ -1299,12 +1303,12 @@ void FenPrincipale::MAJ()
 // On affiche la fenêtre
     maj->show();
 }
-
 // Help
 void FenPrincipale::help()
 {
     QDesktopServices::openUrl(QUrl::fromLocalFile(QApplication::applicationDirPath().replace("\\", "/").remove("/debug").remove("/release") + "/aide/index.html"));
 }
+
 
 // Modification d'un personnage
 void FenPrincipale::persoModifie()
@@ -1316,6 +1320,9 @@ void FenPrincipale::persoModifie()
     }
     enregistrer->setEnabled(true);
 }
+
+
+
 
 // MdiSubWindow modifiée
 MdiSubWindow::MdiSubWindow()

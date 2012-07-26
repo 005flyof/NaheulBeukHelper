@@ -58,13 +58,11 @@ int main(int argc, char *argv[])
     13	- convertion des PC et PA en PO								(13)	- fait
     14	- synchronisation des onglets								(14)	- fait
     15	- faire le log                                              (15)    - fait
-    16	- fonctions d'ouverture des fichiers, de chargement des obj (16)	- pas la peine
+    16	- fonctions d'ouverture des fichiers, de chargement des obj (16)	- fait
     17	- changement des erreurs pour les chargements de  carac     (17)    - fait
-    18	- classe personnage à faire en 2 parties                    (18)    -
+    18	- classe personnage à faire en 2 parties                    (18)    - fait
     19	- changer l'encodage de tous les fichiers : iso -> utf-8	(19)	- fait
     20	- modififer les updates / updaters							(20)	- fait
     21	- faire la doc des sources									(21)	-
     22	- chargement des origines/métiers au démarrage				(22)	-
-    - modifier les caractéristiques -> <2 et >18 pour bonus et malus
-    - modifier la fermeture des groupe
 */
