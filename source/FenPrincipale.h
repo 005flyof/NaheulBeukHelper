@@ -39,7 +39,7 @@
         void creerNouveauGroupe();
         void ajouterPersonnage();
         void ouvrir();
-        void enregistrerTout();
+        void enregistrerGroupe();
         void fermerGroupe();
         void fermerOnglets();
 
@@ -84,6 +84,7 @@
         void initWidget();
 
         void enregistrerNotes();
+        void enregistrerTout();
 
         // ToolBars
         QToolBar *fichierToolBar;

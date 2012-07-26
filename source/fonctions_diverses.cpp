@@ -84,3 +84,27 @@ void log(QString const& message, bool vider)
 
     log.close();
 }
+void log(QString const& message, int niveau)
+{
+    QFile log("nbh.log");
+    if (!log.open(QIODevice::Append | QIODevice::Text))
+        fatalError("Erreur lors de l'ouverture du fichier log");
+
+    QTextStream entree(&log);
+
+    switch (niveau)
+    {
+    case 1:
+        entree << "                         -> " + message + "\n";
+        break;
+
+    case 2:
+        entree << "                                     * " + message + "\n";
+        break;
+
+    default:
+        fatalError("Niveau pour le log inconnu !");
+    }
+
+    log.close();
+}

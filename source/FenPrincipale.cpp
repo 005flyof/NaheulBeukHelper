@@ -103,7 +103,7 @@ void FenPrincipale::initMenus_ToolBars()
     enregistrer = fichier->addAction("Enregistrer les modifications apportées au groupe");
         enregistrer->setShortcut(QKeySequence("Ctrl+S"));
         enregistrer->setIcon(QIcon(":prog-data/img/save.png"));
-        enregistrer->setStatusTip("Forcer l'enregistrement des personnages du groupe ouvert.");
+        enregistrer->setStatusTip("Enregistrer les modifications apportées au groupe ouvert.");
         enregistrer->setEnabled(false);
     fichier->addSeparator();
 
@@ -255,7 +255,7 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(nouveauGroupe, SIGNAL(triggered()), this, SLOT(creerNouveauGroupe()));
     QObject::connect(ajouterPerso, SIGNAL(triggered()), this, SLOT(ajouterPersonnage()));
     QObject::connect(ouvrirPersos, SIGNAL(triggered()), this, SLOT(ouvrir()));
-    QObject::connect(enregistrer, SIGNAL(triggered()), this, SLOT(enregistrerTout()));
+    QObject::connect(enregistrer, SIGNAL(triggered()), this, SLOT(enregistrerGroupe()));
     QObject::connect(quitterGroupe, SIGNAL(triggered()), this, SLOT(fermerGroupe()));
     QObject::connect(quitter, SIGNAL(triggered()), this, SLOT(close()));
 
@@ -474,6 +474,7 @@ void FenPrincipale::creerNouveauGroupe()
 
     QTextStream sortie(&groupeRec);
 
+    QString cheminApp = QApplication::applicationDirPath();
     if (OS == 0)
     {
         cheminNotes.replace("/", "\\");
@@ -566,7 +567,7 @@ void FenPrincipale::ouvrir()
         return;
     }
 
-    log("Ouverture du fichier de notes : '" + m_fichierNotes->fileName() + "'");
+    log("Ouverture du fichier de notes : '" + m_fichierNotes->fileName() + "'", 1);
 
     QTextStream notes_flux(m_fichierNotes);
     QString notes = notes_flux.readAll();
@@ -608,7 +609,7 @@ void FenPrincipale::ouvrir()
     progressBar_status = 0;
 
     statusBar->showMessage("Groupe ouvert avec succès", 2000);
-    log("Groupe ouvert avec succès !");
+    log("Groupe ouvert avec succès !", 1);
 
 
 // On "enable" l'ordre de marche et la gestion de l'attaque
@@ -619,7 +620,6 @@ void FenPrincipale::ouvrir()
     attaque_fen->setEnabled(true);
 
 // On "enable" les boutons
-    enregistrer->setEnabled(true);
     quitterGroupe->setEnabled(true);
 
     attaque->setEnabled(true);
@@ -643,7 +643,13 @@ void FenPrincipale::ouvrir()
 }
 
 // Enregistrement
-void FenPrincipale::enregistrerTout()
+void FenPrincipale::enregistrerGroupe() // Pour le bouton
+{
+    log("Enregistrement du groupe :");
+    enregistrerTout();
+    enregistrer->setEnabled(false);
+}
+void FenPrincipale::enregistrerTout()   // Pour la fermeture
 {
     if (m_fichierGroupe != 0)
     {
@@ -658,7 +664,7 @@ void FenPrincipale::enregistrerTout()
 
             m_fichierNotes->close();
 
-            log("Enregistrement des notes !");
+            log("Enregistrement des notes !", 2);
         }
         else
             fatalError("Impossible d'accéder à la variable de fichier de notes !");
@@ -672,11 +678,11 @@ void FenPrincipale::enregistrerTout()
             zoneCentrale->subWindowList().at(i)->setWindowTitle(m_personnages.at(i)->getNom());
 
 
-        log("Enregistrement effectué !");
+        log("Enregistrement effectué !", 2);
         statusBar->showMessage("Enregistrement effectué", 2000);
     }
 }
-void FenPrincipale::enregistrerNotes()
+void FenPrincipale::enregistrerNotes()  // Pour juste les notes
 {
     if (m_fichierGroupe != 0)
     {
@@ -691,7 +697,7 @@ void FenPrincipale::enregistrerNotes()
 
             m_fichierNotes->close();
 
-            log("Enregistrement des notes !");
+            log("Enregistrement des notes !", 2);
         }
         else
             fatalError("Impossible d'accéder à la variable de fichier de notes !");
@@ -738,10 +744,10 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
         if (reponse == QMessageBox::Save)
         {
             log("Fermeture de NBH :");
-            log("Enregistrement du groupe :");
+            log("Enregistrement du groupe :", 1);
             enregistrerTout();
 
-            log("Enregistrement des préférences !");
+            log("Enregistrement des préférences !", 1);
 
         // Enregistrement des options/positions
             QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
@@ -762,7 +768,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
         else if (reponse == QMessageBox::Discard)
         {
             log("Fermeture de NBH !");
-            log("Enregistrement des préférences !");
+            log("Enregistrement des préférences !", 1);
 
         // Enregistrement des options/positions
             QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
@@ -787,10 +793,10 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
     else
     {
         log("Fermeture de NBH :");
-        log("Enregistrement du groupe :");
+        log("Enregistrement du groupe :", 1);
         enregistrerNotes();
 
-        log("Enregistrement des préférences !");
+        log("Enregistrement des préférences !", 1);
 
     // Enregistrement des options/positions
         QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
@@ -1088,6 +1094,7 @@ void FenPrincipale::persoModifie()
         if (m_personnages.at(i)->getModif())
             zoneCentrale->subWindowList().at(i)->setWindowTitle("* " + m_personnages.at(i)->getNom());
     }
+    enregistrer->setEnabled(true);
 }
 
 // MdiSubWindow modifiée

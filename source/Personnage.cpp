@@ -855,7 +855,7 @@ void Personnage::chargerPerso()
         }
     }
 
-    log("Personnage chargé !    (" + m_cheminEnregistrement + ")");
+    log("Personnage chargé !    (" + m_cheminEnregistrement + ")", 1);
     m_fichierPerso->close();
 }
 void Personnage::enregistrerPerso()
@@ -923,7 +923,7 @@ void Personnage::enregistrerPerso()
 
     sortie << total;
 
-    log("'" + m_nom + "' a été enregistré !");
+    log("'" + m_nom + "' a été enregistré !", 2);
     m_fichierPerso->close();
 
     modifNonRec = false;

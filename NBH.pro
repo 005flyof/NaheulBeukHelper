@@ -12,7 +12,10 @@ HEADERS += \
     source/Personnage.h \
     source/ClassesPourPersonnage.h \
     source/Competence.h \
-    source/FenPrincipale.h
+    source/FenPrincipale.h \
+    source/FenOrdreMarche.h \
+    source/FenMAJ.h \
+    source/FenAttaque.h
 
 SOURCES += \
     source/main.cpp \
@@ -28,7 +31,10 @@ SOURCES += \
     source/FenChargement.cpp \
     source/Personnage.cpp \
     source/Competence.cpp \
-    source/FenPrincipale.cpp
+    source/FenPrincipale.cpp \
+    source/FenOrdreMarche.cpp \
+    source/FenMAJ.cpp \
+    source/FenAttaque.cpp
 
 QT += network
 
