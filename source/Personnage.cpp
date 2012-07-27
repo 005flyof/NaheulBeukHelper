@@ -1502,6 +1502,7 @@ void Personnage::achatCOU()
 
     rafraichirRichesses();
     rafraichirCarac();
+    emit persoModifie();
 }
 void Personnage::achatINT()
 {
@@ -1531,6 +1532,7 @@ void Personnage::achatINT()
 
     rafraichirRichesses();
     rafraichirCarac();
+    emit persoModifie();
 }
 void Personnage::achatCHA()
 {
@@ -1560,6 +1562,7 @@ void Personnage::achatCHA()
 
     rafraichirRichesses();
     rafraichirCarac();
+    emit persoModifie();
 }
 void Personnage::achatFO()
 {
@@ -1589,6 +1592,7 @@ void Personnage::achatFO()
 
     rafraichirRichesses();
     rafraichirCarac();
+    emit persoModifie();
 }
 void Personnage::achatATPRD()
 {
@@ -1628,6 +1632,7 @@ void Personnage::achatATPRD()
 
     rafraichirRichesses();
     rafraichirCarac();
+    emit persoModifie();
 }
 
 void Personnage::achatEV()
@@ -1658,6 +1663,7 @@ void Personnage::achatEV()
 
     rafraichirRichesses();
     rafraichirCarac();
+    emit persoModifie();
 }
 void Personnage::achatEA()
 {
@@ -1697,6 +1703,7 @@ void Personnage::achatEA()
 
     rafraichirRichesses();
     rafraichirCarac();
+    emit persoModifie();
 }
 
 

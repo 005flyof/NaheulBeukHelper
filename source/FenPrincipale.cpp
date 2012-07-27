@@ -19,20 +19,7 @@
 #include "FenPrincipale.h"
 #include <QtGui>
 
-#define NOTES_BASE "Vos notes par rapport à ce que l'on pert dans le programme une fois sur l'autre !\n\n" \
-                   "Comme les maladies, etc...\n\n" \
-                   "	------------\n\n" \
-                   "Merci d'utiliser ce programme !\n\n" \
-                   "	------------\n\n" \
-                   "Pour commencer :\n" \
-                      "* créez un groupe\n" \
-                      "* créez / ajouter un personnage au groupe créé\n" \
-                      "* ouvrez le groupe\n" \
-                      "* enjoy the features of this program !!!\n\n" \
-                   "	------------\n\n" \
-                   "Vous utilisez la version " VERSION " de ce programme.\n" \
-                   "Ce programme est développé en C++ avec QtCreator, par Florent Fayollas.\n" \
-                   "NaheulBeuk Helper utilise la bibliothèque Qt développée par Nokia."
+#define NOTES_BASE "Pas de groupe de personnages ouverts"
 
 using namespace std;
 
@@ -44,7 +31,7 @@ FenPrincipale::FenPrincipale() :
 // On s'occupe de la fenêtre
     setWindowTitle("NBH     --     NaheulBeuk Helper");
     setIcone(this);
-    setMinimumSize(910, 540);
+    setMinimumSize(900, 540);
 
 // Création de la statusBar
     statusBar = new QStatusBar();
@@ -54,6 +41,12 @@ FenPrincipale::FenPrincipale() :
 // Initialisation diverses
     initMenus_ToolBars();
     initWidget();
+        afficher_notes->setChecked(false);
+        afficher_ordreMarche->setChecked(false);
+        attaque_dock->setVisible(false);
+
+    widgetParDefaut = new Acceuil(VERSION);
+    setCentralWidget(widgetParDefaut);
 
 // Initialisation des options
     QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
@@ -64,6 +57,16 @@ FenPrincipale::FenPrincipale() :
     if (!settings->value("FenPrincipale/windowState").isNull())
         restoreState(settings->value("FenPrincipale/windowState").toByteArray());
 
+
+    if (!settings->value("FenPrincipale/modePassif").isNull())
+    {
+        if (settings->value("FenPrincipale/modePassif").toBool())
+            modePassif();
+        else
+            modeAttaque();
+    }
+
+
     if (!settings->value("FenPrincipale/toolBar/Fichier").isNull())
         afficher_fichier->setChecked(settings->value("FenPrincipale/toolBar/Fichier").toBool());
 
@@ -72,6 +75,13 @@ FenPrincipale::FenPrincipale() :
 
     if (!settings->value("FenPrincipale/toolBar/Achat").isNull())
         afficher_achat->setChecked(settings->value("FenPrincipale/toolBar/Achat").toBool());
+
+
+    if (!settings->value("FenPrincipale/docks/notes").isNull())
+        afficher_notes->setChecked(settings->value("FenPrincipale/docks/notes").toBool());
+
+    if (!settings->value("FenPrincipale/docks/ordreMarche").isNull())
+        afficher_ordreMarche->setChecked(settings->value("FenPrincipale/docks/orderMarche").toBool());
 }
 void FenPrincipale::initMenus_ToolBars()
 {
@@ -210,20 +220,28 @@ void FenPrincipale::initMenus_ToolBars()
 
 // Menu : Affichage
     QMenu *affichage = barreDeMenu->addMenu("&Affichage");
-        QMenu *affichage_barreOutils = affichage->addMenu("Barre d'outils");
-
-        afficher_fichier = affichage_barreOutils->addAction("Fichier");
+        afficher_fichier = affichage->addAction("Fichier");
             afficher_fichier->setEnabled(true);
             afficher_fichier->setCheckable(true);
             afficher_fichier->setChecked(true);
-        afficher_action = affichage_barreOutils->addAction("Actions");
+        afficher_action = affichage->addAction("Actions");
             afficher_action->setEnabled(true);
             afficher_action->setCheckable(true);
             afficher_action->setChecked(true);
-        afficher_achat = affichage_barreOutils->addAction("Achat");
+        afficher_achat = affichage->addAction("Achat");
             afficher_achat->setEnabled(true);
             afficher_achat->setCheckable(true);
             afficher_achat->setChecked(true);
+        affichage->addSeparator();
+
+        afficher_notes = affichage->addAction("Notes");
+            afficher_notes->setEnabled(true);
+            afficher_notes->setCheckable(true);
+            afficher_notes->setChecked(true);
+        afficher_ordreMarche = affichage->addAction("Ordre de marche");
+            afficher_ordreMarche->setEnabled(true);
+            afficher_ordreMarche->setCheckable(true);
+            afficher_ordreMarche->setChecked(true);
 
 
 // Menu : ?
@@ -280,6 +298,8 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(afficher_fichier, SIGNAL(toggled(bool)), this, SLOT(afficherFichier(bool)));
     QObject::connect(afficher_action, SIGNAL(toggled(bool)), this, SLOT(afficherAction(bool)));
     QObject::connect(afficher_achat, SIGNAL(toggled(bool)), this, SLOT(afficherAchat(bool)));
+    QObject::connect(afficher_notes, SIGNAL(toggled(bool)), this, SLOT(afficherNotes(bool)));
+    QObject::connect(afficher_ordreMarche, SIGNAL(toggled(bool)), this, SLOT(afficherOrdreMarche(bool)));
 
     QObject::connect(aPropos, SIGNAL(triggered()), this, SLOT(aProposDeNBH()));
     QObject::connect(aProposDeQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
@@ -343,19 +363,10 @@ void FenPrincipale::initMenus_ToolBars()
 }
 void FenPrincipale::initWidget()
 {
-// Création du widget central
-    zoneCentrale = new QMdiArea(this);
-    zoneCentrale->setViewMode(QMdiArea::TabbedView);
-    zoneCentrale->setTabsMovable(false);
-
-    // On valide le widget "zoneCentrale"
-    setCentralWidget(zoneCentrale);
-
-
 // Création du widget pour les notes
-    QDockWidget *notes = new QDockWidget("Notes :");
-    notes->setFeatures(QDockWidget::NoDockWidgetFeatures);
-    notes->setObjectName("dock-notes");
+    notes_dock = new QDockWidget("Notes");
+    notes_dock->setObjectName("dock-notes");
+    notes_dock->setMinimumWidth(200);
 
     notes_txt = new QTextEdit();
     notes_txt->setPlainText(NOTES_BASE);
@@ -363,38 +374,35 @@ void FenPrincipale::initWidget()
     notes_txt->setUndoRedoEnabled(true);
 
     // On ajoute le widget au Dock
-    notes->setWidget(notes_txt);
-    notes->setMinimumWidth(170);
-    notes->setMaximumWidth(250);
-    addDockWidget(Qt::LeftDockWidgetArea, notes);
+    notes_dock->setWidget(notes_txt);
+    addDockWidget(Qt::LeftDockWidgetArea, notes_dock);
 
 
 // Création du widget pour l'ordre de marche
-    QDockWidget *ordreMarche_dock = new QDockWidget("Ordre de marche :");
-    ordreMarche_dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+    ordreMarche_dock = new QDockWidget("Ordre de marche");
     ordreMarche_dock->setObjectName("dock-marche");
+    ordreMarche_dock->setMaximumWidth(200);
+    ordreMarche_dock->setMinimumWidth(200);
 
     QStringList listeNomVide("Pas de groupe\nde personnages\nouverts");
     ordreMarche = new FenOrdreMarche(listeNomVide);
     ordreMarche->setEnabled(false);
     ordreMarche_dock->setWidget(ordreMarche);
-    ordreMarche_dock->setMinimumWidth(130);
-    ordreMarche_dock->setMaximumWidth(180);
 
     addDockWidget(Qt::RightDockWidgetArea, ordreMarche_dock);
 
 
 // Création du widget de gestion des attaques
-    attaque_dock = new QDockWidget("Gestion des attaques :");
+    attaque_dock = new QDockWidget("Gestion des attaques");
+    attaque_dock->setObjectName("dock-attaque");
     attaque_dock->setFeatures(QDockWidget::NoDockWidgetFeatures);
-    attaque_dock->setObjectName("attack-dock");
+    attaque_dock->setMaximumWidth(200);
+    attaque_dock->setMinimumWidth(200);
 
     attaque_fen = new FenAttaque(listeNomVide);
     attaque_fen->setEnabled(false);
         QObject::connect(attaque_fen, SIGNAL(attaque()), this, SLOT(attaquer()));
     attaque_dock->setWidget(attaque_fen);
-    attaque_dock->setMinimumWidth(130);
-    attaque_dock->setMaximumWidth(180);
 
     addDockWidget(Qt::RightDockWidgetArea, attaque_dock);
 }
@@ -484,7 +492,7 @@ void FenPrincipale::ouvrir()
     }
 
 // On demande à l'utilisateur de choisir le fichier contenant le groupe
-    QString groupeAdresse = QFileDialog::getOpenFileName(zoneCentrale,
+    QString groupeAdresse = QFileDialog::getOpenFileName(this,
                                                          "Ouvrir un groupe",
                                                          "enregistrements",
                                                          "Groupes de personnages (*.nbh)");
@@ -557,6 +565,16 @@ void FenPrincipale::ouvrir()
     notes_txt->setText(notes);
     notes_txt->setEnabled(true);
     notes_txt->setUndoRedoEnabled(true);
+
+
+// Création du widget central
+    zoneCentrale = new QMdiArea(this);
+    zoneCentrale->setViewMode(QMdiArea::TabbedView);
+    zoneCentrale->setTabsMovable(false);
+
+    // On valide le widget "zoneCentrale"
+    setCentralWidget(zoneCentrale);
+
 // On ajoute 1 à l'itérateur
     cheminPersoOuverture++;
 
@@ -587,10 +605,8 @@ void FenPrincipale::ouvrir()
             m_nomPersos.clear();
 
             zoneCentrale->deleteLater();
-            zoneCentrale = new QMdiArea(this);
-            zoneCentrale->setViewMode(QMdiArea::TabbedView);
-            zoneCentrale->setTabsMovable(true);
-            setCentralWidget(zoneCentrale);
+            widgetParDefaut = new Acceuil(VERSION);
+            setCentralWidget(widgetParDefaut);
 
             m_fichierGroupe->close();
             delete m_fichierGroupe;
@@ -753,6 +769,30 @@ void FenPrincipale::enregistrerNotes()  // Pour juste les notes
             fatalError("Impossible d'accéder à la variable de fichier de notes !");
     }
 }
+void FenPrincipale::enregistrerPref()
+{
+    log("Enregistrement des préférences !", 1);
+
+// Enregistrement des options/positions
+    QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
+    settings->beginGroup("FenPrincipale");
+        settings->setValue("geometry", saveGeometry());
+        settings->setValue("windowState", saveState());
+
+        settings->setValue("modePassif", passif->isChecked());
+
+        settings->beginGroup("toolBar");
+            settings->setValue("Fichier", afficher_fichier->isChecked());
+            settings->setValue("Action", afficher_action->isChecked());
+            settings->setValue("Achat", afficher_achat->isChecked());
+        settings->endGroup();
+
+        settings->beginGroup("docks");
+            settings->setValue("notes", afficher_notes->isChecked());
+            settings->setValue("ordreMarche", afficher_ordreMarche->isChecked());
+        settings->endGroup();
+    settings->endGroup();
+}
 
 
 // Fermer le groupe en cours
@@ -786,10 +826,8 @@ void FenPrincipale::fermerGroupe()
             m_nomPersos.clear();
 
             zoneCentrale->deleteLater();
-            zoneCentrale = new QMdiArea(this);
-            zoneCentrale->setViewMode(QMdiArea::TabbedView);
-            zoneCentrale->setTabsMovable(true);
-            setCentralWidget(zoneCentrale);
+            widgetParDefaut = new Acceuil(VERSION);
+            setCentralWidget(widgetParDefaut);
 
             m_fichierGroupe->close();
             delete m_fichierGroupe;
@@ -841,10 +879,8 @@ void FenPrincipale::fermerGroupe()
             m_nomPersos.clear();
 
             zoneCentrale->deleteLater();
-            zoneCentrale = new QMdiArea(this);
-            zoneCentrale->setViewMode(QMdiArea::TabbedView);
-            zoneCentrale->setTabsMovable(true);
-            setCentralWidget(zoneCentrale);
+            widgetParDefaut = new Acceuil(VERSION);
+            setCentralWidget(widgetParDefaut);
 
             m_fichierGroupe->close();
             delete m_fichierGroupe;
@@ -898,10 +934,8 @@ void FenPrincipale::fermerGroupe()
         m_nomPersos.clear();
 
         zoneCentrale->deleteLater();
-        zoneCentrale = new QMdiArea(this);
-        zoneCentrale->setViewMode(QMdiArea::TabbedView);
-        zoneCentrale->setTabsMovable(true);
-        setCentralWidget(zoneCentrale);
+        widgetParDefaut = new Acceuil(VERSION);
+        setCentralWidget(widgetParDefaut);
 
         m_fichierGroupe->close();
         delete m_fichierGroupe;
@@ -966,21 +1000,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
             log("Fermeture de NBH :");
             log("Enregistrement du groupe :", 1);
             enregistrerTout();
-
-            log("Enregistrement des préférences !", 1);
-
-        // Enregistrement des options/positions
-            QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
-            settings->beginGroup("FenPrincipale");
-                settings->setValue("geometry", saveGeometry());
-                settings->setValue("windowState", saveState());
-
-                settings->beginGroup("toolBar");
-                    settings->setValue("Fichier", afficher_fichier->isChecked());
-                    settings->setValue("Action", afficher_action->isChecked());
-                    settings->setValue("Achat", afficher_achat->isChecked());
-                settings->endGroup();
-            settings->endGroup();
+            enregistrerPref();
 
             // On ferme NBH
             e->accept();
@@ -988,20 +1008,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
         else if (reponse == QMessageBox::Discard)
         {
             log("Fermeture de NBH !");
-            log("Enregistrement des préférences !", 1);
-
-        // Enregistrement des options/positions
-            QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
-            settings->beginGroup("FenPrincipale");
-                settings->setValue("geometry", saveGeometry());
-                settings->setValue("windowState", saveState());
-
-                settings->beginGroup("toolBar");
-                    settings->setValue("Fichier", afficher_fichier->isChecked());
-                    settings->setValue("Action", afficher_action->isChecked());
-                    settings->setValue("Achat", afficher_achat->isChecked());
-                settings->endGroup();
-            settings->endGroup();
+            enregistrerPref();
 
             // On ferme NBH
             e->accept();
@@ -1015,21 +1022,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
         log("Fermeture de NBH :");
         log("Enregistrement du groupe :", 1);
         enregistrerNotes();
-
-        log("Enregistrement des préférences !", 1);
-
-    // Enregistrement des options/positions
-        QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
-        settings->beginGroup("FenPrincipale");
-            settings->setValue("geometry", saveGeometry());
-            settings->setValue("windowState", saveState());
-
-            settings->beginGroup("toolBar");
-                settings->setValue("Fichier", afficher_fichier->isChecked());
-                settings->setValue("Action", afficher_action->isChecked());
-                settings->setValue("Achat", afficher_achat->isChecked());
-            settings->endGroup();
-        settings->endGroup();
+        enregistrerPref();
 
         // On ferme NBH
         e->accept();
@@ -1262,24 +1255,23 @@ void FenPrincipale::EA()
 // Afficher les barres d'outils
 void FenPrincipale::afficherFichier(bool affiche)
 {
-    if (!affiche)
-        fichierToolBar->setVisible(false);
-    else
-        fichierToolBar->setVisible(true);
+    fichierToolBar->setVisible(affiche);
 }
 void FenPrincipale::afficherAction(bool affiche)
 {
-    if (!affiche)
-        actionsToolBar->setVisible(false);
-    else
-        actionsToolBar->setVisible(true);
+    actionsToolBar->setVisible(affiche);
 }
 void FenPrincipale::afficherAchat(bool affiche)
 {
-    if (!affiche)
-        achatToolBar->setVisible(false);
-    else
-        achatToolBar->setVisible(true);
+    achatToolBar->setVisible(affiche);
+}
+void FenPrincipale::afficherNotes(bool affiche)
+{
+    notes_dock->setVisible(affiche);
+}
+void FenPrincipale::afficherOrdreMarche(bool affiche)
+{
+    ordreMarche_dock->setVisible(affiche);
 }
 
 

@@ -50,7 +50,7 @@ FenChargement::FenChargement(char *argv[])
     ui->label->setText("Interface chargée ! Fermeture de la fenêtre de chargement...");
 
     close();
-    fenetrePrincipale->show();
+    fenetrePrincipale->showMaximized();
 }
 
 FenChargement::~FenChargement()

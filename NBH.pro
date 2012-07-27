@@ -15,7 +15,8 @@ HEADERS += \
     source/FenPrincipale.h \
     source/FenOrdreMarche.h \
     source/FenMAJ.h \
-    source/FenAttaque.h
+    source/FenAttaque.h \
+    source/Acceuil.h
 
 SOURCES += \
     source/main.cpp \
@@ -34,7 +35,8 @@ SOURCES += \
     source/FenPrincipale.cpp \
     source/FenOrdreMarche.cpp \
     source/FenMAJ.cpp \
-    source/FenAttaque.cpp
+    source/FenAttaque.cpp \
+    source/Acceuil.cpp
 
 QT += network
 
@@ -48,4 +50,5 @@ RESOURCES += \
 
 FORMS += \
     source/FenChargement.ui \
-    source/Personnage.ui
+    source/Personnage.ui \
+    source/Acceuil.ui

@@ -26,6 +26,7 @@
     #include "FenMAJ.h"
     #include "FenOrdreMarche.h"
     #include "FenAttaque.h"
+    #include "Acceuil.h"
 
     class FenPrincipale : public QMainWindow
     {
@@ -74,6 +75,8 @@
         void afficherFichier(bool affiche);
         void afficherAction(bool affiche);
         void afficherAchat(bool affiche);
+        void afficherNotes(bool affiche);
+        void afficherOrdreMarche(bool affiche);
 
     // Menu : ?
         void aProposDeNBH();
@@ -90,13 +93,38 @@
 
         void enregistrerNotes();
         void enregistrerTout();
+        void enregistrerPref();
 
-        // ToolBars
+    // Pour le programme
+        QVector<Personnage*> m_personnages;
+        QStringList m_nomPersos;
+
+        // Pour le groupe
+        QFile *m_fichierGroupe;
+
+        // Pour les notes
+        QFile *m_fichierNotes;
+        QTextEdit *notes_txt;
+
+        // Affichage
+        QMdiArea *zoneCentrale;
+            Acceuil *widgetParDefaut;
+        QStatusBar *statusBar;
+            QProgressBar *progressBar_status;
+
+            // ToolBars
         QToolBar *fichierToolBar;
         QToolBar *actionsToolBar;
         QToolBar *achatToolBar;
 
-        // Boutons
+            // Docks
+        QDockWidget *notes_dock;
+        QDockWidget *ordreMarche_dock;
+            FenOrdreMarche *ordreMarche;
+        QDockWidget *attaque_dock;
+            FenAttaque *attaque_fen;
+
+            // Boutons
         QAction *enregistrer;
         QAction *quitterGroupe;
 
@@ -122,27 +150,8 @@
         QAction *afficher_fichier;
         QAction *afficher_action;
         QAction *afficher_achat;
-
-    // Pour le programme
-        QVector<Personnage*> m_personnages;
-        QStringList m_nomPersos;
-
-        // Pour le groupe
-        QFile *m_fichierGroupe;
-
-        // Pour les notes
-        QFile *m_fichierNotes;
-        QTextEdit *notes_txt;
-
-        // Affichage
-        QMdiArea *zoneCentrale;
-        QStatusBar *statusBar;
-            QProgressBar *progressBar_status;
-
-            // Docks
-            FenOrdreMarche *ordreMarche;
-            FenAttaque *attaque_fen;
-            QDockWidget *attaque_dock;
+        QAction *afficher_notes;
+        QAction *afficher_ordreMarche;
     };
 
     class MdiSubWindow : public QMdiSubWindow
