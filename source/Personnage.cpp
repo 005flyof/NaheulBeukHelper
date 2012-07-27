@@ -41,45 +41,7 @@ void Personnage::setAffichage()
     rafraichirRichesses();
 
 // Caractéristiques
-    ui->ev->setText(QString::number(m_EV));
-    ui->evModif->setText(QString::number(m_EV_modif));
-
-    if (m_presenceEA)
-    {
-        ui->ea->setText(QString::number(m_EA));
-        ui->eaModif->setText(QString::number(m_EA_modif));
-        ui->typeEa->setText(m_typeEA);
-        ui->magiePhys->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getAdresse() ) / 2));
-        ui->magiePsy->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getCharisme() ) / 2));
-    }
-    else
-    {
-        ui->eaModif->setEnabled(false);
-        ui->eaPlus->setEnabled(false);
-        ui->eaMoins->setEnabled(false);
-
-        ui->ea->setText("-");
-        ui->eaModif->setText("-");
-        ui->typeEa->setText("-");
-        ui->magiePhys->setText("-");
-        ui->magiePsy->setText("-");
-    }
-    ui->resistMagie->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getCourage() + m_carac_modif->getForce() ) / 3));
-
-    ui->cou->setText(QString::number(m_carac->getCourage()));
-    ui->couModif->setText(QString::number(m_carac_modif->getCourage()));
-    ui->intel->setText(QString::number(m_carac->getIntelligence()));
-    ui->intelModif->setText(QString::number(m_carac_modif->getIntelligence()));
-    ui->cha->setText(QString::number(m_carac->getCharisme()));
-    ui->chaModif->setText(QString::number(m_carac_modif->getCharisme()));
-    ui->ad->setText(QString::number(m_carac->getAdresse()));
-    ui->adModif->setText(QString::number(m_carac_modif->getAdresse()));
-    ui->fo->setText(QString::number(m_carac->getForce()));
-    ui->foModif->setText(QString::number(m_carac_modif->getForce()));
-    ui->at->setText(QString::number(m_carac->getAttaque()));
-    ui->atModif->setText(QString::number(m_carac_modif->getAttaque()));
-    ui->prd->setText(QString::number(m_carac->getParade()));
-    ui->prdModif->setText(QString::number(m_carac_modif->getParade()));
+    rafraichirCarac();
 
 // Protections
     ui->prNom_1->setText(m_protections[0]->getNom());
@@ -298,7 +260,7 @@ void Personnage::rafraichirRichesses()
 {
 // PO
     ui->po->setText(QString::number(m_richesses->getOr()));
-    if (m_richesses->getOr() == -999999)
+    if (m_richesses->getOr() == -99999)
     {
         ui->poMoins->setEnabled(false);
         ui->poPlus->setEnabled(true);
@@ -316,7 +278,7 @@ void Personnage::rafraichirRichesses()
 
 // PA
     ui->pa->setText(QString::number(m_richesses->getArgent()));
-    if (m_richesses->getArgent() == -999999)
+    if (m_richesses->getArgent() == -99999)
     {
         ui->paMoins->setEnabled(false);
         ui->paPlus->setEnabled(true);
@@ -334,7 +296,7 @@ void Personnage::rafraichirRichesses()
 
 // PC
     ui->pc->setText(QString::number(m_richesses->getCuivre()));
-    if (m_richesses->getCuivre() == -999999)
+    if (m_richesses->getCuivre() == -99999)
     {
         ui->pcMoins->setEnabled(false);
         ui->pcPlus->setEnabled(true);
@@ -349,6 +311,48 @@ void Personnage::rafraichirRichesses()
         ui->pcMoins->setEnabled(true);
         ui->pcPlus->setEnabled(true);
     }
+}
+void Personnage::rafraichirCarac()
+{
+    ui->ev->setText(QString::number(m_EV));
+    ui->evModif->setText(QString::number(m_EV_modif));
+
+    if (m_presenceEA)
+    {
+        ui->ea->setText(QString::number(m_EA));
+        ui->eaModif->setText(QString::number(m_EA_modif));
+        ui->typeEa->setText(m_typeEA);
+        ui->magiePhys->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getAdresse() ) / 2));
+        ui->magiePsy->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getCharisme() ) / 2));
+    }
+    else
+    {
+        ui->eaModif->setEnabled(false);
+        ui->eaPlus->setEnabled(false);
+        ui->eaMoins->setEnabled(false);
+
+        ui->ea->setText("-");
+        ui->eaModif->setText("-");
+        ui->typeEa->setText("-");
+        ui->magiePhys->setText("-");
+        ui->magiePsy->setText("-");
+    }
+    ui->resistMagie->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getCourage() + m_carac_modif->getForce() ) / 3));
+
+    ui->cou->setText(QString::number(m_carac->getCourage()));
+    ui->couModif->setText(QString::number(m_carac_modif->getCourage()));
+    ui->intel->setText(QString::number(m_carac->getIntelligence()));
+    ui->intelModif->setText(QString::number(m_carac_modif->getIntelligence()));
+    ui->cha->setText(QString::number(m_carac->getCharisme()));
+    ui->chaModif->setText(QString::number(m_carac_modif->getCharisme()));
+    ui->ad->setText(QString::number(m_carac->getAdresse()));
+    ui->adModif->setText(QString::number(m_carac_modif->getAdresse()));
+    ui->fo->setText(QString::number(m_carac->getForce()));
+    ui->foModif->setText(QString::number(m_carac_modif->getForce()));
+    ui->at->setText(QString::number(m_carac->getAttaque()));
+    ui->atModif->setText(QString::number(m_carac_modif->getAttaque()));
+    ui->prd->setText(QString::number(m_carac->getParade()));
+    ui->prdModif->setText(QString::number(m_carac_modif->getParade()));
 }
 
 
@@ -632,6 +636,7 @@ bool Personnage::chargerPerso()
 // Energie Vitale
     m_EV = entree.readLine().toInt();
     numLigne++;
+    m_EV_modif = m_EV;
 
 // Informations générales (suite)
     m_ptsDestin = entree.readLine().toInt();
@@ -721,6 +726,7 @@ bool Personnage::chargerPerso()
         else if (ligne == "~!magie!~")
         {
             m_EA = entree.readLine().toInt();
+            m_EA_modif = m_EA;
             numLigne++;
             m_typeEA = entree.readLine();
             numLigne++;
@@ -1079,7 +1085,7 @@ bool Personnage::getModif() const
 }
 
 
-// Slots perso
+// Modification du personnage
 void Personnage::ajouterXP(int value)
 {
     if (value == 0)
@@ -1466,6 +1472,231 @@ void Personnage::retirerPC(int value)
 
     rafraichirRichesses();
     emit persoModifie();
+}
+
+void Personnage::achatCOU()
+{
+    if (m_richesses->getOr() - 400 < -99999)
+    {
+        QMessageBox::information(this, "Action impossible !",
+                                 "Ce personnage n'a pas assez de PO pour se payer ce stage !");
+        return;
+    }
+
+    QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
+                      "Ce personnage va acheter pour 400 PO un stage de 1 mois pour obtenir un point de COU...");
+    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *annuler = verif.addButton(QMessageBox::Abort);
+    setIcone(&verif);
+    verif.exec();
+    if (verif.clickedButton() == annuler)
+        return;
+
+    QMessageBox::information(this, m_nom + " -> Achat de puissance",
+                            "Ce personnage achète 400 PO un stage de 1 mois pour obtenir un point de COU en plus.");
+    m_carac->setCourage(m_carac->getCourage() + 1);
+
+    m_richesses->setOr(m_richesses->getOr() - 400);
+
+    log(m_nom + " achète un point de COU.");
+
+    rafraichirRichesses();
+    rafraichirCarac();
+}
+void Personnage::achatINT()
+{
+    if (m_richesses->getOr() - 500 < -99999)
+    {
+        QMessageBox::information(this, "Action impossible !",
+                                 "Ce personnage n'a pas assez de PO pour se payer ce stage !");
+        return;
+    }
+
+    QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
+                      "Ce personnage va acheter pour 500 PO un stage de 6 mois pour obtenir un point d'INT...");
+    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *annuler = verif.addButton(QMessageBox::Abort);
+    setIcone(&verif);
+    verif.exec();
+    if (verif.clickedButton() == annuler)
+        return;
+
+    QMessageBox::information(this, m_nom + " -> Achat de puissance",
+                             "Ce personnage achète 500 PO un stage de 6 mois pour obtenir un point d'INT en plus.");
+    m_carac->setIntelligence(m_carac->getIntelligence() + 1);
+
+    m_richesses->setOr(m_richesses->getOr() - 500);
+
+    log(m_nom + " achète un point d'INT.");
+
+    rafraichirRichesses();
+    rafraichirCarac();
+}
+void Personnage::achatCHA()
+{
+    if (m_richesses->getOr() - 400 < -99999)
+    {
+        QMessageBox::information(this, "Action impossible !",
+                                 "Ce personnage n'a pas assez de PO pour se payer ce stage !");
+        return;
+    }
+
+    QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
+                      "Ce personnage va acheter pour 400 PO un stage de 1 semaine pour obtenir un point de CHA...");
+    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *annuler = verif.addButton(QMessageBox::Abort);
+    setIcone(&verif);
+    verif.exec();
+    if (verif.clickedButton() == annuler)
+        return;
+
+    QMessageBox::information(this, m_nom + " -> Achat de puissance",
+                            "Ce personnage achète 400 PO un stage de 1 semaine pour obtenir un point de CHA en plus.");
+    m_carac->setCharisme(m_carac->getCharisme() + 1);
+
+    m_richesses->setOr(m_richesses->getOr() - 400);
+
+    log(m_nom + " achète un point de CHA.");
+
+    rafraichirRichesses();
+    rafraichirCarac();
+}
+void Personnage::achatFO()
+{
+    if (m_richesses->getOr() - 400 < -99999)
+    {
+        QMessageBox::information(this, "Action impossible !",
+                                 "Ce personnage n'a pas assez de PO pour se payer ce stage !");
+        return;
+    }
+
+    QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
+                      "Ce personnage va acheter pour 400 PO un stage de 1 mois pour obtenir un point de FO...");
+    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *annuler = verif.addButton(QMessageBox::Abort);
+    setIcone(&verif);
+    verif.exec();
+    if (verif.clickedButton() == annuler)
+        return;
+
+    QMessageBox::information(this, m_nom + " -> Achat de puissance",
+                            "Ce personnage achète 400 PO un stage de 1 mois pour obtenir un point de FO en plus.");
+    m_carac->setForce(m_carac->getForce() + 1);
+
+    m_richesses->setOr(m_richesses->getOr() - 400);
+
+    log(m_nom + " achète un point de FO.");
+
+    rafraichirRichesses();
+    rafraichirCarac();
+}
+void Personnage::achatATPRD()
+{
+    if (m_richesses->getOr() - 500 < -99999)
+    {
+        QMessageBox::information(this, "Action impossible !",
+                                 "Ce personnage n'a pas assez de PO pour se payer ce stage !");
+        return;
+    }
+
+    QStringList a;
+    a << "AT" << "PRD";
+    bool ok(false);
+    QString b = QInputDialog::getItem(this, m_nom + " -> Achat de puissance",
+                                      "Ce personnage achète un stage pour 500 PO pour obtenir un point de :", a, 0, ok);
+
+    if (ok)
+        m_richesses->setOr(m_richesses->getOr() - 500);
+    if (b == "AT" && ok)
+    {
+        QMessageBox::information(this, m_nom + " -> Achat de puissance",
+                                "Ce personnage achète 500 PO un stage d'un mois pour acheter un point d'AT");
+        m_carac->setAttaque(m_carac->getAttaque() + 1);
+
+        log(m_nom + " achète un point d'AT.");
+    }
+    else if (b == "PRD" && ok)
+    {
+        QMessageBox::information(this, m_nom + " -> Achat de puissance",
+                                "Ce personnage achète 500 PO un stage d'un mois pour acheter un point de PRD");
+        m_carac->setParade(m_carac->getParade() + 1);
+
+        log(m_nom + " achète un point de PRD.");
+    }
+    else
+        return;
+
+    rafraichirRichesses();
+    rafraichirCarac();
+}
+
+void Personnage::achatEV()
+{
+    if (m_richesses->getOr() - 200 < -99999)
+    {
+        QMessageBox::information(this, "Action impossible !",
+                                 "Ce personnage n'a pas assez de PO pour se payer ce stage !");
+        return;
+    }
+
+    QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
+                      "Ce personnage va acheter 200 PO un stage de 1 semaine pour obtenir un point d'EV...");
+    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *annuler = verif.addButton(QMessageBox::Abort);
+    setIcone(&verif);
+    verif.exec();
+    if (verif.clickedButton() == annuler)
+        return;
+
+    QMessageBox::information(this, m_nom + " -> Achat de puissance",
+                            "Ce personnage achète 200 PO un stage de 1 semaine pour obtenir un point d'EV en plus.");
+    m_EV++;
+
+    m_richesses->setOr(m_richesses->getOr() - 200);
+
+    log(m_nom + " achète un point d'EV.");
+
+    rafraichirRichesses();
+    rafraichirCarac();
+}
+void Personnage::achatEA()
+{
+// Si le perso n'est pas un "mage"
+    if (!m_presenceEA)
+    {
+        QMessageBox::information(this, "Action impossible !",
+                                         "Ce personnage n'est pas un mage ; "
+                                         "il ne peut donc pas suivre un stage pour gagner de l'EA!");
+        return;
+    }
+
+// si le perso est un "mage"
+    if (m_richesses->getOr() - 200 < -99999)
+    {
+        QMessageBox::information(this, "Action impossible !",
+                                 "Ce personnage n'a pas assez de PO pour se payer ce stage !");
+        return;
+    }
+
+    QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
+                      "Ce personnage va acheter 200 PO un stage de 1 mois pour obtenir un point d'EA...");
+    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *annuler = verif.addButton(QMessageBox::Abort);
+    setIcone(&verif);
+    verif.exec();
+    if (verif.clickedButton() == annuler)
+        return;
+
+    QMessageBox::information(this, m_nom + " -> Achat de puissance",
+                            "Ce personnage achète 200 PO un stage de 1 mois pour obtenir un point d'EA en plus.");
+    m_EA++;
+
+    m_richesses->setOr(m_richesses->getOr() - 200);
+
+    log(m_nom + " achète un point d'EA.");
+
+    rafraichirRichesses();
+    rafraichirCarac();
 }
 
 

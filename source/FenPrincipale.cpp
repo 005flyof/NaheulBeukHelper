@@ -138,7 +138,7 @@ void FenPrincipale::initMenus_ToolBars()
 
 
 // Menu : Groupe
-    QMenu *groupe = barreDeMenu->addMenu("Modification sur le &groupe");
+    QMenu *groupe = barreDeMenu->addMenu("Modifications sur le &groupe");
 
     xpGroupe = groupe->addAction("XP de groupe");
         xpGroupe->setIcon(QIcon(":prog-data/img/XP.png"));
@@ -176,10 +176,10 @@ void FenPrincipale::initMenus_ToolBars()
 // Menu : Perso en cours
     QMenu *perso = barreDeMenu->addMenu("Personnage en cours");
 
-    achatATPRD = perso->addAction("Achat de point d'AT / PRD");
-        achatATPRD->setIcon(QIcon(":prog-data/img/at_prd+.png"));
-        achatATPRD->setStatusTip("Achat d'un point d'AT ou de PRD (500 PO -> 1 mois de stage)");
-        achatATPRD->setEnabled(false);
+    achatCOU = perso->addAction("Achat de point de COU");
+        achatCOU->setIcon(QIcon(":prog-data/img/cou+.png"));
+        achatCOU->setStatusTip("Achat d'un point de COU (400 PO -> 1 mois de stage)");
+        achatCOU->setEnabled(false);
     achatINT = perso->addAction("Achat de point d'INT");
         achatINT->setIcon(QIcon(":prog-data/img/int+.png"));
         achatINT->setStatusTip("Achat d'un point d'INT (500 PO -> 6 mois de stage)");
@@ -192,10 +192,10 @@ void FenPrincipale::initMenus_ToolBars()
         achatFO->setIcon(QIcon(":prog-data/img/fo+.png"));
         achatFO->setStatusTip("Achat d'un point de FO (400 PO -> 6 mois de stage)");
         achatFO->setEnabled(false);
-    achatCOU = perso->addAction("Achat de point de COU");
-        achatCOU->setIcon(QIcon(":prog-data/img/cou+.png"));
-        achatCOU->setStatusTip("Achat d'un point de COU (400 PO -> 1 mois de stage)");
-        achatCOU->setEnabled(false);
+    achatATPRD = perso->addAction("Achat de point d'AT / PRD");
+        achatATPRD->setIcon(QIcon(":prog-data/img/at_prd+.png"));
+        achatATPRD->setStatusTip("Achat d'un point d'AT ou de PRD (500 PO -> 1 mois de stage)");
+        achatATPRD->setEnabled(false);
     perso->addSeparator();
 
     achatEV = perso->addAction("Achat de point d'EV");
@@ -331,11 +331,11 @@ void FenPrincipale::initMenus_ToolBars()
     achatToolBar = addToolBar("Barre d'outils d'Achat de puissance");
         achatToolBar->setObjectName("toolBar-Achat");
 
-        achatToolBar->addAction(achatATPRD);
+        achatToolBar->addAction(achatCOU);
         achatToolBar->addAction(achatINT);
         achatToolBar->addAction(achatCHA);
         achatToolBar->addAction(achatFO);
-        achatToolBar->addAction(achatCOU);
+        achatToolBar->addAction(achatATPRD);
         achatToolBar->addSeparator();
 
         achatToolBar->addAction(achatEV);
@@ -346,7 +346,7 @@ void FenPrincipale::initWidget()
 // Création du widget central
     zoneCentrale = new QMdiArea(this);
     zoneCentrale->setViewMode(QMdiArea::TabbedView);
-    zoneCentrale->setTabsMovable(true);
+    zoneCentrale->setTabsMovable(false);
 
     // On valide le widget "zoneCentrale"
     setCentralWidget(zoneCentrale);
@@ -1193,35 +1193,70 @@ void FenPrincipale::pc()
 
 
 // Achat
-/*void FenPrincipale::ATPRD()
+void FenPrincipale::COU()
 {
-    tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatATPRD();
+    for (int i = 0; i < m_personnages.count(); i++)
+    {
+        if (m_personnages.at(i)->getNom() == zoneCentrale->currentSubWindow()->windowTitle()
+            || ("* " + m_personnages.at(i)->getNom()) == zoneCentrale->currentSubWindow()->windowTitle())
+            m_personnages.at(i)->achatCOU();
+    }
 }
 void FenPrincipale::INT()
 {
-    tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatINT();
+    for (int i = 0; i < m_personnages.count(); i++)
+    {
+        if (m_personnages.at(i)->getNom() == zoneCentrale->currentSubWindow()->windowTitle()
+            || ("* " + m_personnages.at(i)->getNom()) == zoneCentrale->currentSubWindow()->windowTitle())
+            m_personnages.at(i)->achatINT();
+    }
 }
 void FenPrincipale::CHA()
 {
-    tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatCHA();
+    for (int i = 0; i < m_personnages.count(); i++)
+    {
+        if (m_personnages.at(i)->getNom() == zoneCentrale->currentSubWindow()->windowTitle()
+            || ("* " + m_personnages.at(i)->getNom()) == zoneCentrale->currentSubWindow()->windowTitle())
+            m_personnages.at(i)->achatCHA();
+    }
 }
 void FenPrincipale::FO()
 {
-    tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatFO();
+    for (int i = 0; i < m_personnages.count(); i++)
+    {
+        if (m_personnages.at(i)->getNom() == zoneCentrale->currentSubWindow()->windowTitle()
+            || ("* " + m_personnages.at(i)->getNom()) == zoneCentrale->currentSubWindow()->windowTitle())
+            m_personnages.at(i)->achatFO();
+    }
 }
-void FenPrincipale::COU()
+void FenPrincipale::ATPRD()
 {
-    tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatCOU();
+    for (int i = 0; i < m_personnages.count(); i++)
+    {
+        if (m_personnages.at(i)->getNom() == zoneCentrale->currentSubWindow()->windowTitle()
+            || ("* " + m_personnages.at(i)->getNom()) == zoneCentrale->currentSubWindow()->windowTitle())
+            m_personnages.at(i)->achatATPRD();
+    }
 }
+
 void FenPrincipale::EV()
 {
-    tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatEV();
+    for (int i = 0; i < m_personnages.count(); i++)
+    {
+        if (m_personnages.at(i)->getNom() == zoneCentrale->currentSubWindow()->windowTitle()
+            || ("* " + m_personnages.at(i)->getNom()) == zoneCentrale->currentSubWindow()->windowTitle())
+            m_personnages.at(i)->achatEV();
+    }
 }
 void FenPrincipale::EA()
 {
-    tableauDePersonnages[zoneCentrale->currentSubWindow()->windowTitle()].achatEA();
+    for (int i = 0; i < m_personnages.count(); i++)
+    {
+        if (m_personnages.at(i)->getNom() == zoneCentrale->currentSubWindow()->windowTitle()
+            || ("* " + m_personnages.at(i)->getNom()) == zoneCentrale->currentSubWindow()->windowTitle())
+            m_personnages.at(i)->achatEA();
+    }
 }
-*/
 
 
 // Afficher les barres d'outils

@@ -30,9 +30,9 @@ void Richesses::setOr(int value)
         QMessageBox::information(pb, "Information",
                                  "ATTENTION :\nLe nombre maximum de PO (= 999999) a été dépassé !\n\n"
                                  "Le nombre de PO n'a donc pas été modifié");
-    else if (value < -999999)
+    else if (value < -99999)
         QMessageBox::information(pb, "Information",
-                                 "ATTENTION :\nLe nombre minimal de PO (= -999999) a été dépassé !\n\n"
+                                 "ATTENTION :\nLe nombre minimal de PO (= -99999) a été dépassé !\n\n"
                                  "Le nombre de PO n'a donc pas été modifié");
     else
         m_or = value;
@@ -45,9 +45,9 @@ void Richesses::setArgent(int value)
         QMessageBox::information(pb, "Information",
                                  "ATTENTION :\nLe nombre maximum de PA (= 999999) a été dépassé !\n\n"
                                  "Le nombre de PA n'a donc pas été modifié");
-    else if (value < -999999)
+    else if (value < -99999)
         QMessageBox::information(pb, "Information",
-                                 "ATTENTION :\nLe nombre minimal de PA (= -999999) a été dépassé !\n\n"
+                                 "ATTENTION :\nLe nombre minimal de PA (= -99999) a été dépassé !\n\n"
                                  "Le nombre de PA n'a donc pas été modifié");
     else
         m_argent = value;
@@ -60,9 +60,9 @@ void Richesses::setCuivre(int value)
         QMessageBox::information(pb, "Information",
                                  "ATTENTION :\nLe nombre maximum de PC (= 999999) a été dépassé !\n\n"
                                  "Le nombre de PC n'a donc pas été modifié");
-    else if (value < -999999)
+    else if (value < -99999)
         QMessageBox::information(pb, "Information",
-                                 "ATTENTION :\nLe nombre minimal de PC (= -999999) a été dépassé !\n\n"
+                                 "ATTENTION :\nLe nombre minimal de PC (= -99999) a été dépassé !\n\n"
                                  "Le nombre de PC n'a donc pas été modifié");
     else
         m_cuivre = value;
@@ -136,7 +136,9 @@ QString Richesses::richessesEnregistrement() const
 {
     QString richesses = "";
 
-    if (m_or < 10)
+    if (m_or < -1)
+        richesses = QString::number(m_or) + "_";
+    else if (m_or < 10 && m_or > -1)
         richesses = "00000" + QString::number(m_or) + "_";
     else if (m_or < 100 && m_or > 9)
         richesses = "0000" + QString::number(m_or) + "_";
@@ -149,7 +151,9 @@ QString Richesses::richessesEnregistrement() const
     else if (m_or < 1000000 && m_or > 99999)
         richesses = QString::number(m_or) + "_";
 
-    if (m_argent < 10)
+    if (m_argent < -1)
+        richesses += QString::number(m_argent) + "_";
+    else if (m_argent < 10 && m_argent > -1)
         richesses += "00000" + QString::number(m_argent) + "_";
     else if (m_argent < 100 && m_argent > 9)
         richesses += "0000" + QString::number(m_argent) + "_";
@@ -162,7 +166,9 @@ QString Richesses::richessesEnregistrement() const
     else if (m_argent < 1000000 && m_argent > 99999)
         richesses += QString::number(m_argent) + "_";
 
-    if (m_cuivre < 10)
+    if (m_cuivre < -1)
+        richesses += QString::number(m_cuivre);
+    else if (m_cuivre < 10 && m_cuivre > -1)
         richesses += "00000" + QString::number(m_cuivre);
     else if (m_cuivre < 100 && m_cuivre > 9)
         richesses += "0000" + QString::number(m_cuivre);

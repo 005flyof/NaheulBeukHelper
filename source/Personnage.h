@@ -26,21 +26,33 @@
         bool chargerPerso();
         void enregistrerPerso();
 
+
         // Accesseurs
         QString getNom() const;
         bool getModif() const;
 
-    signals:
-        void persoModifie();
 
-    public slots:
+        // Modifications du perso
         void ajouterXP(int value = 0);
+
         void ajouterPO(int value = 0);
         void retirerPO(int value = 0);
         void ajouterPA(int value = 0);
         void retirerPA(int value = 0);
         void ajouterPC(int value = 0);
         void retirerPC(int value = 0);
+
+        void achatCOU();
+        void achatINT();
+        void achatCHA();
+        void achatFO();
+        void achatATPRD();
+
+        void achatEV();
+        void achatEA();
+
+    signals:
+        void persoModifie();
 
     private slots:
         void modifierPerso();
@@ -81,13 +93,13 @@
         Ui::Personnage *ui;
 
     // Fonctions
-        Caracteristiques chargerCarac(bool *erreur, QString ligne, bool AT_PRD, int numLigne);
-
-        bool setNiveau();
-        void setAffichage();
         void viderVariables();
+        Caracteristiques chargerCarac(bool *erreur, QString ligne, bool AT_PRD, int numLigne);
+        bool setNiveau();
 
+        void setAffichage();
         void rafraichirRichesses();
+        void rafraichirCarac();
 
     // Variables
         // Pour le programme

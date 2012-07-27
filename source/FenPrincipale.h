@@ -35,6 +35,12 @@
         ~FenPrincipale();
 
     public slots:
+        void attaquer();
+
+    private slots:
+        void persoModifie();
+
+    // Menu : Fichier
         void creerNouveauPersonnage();
         void creerNouveauGroupe();
         void ajouterPersonnage();
@@ -42,11 +48,11 @@
         void enregistrerGroupe();
         void fermerGroupe();
 
+    // Menu : Mode
         void modeAttaque();
         void modePassif();
 
-        void attaquer();
-
+    // Menu : Modifications sur le groupe
         void xp();
         void PO();
         void PA();
@@ -55,25 +61,25 @@
         void pa();
         void pc();
 
-        /*void ATPRD();
+    // Menu : Personnage en cours
+        void COU();
         void INT();
         void CHA();
         void FO();
-        void COU();
+        void ATPRD();
         void EV();
-        void EA();*/
+        void EA();
 
+    // Menu : Affichage
         void afficherFichier(bool affiche);
         void afficherAction(bool affiche);
         void afficherAchat(bool affiche);
 
+    // Menu : ?
         void aProposDeNBH();
         void licence();
         void MAJ();
         void help();
-
-    private slots:
-        void persoModifie();
 
     protected:
         void closeEvent(QCloseEvent *e);

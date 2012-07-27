@@ -65,4 +65,5 @@ int main(int argc, char *argv[])
     20	- modififer les updates / updaters							(20)	- fait
     21	- faire la doc des sources									(21)	-
     22	- chargement des origines/métiers au démarrage				(22)	-
+    - emit persoModifie(); !! /!\ !!
 */
