@@ -2,55 +2,63 @@
 #include "ui_FenChargement.h"
 
 FenChargement::FenChargement(char *argv[])
-    : QDialog(), ui(new Ui::FenChargement)
+    : QDialog(),
+      ui(new Ui::FenChargement)
 {
     ui->setupUi(this);
     ui->progression->setValue(0);
 
     show();
-    setModal(true);
+
+    log("Lancement de NBH :", true);
 
 // Suppression du fichier temporaire de la MAJ
     ui->label->setText("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...");
+    log("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...", 1);
     remove("tmp.zip");
     ui->progression->setValue(10);
     ui->label->setText("Fichier temporaire de Mise à Jour supprimé !");
 
 // Suppression du fichier d'erreur
     ui->label->setText("Suppression du fichier d'erreurs : 'error.log'...");
+    log("Suppression du fichier d'erreurs : 'error.log'...", 1);
     remove("error.log");
     ui->progression->setValue(20);
     ui->label->setText("Fichier d'erreur supprimé !");
 
 // Suppression du fichier d'erreur
     ui->label->setText("Vérification des mises à jour...");
+    log("Vérification des mises à jour...", 1);
     FenMAJ test(this, true);
     ui->progression->setValue(30);
     ui->label->setText("Mises à jour vérifiées.");
 
 // Chargement des origines
     ui->label->setText("Chargement des origines...");
-    //ouvrirOrigines();
+    log("Chargement des origines...", 1);
+    ouvrirOrigines();
     ui->progression->setValue(55);
     ui->label->setText("Origines chargées !");
 
 // Chargement des métiers
     ui->label->setText("Chargement des métiers...");
-    //ouvrirMetiers();
+    log("Chargement des métiers...", 1);
+    ouvrirMetiers();
     ui->progression->setValue(90);
     ui->label->setText("Métiers chargés !");
 
 // Création de l'interface graphique
     ui->label->setText("Création de l'interface graphique...");
-    log("Lancement de NBH", true);
+    log("Création de l'interface graphique...", 1);
 
     fenetrePrincipale = new FenPrincipale;
+        fenetrePrincipale->setOrigines(origines);
+        fenetrePrincipale->setMetiers(metiers);
+    fenetrePrincipale->showMaximized();
 
     ui->progression->setValue(100);
     ui->label->setText("Interface chargée ! Fermeture de la fenêtre de chargement...");
-
     close();
-    fenetrePrincipale->showMaximized();
 }
 
 FenChargement::~FenChargement()
@@ -59,311 +67,220 @@ FenChargement::~FenChargement()
 }
 
 
-/*
 void FenChargement::ouvrirOrigines()
 {
-    QFile nouveau_origine_conteneur(":prog-data/origines.txt");
-    if (!nouveau_origine_conteneur.open(QIODevice::ReadOnly | QIODevice::Text))
+// On ouvre le fichier
+    QFile fichierOrig(":prog-data/origines.txt");
+    if (!fichierOrig.open(QIODevice::ReadOnly | QIODevice::Text))
         fatalError("Fichier contenant les origines inaccessible !");
 
-    QTextStream nouveau_origineTexte(&nouveau_origine_conteneur);
+    QTextStream originesTexte(&fichierOrig);
 
-    QString ligne = nouveau_origineTexte.readLine();
-    int compteurLigne(0);
+// Définition des variables
+    bool erreur(false);
+    int nbOrigines(0);
+
+// On commence à charger
+    QString ligne = originesTexte.readLine();
+    int compteurLigne(2);
 
     do
     {
-        // On travaille sur le fichier
-        QString origine_nom = nouveau_origineTexte.readLine();
+    // Ouverture du nom
+        QString nom = originesTexte.readLine();
         compteurLigne++;
 
-        lecteurLigne = 0;
-        int origine_COU(0), origine_INT(0), origine_CHA(0), origine_FO(0), origine_AD(0);
-        int origine_cou(0), origine_int(0), origine_cha(0), origine_fo(0), origine_ad(0);
-
-        // Carac minimum
-        QString origineCarac_ligne = nouveau_origineTexte.readLine();
+    // Malus
+        Caracteristiques mini = Personnage::chargerCaracStatic(&erreur, originesTexte.readLine(), false, compteurLigne);
+        if (erreur)
+            fatalError("Impossible de charger les caractéristiques à la ligne " + QString::number(compteurLigne) + " du fichier " + fichierOrig.fileName());
         compteurLigne++;
-        while (lecteurLigne < origineCarac_ligne.size())
-        {
-            if (origineCarac_ligne[lecteurLigne] == '_')
-                lecteurLigne++;
 
-            else
-            {
-                QString origineCarac_string("");
-                QChar a(origineCarac_ligne[lecteurLigne]);
-                origineCarac_string = a + origineCarac_ligne[lecteurLigne+1];
+    // Bonus
+        Caracteristiques maxi = Personnage::chargerCaracStatic(&erreur, originesTexte.readLine(), false, compteurLigne);
+        if (erreur)
+            fatalError("Impossible de charger les caractéristiques à la ligne " + QString::number(compteurLigne) + " du fichier " + fichierOrig.fileName());
+        compteurLigne++;
 
-                switch (lecteurLigne)
-                {
-                case 0:
-                    origine_cou = origineCarac_string.toInt();
-                    break;
-                case 3:
-                    origine_int = origineCarac_string.toInt();
-                    break;
-                case 6:
-                    origine_cha = origineCarac_string.toInt();
-                    break;
-                case 9:
-                    origine_ad = origineCarac_string.toInt();
-                    break;
-                case 12:
-                    origine_fo = origineCarac_string.toInt();
-                    break;
-                default:
-                    QMessageBox::critical(zoneCentrale, "Erreur réparable !",
-                                          "ERREUR : Erreur lors de l'ouverture du fichier contenant les origines :\n"
-                                          "     ->  Origine : \"" + origine_nom + "\" invalide !\n\n"
-                                          "Caractéristiques minimum non valides !\n");
-                    statusBar->showMessage("Action annulée -> Erreur lors de l'ouverture du fichier contenant les origines !");
-                    return;
-                    break;
-                }
-                lecteurLigne += 2;
-            }
-        }
+    // EV et AT
+        int EV(0), AT(0);
 
-        // Carac maximum
-        lecteurLigne = 0;
-        origineCarac_ligne = nouveau_origineTexte.readLine();
-        while (lecteurLigne < origineCarac_ligne.size())
-        {
-            if (origineCarac_ligne[lecteurLigne] == '_')
-                lecteurLigne++;
+        ligne = originesTexte.readLine();
+        EV = ligne.toInt();
+        compteurLigne++;
 
-            else
-            {
-                QString origineCarac_string("");
-                QChar a(origineCarac_ligne[lecteurLigne]);
-                origineCarac_string = a + origineCarac_ligne[lecteurLigne+1];
-
-                switch (lecteurLigne)
-                {
-                case 0:
-                    origine_COU = origineCarac_string.toInt();
-                    break;
-                case 3:
-                    origine_INT = origineCarac_string.toInt();
-                    break;
-                case 6:
-                    origine_CHA = origineCarac_string.toInt();
-                    break;
-                case 9:
-                    origine_AD = origineCarac_string.toInt();
-                    break;
-                case 12:
-                    origine_FO = origineCarac_string.toInt();
-                    break;
-                default:
-                    QMessageBox::critical(zoneCentrale, "Erreur réparable !",
-                                          "ERREUR : Erreur lors de l'ouverture du fichier contenant les origines :\n"
-                                          "     ->  Origine : \"" + origine_nom + "\" invalide !\n\n"
-                                          "Caractéristiques maximum non valides !\n");
-                    statusBar->showMessage("Action annulée -> Erreur lors de l'ouverture du fichier contenant les origines !");
-                    return;
-                    break;
-                }
-                lecteurLigne += 2;
-            }
-        }
-
-        // EV et AT
-        int origine_EV(0), origine_AT(0);
-
-        ligne = nouveau_origineTexte.readLine();
-        origine_EV = ligne.toInt();
-
-        ligne = nouveau_origineTexte.readLine();
+        ligne = originesTexte.readLine();
         if (ligne == "x")
-            origine_AT = ligne.toInt();
+            AT = ligne.toInt();
+        compteurLigne++;
 
-        m_origines[origine_nom] = new Origine(origine_nom, origine_EV, origine_AT,
-                                                    origine_cou, origine_int, origine_cha, origine_ad, origine_fo,
-                                                    origine_COU, origine_INT, origine_CHA, origine_AD, origine_FO);
+    // On crée l'origine
+        origines.push_back(new Origine(nom, EV, AT, mini, maxi));
 
-        bool possible = tableauDePersonnages[nouveau_nom->text()].testOrigine(m_origines[origine_nom]);
-
-        if (possible)
-        {
-            QRadioButton *temp = new QRadioButton(origine_nom);
-            tableauDeRadioButton_Origine.push_back(temp);
-
-            QVector<QRadioButton>::iterator it = tableauDeRadioButton_Origine.at(totalOrigine);
-            layout->addWidget(&*it);
-            totalOrigine++;
-        }
-
-        // On charge la ligne pour vérifier que le fichier n'est pas fini
-        ligne = nouveau_origineTexte.readLine();
+    // On charge la ligne pour vérifier que le fichier n'est pas fini
+        ligne = originesTexte.readLine();
+        compteurLigne++;
 
         while (ligne == "~!competence-obligatoire!~")
         {
-            QString competence_nom = nouveau_origineTexte.readLine();
-            QString competence_description = nouveau_origineTexte.readLine();
+            QString competence_nom = originesTexte.readLine();
+            compteurLigne++;
+            QString competence_description = originesTexte.readLine();
+            compteurLigne++;
 
-            m_origines[origine_nom]->addCompetence(competence_nom, competence_description);
+            origines.at(nbOrigines)->addCompetence(competence_nom, competence_description);
 
-            ligne = nouveau_origineTexte.readLine();
+            ligne = originesTexte.readLine();
+            compteurLigne++;
         }
-
         while (ligne == "~!competence-choisir!~")
         {
-            QString competence_nom = nouveau_origineTexte.readLine();
-            QString competence_description = nouveau_origineTexte.readLine();
+            QString competence_nom = originesTexte.readLine();
+            compteurLigne++;
+            QString competence_description = originesTexte.readLine();
+            compteurLigne++;
 
-            m_origines[origine_nom]->addCompetence(competence_nom, competence_description, false);
+            origines.at(nbOrigines)->addCompetence(competence_nom, competence_description, false);
 
-            ligne = nouveau_origineTexte.readLine();
+            ligne = originesTexte.readLine();
+            compteurLigne++;
         }
+
+        nbOrigines++;
     } while (ligne != "~!FIN_ORIGINE!~");
 }
 void FenChargement::ouvrirMetiers()
 {
-    // On crée les métiers depuis le fichier conteneur
-        QFile nouveau_metier_conteneur(":prog-data/metiers.txt");
-        if (!nouveau_metier_conteneur.open(QIODevice::ReadOnly | QIODevice::Text))
-            fatalError("Impossible de charger le fichier contenant les métiers.");
+// On ouvre le fichier
+    QFile metiersFichier(":prog-data/metiers.txt");
+    if (!metiersFichier.open(QIODevice::ReadOnly | QIODevice::Text))
+        fatalError("Impossible de charger le fichier contenant les métiers.");
 
-        QTextStream nouveau_metierTexte(&nouveau_metier_conteneur);
+    QTextStream metiersTexte(&metiersFichier);
 
-        QString ligne = nouveau_metierTexte.readLine();
+// Définition des variables
+    bool erreur(false);
+    int nbMetiers(0);
 
-        do {
-        // On travaille sur le fichier
-            QString metier_nom = nouveau_metierTexte.readLine();
+// On commence à charger
+    QString ligne = metiersTexte.readLine();
+    int compteurLigne(2);
 
-            int lecteurLigne = 0;
-            int metier_cou(0), metier_int(0), metier_cha(0), metier_fo(0), metier_ad(0), metier_at(0), metier_prd(0);
+    do {
+    // Ouverture du nom
+        QString nom = metiersTexte.readLine();
+        compteurLigne++;
 
-            // Carac minimum
-            QString metierCarac_ligne = nouveau_metierTexte.readLine();
-            while (lecteurLigne < metierCarac_ligne.size())
-            {
-                if (metierCarac_ligne[lecteurLigne] == '_')
-                    lecteurLigne++;
+    // Malus
+        Caracteristiques malus = Personnage::chargerCaracStatic(&erreur, metiersTexte.readLine(), false, compteurLigne);
+        if (erreur)
+            fatalError("Impossible de charger les caractéristiques à la ligne " + QString::number(compteurLigne) + " du fichier " + metiersFichier.fileName());
+        compteurLigne++;
 
-                else
-                {
-                    QString metierCarac_string("");
-                    QChar a(metierCarac_ligne[lecteurLigne]);
-                    metierCarac_string = a + metierCarac_ligne[lecteurLigne+1];
+    // AT & PRD
+        int AT(0), PRD(0);
+        ligne = metiersTexte.readLine();
+        if (ligne != "x")
+            AT = ligne.toInt();
+        compteurLigne++;
 
-                    switch (lecteurLigne)
-                    {
-                    case 0:
-                        metier_cou = metierCarac_string.toInt();
-                        break;
-                    case 3:
-                        metier_int = metierCarac_string.toInt();
-                        break;
-                    case 6:
-                        metier_cha = metierCarac_string.toInt();
-                        break;
-                    case 9:
-                        metier_ad = metierCarac_string.toInt();
-                        break;
-                    case 12:
-                        metier_fo = metierCarac_string.toInt();
-                        break;
-                    default:
-                        QMessageBox::critical(zoneCentrale, "Erreur réparable !",
-                                              "ERREUR : Erreur lors de l'ouverture du fichier contenant les métiers :\n"
-                                              "     ->  Métier : \"" + metier_nom + "\" invalide !\n\n"
-                                              "Caractéristiques minimum non valides !\n");
-                        statusBar->showMessage("Action annulée -> Erreur lors de l'ouverture du fichier contenant les métiers !");
-                        return;
-                        break;
-                    }
-                    lecteurLigne += 2;
-                }
-            }
-
-            // AT & PRD
-            ligne = nouveau_metierTexte.readLine();
-            if (ligne != "x")
-                metier_at = ligne.toInt();
-
-            ligne = nouveau_metierTexte.readLine();
-            if (ligne != "x")
-                metier_prd = ligne.toInt();
+        ligne = metiersTexte.readLine();
+        if (ligne != "x")
+            PRD = ligne.toInt();
+        compteurLigne++;
 
         // On crée le métier
-            m_metiers[metier_nom] = new Metier(metier_nom, metier_at, metier_prd,
-                                               metier_cou, metier_int, metier_cha, metier_ad, metier_fo);
+        metiers.push_back(new Metier(nom,
+                                     AT, PRD,
+                                     malus.getCourage(), malus.getIntelligence(), malus.getCharisme(), malus.getAdresse(), malus.getForce()));
 
-            // EV
-            ligne = nouveau_metierTexte.readLine();
+        // EV
+        ligne = metiersTexte.readLine();
+        compteurLigne++;
 
-            if (ligne == "~!EV_CLASSES!~")
-            {
-                QStringList liste_classes;
-                int ev_pourClassesModifiees(0), evEnPlus_pourLesAutres(0);
+        if (ligne == "~!EV_CLASSES!~")
+        {
+            QStringList liste_classes;
+            int ev_pourClassesModifiees(0), evEnPlus_pourLesAutres(0);
 
             // On capte la ligne pour pas faire planter
-                ligne = nouveau_metierTexte.readLine();
+            ligne = metiersTexte.readLine();
+            compteurLigne++;
 
-                do {
+            do {
                 // On remplit la liste de classes modifiées
-                    liste_classes << ligne;
+                liste_classes << ligne;
 
                 // On charge la ligne pour vérifier que la liste des classes modifiées n'est pas fini
-                    ligne = nouveau_metierTexte.readLine();
-                } while (ligne != "~!EV_MODIF!~");
+                ligne = metiersTexte.readLine();
+                compteurLigne++;
+            } while (ligne != "~!EV_MODIF!~");
 
-                ligne = nouveau_metierTexte.readLine();
-                ev_pourClassesModifiees = ligne.toInt();
+            ev_pourClassesModifiees = metiersTexte.readLine().toInt();
+            compteurLigne++;
 
-                ligne = nouveau_metierTexte.readLine();
-                evEnPlus_pourLesAutres = ligne.toInt();
-                QString ligne2 = nouveau_metierTexte.readLine();
-                if (ligne2 == "pourcent")
-                {
-                // On ajoute tout cela au métier
-                    m_metiers[metier_nom]->setEV(liste_classes, ev_pourClassesModifiees, evEnPlus_pourLesAutres, true);
-                // On charge la ligne pour pouvoir vérifier que le fichier n'est pas fini
-                    ligne = nouveau_metierTexte.readLine();
-                }
-                else
-                {
-                    ligne = ligne2;
-                // On ajoute tout cela au métier
-                    m_metiers[metier_nom]->setEV(liste_classes, ev_pourClassesModifiees, evEnPlus_pourLesAutres, false);
-                }
-            }
+            evEnPlus_pourLesAutres = metiersTexte.readLine().toInt();
+            compteurLigne++;
 
-            if (ligne == "~!magie!~")
+            QString ligne2 = metiersTexte.readLine();
+            compteurLigne++;
+            if (ligne2 == "pourcent")
             {
-                QString typeEA = nouveau_metierTexte.readLine();
-                int EA = nouveau_metierTexte.readLine().toInt();
+                // On ajoute tout cela au métier
+                metiers.at(nbMetiers)->setEV(liste_classes, ev_pourClassesModifiees, evEnPlus_pourLesAutres, true);
+                // On charge la ligne pour pouvoir vérifier que le fichier n'est pas fini
+                ligne = metiersTexte.readLine();
+                compteurLigne++;
+            }
+            else
+            {
+                ligne = ligne2;
+                // On ajoute tout cela au métier
+                metiers.at(nbMetiers)->setEV(liste_classes, ev_pourClassesModifiees, evEnPlus_pourLesAutres, false);
+            }
+        }
+
+        if (ligne == "~!magie!~")
+        {
+            QString typeEA = metiersTexte.readLine();
+            compteurLigne++;
+            int EA = metiersTexte.readLine().toInt();
+            compteurLigne++;
 
             // On ajoute l'EA au métier
-                m_metiers[metier_nom]->setEA(typeEA, EA);
+            metiers.at(nbMetiers)->setEA(typeEA, EA);
 
             // On charge la ligne pour pouvoir vérifier que le fichier n'est pas fini
-                ligne = nouveau_metierTexte.readLine();
-            }
+            ligne = metiersTexte.readLine();
+            compteurLigne++;
+        }
 
-            while (ligne == "~!competence-obligatoire!~")
-            {
-                QString competence_nom = nouveau_metierTexte.readLine();
-                QString competence_description = nouveau_metierTexte.readLine();
+    // Conpétences
+        while (ligne == "~!competence-obligatoire!~")
+        {
+            QString competence_nom = metiersTexte.readLine();
+            compteurLigne++;
+            QString competence_description = metiersTexte.readLine();
+            compteurLigne++;
 
-                m_metiers[metier_nom]->addCompetence(competence_nom, competence_description);
+            metiers.at(nbMetiers)->addCompetence(competence_nom, competence_description);
 
-                ligne = nouveau_metierTexte.readLine();
-            }
+            ligne = metiersTexte.readLine();
+            compteurLigne++;
+        }
+        while (ligne == "~!competence-choisir!~")
+        {
+            QString competence_nom = metiersTexte.readLine();
+            compteurLigne++;
+            QString competence_description = metiersTexte.readLine();
+            compteurLigne++;
 
-            while (ligne == "~!competence-choisir!~")
-            {
-                QString competence_nom = nouveau_metierTexte.readLine();
-                QString competence_description = nouveau_metierTexte.readLine();
+            metiers.at(nbMetiers)->addCompetence(competence_nom, competence_description, false);
 
-                m_metiers[metier_nom]->addCompetence(competence_nom, competence_description, false);
+            ligne = metiersTexte.readLine();
+            compteurLigne++;
+        }
 
-                ligne = nouveau_metierTexte.readLine();
-            }
-        } while (ligne != "~!FIN_METIER!~");
+        nbMetiers++;
+    } while (ligne != "~!FIN_METIER!~");
 }
-*/

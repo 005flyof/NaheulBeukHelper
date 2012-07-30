@@ -23,10 +23,14 @@
 
     #include <QtGui>
     #include "Personnage.h"
+
     #include "FenMAJ.h"
     #include "FenOrdreMarche.h"
     #include "FenAttaque.h"
+
     #include "Acceuil.h"
+    #include "AddPerso.h"
+    #include "NewPerso.h"
 
     class FenPrincipale : public QMainWindow
     {
@@ -34,6 +38,10 @@
     public:
         FenPrincipale();
         ~FenPrincipale();
+
+        // Pour la création d'un personnage
+        void setMetiers(QVector<Metier*> metiers);
+        void setOrigines(QVector<Origine*> origines);
 
     public slots:
         void attaquer();
@@ -98,6 +106,10 @@
     // Pour le programme
         QVector<Personnage*> m_personnages;
         QStringList m_nomPersos;
+
+        // Création d'un personnage
+        QVector<Metier*> m_metiers;
+        QVector<Origine*> m_origines;
 
         // Pour le groupe
         QFile *m_fichierGroupe;

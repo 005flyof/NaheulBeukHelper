@@ -127,13 +127,13 @@ Caracteristiques& Caracteristiques::operator=(Caracteristiques const& b)
 {
     if(this != &b)
     {
-        utilisation_AT_PRD = b.utilisation_AT_PRD;
-
         m_courage = b.m_courage;
         m_intelligence = b.m_intelligence;
         m_charisme = b.m_charisme;
         m_adresse = b.m_adresse;
         m_force = b.m_force;
+
+        utilisation_AT_PRD = b.utilisation_AT_PRD;
         m_attaque = b.m_attaque;
         m_parade = b.m_parade;
     }

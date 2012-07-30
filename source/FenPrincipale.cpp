@@ -414,7 +414,18 @@ FenPrincipale::~FenPrincipale()
 
 // Fenêtre de création des personnages
 void FenPrincipale::creerNouveauPersonnage()
-{}
+{
+    NewPerso nouveau(m_origines, m_metiers);
+    nouveau.exec();
+}
+void FenPrincipale::setOrigines(QVector<Origine *> origines)
+{
+    m_origines = origines;
+}
+void FenPrincipale::setMetiers(QVector<Metier *> metiers)
+{
+    m_metiers = metiers;
+}
 // Créer un nouveau groupe
 void FenPrincipale::creerNouveauGroupe()
 {
@@ -476,9 +487,12 @@ void FenPrincipale::creerNouveauGroupe()
     log("Groupe bien crée !");
     statusBar->showMessage("Groupe bien créé", 2000);
 }
-// Ajouter un personnage
+// Fenêtre d'ajout d'un personnage
 void FenPrincipale::ajouterPersonnage()
-{}
+{
+    AddPerso ajouter;
+    ajouter.exec();
+}
 
 // Ouvrir
 void FenPrincipale::ouvrir()
@@ -769,7 +783,7 @@ void FenPrincipale::enregistrerNotes()  // Pour juste les notes
             fatalError("Impossible d'accéder à la variable de fichier de notes !");
     }
 }
-void FenPrincipale::enregistrerPref()
+void FenPrincipale::enregistrerPref()   // Pour les préférences
 {
     log("Enregistrement des préférences !", 1);
 

@@ -15,16 +15,18 @@
     public:
         explicit FenChargement(char *argv[]);
         ~FenChargement();
-/*
+
         void ouvrirOrigines();
-        void ouvrirMetiers();*/
+        void ouvrirMetiers();
 
     private:
         Ui::FenChargement *ui;
 
         FenPrincipale *fenetrePrincipale;
-        /*QMap<QString, Origine*> m_origines;
-        QMap<QString, Metier*> m_metiers;*/
+
+        // Variables
+        QVector<Metier*> metiers;
+        QVector<Origine*> origines;
     };
 
 #endif // FENCHARGEMENT_H

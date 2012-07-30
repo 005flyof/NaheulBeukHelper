@@ -19,12 +19,14 @@
 #include "Competence.h"
 
 Competence::Competence(QString const& nom, QString const& description)
-    : QWidget(), m_nom(nom), m_description(description)
+    : QWidget(),
+      m_nom(nom), m_description(description)
 {
     initAffichage();
 }
 Competence::Competence(Competence const& aCopier)
-    : QWidget()
+    : QWidget(),
+      m_nom(aCopier.m_nom), m_description(aCopier.m_description)
 {
     initAffichage();
 }

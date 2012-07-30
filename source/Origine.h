@@ -27,8 +27,7 @@
     {
     public:
         Origine(QString nom, int EV, int AT,
-                int cou, int intel, int cha, int ad, int fo,
-                int COU, int INTEL, int CHA, int AD, int FO);
+                Caracteristiques mini, Caracteristiques maxi);
 
         void addCompetence(QString nom, QString description, bool obligatoire = true);
 

@@ -397,6 +397,26 @@ void Personnage::viderVariables()
     for (int lecteur = 0; lecteur < MAX_FLECHE; lecteur++)
         m_fleches[lecteur] = 0;
 }
+void Personnage::viderTousEquipements()
+{
+    for (int i = 0; i < MAX_VETEMENT; i++)
+        m_vetements[i] = new Vetement("Nu",
+                                      0, 0, 0, 0, 0,
+                                      0, 0, 0, 0, 0);
+
+    for (int i = 0; i < MAX_PROTECTION; i++)
+        m_protections[i] = new Protection("Pas de protection", 0,
+                                          0, 0, 0, 0, 0, 0, 0,
+                                          0, 0, 0, 0, 0, 0, 0);
+
+    for (int i = 0; i < MAX_ARME; i++)
+        m_armes[i] = new Arme("A mains nues", 1, -2,
+                              0, 0, 0, 0, 0, 0, 0,
+                              0, 0, 0, 0, 0, 0, 0);
+
+    for (int i = 0; i < MAX_FLECHE; i++)
+        m_fleches[i] = new Fleche("Pas de flèches", 0, 0, 0);
+}
 bool Personnage::setNiveau()
 {
     int niveauAncien = m_niveau;
@@ -516,6 +536,95 @@ bool Personnage::setNiveau()
 }
 
 // Fonctions de chargement
+Caracteristiques Personnage::chargerCaracStatic(bool *erreur, QString ligne, bool AT_PRD, int numLigne)
+{
+    if (AT_PRD)
+    {
+        Caracteristiques renvoyer(0, 0, 0, 0, 0, 0, 0);
+        int lecteur(0);
+        while (lecteur < ligne.size())
+        {
+            QString carac("");
+            carac += ligne.at(lecteur);
+            carac += ligne.at(lecteur + 1);
+            switch (lecteur)
+            {
+            case 0:
+                renvoyer.setCourage(carac.toInt());
+                break;
+            case 3:
+                renvoyer.setIntelligence(carac.toInt());
+                break;
+            case 6:
+                renvoyer.setCharisme(carac.toInt());
+                break;
+            case 9:
+                renvoyer.setAdresse(carac.toInt());
+                break;
+            case 12:
+                renvoyer.setForce(carac.toInt());
+                break;
+            case 15:
+                renvoyer.setAttaque(carac.toInt());
+                break;
+            case 18:
+                renvoyer.setParade(carac.toInt());
+                break;
+            default:
+                QMessageBox::critical(new QWidget, "Erreur réparable !",
+                                      "Caractéristiques non valides !\n"
+                                      "Pour plus d'informations : regardez le fichier de log");
+                log("Il y a des caractéristiques invalides à la ligne " + QString::number(numLigne) + " !", 2);
+                *erreur = true;
+                return renvoyer;
+                break;
+            }
+            lecteur += 3;
+        }
+
+        return renvoyer;
+    }
+    else
+    {
+        Caracteristiques renvoyer(0, 0, 0, 0, 0);
+        int lecteur(0);
+        while (lecteur < ligne.size())
+        {
+            QString carac("");
+            carac += ligne.at(lecteur);
+            carac += ligne.at(lecteur + 1);
+            switch (lecteur)
+            {
+            case 0:
+                renvoyer.setCourage(carac.toInt());
+                break;
+            case 3:
+                renvoyer.setIntelligence(carac.toInt());
+                break;
+            case 6:
+                renvoyer.setCharisme(carac.toInt());
+                break;
+            case 9:
+                renvoyer.setAdresse(carac.toInt());
+                break;
+            case 12:
+                renvoyer.setForce(carac.toInt());
+                break;
+            default:
+                QMessageBox::critical(new QWidget, "Erreur réparable !",
+                                      "Caractéristiques non valides !\n"
+                                      "Pour plus d'informations : regardez le fichier de log");
+                log("Il y a des caractéristiques invalides à la ligne " + QString::number(numLigne) + " !", 2);
+                *erreur = true;
+                return renvoyer;
+                break;
+            }
+            lecteur += 3;
+        }
+
+        return renvoyer;
+    }
+}
 Caracteristiques Personnage::chargerCarac(bool *erreur, QString ligne, bool AT_PRD, int numLigne)
 {
     if (AT_PRD)
@@ -597,7 +706,7 @@ Caracteristiques Personnage::chargerCarac(bool *erreur, QString ligne, bool AT_P
                 QMessageBox::critical(ui->nom, "Erreur réparable !",
                                       "ERREUR : Erreur lors de l'ouverture du fichier :\n"
                                       "     -> " + m_cheminEnregistrement + " (" + m_nom + ") !\n\n"
-                                      "Caractéristiques initiales non valides !\n"
+                                      "Caractéristiques non valides !\n"
                                       "Pour plus d'informations : regardez le fichier de log");
                 log("Personnage non ouvert : il y a des caractéristiques invalides à la ligne " + QString::number(numLigne) + " !", 2);
                 log("Annulation du chargement du groupe !", 1);
@@ -624,8 +733,37 @@ bool Personnage::chargerPerso()
     int numLigne(1);
 
 // Informations générales
-    m_nom = entree.readLine();
-    numLigne++;
+    // On vérifie que le personnage n'est pas nouveau
+    QString ligne1(entree.readLine());
+    if (ligne1 == "~!AddPerso!~")
+    {
+        m_nom = entree.readLine();
+        numLigne += 2;
+        QMessageBox::information(this, "Ajout d'un personnage ayant déjà joué !",
+                                 "Félicitations !\n\n"
+                                 "Vous avez bien ajouté " + m_nom + " au groupe.\n"
+                                 "Mais pour l'instant, ce personnage est tout nu, non protégé et non armé !\n"
+                                 "Vous pouvez lui ajouter des armes, protections et des vêtements dès maintenant ! :)");
+        viderTousEquipements();
+    }
+    else if (ligne1 == "~!NewPerso!~")
+    {
+        m_nom = entree.readLine();
+        numLigne += 2;
+        QMessageBox::information(this, "Création d'un nouveau personnage de niveau 1 !",
+                                 "Félicitations !\n\n"
+                                 "Vous avez bien créé " + m_nom + ", un nouveau personnage de niveau 1.\n"
+                                 "Mais pour l'instant, ce personnage est tout nu, non protégé et non armé !\n"
+                                 "Vous pouvez lui ajouter des armes, protections et des vêtements dès maintenant ! :)");
+        viderTousEquipements();
+    }
+    else
+    {
+        m_nom = ligne1;
+        numLigne++;
+    }
+
+    // On continue
     m_sexe = entree.readLine();
     numLigne++;
     m_origine = entree.readLine();
@@ -650,6 +788,8 @@ bool Personnage::chargerPerso()
     if (erreur)
         return true;
     m_carac_modif = new Caracteristiques(chargerCarac(&erreur, entree.readLine(), true, numLigne++));
+    if (erreur)
+        return true;
 
 // Richesses
     m_richesses = new Richesses(0, 0, 0);
@@ -852,6 +992,8 @@ bool Personnage::chargerPerso()
                 case 3:
                     m_armes[lecteurTableauArme]->setType(Arme::Projectile);
                     break;
+                default:
+                    m_armes[lecteurTableauArme]->setType(Arme::MainNue);
                 }
                 m_armes[lecteurTableauArme]->setRupture(entree.readLine().toInt());
                 numLigne++;
@@ -918,6 +1060,8 @@ bool Personnage::chargerPerso()
                     fin = true;
                 if (ligne == "~!competence!~")
                     fin = true;
+                if (ligne == "~!FIN_ENREGISTREMENT!~")
+                    fin = true;
 
                 // On inscrit la ligne dans l'équipement tant que ce n'est pas un autre objet
                 while (!fin)
@@ -929,6 +1073,8 @@ bool Personnage::chargerPerso()
                     if (ligne == "~!equipement!~")
                         fin = true;
                     if (ligne == "~!competence!~")
+                        fin = true;
+                    if (ligne == "~!FIN_ENREGISTREMENT!~")
                         fin = true;
                 }
 

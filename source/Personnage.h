@@ -26,6 +26,7 @@
         bool chargerPerso();
         void enregistrerPerso();
 
+        static Caracteristiques chargerCaracStatic(bool *erreur, QString ligne, bool AT_PRD, int numLigne);
 
         // Accesseurs
         QString getNom() const;
@@ -94,6 +95,7 @@
 
     // Fonctions
         void viderVariables();
+        void viderTousEquipements();
         Caracteristiques chargerCarac(bool *erreur, QString ligne, bool AT_PRD, int numLigne);
         bool setNiveau();
 

@@ -24,9 +24,10 @@
     #include "Arme.h"
     #include "Vetement.h"
     #include "Fleche.h"
-    #include "Metier.h"
-    #include "Origine.h"
     #include "Protection.h"
     #include "Richesses.h"
+
+    #include "Metier.h"
+    #include "Origine.h"
 
 #endif // CLASSESPOURPERSONNAGE_H

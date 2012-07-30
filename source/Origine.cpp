@@ -19,12 +19,11 @@
 #include "ClassesPourPersonnage.h"
 
 Origine::Origine(QString nom, int EV, int AT,
-                 int cou, int intel, int cha, int ad, int fo,
-                 int COU, int INTEL, int CHA, int AD, int FO)
+                 Caracteristiques mini, Caracteristiques maxi)
 {
     m_nom = nom;
-    m_caracMini = new Caracteristiques(cou, intel, cha, ad, fo);
-    m_caracMax = new Caracteristiques(COU, INTEL, CHA, AD, FO);
+    m_caracMini = new Caracteristiques(mini);
+    m_caracMax = new Caracteristiques(maxi);
     m_EV = EV;
     m_AT = AT;
 }
