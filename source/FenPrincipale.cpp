@@ -430,8 +430,9 @@ void FenPrincipale::setMetiers(QVector<Metier *> metiers)
 void FenPrincipale::creerNouveauGroupe()
 {
 // Choix des chemins
-    QString cheminGroupe = QFileDialog::getSaveFileName(zoneCentrale, "Créer un groupe -> Fichier 'NBH'",
-                                                       QString("enregistrements"), "Groupe de personnages (*.nbh)");
+    QString cheminGroupe;
+    cheminGroupe = QFileDialog::getSaveFileName(zoneCentrale, "Créer un groupe de personnage",
+                                                        "enregistrements", "Groupe de personnages (*.nbh)");
 
     if (cheminGroupe.isEmpty())
         return;
@@ -583,6 +584,7 @@ void FenPrincipale::ouvrir()
 
 // Création du widget central
     zoneCentrale = new QMdiArea(this);
+    zoneCentrale->setMinimumWidth(901);
     zoneCentrale->setViewMode(QMdiArea::TabbedView);
     zoneCentrale->setTabsMovable(false);
 
@@ -659,6 +661,8 @@ void FenPrincipale::ouvrir()
             achatCOU->setEnabled(false);
             achatEV->setEnabled(false);
             achatEA->setEnabled(false);
+
+            enregistrer->setEnabled(false);
 
             statusBar->removeWidget(progressBar_status);
             delete progressBar_status;
@@ -881,6 +885,8 @@ void FenPrincipale::fermerGroupe()
             achatEV->setEnabled(false);
             achatEA->setEnabled(false);
 
+            enregistrer->setEnabled(false);
+
             log("Groupe fermé !", 1);
         }
         else if (reponse == QMessageBox::Discard)
@@ -933,6 +939,8 @@ void FenPrincipale::fermerGroupe()
             achatCOU->setEnabled(false);
             achatEV->setEnabled(false);
             achatEA->setEnabled(false);
+
+            enregistrer->setEnabled(false);
         }
         else if (reponse == QMessageBox::Cancel)
             return;
@@ -988,6 +996,8 @@ void FenPrincipale::fermerGroupe()
         achatCOU->setEnabled(false);
         achatEV->setEnabled(false);
         achatEA->setEnabled(false);
+
+        enregistrer->setEnabled(false);
     }
 }
 // Quitter NBH

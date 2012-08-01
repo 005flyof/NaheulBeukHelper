@@ -29,6 +29,7 @@ Protection::Protection(QString nom, int nb_PR,
     m_nombreProtection = nb_PR;
     m_bonus = new Caracteristiques(COU, INTEL, CHA, AD, FO, AT, PRD);
     m_malus = new Caracteristiques(cou, intel, cha, ad, fo, at, prd);
+    m_rupture_max = 0;
 }
 
 
@@ -51,11 +52,24 @@ void Protection::setMalus(Caracteristiques carac)
 {
     *m_malus = carac;
 }
+void Protection::setRupture(int value)
+{
+    m_rupture_max = value;
+}
 
 
 QString Protection::getNom() const
 {
     return m_nomProtection;
+}
+QString Protection::getRuptAffichage() const
+{
+    if (m_nomProtection == "Pas de protection")
+        return QString("-");
+    else if (m_rupture_max == 0)
+        return QString("Incassable !");
+    else
+        return QString("1 à " + QString::number(m_rupture_max));
 }
 QString Protection::getBonusAffichage() const
 {
@@ -86,6 +100,10 @@ Caracteristiques Protection::getMalus() const
 {
     return *m_malus;
 }
+int Protection::getRupture() const
+{
+    return m_rupture_max;
+}
 
 
 /*
@@ -99,7 +117,9 @@ QString Protection::protectionEnregistrement() const
     pr += m_nomProtection + "\n";
     pr += QString::number(m_nombreProtection) + "\n";
     pr += m_bonus->caracEnregistrement() + "\n";
-    pr += m_malus->caracEnregistrement();
+    pr += m_malus->caracEnregistrement() + "\n";
+
+    pr += QString::number(m_rupture_max);
 
     return pr;
 }

@@ -1,3 +1,21 @@
+/*
+    Copyright (C) 2011 Florent FAYOLLAS
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+*/
+
 #include "Personnage.h"
 #include "ui_Personnage.h"
 
@@ -44,205 +62,16 @@ void Personnage::setAffichage()
     rafraichirCarac();
 
 // Protections
-    ui->prNom_1->setText(m_protections[0]->getNom());
-    ui->prBonus_1->setText(m_protections[0]->getBonusAffichage());
-    ui->prMalus_1->setText(m_protections[0]->getMalusAffichage());
-    ui->prPr_1->setText(QString::number(m_protections[0]->getNbPR()));
-    ui->prRupt_1->setText("A faire !!");
-
-    ui->prNom_2->setText(m_protections[1]->getNom());
-    ui->prBonus_2->setText(m_protections[1]->getBonusAffichage());
-    ui->prMalus_2->setText(m_protections[1]->getMalusAffichage());
-    ui->prPr_2->setText(QString::number(m_protections[1]->getNbPR()));
-    ui->prRupt_2->setText("A faire !!");
-
-    ui->prNom_3->setText(m_protections[2]->getNom());
-    ui->prBonus_3->setText(m_protections[2]->getBonusAffichage());
-    ui->prMalus_3->setText(m_protections[2]->getMalusAffichage());
-    ui->prPr_3->setText(QString::number(m_protections[2]->getNbPR()));
-    ui->prRupt_3->setText("A faire !!");
-
-    ui->prNom_4->setText(m_protections[3]->getNom());
-    ui->prBonus_4->setText(m_protections[3]->getBonusAffichage());
-    ui->prMalus_4->setText(m_protections[3]->getMalusAffichage());
-    ui->prPr_4->setText(QString::number(m_protections[3]->getNbPR()));
-    ui->prRupt_4->setText("A faire !!");
-
-    ui->prNom_5->setText(m_protections[4]->getNom());
-    ui->prBonus_5->setText(m_protections[4]->getBonusAffichage());
-    ui->prMalus_5->setText(m_protections[4]->getMalusAffichage());
-    ui->prPr_5->setText(QString::number(m_protections[4]->getNbPR()));
-    ui->prRupt_5->setText("A faire !!");
-
-    ui->prNom_6->setText(m_protections[5]->getNom());
-    ui->prBonus_6->setText(m_protections[5]->getBonusAffichage());
-    ui->prMalus_6->setText(m_protections[5]->getMalusAffichage());
-    ui->prPr_6->setText(QString::number(m_protections[5]->getNbPR()));
-    ui->prRupt_6->setText("A faire !!");
-
-    ui->prTotale->setText(QString::number(m_prTotale));
+    rafraichirProtections();
 
 // Armes
-    ui->armesNom_1->setText(m_armes[0]->getNom());
-    ui->armesBonus_1->setText(m_armes[0]->getBonusAffichage());
-    ui->armesMalus_1->setText(m_armes[0]->getMalusAffichage());
-    ui->armesPi_1->setText(m_armes[0]->getDegatsAffichage());
-    ui->armesRupt_1->setText("A faire !!");
-
-    ui->armesNom_2->setText(m_armes[1]->getNom());
-    ui->armesBonus_2->setText(m_armes[1]->getBonusAffichage());
-    ui->armesMalus_2->setText(m_armes[1]->getMalusAffichage());
-    ui->armesPi_2->setText(m_armes[1]->getDegatsAffichage());
-    ui->armesRupt_2->setText("A faire !!");
-
-    ui->armesNom_3->setText(m_armes[2]->getNom());
-    ui->armesBonus_3->setText(m_armes[2]->getBonusAffichage());
-    ui->armesMalus_3->setText(m_armes[2]->getMalusAffichage());
-    ui->armesPi_3->setText(m_armes[2]->getDegatsAffichage());
-    ui->armesRupt_3->setText("A faire !!");
-
-    ui->armesNom_4->setText(m_armes[3]->getNom());
-    ui->armesBonus_4->setText(m_armes[3]->getBonusAffichage());
-    ui->armesMalus_4->setText(m_armes[3]->getMalusAffichage());
-    ui->armesPi_4->setText(m_armes[3]->getDegatsAffichage());
-    ui->armesRupt_4->setText("A faire !!");
+    rafraichirArmes();
 
 // Flèches
-    ui->flechesNom_1->setText(m_fleches[0]->getNom());
-    ui->flechesBonus_1->setText(m_fleches[0]->getBonusAffichage());
-    ui->flechesNb_1->setText(QString::number(m_fleches[0]->getNombre()));
-    if (m_fleches[0]->getNom() == "Pas de flèches")
-    {
-        ui->flechesNb_1->setEnabled(false);
-        ui->flechesPlus_1->setEnabled(false);
-        ui->flechesMoins_1->setEnabled(false);
-    }
-    else if (m_fleches[0]->getNombre() == 0)
-    {
-        ui->flechesNb_1->setEnabled(true);
-        ui->flechesPlus_1->setEnabled(true);
-        ui->flechesMoins_1->setEnabled(false);
-    }
-    else
-    {
-        ui->flechesNb_1->setEnabled(true);
-        ui->flechesPlus_1->setEnabled(true);
-        ui->flechesMoins_1->setEnabled(true);
-    }
-
-    ui->flechesNom_2->setText(m_fleches[1]->getNom());
-    ui->flechesBonus_2->setText(m_fleches[1]->getBonusAffichage());
-    ui->flechesNb_2->setText(QString::number(m_fleches[1]->getNombre()));
-    if (m_fleches[1]->getNom() == "Pas de flèches")
-    {
-        ui->flechesNb_2->setEnabled(false);
-        ui->flechesPlus_2->setEnabled(false);
-        ui->flechesMoins_2->setEnabled(false);
-    }
-    else if (m_fleches[1]->getNombre() == 0)
-    {
-        ui->flechesNb_2->setEnabled(true);
-        ui->flechesPlus_2->setEnabled(true);
-        ui->flechesMoins_2->setEnabled(false);
-    }
-    else
-    {
-        ui->flechesNb_2->setEnabled(true);
-        ui->flechesPlus_2->setEnabled(true);
-        ui->flechesMoins_2->setEnabled(true);
-    }
-
-    ui->flechesNom_3->setText(m_fleches[2]->getNom());
-    ui->flechesBonus_3->setText(m_fleches[2]->getBonusAffichage());
-    ui->flechesNb_3->setText(QString::number(m_fleches[2]->getNombre()));
-    if (m_fleches[2]->getNom() == "Pas de flèches")
-    {
-        ui->flechesNb_3->setEnabled(false);
-        ui->flechesPlus_3->setEnabled(false);
-        ui->flechesMoins_3->setEnabled(false);
-    }
-    else if (m_fleches[2]->getNombre() == 0)
-    {
-        ui->flechesNb_3->setEnabled(true);
-        ui->flechesPlus_3->setEnabled(true);
-        ui->flechesMoins_3->setEnabled(false);
-    }
-    else
-    {
-        ui->flechesNb_3->setEnabled(true);
-        ui->flechesPlus_3->setEnabled(true);
-        ui->flechesMoins_3->setEnabled(true);
-    }
-
-    ui->flechesNom_4->setText(m_fleches[3]->getNom());
-    ui->flechesBonus_4->setText(m_fleches[3]->getBonusAffichage());
-    ui->flechesNb_4->setText(QString::number(m_fleches[3]->getNombre()));
-    if (m_fleches[3]->getNom() == "Pas de flèches")
-    {
-        ui->flechesNb_4->setEnabled(false);
-        ui->flechesPlus_4->setEnabled(false);
-        ui->flechesMoins_4->setEnabled(false);
-    }
-    else if (m_fleches[3]->getNombre() == 0)
-    {
-        ui->flechesNb_4->setEnabled(true);
-        ui->flechesPlus_4->setEnabled(true);
-        ui->flechesMoins_4->setEnabled(false);
-    }
-    else
-    {
-        ui->flechesNb_4->setEnabled(true);
-        ui->flechesPlus_4->setEnabled(true);
-        ui->flechesMoins_4->setEnabled(true);
-    }
-
-    ui->flechesNom_5->setText(m_fleches[4]->getNom());
-    ui->flechesBonus_5->setText(m_fleches[4]->getBonusAffichage());
-    ui->flechesNb_5->setText(QString::number(m_fleches[4]->getNombre()));
-    if (m_fleches[4]->getNom() == "Pas de flèches")
-    {
-        ui->flechesNb_5->setEnabled(false);
-        ui->flechesPlus_5->setEnabled(false);
-        ui->flechesMoins_5->setEnabled(false);
-    }
-    else if (m_fleches[4]->getNombre() == 0)
-    {
-        ui->flechesNb_5->setEnabled(true);
-        ui->flechesPlus_5->setEnabled(true);
-        ui->flechesMoins_5->setEnabled(false);
-    }
-    else
-    {
-        ui->flechesNb_5->setEnabled(true);
-        ui->flechesPlus_5->setEnabled(true);
-        ui->flechesMoins_5->setEnabled(true);
-    }
+    rafraichirFleches();
 
 // Vêtements
-    ui->vetNom_1->setText(m_vetements[0]->getNom());
-    ui->vetBonus_1->setText(m_vetements[0]->getBonusAffichage());
-    ui->vetMalus_1->setText(m_vetements[0]->getMalusAffichage());
-    ui->vetVisible_1->setChecked(true);
-
-    ui->vetNom_2->setText(m_vetements[1]->getNom());
-    ui->vetBonus_2->setText(m_vetements[1]->getBonusAffichage());
-    ui->vetMalus_2->setText(m_vetements[1]->getMalusAffichage());
-    ui->vetVisible_2->setChecked(true);
-
-    ui->vetNom_3->setText(m_vetements[2]->getNom());
-    ui->vetBonus_3->setText(m_vetements[2]->getBonusAffichage());
-    ui->vetMalus_3->setText(m_vetements[2]->getMalusAffichage());
-    ui->vetVisible_3->setChecked(true);
-
-    ui->vetNom_4->setText(m_vetements[3]->getNom());
-    ui->vetBonus_4->setText(m_vetements[3]->getBonusAffichage());
-    ui->vetMalus_4->setText(m_vetements[3]->getMalusAffichage());
-    ui->vetVisible_4->setChecked(true);
-
-    ui->vetNom_5->setText(m_vetements[4]->getNom());
-    ui->vetBonus_5->setText(m_vetements[4]->getBonusAffichage());
-    ui->vetMalus_5->setText(m_vetements[4]->getMalusAffichage());
-    ui->vetVisible_5->setChecked(true);
+    rafraichirVetements();
 
 // Equipements
     ui->equips_1->setText(m_equipements[0]);
@@ -314,13 +143,28 @@ void Personnage::rafraichirRichesses()
 }
 void Personnage::rafraichirCarac()
 {
+    if (ui->remiseAZero->isChecked())
+        calculerCarac();
+
     ui->ev->setText(QString::number(m_EV));
     ui->evModif->setText(QString::number(m_EV_modif));
+        ui->evPlus->setEnabled(true);
+        ui->evMoins->setEnabled(true);
+        if (m_EV_modif == m_EV)
+            ui->evPlus->setEnabled(false);
+        else if (m_EV_modif == 0)
+            ui->evMoins->setEnabled(false);
 
     if (m_presenceEA)
     {
         ui->ea->setText(QString::number(m_EA));
         ui->eaModif->setText(QString::number(m_EA_modif));
+            ui->eaPlus->setEnabled(true);
+            ui->eaMoins->setEnabled(true);
+            if (m_EA_modif == m_EA)
+                ui->eaPlus->setEnabled(false);
+            else if (m_EA_modif == 0)
+                ui->eaMoins->setEnabled(false);
         ui->typeEa->setText(m_typeEA);
         ui->magiePhys->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getAdresse() ) / 2));
         ui->magiePsy->setText(QString::number((m_carac_modif->getIntelligence() + m_carac_modif->getCharisme() ) / 2));
@@ -341,18 +185,358 @@ void Personnage::rafraichirCarac()
 
     ui->cou->setText(QString::number(m_carac->getCourage()));
     ui->couModif->setText(QString::number(m_carac_modif->getCourage()));
+        ui->couPlus->setEnabled(true);
+        ui->couMoins->setEnabled(true);
+        if (m_carac_modif->getCourage() == 18)
+            ui->couPlus->setEnabled(false);
+        else if (m_carac_modif->getCourage() == 2)
+            ui->couMoins->setEnabled(false);
+
     ui->intel->setText(QString::number(m_carac->getIntelligence()));
     ui->intelModif->setText(QString::number(m_carac_modif->getIntelligence()));
+        ui->intelPlus->setEnabled(true);
+        ui->intelMoins->setEnabled(true);
+        if (m_carac_modif->getIntelligence() == 18)
+            ui->intelPlus->setEnabled(false);
+        else if (m_carac_modif->getIntelligence() == 2)
+            ui->intelMoins->setEnabled(false);
+
     ui->cha->setText(QString::number(m_carac->getCharisme()));
     ui->chaModif->setText(QString::number(m_carac_modif->getCharisme()));
+        ui->chaPlus->setEnabled(true);
+        ui->chaMoins->setEnabled(true);
+        if (m_carac_modif->getCharisme() == 18)
+            ui->chaPlus->setEnabled(false);
+        else if (m_carac_modif->getCharisme() == 2)
+            ui->chaMoins->setEnabled(false);
+
     ui->ad->setText(QString::number(m_carac->getAdresse()));
     ui->adModif->setText(QString::number(m_carac_modif->getAdresse()));
+        ui->adPlus->setEnabled(true);
+        ui->adMoins->setEnabled(true);
+        if (m_carac_modif->getAdresse() == 18)
+            ui->adPlus->setEnabled(false);
+        else if (m_carac_modif->getAdresse() == 2)
+            ui->adMoins->setEnabled(false);
+
     ui->fo->setText(QString::number(m_carac->getForce()));
     ui->foModif->setText(QString::number(m_carac_modif->getForce()));
+        ui->foPlus->setEnabled(true);
+        ui->foMoins->setEnabled(true);
+        if (m_carac_modif->getForce() == 18)
+            ui->foPlus->setEnabled(false);
+        else if (m_carac_modif->getForce() == 2)
+            ui->foMoins->setEnabled(false);
+
     ui->at->setText(QString::number(m_carac->getAttaque()));
     ui->atModif->setText(QString::number(m_carac_modif->getAttaque()));
+        ui->atPlus->setEnabled(true);
+        ui->atMoins->setEnabled(true);
+        if (m_carac_modif->getAttaque() == 18)
+            ui->atPlus->setEnabled(false);
+        else if (m_carac_modif->getAttaque() == 2)
+            ui->atMoins->setEnabled(false);
+
     ui->prd->setText(QString::number(m_carac->getParade()));
     ui->prdModif->setText(QString::number(m_carac_modif->getParade()));
+        ui->prdPlus->setEnabled(true);
+        ui->prdMoins->setEnabled(true);
+        if (m_carac_modif->getParade() == 18)
+            ui->prdPlus->setEnabled(false);
+        else if (m_carac_modif->getParade() == 2)
+            ui->prdMoins->setEnabled(false);
+
+
+    for (int i(0); i < MAX_ARME; i++)
+    {
+        m_AT_modif[i] = m_carac_modif->getAttaque() + m_armes[i]->getBonus().getAttaque() - m_armes[i]->getMalus().getAttaque();
+        m_PRD_modif[i] = m_carac_modif->getParade() + m_armes[i]->getBonus().getParade() - m_armes[i]->getMalus().getParade();
+    }
+
+    ui->AT_arme_1->setText(QString::number(m_AT_modif[0]));
+    ui->AT_arme_2->setText(QString::number(m_AT_modif[1]));
+    ui->AT_arme_3->setText(QString::number(m_AT_modif[2]));
+    ui->AT_arme_4->setText(QString::number(m_AT_modif[3]));
+
+    ui->PRD_arme_1->setText(QString::number(m_PRD_modif[0]));
+    ui->PRD_arme_2->setText(QString::number(m_PRD_modif[1]));
+    ui->PRD_arme_3->setText(QString::number(m_PRD_modif[2]));
+    ui->PRD_arme_4->setText(QString::number(m_PRD_modif[3]));
+}
+void Personnage::rafraichirProtections()
+{
+    ui->prNom_1->setText(m_protections[0]->getNom());
+    ui->prBonus_1->setText(m_protections[0]->getBonusAffichage());
+    ui->prMalus_1->setText(m_protections[0]->getMalusAffichage());
+    ui->prPr_1->setText(QString::number(m_protections[0]->getNbPR()));
+    ui->prRupt_1->setText(m_protections[0]->getRuptAffichage());
+
+    ui->prNom_2->setText(m_protections[1]->getNom());
+    ui->prBonus_2->setText(m_protections[1]->getBonusAffichage());
+    ui->prMalus_2->setText(m_protections[1]->getMalusAffichage());
+    ui->prPr_2->setText(QString::number(m_protections[1]->getNbPR()));
+    ui->prRupt_2->setText(m_protections[1]->getRuptAffichage());
+
+    ui->prNom_3->setText(m_protections[2]->getNom());
+    ui->prBonus_3->setText(m_protections[2]->getBonusAffichage());
+    ui->prMalus_3->setText(m_protections[2]->getMalusAffichage());
+    ui->prPr_3->setText(QString::number(m_protections[2]->getNbPR()));
+    ui->prRupt_3->setText(m_protections[2]->getRuptAffichage());
+
+    ui->prNom_4->setText(m_protections[3]->getNom());
+    ui->prBonus_4->setText(m_protections[3]->getBonusAffichage());
+    ui->prMalus_4->setText(m_protections[3]->getMalusAffichage());
+    ui->prPr_4->setText(QString::number(m_protections[3]->getNbPR()));
+    ui->prRupt_4->setText(m_protections[3]->getRuptAffichage());
+
+    ui->prNom_5->setText(m_protections[4]->getNom());
+    ui->prBonus_5->setText(m_protections[4]->getBonusAffichage());
+    ui->prMalus_5->setText(m_protections[4]->getMalusAffichage());
+    ui->prPr_5->setText(QString::number(m_protections[4]->getNbPR()));
+    ui->prRupt_5->setText(m_protections[4]->getRuptAffichage());
+
+    ui->prNom_6->setText(m_protections[5]->getNom());
+    ui->prBonus_6->setText(m_protections[5]->getBonusAffichage());
+    ui->prMalus_6->setText(m_protections[5]->getMalusAffichage());
+    ui->prPr_6->setText(QString::number(m_protections[5]->getNbPR()));
+    ui->prRupt_6->setText(m_protections[5]->getRuptAffichage());
+
+    m_prTotale = m_protections[0]->getNbPR()
+               + m_protections[1]->getNbPR()
+               + m_protections[2]->getNbPR()
+               + m_protections[3]->getNbPR()
+               + m_protections[4]->getNbPR()
+               + m_protections[5]->getNbPR();
+    ui->prTotale->setText(QString::number(m_prTotale));
+
+    rafraichirCarac();
+}
+void Personnage::rafraichirArmes()
+{
+    ui->armesNom_1->setText(m_armes[0]->getNom());
+    ui->armesBonus_1->setText(m_armes[0]->getBonusAffichage());
+    ui->armesMalus_1->setText(m_armes[0]->getMalusAffichage());
+    ui->armesPi_1->setText(m_armes[0]->getDegatsAffichage());
+    ui->armesRupt_1->setText(m_armes[0]->getRuptAffichage());
+
+    ui->armesNom_2->setText(m_armes[1]->getNom());
+    ui->armesBonus_2->setText(m_armes[1]->getBonusAffichage());
+    ui->armesMalus_2->setText(m_armes[1]->getMalusAffichage());
+    ui->armesPi_2->setText(m_armes[1]->getDegatsAffichage());
+    ui->armesRupt_2->setText(m_armes[1]->getRuptAffichage());
+
+    ui->armesNom_3->setText(m_armes[2]->getNom());
+    ui->armesBonus_3->setText(m_armes[2]->getBonusAffichage());
+    ui->armesMalus_3->setText(m_armes[2]->getMalusAffichage());
+    ui->armesPi_3->setText(m_armes[2]->getDegatsAffichage());
+    ui->armesRupt_3->setText(m_armes[2]->getRuptAffichage());
+
+    ui->armesNom_4->setText(m_armes[3]->getNom());
+    ui->armesBonus_4->setText(m_armes[3]->getBonusAffichage());
+    ui->armesMalus_4->setText(m_armes[3]->getMalusAffichage());
+    ui->armesPi_4->setText(m_armes[3]->getDegatsAffichage());
+    ui->armesRupt_4->setText(m_armes[3]->getRuptAffichage());
+
+    rafraichirCarac();
+}
+void Personnage::rafraichirFleches()
+{
+    ui->flechesNom_1->setText(m_fleches[0]->getNom());
+    ui->flechesBonus_1->setText(m_fleches[0]->getBonusAffichage());
+    ui->flechesNb_1->setText(QString::number(m_fleches[0]->getNombre()));
+    ui->flechesRupt_1->setText(m_fleches[0]->getRuptAffichage());
+    if (m_fleches[0]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_1->setEnabled(false);
+        ui->flechesPlus_1->setEnabled(false);
+        ui->flechesMoins_1->setEnabled(false);
+    }
+    else if (m_fleches[0]->getNombre() == 0)
+    {
+        ui->flechesNb_1->setEnabled(true);
+        ui->flechesPlus_1->setEnabled(true);
+        ui->flechesMoins_1->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_1->setEnabled(true);
+        ui->flechesPlus_1->setEnabled(true);
+        ui->flechesMoins_1->setEnabled(true);
+    }
+
+    ui->flechesNom_2->setText(m_fleches[1]->getNom());
+    ui->flechesBonus_2->setText(m_fleches[1]->getBonusAffichage());
+    ui->flechesNb_2->setText(QString::number(m_fleches[1]->getNombre()));
+    ui->flechesRupt_2->setText(m_fleches[1]->getRuptAffichage());
+    if (m_fleches[1]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_2->setEnabled(false);
+        ui->flechesPlus_2->setEnabled(false);
+        ui->flechesMoins_2->setEnabled(false);
+    }
+    else if (m_fleches[1]->getNombre() == 0)
+    {
+        ui->flechesNb_2->setEnabled(true);
+        ui->flechesPlus_2->setEnabled(true);
+        ui->flechesMoins_2->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_2->setEnabled(true);
+        ui->flechesPlus_2->setEnabled(true);
+        ui->flechesMoins_2->setEnabled(true);
+    }
+
+    ui->flechesNom_3->setText(m_fleches[2]->getNom());
+    ui->flechesBonus_3->setText(m_fleches[2]->getBonusAffichage());
+    ui->flechesNb_3->setText(QString::number(m_fleches[2]->getNombre()));
+    ui->flechesRupt_3->setText(m_fleches[2]->getRuptAffichage());
+    if (m_fleches[2]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_3->setEnabled(false);
+        ui->flechesPlus_3->setEnabled(false);
+        ui->flechesMoins_3->setEnabled(false);
+    }
+    else if (m_fleches[2]->getNombre() == 0)
+    {
+        ui->flechesNb_3->setEnabled(true);
+        ui->flechesPlus_3->setEnabled(true);
+        ui->flechesMoins_3->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_3->setEnabled(true);
+        ui->flechesPlus_3->setEnabled(true);
+        ui->flechesMoins_3->setEnabled(true);
+    }
+
+    ui->flechesNom_4->setText(m_fleches[3]->getNom());
+    ui->flechesBonus_4->setText(m_fleches[3]->getBonusAffichage());
+    ui->flechesNb_4->setText(QString::number(m_fleches[3]->getNombre()));
+    ui->flechesRupt_4->setText(m_fleches[3]->getRuptAffichage());
+    if (m_fleches[3]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_4->setEnabled(false);
+        ui->flechesPlus_4->setEnabled(false);
+        ui->flechesMoins_4->setEnabled(false);
+    }
+    else if (m_fleches[3]->getNombre() == 0)
+    {
+        ui->flechesNb_4->setEnabled(true);
+        ui->flechesPlus_4->setEnabled(true);
+        ui->flechesMoins_4->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_4->setEnabled(true);
+        ui->flechesPlus_4->setEnabled(true);
+        ui->flechesMoins_4->setEnabled(true);
+    }
+
+    ui->flechesNom_5->setText(m_fleches[4]->getNom());
+    ui->flechesBonus_5->setText(m_fleches[4]->getBonusAffichage());
+    ui->flechesNb_5->setText(QString::number(m_fleches[4]->getNombre()));
+    ui->flechesRupt_5->setText(m_fleches[4]->getRuptAffichage());
+    if (m_fleches[4]->getNom() == "Pas de flèches")
+    {
+        ui->flechesNb_5->setEnabled(false);
+        ui->flechesPlus_5->setEnabled(false);
+        ui->flechesMoins_5->setEnabled(false);
+    }
+    else if (m_fleches[4]->getNombre() == 0)
+    {
+        ui->flechesNb_5->setEnabled(true);
+        ui->flechesPlus_5->setEnabled(true);
+        ui->flechesMoins_5->setEnabled(false);
+    }
+    else
+    {
+        ui->flechesNb_5->setEnabled(true);
+        ui->flechesPlus_5->setEnabled(true);
+        ui->flechesMoins_5->setEnabled(true);
+    }
+
+    rafraichirCarac();
+}
+void Personnage::rafraichirVetements()
+{
+    ui->vetNom_1->setText(m_vetements[0]->getNom());
+    ui->vetBonus_1->setText(m_vetements[0]->getBonusAffichage());
+    ui->vetMalus_1->setText(m_vetements[0]->getMalusAffichage());
+    ui->vetVisible_1->setChecked(m_vetements[0]->isVisible());
+
+    ui->vetNom_2->setText(m_vetements[1]->getNom());
+    ui->vetBonus_2->setText(m_vetements[1]->getBonusAffichage());
+    ui->vetMalus_2->setText(m_vetements[1]->getMalusAffichage());
+    ui->vetVisible_2->setChecked(m_vetements[1]->isVisible());
+
+    ui->vetNom_3->setText(m_vetements[2]->getNom());
+    ui->vetBonus_3->setText(m_vetements[2]->getBonusAffichage());
+    ui->vetMalus_3->setText(m_vetements[2]->getMalusAffichage());
+    ui->vetVisible_3->setChecked(m_vetements[2]->isVisible());
+
+    ui->vetNom_4->setText(m_vetements[3]->getNom());
+    ui->vetBonus_4->setText(m_vetements[3]->getBonusAffichage());
+    ui->vetMalus_4->setText(m_vetements[3]->getMalusAffichage());
+    ui->vetVisible_4->setChecked(m_vetements[3]->isVisible());
+
+    ui->vetNom_5->setText(m_vetements[4]->getNom());
+    ui->vetBonus_5->setText(m_vetements[4]->getBonusAffichage());
+    ui->vetMalus_5->setText(m_vetements[4]->getMalusAffichage());
+    ui->vetVisible_5->setChecked(m_vetements[4]->isVisible());
+
+    rafraichirCarac();
+}
+void Personnage::calculerCarac()
+{
+// On remet à zéro
+    *m_carac_modif = *m_carac;
+
+// On calcule
+    for (int i(0); i < MAX_PROTECTION; i++)
+    {
+        *m_carac_modif += m_protections[i]->getBonus();
+        *m_carac_modif -= m_protections[i]->getMalus();
+    }
+
+    for (int i(0); i < MAX_ARME; i++)
+    {
+        *m_carac_modif += Caracteristiques(m_armes[i]->getBonus().getCourage(),
+                                           m_armes[i]->getBonus().getIntelligence(),
+                                           m_armes[i]->getBonus().getCharisme(),
+                                           m_armes[i]->getBonus().getAdresse(),
+                                           m_armes[i]->getBonus().getForce());
+        *m_carac_modif -= Caracteristiques(m_armes[i]->getMalus().getCourage(),
+                                           m_armes[i]->getMalus().getIntelligence(),
+                                           m_armes[i]->getMalus().getCharisme(),
+                                           m_armes[i]->getMalus().getAdresse(),
+                                           m_armes[i]->getMalus().getForce());
+    }
+
+    for (int i(0); i < MAX_FLECHE; i++)
+        m_carac_modif->setAdresse(m_carac_modif->getAdresse() + m_fleches[i]->getAD());
+
+    for (int i(0); i < MAX_VETEMENT; i++)
+    {
+        if (m_vetements[i]->isVisible())
+        {
+            *m_carac_modif += m_vetements[i]->getBonus();
+            *m_carac_modif -= m_vetements[i]->getMalus();
+        }
+        else
+        {
+            *m_carac_modif += Caracteristiques(m_vetements[i]->getBonus().getCourage(),
+                                              m_vetements[i]->getBonus().getIntelligence(),
+                                              0,
+                                              m_vetements[i]->getBonus().getAdresse(),
+                                              m_vetements[i]->getBonus().getForce());
+            *m_carac_modif -= Caracteristiques(m_vetements[i]->getMalus().getCourage(),
+                                              m_vetements[i]->getMalus().getIntelligence(),
+                                              0,
+                                              m_vetements[i]->getMalus().getAdresse(),
+                                              m_vetements[i]->getMalus().getForce());
+        }
+    }
 }
 
 
@@ -392,7 +576,11 @@ void Personnage::viderVariables()
     m_prTotale = 0;
 
     for (int lecteur = 0; lecteur < MAX_ARME; lecteur++)
+    {
         m_armes[lecteur] = 0;
+        m_AT_modif[lecteur] = 8;
+        m_PRD_modif[lecteur] = 10;
+    }
 
     for (int lecteur = 0; lecteur < MAX_FLECHE; lecteur++)
         m_fleches[lecteur] = 0;
@@ -411,7 +599,7 @@ void Personnage::viderTousEquipements()
 
     for (int i = 0; i < MAX_ARME; i++)
         m_armes[i] = new Arme("A mains nues", 1, -2,
-                              0, 0, 0, 0, 0, 0, 0,
+                              0, 0, 0, 0, 0, 4, 0,
                               0, 0, 0, 0, 0, 0, 0);
 
     for (int i = 0; i < MAX_FLECHE; i++)
@@ -866,9 +1054,19 @@ bool Personnage::chargerPerso()
         else if (ligne == "~!magie!~")
         {
             m_EA = entree.readLine().toInt();
-            m_EA_modif = m_EA;
             numLigne++;
+            m_EA_modif = m_EA;
             m_typeEA = entree.readLine();
+            numLigne++;
+        }
+
+        // Valeurs des énergies modifiées
+        else if (ligne == "~!energie_modif!~")
+        {
+            m_EV_modif = entree.readLine().toInt();
+            numLigne++;
+
+            m_EA_modif = entree.readLine().toInt();
             numLigne++;
         }
 
@@ -906,6 +1104,22 @@ bool Personnage::chargerPerso()
                         return true;
                 numLigne++;
 
+                ligne = entree.readLine();
+                numLigne++;
+                if (ligne != "~!protection!~"
+                    && ligne != "~!chapeau!~"
+                        && ligne != "~!haut!~"
+                        && ligne != "~!bas!~"
+                        && ligne != "~!chaussures!~"
+                        && ligne != "~!divers!~"
+                        && ligne != "~!vetement!~")
+                {
+                    if (ligne == "true")
+                        m_vetements[lecteurTableauVetement]->setVisible(true);
+                }
+                else
+                    ligneDejaLue = true;
+
                 lecteurTableauVetement++;
             }
         }
@@ -939,6 +1153,14 @@ bool Personnage::chargerPerso()
                     if (erreur)
                         return true;
                 numLigne++;
+
+                ligne = entree.readLine();
+                numLigne++;
+                if (ligne != "~!protection!~"
+                    && ligne != "~!arme!~")
+                    m_protections[lecteurTableauProtection]->setRupture(ligne.toInt());
+                else
+                    ligneDejaLue = true;
 
                 lecteurTableauProtection++;
             }
@@ -1026,6 +1248,19 @@ bool Personnage::chargerPerso()
                 numLigne++;
                 numLigne++;
                 numLigne++;
+
+
+                ligne = entree.readLine();
+                numLigne++;
+                if (ligne != "~!fleche!~"
+                    && ligne != "~!equipement!~")
+                {
+                    m_fleches[lecteurTableauFleche]->setNbDes(ligne.toInt());
+                    m_fleches[lecteurTableauFleche]->setRupture(entree.readLine().toInt());
+                    numLigne++;
+                }
+                else
+                    ligneDejaLue = true;
 
                 lecteurTableauFleche++;
             }
@@ -1176,6 +1411,10 @@ void Personnage::enregistrerPerso()
 
     if (m_presenceEA)
         total += "~!magie!~\n" + QString::number(m_EA) + "\n" + m_typeEA + "\n";
+
+    total += "~!energie_modif!~\n";
+    total += QString::number(m_EV_modif) + "\n";
+    total += QString::number(m_EA_modif) + "\n";
 
     for (int lecteur = 0; lecteur < MAX_VETEMENT; lecteur++)
         total += m_vetements[lecteur]->vetementEnregistrement() + "\n";
@@ -1631,7 +1870,8 @@ void Personnage::achatCOU()
 
     QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
                       "Ce personnage va acheter pour 400 PO un stage de 1 mois pour obtenir un point de COU...");
-    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *continuer = new QPushButton("Valider");
+    verif.addButton(continuer, QMessageBox::ActionRole);
     QPushButton *annuler = verif.addButton(QMessageBox::Abort);
     setIcone(&verif);
     verif.exec();
@@ -1661,7 +1901,8 @@ void Personnage::achatINT()
 
     QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
                       "Ce personnage va acheter pour 500 PO un stage de 6 mois pour obtenir un point d'INT...");
-    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *continuer = new QPushButton("Valider");
+    verif.addButton(continuer, QMessageBox::ActionRole);
     QPushButton *annuler = verif.addButton(QMessageBox::Abort);
     setIcone(&verif);
     verif.exec();
@@ -1691,7 +1932,8 @@ void Personnage::achatCHA()
 
     QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
                       "Ce personnage va acheter pour 400 PO un stage de 1 semaine pour obtenir un point de CHA...");
-    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *continuer = new QPushButton("Valider");
+    verif.addButton(continuer, QMessageBox::ActionRole);
     QPushButton *annuler = verif.addButton(QMessageBox::Abort);
     setIcone(&verif);
     verif.exec();
@@ -1721,7 +1963,8 @@ void Personnage::achatFO()
 
     QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
                       "Ce personnage va acheter pour 400 PO un stage de 1 mois pour obtenir un point de FO...");
-    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *continuer = new QPushButton("Valider");
+    verif.addButton(continuer, QMessageBox::ActionRole);
     QPushButton *annuler = verif.addButton(QMessageBox::Abort);
     setIcone(&verif);
     verif.exec();
@@ -1792,7 +2035,8 @@ void Personnage::achatEV()
 
     QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
                       "Ce personnage va acheter 200 PO un stage de 1 semaine pour obtenir un point d'EV...");
-    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *continuer = new QPushButton("Valider");
+    verif.addButton(continuer, QMessageBox::ActionRole);
     QPushButton *annuler = verif.addButton(QMessageBox::Abort);
     setIcone(&verif);
     verif.exec();
@@ -1832,7 +2076,8 @@ void Personnage::achatEA()
 
     QMessageBox verif(QMessageBox::Question, m_nom + " -> Achat de puissance",
                       "Ce personnage va acheter 200 PO un stage de 1 mois pour obtenir un point d'EA...");
-    QPushButton *continuer = verif.addButton("Valider", QMessageBox::ActionRole);
+    QPushButton *continuer = new QPushButton("Valider");
+    verif.addButton(continuer, QMessageBox::ActionRole);
     QPushButton *annuler = verif.addButton(QMessageBox::Abort);
     setIcone(&verif);
     verif.exec();
@@ -1957,6 +2202,307 @@ void Personnage::on_conversionPA_en_PC_clicked()
     emit persoModifie();
 }
 
+// Protections
+void Personnage::on_prEdit_1_clicked()
+{
+    EquipModif modif(m_protections[0]);
+    modif.exec();
+
+    rafraichirProtections();
+
+    emit persoModifie();
+}
+void Personnage::on_prEdit_2_clicked()
+{
+    EquipModif modif(m_protections[1]);
+    modif.exec();
+
+    rafraichirProtections();
+
+    emit persoModifie();
+}
+void Personnage::on_prEdit_3_clicked()
+{
+    EquipModif modif(m_protections[2]);
+    modif.exec();
+
+    rafraichirProtections();
+
+    emit persoModifie();
+}
+void Personnage::on_prEdit_4_clicked()
+{
+    EquipModif modif(m_protections[3]);
+    modif.exec();
+
+    rafraichirProtections();
+
+    emit persoModifie();
+}
+void Personnage::on_prEdit_5_clicked()
+{
+    EquipModif modif(m_protections[4]);
+    modif.exec();
+
+    rafraichirProtections();
+
+    emit persoModifie();
+}
+void Personnage::on_prEdit_6_clicked()
+{
+    EquipModif modif(m_protections[5]);
+    modif.exec();
+
+    rafraichirProtections();
+
+    emit persoModifie();
+}
+
+// Armes
+void Personnage::on_armesEdit_1_clicked()
+{
+    EquipModif modif(m_armes[0]);
+    modif.exec();
+
+    rafraichirArmes();
+
+    emit persoModifie();
+}
+void Personnage::on_armesEdit_2_clicked()
+{
+    EquipModif modif(m_armes[1]);
+    modif.exec();
+
+    rafraichirArmes();
+
+    emit persoModifie();
+}
+void Personnage::on_armesEdit_3_clicked()
+{
+    EquipModif modif(m_armes[2]);
+    modif.exec();
+
+    rafraichirArmes();
+
+    emit persoModifie();
+}
+void Personnage::on_armesEdit_4_clicked()
+{
+    EquipModif modif(m_armes[3]);
+    modif.exec();
+
+    rafraichirArmes();
+
+    emit persoModifie();
+}
+
+// Fleches
+void Personnage::on_flechesEdit_1_clicked()
+{
+    EquipModif modif(m_fleches[0]);
+    modif.exec();
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesEdit_2_clicked()
+{
+    EquipModif modif(m_fleches[1]);
+    modif.exec();
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesEdit_3_clicked()
+{
+    EquipModif modif(m_fleches[2]);
+    modif.exec();
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesEdit_4_clicked()
+{
+    EquipModif modif(m_fleches[3]);
+    modif.exec();
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesEdit_5_clicked()
+{
+    EquipModif modif(m_fleches[4]);
+    modif.exec();
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+
+void Personnage::on_flechesPlus_1_clicked()
+{
+    m_fleches[0]->setNombre(m_fleches[0]->getNombre() + 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesPlus_2_clicked()
+{
+    m_fleches[1]->setNombre(m_fleches[1]->getNombre() + 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesPlus_3_clicked()
+{
+    m_fleches[2]->setNombre(m_fleches[2]->getNombre() + 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesPlus_4_clicked()
+{
+    m_fleches[3]->setNombre(m_fleches[3]->getNombre() + 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesPlus_5_clicked()
+{
+    m_fleches[4]->setNombre(m_fleches[4]->getNombre() + 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+
+void Personnage::on_flechesMoins_1_clicked()
+{
+    m_fleches[0]->setNombre(m_fleches[0]->getNombre() - 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesMoins_2_clicked()
+{
+    m_fleches[1]->setNombre(m_fleches[1]->getNombre() - 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesMoins_3_clicked()
+{
+    m_fleches[2]->setNombre(m_fleches[2]->getNombre() - 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesMoins_4_clicked()
+{
+    m_fleches[3]->setNombre(m_fleches[3]->getNombre() - 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+void Personnage::on_flechesMoins_5_clicked()
+{
+    m_fleches[4]->setNombre(m_fleches[4]->getNombre() - 1);
+
+    rafraichirFleches();
+
+    emit persoModifie();
+}
+
+// Vêtements
+void Personnage::on_vetEdit_1_clicked()
+{
+    EquipModif modif(m_vetements[0]);
+    modif.exec();
+
+    rafraichirVetements();
+
+    emit persoModifie();
+}
+void Personnage::on_vetEdit_2_clicked()
+{
+    EquipModif modif(m_vetements[1]);
+    modif.exec();
+
+    rafraichirVetements();
+
+    emit persoModifie();
+}
+void Personnage::on_vetEdit_3_clicked()
+{
+    EquipModif modif(m_vetements[2]);
+    modif.exec();
+
+    rafraichirVetements();
+
+    emit persoModifie();
+}
+void Personnage::on_vetEdit_4_clicked()
+{
+    EquipModif modif(m_vetements[3]);
+    modif.exec();
+
+    rafraichirVetements();
+
+    emit persoModifie();
+}
+void Personnage::on_vetEdit_5_clicked()
+{
+    EquipModif modif(m_vetements[4]);
+    modif.exec();
+
+    rafraichirVetements();
+
+    emit persoModifie();
+}
+
+void Personnage::on_vetVisible_1_clicked(bool checked)
+{
+    m_vetements[0]->setVisible(checked);
+
+    emit persoModifie();
+}
+void Personnage::on_vetVisible_2_clicked(bool checked)
+{
+    m_vetements[1]->setVisible(checked);
+
+    emit persoModifie();
+}
+void Personnage::on_vetVisible_3_clicked(bool checked)
+{
+    m_vetements[2]->setVisible(checked);
+
+    emit persoModifie();
+}
+void Personnage::on_vetVisible_4_clicked(bool checked)
+{
+    m_vetements[3]->setVisible(checked);
+
+    emit persoModifie();
+}
+void Personnage::on_vetVisible_5_clicked(bool checked)
+{
+    m_vetements[4]->setVisible(checked);
+
+    emit persoModifie();
+}
+
 // Equipements
 void Personnage::on_equipsEdit_1_clicked(bool checked)
 {
@@ -2057,4 +2603,195 @@ void Personnage::on_equipsEdit_10_clicked(bool checked)
 
     ui->equips_10->setReadOnly(!checked);
     emit persoModifie();
+}
+
+// Caractéristiques
+void Personnage::on_evPlus_clicked()
+{
+    m_EV_modif++;
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_evMoins_clicked()
+{
+    m_EV_modif--;
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_eaPlus_clicked()
+{
+    m_EA_modif++;
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_eaMoins_clicked()
+{
+    m_EA_modif--;
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+
+void Personnage::on_couPlus_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setCourage(m_carac_modif->getCourage() + 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_couMoins_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setCourage(m_carac_modif->getCourage() - 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_intelPlus_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setIntelligence(m_carac_modif->getIntelligence() + 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_intelMoins_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setIntelligence(m_carac_modif->getIntelligence() - 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_chaPlus_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setCharisme(m_carac_modif->getCharisme() + 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_chaMoins_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setCharisme(m_carac_modif->getCharisme() - 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_adPlus_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setAdresse(m_carac_modif->getAdresse() + 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_adMoins_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setAdresse(m_carac_modif->getAdresse() - 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_foPlus_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setForce(m_carac_modif->getForce() + 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_foMoins_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setForce(m_carac_modif->getForce() - 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_atPlus_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setAttaque(m_carac_modif->getAttaque() + 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_atMoins_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setAttaque(m_carac_modif->getAttaque() - 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_prdPlus_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setParade(m_carac_modif->getParade() + 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+void Personnage::on_prdMoins_clicked()
+{
+    if (ui->remiseAZero->isChecked())
+    {
+        ui->remiseAZero->setChecked(false);
+    }
+    m_carac_modif->setParade(m_carac_modif->getParade() - 1);
+
+    emit persoModifie();
+    rafraichirCarac();
+}
+
+void Personnage::on_remiseAZero_clicked(bool checked)
+{
+    if (checked)
+        rafraichirCarac();
 }

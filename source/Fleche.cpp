@@ -27,6 +27,9 @@ Fleche::Fleche(QString nom, int nb, int PI, int AD)
     m_nomFleche = nom;
     m_degats = PI;
     m_bonusAD = AD;
+
+    m_nbDes = 0;
+    m_rupture_max = 0;
 }
 
 
@@ -43,7 +46,15 @@ QString Fleche::getNom() const
 }
 QString Fleche::getBonusAffichage() const
 {
-    QString bonus = "PI : " + QString::number(m_degats);
+    QString bonus;
+    if (m_nbDes > 0 && m_degats == 0)
+        bonus += "PI : " + QString::number(m_nbDes) + "D";
+    else if (m_nbDes > 0 && m_degats > 0)
+        bonus += "PI : " + QString::number(m_nbDes) + "D+" + QString::number(m_degats);
+    else if (m_nbDes > 0 && m_degats < 0)
+        bonus += "PI : " + QString::number(m_nbDes) + "D" + QString::number(m_degats);
+    else
+        bonus += "PI : " + QString::number(m_degats);
     bonus += " / AD+" + QString::number(m_bonusAD);
 
     return bonus;
@@ -55,6 +66,23 @@ int Fleche::getAD() const
 int Fleche::getPI() const
 {
     return m_degats;
+}
+int Fleche::getRupture() const
+{
+    return m_rupture_max;
+}
+QString Fleche::getRuptAffichage() const
+{
+    if (m_nomFleche == "Pas de flèches")
+        return QString("-");
+    else if (m_rupture_max == 0)
+        return QString("Incassable !");
+    else
+        return QString("1 à " + QString::number(m_rupture_max));
+}
+int Fleche::getNbDes() const
+{
+    return m_nbDes;
 }
 
 
@@ -77,6 +105,14 @@ void Fleche::setAD(int ad_bonus)
 {
     m_bonusAD = ad_bonus;
 }
+void Fleche::setNbDes(int value)
+{
+    m_nbDes = value;
+}
+void Fleche::setRupture(int value)
+{
+    m_rupture_max = value;
+}
 
 
 /*
@@ -92,9 +128,12 @@ QString Fleche::flechesEnregistrement() const
     fleche += QString::number(m_degats) + "\n";
 
     if (m_bonusAD < 10)
-        fleche += "0" + QString::number(m_bonusAD);
+        fleche += "0" + QString::number(m_bonusAD) + "\n";
     else
-        fleche += QString::number(m_bonusAD);
+        fleche += QString::number(m_bonusAD) + "\n";
+
+    fleche += QString::number(m_nbDes) + "\n";
+    fleche += QString::number(m_rupture_max);
 
     return fleche;
 }

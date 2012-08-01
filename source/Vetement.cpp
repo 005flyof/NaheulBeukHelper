@@ -28,6 +28,7 @@ Vetement::Vetement(QString nom,
     m_nomVetement = nom;
     m_bonus = new Caracteristiques(COU, INTEL, CHA, AD, FO);
     m_malus = new Caracteristiques(cou, intel, cha, ad, fo);
+    m_visible = false;
 }
 
 
@@ -45,6 +46,10 @@ void Vetement::setBonus(Caracteristiques carac)
 void Vetement::setMalus(Caracteristiques carac)
 {
     *m_malus = carac;
+}
+void Vetement::setVisible(bool visible)
+{
+    m_visible = visible;
 }
 
 QString Vetement::getNom() const
@@ -71,6 +76,11 @@ Caracteristiques Vetement::getMalus() const
 {
     return *m_malus;
 }
+bool Vetement::isVisible() const
+{
+    return m_visible;
+}
+
 
 /*
  * Enregistrement
@@ -82,7 +92,11 @@ QString Vetement::vetementEnregistrement() const
     vetement += "~!vetement!~\n";
     vetement += m_nomVetement + "\n";
     vetement += m_bonus->caracEnregistrement() + "\n";
-    vetement += m_malus->caracEnregistrement();
+    vetement += m_malus->caracEnregistrement() + "\n";
+    if (m_visible)
+        vetement += "true";
+    else
+        vetement += "false";
 
     return vetement;
 }

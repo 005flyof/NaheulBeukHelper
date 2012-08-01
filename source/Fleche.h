@@ -32,19 +32,27 @@
         QString getBonusAffichage() const;
         int getAD() const;
         int getPI() const;
+        int getNbDes() const;
+        int getRupture() const;
+        QString getRuptAffichage() const;
+
 
         void setNom(QString nom);
         void setNombre(int nb);
         void setPI(int degats);
         void setAD(int ad_bonus);
+        void setNbDes(int value);
+        void setRupture(int value);
 
         QString flechesEnregistrement() const;
 
     private:
         int m_nombre;
         QString m_nomFleche;
+        int m_nbDes;
         int m_degats;
         int m_bonusAD;
+        int m_rupture_max;
     };
 
 #endif // FLECHE_H

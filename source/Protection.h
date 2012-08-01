@@ -33,6 +33,7 @@
         void setPR(int pr);
         void setBonus(Caracteristiques carac);
         void setMalus(Caracteristiques carac);
+        void setRupture(int value);
 
     // Récupérer pour afficher
         QString getNom() const;
@@ -40,6 +41,8 @@
         QString getMalusAffichage() const;
         QString getNbPR_Affichage() const;
         int getNbPR() const;
+        QString getRuptAffichage() const;
+        int getRupture() const;
 
     // Récupérer pour enregistrer
         QString protectionEnregistrement() const;
@@ -53,6 +56,8 @@
         int m_nombreProtection;
         Caracteristiques *m_bonus;
         Caracteristiques *m_malus;
+
+        int m_rupture_max;
     };
 
 #endif // PROTECTION_H

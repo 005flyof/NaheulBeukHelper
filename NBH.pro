@@ -18,7 +18,8 @@ HEADERS += \
     source/FenAttaque.h \
     source/Acceuil.h \
     source/NewPerso.h \
-    source/AddPerso.h
+    source/AddPerso.h \
+    source/EquipModif.h
 
 SOURCES += \
     source/main.cpp \
@@ -40,7 +41,8 @@ SOURCES += \
     source/FenAttaque.cpp \
     source/Acceuil.cpp \
     source/NewPerso.cpp \
-    source/AddPerso.cpp
+    source/AddPerso.cpp \
+    source/EquipModif.cpp
 
 QT += network
 
@@ -57,4 +59,5 @@ FORMS += \
     source/Personnage.ui \
     source/Acceuil.ui \
     source/NewPerso.ui \
-    source/AddPerso.ui
+    source/AddPerso.ui \
+    source/EquipModif.ui

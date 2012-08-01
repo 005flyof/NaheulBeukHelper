@@ -32,11 +32,13 @@
         void setNom(QString nom);
         void setBonus(Caracteristiques carac);
         void setMalus(Caracteristiques carac);
+        void setVisible(bool visible);
 
     // Récupérer pour afficher
         QString getNom() const;
         QString getBonusAffichage() const;
         QString getMalusAffichage() const;
+        bool isVisible() const;
 
     // Récupérer pour enregistrer
         QString vetementEnregistrement() const;
@@ -49,6 +51,8 @@
         QString m_nomVetement;
         Caracteristiques *m_bonus;
         Caracteristiques *m_malus;
+
+        bool m_visible;
     };
 
 #endif // VETEMENT_H

@@ -47,9 +47,11 @@
         QString getBonusAffichage() const;
         QString getMalusAffichage() const;
         QString getDegatsAffichage() const;
+        QString getRuptAffichage() const;
 
         int getNbDes() const;
         int getDegatsEnPlus() const;
+        int getRupture() const;
 
     // Récupérer pour enregistrer
         QString armeEnregistrement() const;

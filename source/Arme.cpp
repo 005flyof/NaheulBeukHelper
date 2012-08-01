@@ -31,6 +31,8 @@ Arme::Arme(QString nom,
     m_degats = degatsEnPlus;
     m_bonus = new Caracteristiques(COU, INTEL, CHA, AD, FO, AT, PRD);
     m_malus = new Caracteristiques(cou, intel, cha, ad, fo, at, prd);
+    m_rupture_max = 0;
+    m_type = Arme::MainNue;
 }
 
 
@@ -90,6 +92,15 @@ Caracteristiques Arme::getMalus() const
     return *m_malus;
 }
 
+QString Arme::getRuptAffichage() const
+{
+    if (m_nomArme == "A mains nues")
+        return QString("-");
+    else if (m_rupture_max == 0)
+        return QString("Incassable !");
+    else
+        return QString("1 à " + QString::number(m_rupture_max));
+}
 QString Arme::getDegatsAffichage() const
 {
     QString degats = "";
@@ -110,6 +121,10 @@ int Arme::getNbDes() const
 int Arme::getDegatsEnPlus() const
 {
     return m_degats;
+}
+int Arme::getRupture() const
+{
+    return m_rupture_max;
 }
 
 

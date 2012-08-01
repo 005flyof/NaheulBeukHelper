@@ -11,15 +11,21 @@ Explication des différents hébergeurs de NBH
 
 Versions
 ========
-Version 1.8.6 béta
-------------------
+Version 2.1
+-----------
   Version en cours de développement
+### Nouveautés de la version
+    * Gestion des bonus de caractéristiques
+    * Rétablissement des compétences
+Version 2.0
+-----------
+  Actuelle version release
 ### Nouveautés de la version
     * Sécurisation de NBH (éviter les fuites de mémoires)
     * Simplification du code source
+    * Modification de l'affichage des personnages
 Version 1.8.5
 -------------
-  Actuelle version release
 ### Nouveautés de la version
     * Gérer l'ordre de marche dans les donjons
 Version 1.8

@@ -1,3 +1,21 @@
+/*
+    Copyright (C) 2011 Florent FAYOLLAS
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+*/
+
 #include "AddPerso.h"
 #include "ui_AddPerso.h"
 
@@ -38,12 +56,16 @@ void AddPerso::on_buttonBox_accepted()
                               ui->intelligence->value(),
                               ui->charisme->value(),
                               ui->adresse->value(),
-                              ui->force->value()).caracEnregistrement() + "\n";
+                              ui->force->value(),
+                              ui->attaque->value(),
+                              ui->parade->value()).caracEnregistrement() + "\n";
     total += Caracteristiques(ui->courage->value(),
                               ui->intelligence->value(),
                               ui->charisme->value(),
                               ui->adresse->value(),
-                              ui->force->value()).caracEnregistrement() + "\n";
+                              ui->force->value(),
+                              ui->attaque->value(),
+                              ui->parade->value()).caracEnregistrement() + "\n";
 
     total += Richesses(ui->po->value(),
                        ui->pa->value(),
@@ -91,4 +113,8 @@ void AddPerso::on_buttonBox_accepted()
     groupe << chemin.remove(QCoreApplication::applicationDirPath()) + "\n";
 
     log("'" + ui->nom->text() + "' a été ajouté à un groupe !");
+    QMessageBox::information(this, "Chargement du personnage",
+                             "Vous venez de créer un personnage lisible par NaheulBeuk Helper.\n\n"
+                             "Si vous avez déjà ouvert le groupe modifié,"
+                             "pour que les modifications soient appliquées, il faut recharger le groupe !");
 }

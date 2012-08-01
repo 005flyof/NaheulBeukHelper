@@ -41,8 +41,6 @@ int main(int argc, char *argv[])
 
 /*
   Ce qui reste à faire :
-    - monstres !!! -> ouverture du fichier quand début fenêtre
-
     1	- XP / PO / PA / PC de groupe								(1)		- fait
     2	- modificat° tout le temps (if fo >= 12) etc				(2)		-
     3	- pouvoir attaquer, parer, esquiver => combat				(3)		-
@@ -64,6 +62,7 @@ int main(int argc, char *argv[])
     19	- changer l'encodage de tous les fichiers : iso -> utf-8	(19)	- fait
     20	- modififer les updates / updaters							(20)	- fait
     21	- faire la doc des sources									(21)	-
-    22	- chargement des origines/métiers au démarrage				(22)	-
-    - modifier équipements
+    22	- chargement des origines/métiers au démarrage				(22)	- fait
+    - bonus supérieurs et inf à la moyenne
+    - fen chargement perso -> quand tout est fini !
 */

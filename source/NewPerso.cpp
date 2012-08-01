@@ -1,3 +1,21 @@
+/*
+    Copyright (C) 2011 Florent FAYOLLAS
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+*/
+
 #include "NewPerso.h"
 #include "ui_NewPerso.h"
 
@@ -136,6 +154,10 @@ void NewPerso::accept()
 
 // On ferme la fenêtre
     QDialog::accept();
+    QMessageBox::information(this, "Chargement du personnage",
+                             "Vous venez de créer un personnage lisible par NaheulBeuk Helper.\n\n"
+                             "Si vous avez déjà ouvert le groupe modifié,"
+                             "pour que les modifications soient appliquées, il faut recharger le groupe !");
 }
 
 
@@ -221,9 +243,9 @@ void NewPerso::setMetier()
             {
                 bool persoEstClasseModifiee(false);
 
-                for(int i = 0; i < m_metiers.at(i)->getClassesModifiees_EV().size(); i++)
+                for(int i2 = 0; i2 < m_metiers.at(i)->getClassesModifiees_EV().size(); i2++)
                 {
-                    if (m_metiers.at(i)->getClassesModifiees_EV().at(i) == m_origine)
+                    if (m_metiers.at(i)->getClassesModifiees_EV().at(i2) == m_origine)
                         persoEstClasseModifiee = true;
                 }
 
@@ -253,8 +275,8 @@ void NewPerso::setMetier()
             }
 
         // Copie des compétences
-            for (int i(0); i < m_metiers.at(i)->getCompetences().count(); i++)
-                m_competences.append(m_metiers.at(i)->getCompetences().at(i));
+            for (int i3(0); i3 < m_metiers.at(i)->getCompetences().count(); i3++)
+                m_competences.append(m_metiers.at(i)->getCompetences().at(i3));
         }
     }
 }

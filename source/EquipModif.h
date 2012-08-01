@@ -16,33 +16,43 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef ADDPERSO_H
-    #define ADDPERSO_H
+#ifndef EQUIPMODIF_H
+    #define EQUIPMODIF_H
 
     #include <QDialog>
-    #include <QFile>
-
-    #include "FenMAJ.h"
-    #include "fonctions_diverses.h"
     #include "ClassesPourPersonnage.h"
 
     namespace Ui {
-        class AddPerso;
+        class EquipModif;
     }
 
-    class AddPerso : public QDialog
+    class EquipModif : public QDialog
     {
         Q_OBJECT
 
     public:
-        explicit AddPerso(QWidget *parent = 0);
-        ~AddPerso();
+        explicit EquipModif(Protection* objet);
+        explicit EquipModif(Arme* objet);
+        explicit EquipModif(Fleche* objet);
+        explicit EquipModif(Vetement* objet);
+        ~EquipModif();
+
+    public slots:
+        void accept();
 
     private slots:
-        void on_buttonBox_accepted();
+        void on_vider_clicked();
 
     private:
-        Ui::AddPerso *ui;
+        Ui::EquipModif *ui;
+
+        void chargerAffichage();
+
+        Protection *m_pr;
+        Arme *m_arme;
+        Fleche *m_fleche;
+        Vetement *m_vet;
+
     };
 
-#endif // ADDPERSO_H
+#endif // EQUIPMODIF_H

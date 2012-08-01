@@ -3,6 +3,7 @@
 
     #include <QScrollArea>
     #include "ClassesPourPersonnage.h"
+    #include "EquipModif.h"
 
     namespace Ui {
         class Personnage;
@@ -78,7 +79,53 @@
         void on_conversionPO_en_PC_clicked();
         void on_conversionPA_en_PC_clicked();
 
-        // Caractéristiques
+        // Protections
+        void on_prEdit_1_clicked();
+        void on_prEdit_2_clicked();
+        void on_prEdit_3_clicked();
+        void on_prEdit_4_clicked();
+        void on_prEdit_5_clicked();
+        void on_prEdit_6_clicked();
+
+        // Armes
+        void on_armesEdit_1_clicked();
+        void on_armesEdit_2_clicked();
+        void on_armesEdit_3_clicked();
+        void on_armesEdit_4_clicked();
+
+        // Flèches
+        void on_flechesEdit_1_clicked();
+        void on_flechesEdit_2_clicked();
+        void on_flechesEdit_3_clicked();
+        void on_flechesEdit_4_clicked();
+        void on_flechesEdit_5_clicked();
+
+        void on_flechesPlus_1_clicked();
+        void on_flechesPlus_2_clicked();
+        void on_flechesPlus_3_clicked();
+        void on_flechesPlus_4_clicked();
+        void on_flechesPlus_5_clicked();
+
+        void on_flechesMoins_1_clicked();
+        void on_flechesMoins_2_clicked();
+        void on_flechesMoins_3_clicked();
+        void on_flechesMoins_4_clicked();
+        void on_flechesMoins_5_clicked();
+
+        // Vêtements
+        void on_vetEdit_1_clicked();
+        void on_vetEdit_2_clicked();
+        void on_vetEdit_3_clicked();
+        void on_vetEdit_4_clicked();
+        void on_vetEdit_5_clicked();
+
+        void on_vetVisible_1_clicked(bool checked);
+        void on_vetVisible_2_clicked(bool checked);
+        void on_vetVisible_3_clicked(bool checked);
+        void on_vetVisible_4_clicked(bool checked);
+        void on_vetVisible_5_clicked(bool checked);
+
+        // Equipements
         void on_equipsEdit_1_clicked(bool checked);
         void on_equipsEdit_2_clicked(bool checked);
         void on_equipsEdit_3_clicked(bool checked);
@@ -89,6 +136,29 @@
         void on_equipsEdit_8_clicked(bool checked);
         void on_equipsEdit_9_clicked(bool checked);
         void on_equipsEdit_10_clicked(bool checked);
+
+        // Caractéristiques
+        void on_evPlus_clicked();
+        void on_evMoins_clicked();
+        void on_eaPlus_clicked();
+        void on_eaMoins_clicked();
+
+        void on_couPlus_clicked();
+        void on_couMoins_clicked();
+        void on_intelPlus_clicked();
+        void on_intelMoins_clicked();
+        void on_chaPlus_clicked();
+        void on_chaMoins_clicked();
+        void on_adPlus_clicked();
+        void on_adMoins_clicked();
+        void on_foPlus_clicked();
+        void on_foMoins_clicked();
+        void on_atPlus_clicked();
+        void on_atMoins_clicked();
+        void on_prdPlus_clicked();
+        void on_prdMoins_clicked();
+
+        void on_remiseAZero_clicked(bool checked);
 
     private:
         Ui::Personnage *ui;
@@ -102,6 +172,12 @@
         void setAffichage();
         void rafraichirRichesses();
         void rafraichirCarac();
+        void rafraichirProtections();
+        void rafraichirArmes();
+        void rafraichirFleches();
+        void rafraichirVetements();
+
+        void calculerCarac();
 
     // Variables
         // Pour le programme
@@ -136,6 +212,8 @@
         Protection *m_protections[MAX_PROTECTION];
             int m_prTotale;
         Arme *m_armes[MAX_ARME];
+            int m_AT_modif[MAX_ARME];
+            int m_PRD_modif[MAX_ARME];
         Fleche *m_fleches[MAX_FLECHE];
 
         QVector<Competence*> m_competences;
