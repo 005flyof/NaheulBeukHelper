@@ -18,8 +18,6 @@
 
 #ifndef FENPRINCIPALE_H
     #define FENPRINCIPALE_H
-    #define NOMBRE_PERSO_MAX 15
-    #define NB_SPACER_FENPRINCIPALE 11
 
     #include <QtGui>
     #include "Personnage.h"
@@ -42,6 +40,8 @@
         // Pour la création d'un personnage
         void setMetiers(QVector<Metier*> metiers);
         void setOrigines(QVector<Origine*> origines);
+
+        void setCompetencesPossibles(QVector<Competence*> competences);
 
     public slots:
         void attaquer();
@@ -110,6 +110,8 @@
         // Création d'un personnage
         QVector<Metier*> m_metiers;
         QVector<Origine*> m_origines;
+
+        QVector<Competence*> competencesPossibles;
 
         // Pour le groupe
         QFile *m_fichierGroupe;

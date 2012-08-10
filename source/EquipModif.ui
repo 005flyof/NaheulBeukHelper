@@ -457,6 +457,30 @@ p, li { white-space: pre-wrap; }
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>nom</tabstop>
+  <tabstop>COU</tabstop>
+  <tabstop>INTEL</tabstop>
+  <tabstop>CHA</tabstop>
+  <tabstop>AD</tabstop>
+  <tabstop>FO</tabstop>
+  <tabstop>AT</tabstop>
+  <tabstop>PRD</tabstop>
+  <tabstop>cou</tabstop>
+  <tabstop>intel</tabstop>
+  <tabstop>cha</tabstop>
+  <tabstop>ad</tabstop>
+  <tabstop>fo</tabstop>
+  <tabstop>at</tabstop>
+  <tabstop>prd</tabstop>
+  <tabstop>rupt</tabstop>
+  <tabstop>pr</tabstop>
+  <tabstop>de</tabstop>
+  <tabstop>PI</tabstop>
+  <tabstop>nb</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>vider</tabstop>
+ </tabstops>
  <resources>
   <include location="../res/ressources.qrc"/>
  </resources>

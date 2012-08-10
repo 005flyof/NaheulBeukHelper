@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 /*
   Ce qui reste à faire :
     1	- XP / PO / PA / PC de groupe								(1)		- fait
-    2	- modificat° tout le temps (if fo >= 12) etc				(2)		-
+    2	- modificat° tout le temps (if fo >= 12) etc				(2)		- fait
     3	- pouvoir attaquer, parer, esquiver => combat				(3)		-
     4	- augmentation d'un niveau									(4)		- fait
     5	- acheter puissance											(5)		- fait
@@ -63,6 +63,6 @@ int main(int argc, char *argv[])
     20	- modififer les updates / updaters							(20)	- fait
     21	- faire la doc des sources									(21)	-
     22	- chargement des origines/métiers au démarrage				(22)	- fait
-    - bonus supérieurs et inf à la moyenne
     - fen chargement perso -> quand tout est fini !
+    - finir de mettre les compétences
 */

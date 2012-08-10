@@ -20,7 +20,7 @@
 #include "ui_Personnage.h"
 
 Personnage::Personnage(QString fichier)
-    : QScrollArea(), ui(new Ui::Personnage),
+    : QTabWidget(), ui(new Ui::Personnage),
       m_fichierPerso(0),
       m_cheminEnregistrement(fichier),
       modifNonRec(false)
@@ -84,6 +84,27 @@ void Personnage::setAffichage()
     ui->equips_8->setText(m_equipements[7]);
     ui->equips_9->setText(m_equipements[8]);
     ui->equips_10->setText(m_equipements[9]);
+
+// Compétences
+    if (m_competences.empty())
+    {
+        bool ok(true);
+        int nb = QInputDialog::getInt(this, m_nom + " -> Aucunes compétences",
+                                      m_nom + " ne semble pas avoir de compétence, est-il si nul que ça ?\n"
+                                      "Combien de compétences voulez-vous lui rajouter ?\n"
+                                      "Cliquez sur annuler pour ne pas en ajouter !", 1, 1, 50, 1, &ok);
+        if (ok)
+            for (int i(0); i < nb; i++)
+                ajouterCompetence();
+        return;
+    }
+
+    QVBoxLayout *layoutCompetences = new QVBoxLayout;
+
+    for (int i(0); i < m_competences.count(); i++)
+        layoutCompetences->addWidget(m_competences.at(i)->getWidget());
+
+    ui->competencesScrollWidgetContents->setLayout(layoutCompetences);
 }
 void Personnage::rafraichirRichesses()
 {
@@ -145,6 +166,7 @@ void Personnage::rafraichirCarac()
 {
     if (ui->remiseAZero->isChecked())
         calculerCarac();
+    calculerCaracSupInfMoy();
 
     ui->ev->setText(QString::number(m_EV));
     ui->evModif->setText(QString::number(m_EV_modif));
@@ -538,6 +560,140 @@ void Personnage::calculerCarac()
         }
     }
 }
+void Personnage::calculerCaracSupInfMoy()
+{
+    if (!m_bonusMalus_carac_calcules)
+    {
+        m_bonusMalus_carac_calcules = true;
+
+        int bonus_degats_vieux = m_bonus_degats;
+        int bonus_degats_magiques_vieux = m_bonus_degatsMagiques;
+
+        m_bonus_degats = 0;
+        m_bonus_degatsMagiques = 0;
+
+    // Bonus / Malus de FO
+        for (int fo(m_carac_modif->getForce()); fo > 12; fo--)
+            m_bonus_degats++;
+        for (int fo(m_carac_modif->getForce()); fo <8; fo++)
+            m_bonus_degats--;
+
+        if (bonus_degats_vieux != m_bonus_degats
+            && m_bonus_degats > 0)
+        {
+            QMessageBox::information(this, "Caractéristiques inférieures ou supérieures à la moyenne",
+                                     m_nom + " a un bonus de dégâts de " + QString::number(m_bonus_degats) + " en raison de sa force grandiose !");
+            emit persoModifie();
+        }
+        else if (bonus_degats_vieux != m_bonus_degats
+                 && m_bonus_degats < 0)
+        {
+            QMessageBox::information(this, "Caractéristiques inférieures ou supérieures à la moyenne",
+                                     m_nom + " a un malus de dégâts de " + QString::number(m_bonus_degats) + " en raison de sa force nullissime !");
+            emit persoModifie();
+        }
+        else if (bonus_degats_vieux != m_bonus_degats)
+        {
+            QMessageBox::information(this, "Caractéristiques inférieures ou supérieures à la moyenne",
+                                     m_nom + " perd son bonus / malus de dégâts !");
+            emit persoModifie();
+        }
+
+    // Bonus / malus de AD
+        if (!m_bonusMalus_ATPRD_calcules)
+        {
+            m_bonusMalus_ATPRD_calcules = true;
+
+            m_bonus_attaque = 0;
+            m_bonus_parade = 0;
+
+            if (m_carac_modif->getAdresse() > 12)
+            {
+                bool ok(false);
+                QStringList at_prd;
+                at_prd << "Attaque (" + QString::number(m_carac->getAttaque()) + ")"
+                       << "Parade (" + QString::number(m_carac->getParade()) + ")";
+                QString choix("");
+
+                while (!ok)
+                    choix = QInputDialog::getItem(this, m_nom + " -> Caractéristiques inférieures à la normale.",
+                                                  "Ce personnage a un malus de 1 point, en raison de son adresse nullissime, sur :",
+                                                  at_prd, 0, false, &ok);
+                if (choix == "Attaque (" + QString::number(m_carac->getAttaque()) + ")")
+                {
+                    m_carac_modif->setAttaque(m_carac_modif->getAttaque() + 1);
+                    m_bonus_attaque = 1;
+                }
+                if (choix == "Parade (" + QString::number(m_carac->getParade()) + ")")
+                {
+                    m_carac_modif->setParade(m_carac_modif->getParade() + 1);
+                    m_bonus_parade = 1;
+                }
+
+                emit persoModifie();
+            }
+            if (m_carac_modif->getAdresse() < 8)
+            {
+                bool ok(false);
+                QStringList at_prd;
+                at_prd << "Attaque (" + QString::number(m_carac->getAttaque()) + ")"
+                       << "Parade (" + QString::number(m_carac->getParade()) + ")";
+                QString choix("");
+
+                while (!ok)
+                    choix = QInputDialog::getItem(this, m_nom + " -> Caractéristiques inférieures à la normale.",
+                                                  "Ce personnage a un malus de 1 point, en raison de son adresse nullissime, sur :",
+                                                  at_prd, 0, false, &ok);
+                if (choix == "Attaque (" + QString::number(m_carac->getAttaque()) + ")")
+                {
+                    m_carac_modif->setAttaque(m_carac_modif->getAttaque() - 1);
+                    m_bonus_attaque = -1;
+                }
+                if (choix == "Parade (" + QString::number(m_carac->getParade()) + ")")
+                {
+                    m_carac_modif->setParade(m_carac_modif->getParade() - 1);
+                    m_bonus_parade = -1;
+                }
+
+                emit persoModifie();
+            }
+        }
+
+    // Bonus / malus de INT
+        for (int intel(m_carac_modif->getIntelligence()); intel > 12; intel--)
+            m_bonus_degatsMagiques++;
+        for (int intel(m_carac_modif->getIntelligence()); intel < 8; intel++)
+            m_bonus_degatsMagiques--;
+
+
+        if (bonus_degats_magiques_vieux != m_bonus_degatsMagiques
+            && m_bonus_degatsMagiques > 0)
+        {
+            QMessageBox::information(this, "Caractéristiques inférieures ou supérieures à la moyenne",
+                                     m_nom + " a un bonus de dégâts magiques de " + QString::number(m_bonus_degatsMagiques) + " en raison de son intelligence grandiose !");
+            emit persoModifie();
+        }
+        else if (bonus_degats_magiques_vieux != m_bonus_degatsMagiques
+                 && m_bonus_degatsMagiques < 0)
+        {
+            QMessageBox::information(this, "Caractéristiques inférieures ou supérieures à la moyenne",
+                                     m_nom + " a un malus de dégâts magiques de " + QString::number(m_bonus_degatsMagiques) + " en raison de son intelligence nullissime !");
+            emit persoModifie();
+        }
+        else if (bonus_degats_magiques_vieux != m_bonus_degatsMagiques)
+        {
+            QMessageBox::information(this, "Caractéristiques inférieures ou supérieures à la moyenne",
+                                     m_nom + " perd son bonus / malus de dégâts magiques !");
+            emit persoModifie();
+        }
+    }
+
+// Affichage
+    ui->bonus_degats->setText(QString::number(m_bonus_degats));
+    ui->bonus_AT->setText(QString::number(m_bonus_attaque));
+    ui->bonus_PRD->setText(QString::number(m_bonus_parade));
+    ui->bonus_magie->setText(QString::number(m_bonus_degatsMagiques));
+}
 
 
 // Diverses
@@ -584,6 +740,15 @@ void Personnage::viderVariables()
 
     for (int lecteur = 0; lecteur < MAX_FLECHE; lecteur++)
         m_fleches[lecteur] = 0;
+
+    // Bonus
+    m_bonusMalus_carac_calcules = false;
+    m_bonusMalus_ATPRD_calcules = false;
+
+    m_bonus_degats = 0;
+    m_bonus_degatsMagiques = 0;
+    m_bonus_attaque = 0;
+    m_bonus_parade = 0;
 }
 void Personnage::viderTousEquipements()
 {
@@ -1040,13 +1205,16 @@ bool Personnage::chargerPerso()
         // Bonus de caractéristiques
         if (ligne == "~!carac_sup_inf!~")
         {
-            int ouvertureDegatsBonus = entree.readLine().toInt();
+            m_bonusMalus_carac_calcules = true;
+            m_bonusMalus_ATPRD_calcules = true;
+
+            m_bonus_degats = entree.readLine().toInt();
             numLigne++;
-            int ouvertureAttaqueBonus = entree.readLine().toInt();
+            m_bonus_attaque = entree.readLine().toInt();
             numLigne++;
-            int ouvertureParadeBonus = entree.readLine().toInt();
+            m_bonus_parade = entree.readLine().toInt();
             numLigne++;
-            int ouvertureDegatsBonusSorts = entree.readLine().toInt();
+            m_bonus_degatsMagiques = entree.readLine().toInt();
             numLigne++;
         }
 
@@ -1402,19 +1570,18 @@ void Personnage::enregistrerPerso()
 
     total += m_richesses->richessesEnregistrement() + "\n";
 
-    /* Bonus de caractéristiques
-    total += "~!carac_sup_inf!~\n";
-    total += QString::number(m_degatsBonus) + "\n";
-    total += QString::number(m_attaqueBonus) + "\n";
-    total += QString::number(m_paradeBonus) + "\n";
-    total += QString::number(m_degatsBonusSorts) + "\n";*/
-
     if (m_presenceEA)
         total += "~!magie!~\n" + QString::number(m_EA) + "\n" + m_typeEA + "\n";
 
     total += "~!energie_modif!~\n";
     total += QString::number(m_EV_modif) + "\n";
     total += QString::number(m_EA_modif) + "\n";
+
+    total += "~!carac_sup_inf!~\n";
+    total += QString::number(m_bonus_degats) + "\n";
+    total += QString::number(m_bonus_attaque) + "\n";
+    total += QString::number(m_bonus_parade) + "\n";
+    total += QString::number(m_bonus_degatsMagiques) + "\n";
 
     for (int lecteur = 0; lecteur < MAX_VETEMENT; lecteur++)
         total += m_vetements[lecteur]->vetementEnregistrement() + "\n";
@@ -2208,54 +2375,84 @@ void Personnage::on_prEdit_1_clicked()
     EquipModif modif(m_protections[0]);
     modif.exec();
 
-    rafraichirProtections();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirProtections();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_prEdit_2_clicked()
 {
     EquipModif modif(m_protections[1]);
     modif.exec();
 
-    rafraichirProtections();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirProtections();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_prEdit_3_clicked()
 {
     EquipModif modif(m_protections[2]);
     modif.exec();
 
-    rafraichirProtections();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirProtections();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_prEdit_4_clicked()
 {
     EquipModif modif(m_protections[3]);
     modif.exec();
 
-    rafraichirProtections();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirProtections();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_prEdit_5_clicked()
 {
     EquipModif modif(m_protections[4]);
     modif.exec();
 
-    rafraichirProtections();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirProtections();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_prEdit_6_clicked()
 {
     EquipModif modif(m_protections[5]);
     modif.exec();
 
-    rafraichirProtections();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirProtections();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 
 // Armes
@@ -2264,36 +2461,56 @@ void Personnage::on_armesEdit_1_clicked()
     EquipModif modif(m_armes[0]);
     modif.exec();
 
-    rafraichirArmes();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirArmes();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_armesEdit_2_clicked()
 {
     EquipModif modif(m_armes[1]);
     modif.exec();
 
-    rafraichirArmes();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirArmes();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_armesEdit_3_clicked()
 {
     EquipModif modif(m_armes[2]);
     modif.exec();
 
-    rafraichirArmes();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirArmes();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_armesEdit_4_clicked()
 {
     EquipModif modif(m_armes[3]);
     modif.exec();
 
-    rafraichirArmes();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_ATPRD_calcules = false;
+        m_bonusMalus_carac_calcules = false;
+        rafraichirArmes();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 
 // Fleches
@@ -2302,45 +2519,65 @@ void Personnage::on_flechesEdit_1_clicked()
     EquipModif modif(m_fleches[0]);
     modif.exec();
 
-    rafraichirFleches();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirFleches();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_flechesEdit_2_clicked()
 {
     EquipModif modif(m_fleches[1]);
     modif.exec();
 
-    rafraichirFleches();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirFleches();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_flechesEdit_3_clicked()
 {
     EquipModif modif(m_fleches[2]);
     modif.exec();
 
-    rafraichirFleches();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirFleches();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_flechesEdit_4_clicked()
 {
     EquipModif modif(m_fleches[3]);
     modif.exec();
 
-    rafraichirFleches();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirFleches();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_flechesEdit_5_clicked()
 {
     EquipModif modif(m_fleches[4]);
     modif.exec();
 
-    rafraichirFleches();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirFleches();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 
 void Personnage::on_flechesPlus_1_clicked()
@@ -2431,45 +2668,65 @@ void Personnage::on_vetEdit_1_clicked()
     EquipModif modif(m_vetements[0]);
     modif.exec();
 
-    rafraichirVetements();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirVetements();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_vetEdit_2_clicked()
 {
     EquipModif modif(m_vetements[1]);
     modif.exec();
 
-    rafraichirVetements();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirVetements();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_vetEdit_3_clicked()
 {
     EquipModif modif(m_vetements[2]);
     modif.exec();
 
-    rafraichirVetements();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirVetements();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_vetEdit_4_clicked()
 {
     EquipModif modif(m_vetements[3]);
     modif.exec();
 
-    rafraichirVetements();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirVetements();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 void Personnage::on_vetEdit_5_clicked()
 {
     EquipModif modif(m_vetements[4]);
     modif.exec();
 
-    rafraichirVetements();
+    if (modif.equipementModifie())
+    {
+        m_bonusMalus_carac_calcules = false;
+        rafraichirVetements();
 
-    emit persoModifie();
+        emit persoModifie();
+    }
 }
 
 void Personnage::on_vetVisible_1_clicked(bool checked)
@@ -2665,6 +2922,7 @@ void Personnage::on_intelPlus_clicked()
     }
     m_carac_modif->setIntelligence(m_carac_modif->getIntelligence() + 1);
 
+    m_bonusMalus_carac_calcules = false;
     emit persoModifie();
     rafraichirCarac();
 }
@@ -2676,6 +2934,7 @@ void Personnage::on_intelMoins_clicked()
     }
     m_carac_modif->setIntelligence(m_carac_modif->getIntelligence() - 1);
 
+    m_bonusMalus_carac_calcules = false;
     emit persoModifie();
     rafraichirCarac();
 }
@@ -2709,6 +2968,8 @@ void Personnage::on_adPlus_clicked()
     }
     m_carac_modif->setAdresse(m_carac_modif->getAdresse() + 1);
 
+    m_bonusMalus_carac_calcules = false;
+    m_bonusMalus_ATPRD_calcules = false;
     emit persoModifie();
     rafraichirCarac();
 }
@@ -2720,6 +2981,8 @@ void Personnage::on_adMoins_clicked()
     }
     m_carac_modif->setAdresse(m_carac_modif->getAdresse() - 1);
 
+    m_bonusMalus_carac_calcules = false;
+    m_bonusMalus_ATPRD_calcules = false;
     emit persoModifie();
     rafraichirCarac();
 }
@@ -2731,6 +2994,7 @@ void Personnage::on_foPlus_clicked()
     }
     m_carac_modif->setForce(m_carac_modif->getForce() + 1);
 
+    m_bonusMalus_carac_calcules = false;
     emit persoModifie();
     rafraichirCarac();
 }
@@ -2742,6 +3006,7 @@ void Personnage::on_foMoins_clicked()
     }
     m_carac_modif->setForce(m_carac_modif->getForce() - 1);
 
+    m_bonusMalus_carac_calcules = false;
     emit persoModifie();
     rafraichirCarac();
 }
@@ -2794,4 +3059,109 @@ void Personnage::on_remiseAZero_clicked(bool checked)
 {
     if (checked)
         rafraichirCarac();
+}
+
+// Compétences
+void Personnage::setCompetencesPossibles(QVector<Competence *> tab)
+{
+// On copie
+    competencesPossibles = tab;
+
+// On enlève celles que l'on a déjà
+    for (int i(0); i < m_competences.count(); i++)
+        if (competencesPossibles.contains(m_competences.at(i)))
+        {
+            int index = competencesPossibles.indexOf(m_competences.at(i));
+            competencesPossibles.remove(index);
+        }
+}
+
+void Personnage::on_addCompetence_clicked()
+{
+    ajouterCompetence();
+}
+void Personnage::ajouterCompetence()
+{
+    SelectCompetence *dialogue = new SelectCompetence(competencesPossibles, this);
+    int result = dialogue->exec();
+
+    if (result == QDialog::Accepted)
+    {
+        QString nom = dialogue->getChoix();
+
+        // On ajoute la compétence à la liste
+        for (int i(0); i < competencesPossibles.count(); i++)
+            if (competencesPossibles.at(i)->getNom() == nom)
+            {
+                m_competences.push_back(competencesPossibles.at(i));
+                competencesPossibles.remove(i);
+            }
+
+        // On affiche
+        if (m_competences.count() == 1)
+        {
+            QVBoxLayout *layoutCompetences = new QVBoxLayout;
+
+            layoutCompetences->addWidget(m_competences.at(0)->getWidget());
+
+            ui->competencesScrollWidgetContents->setLayout(layoutCompetences);
+        }
+        else
+            ui->competencesScrollWidgetContents->layout()->addWidget(m_competences.at(m_competences.count() - 1)->getWidget());
+
+        emit persoModifie();
+    }
+}
+
+void Personnage::on_addCompetencePerso_clicked()
+{
+    ajouterCompetencePerso();
+}
+void Personnage::ajouterCompetencePerso()
+{
+    QDialog *dialogue = new QDialog(this, Qt::Dialog);
+    dialogue->setWindowTitle(m_nom + " -> ajout d'une compétence !");
+
+    QGroupBox nom_group("Nom");
+        QLineEdit *nom = new QLineEdit();
+        QVBoxLayout layout1;
+            layout1.addWidget(nom);
+        nom_group.setLayout(&layout1);
+
+    QGroupBox description_group("Description");
+        QTextEdit *description = new QTextEdit();
+        QVBoxLayout layout2;
+            layout2.addWidget(description);
+        description_group.setLayout(&layout2);
+
+    QDialogButtonBox boutons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+        QObject::connect(&boutons, SIGNAL(accepted()), dialogue, SLOT(accept()));
+        QObject::connect(&boutons, SIGNAL(rejected()), dialogue, SLOT(reject()));
+
+    QVBoxLayout total;
+        total.addWidget(&nom_group);
+        total.addWidget(&description_group);
+        total.addWidget(&boutons);
+
+    dialogue->setLayout(&total);
+
+    int result = dialogue->exec();
+
+    if (result == QDialog::Accepted)
+    {
+        m_competences.push_back(new Competence(nom->text(), description->toPlainText()));
+
+        if (m_competences.count() == 1)
+        {
+            QVBoxLayout *layoutCompetences = new QVBoxLayout;
+
+            layoutCompetences->addWidget(m_competences.at(0)->getWidget());
+
+            ui->competencesScrollWidgetContents->setLayout(layoutCompetences);
+        }
+        else
+            ui->competencesScrollWidgetContents->layout()->addWidget(m_competences.at(m_competences.count() - 1)->getWidget());
+
+        emit persoModifie();
+    }
 }

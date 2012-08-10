@@ -48,11 +48,11 @@ void Competence::initAffichage()
     description_label = new QTextEdit();
         description_label->setPlainText(m_description);
         description_label->setReadOnly(true);
-        description_label->setMinimumSize(450, 100);
-        description_label->setMaximumSize(450, 100);
+        description_label->setMinimumSize(680, 30);
+        description_label->setMaximumSize(680, 120);
     modif = new QPushButton("Modifier");
-        modif->setMinimumSize(100, 20);
-        modif->setMaximumSize(100, 20);
+        modif->setMinimumSize(100, 30);
+        modif->setMaximumSize(100, 30);
         QObject::connect(modif, SIGNAL(clicked()), this, SLOT(modifier()));
 
     QVBoxLayout *layout1 = new QVBoxLayout;
@@ -63,9 +63,10 @@ void Competence::initAffichage()
     QHBoxLayout *layoutHor = new QHBoxLayout;
         layoutHor->addWidget(nom_label);
         layoutHor->addWidget(modif);
-        layoutHor->setSpacing(50);
+        layoutHor->setSpacing(20);
 
     setLayout(layoutHor);
+    setMinimumSize(800, 200);
 }
 
 Competence::~Competence()

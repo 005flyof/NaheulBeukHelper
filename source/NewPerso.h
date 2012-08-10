@@ -25,6 +25,7 @@
     #include "FenMAJ.h"
     #include "fonctions_diverses.h"
     #include "ClassesPourPersonnage.h"
+    #include "SelectCompetence.h"
 
     namespace Ui {
         class NewPerso;
@@ -53,6 +54,8 @@
 
         void setOrigine();
         void setMetier();
+
+        bool choixCompetences();
 
         // Variables
         QVector<Origine*> m_origines;

@@ -41,5 +41,6 @@
         <file>metiers.txt</file>
         <file>origines.txt</file>
         <file>lance.png</file>
+        <file>competences.txt</file>
     </qresource>
 </RCC>

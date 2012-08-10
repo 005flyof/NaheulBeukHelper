@@ -31,7 +31,7 @@ FenPrincipale::FenPrincipale() :
 // On s'occupe de la fenêtre
     setWindowTitle("NBH     --     NaheulBeuk Helper");
     setIcone(this);
-    setMinimumSize(900, 540);
+    setMinimumSize(1116, 670);
 
 // Création de la statusBar
     statusBar = new QStatusBar();
@@ -430,8 +430,7 @@ void FenPrincipale::setMetiers(QVector<Metier *> metiers)
 void FenPrincipale::creerNouveauGroupe()
 {
 // Choix des chemins
-    QString cheminGroupe;
-    cheminGroupe = QFileDialog::getSaveFileName(zoneCentrale, "Créer un groupe de personnage",
+    QString cheminGroupe = QFileDialog::getSaveFileName(this, "Créer un groupe de personnage",
                                                         "enregistrements", "Groupe de personnages (*.nbh)");
 
     if (cheminGroupe.isEmpty())
@@ -441,14 +440,14 @@ void FenPrincipale::creerNouveauGroupe()
     QString cheminNotes;
     while (!erreur)
     {
-        QMessageBox::information(zoneCentrale, "Notes",
+        QMessageBox::information(this, "Notes",
                                  "Dans la fenêtre suivante, vous devrez rentrer un nom pour le fichier qui contiendra vos notes.");
 
-        cheminNotes = QFileDialog::getSaveFileName(zoneCentrale, "Créer un groupe -> Fichier 'notes'",
+        cheminNotes = QFileDialog::getSaveFileName(this, "Créer un groupe -> Fichier 'notes'",
                                                            QString("enregistrements"), "Fichier Notes (*.notes)");
 
         if (cheminNotes.isEmpty())
-            QMessageBox::critical(zoneCentrale, "ERREUR !", "Erreur :\nVous devez enregistrer un fichier contenant vos notes !");
+            QMessageBox::critical(this, "ERREUR !", "Erreur :\nVous devez enregistrer un fichier contenant vos notes !");
         else
             erreur = true;
     }
@@ -544,7 +543,15 @@ void FenPrincipale::ouvrir()
         cheminApp.remove("/release");
         if (OS == 0)
             cheminApp.replace("/", "\\");
-        chemins << cheminApp + ligne;
+
+        QString test;
+        for (int i = 0; i < 16; i++)
+            test += ligne.at(i);
+        if (test == "/enregistrements")
+            chemins << cheminApp + ligne;
+        else
+            chemins << ligne;
+
         ligne = groupeTxt.readLine();
     }
 
@@ -584,7 +591,7 @@ void FenPrincipale::ouvrir()
 
 // Création du widget central
     zoneCentrale = new QMdiArea(this);
-    zoneCentrale->setMinimumWidth(901);
+    zoneCentrale->setMinimumWidth(908);
     zoneCentrale->setViewMode(QMdiArea::TabbedView);
     zoneCentrale->setTabsMovable(false);
 
@@ -609,6 +616,7 @@ void FenPrincipale::ouvrir()
 
         // On crée le personnage
         m_personnages.push_back(new Personnage(*cheminPersoOuverture));
+        m_personnages.at(compteurOnglets)->setCompetencesPossibles(competencesPossibles);
 
         // On charge le personnage
         bool erreur = m_personnages.at(compteurOnglets)->chargerPerso();
@@ -678,7 +686,13 @@ void FenPrincipale::ouvrir()
         // On crée l'affichage
         MdiSubWindow *sousFen = new MdiSubWindow();
         sousFen->setWidget(m_personnages.at(compteurOnglets));
-        sousFen->setWindowTitle(m_personnages.at(compteurOnglets)->getNom());
+        if (m_personnages.at(compteurOnglets)->getModif())
+        {
+            sousFen->setWindowTitle("* " + m_personnages.at(compteurOnglets)->getNom());
+            enregistrer->setEnabled(true);
+        }
+        else
+            sousFen->setWindowTitle(m_personnages.at(compteurOnglets)->getNom());
         zoneCentrale->addSubWindow(sousFen)->show();
 
         // On connecte le changement de nom des onglets
@@ -695,6 +709,12 @@ void FenPrincipale::ouvrir()
     statusBar->showMessage("Groupe ouvert avec succès", 2000);
     log("Groupe ouvert avec succès !", 1);
 
+// On synchronise tous les onglets
+    for (int i(0); i < m_personnages.count(); i++)
+        for (int i2(0); i2 < m_personnages.count(); i2++)
+            if (m_personnages.at(i)->getNom() != m_personnages.at(i2)->getNom())
+                QObject::connect(m_personnages.at(i), SIGNAL(currentChanged(int)),
+                                 m_personnages.at(i2), SLOT(setCurrentIndex(int)));
 
 // On "enable" l'ordre de marche et la gestion de l'attaque
     ordreMarche->setNomPersos(m_nomPersos);
@@ -824,7 +844,7 @@ void FenPrincipale::fermerGroupe()
 // S'il y a des modifications non enregistrées, on demande que faire
     if (modifNonRec)
     {
-        QMessageBox question;
+        QMessageBox question(this);
         question.setWindowTitle("Fermer le groupe actuel ?");
         question.setText("Il y a des modifications non enregistrées");
         question.setInformativeText("Voulez-vous enregistrer les modifications ?");
@@ -1011,7 +1031,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
 // S'il y a des modifications non enregistrées, on demande que faire
     if (modifNonRec)
     {
-        QMessageBox question;
+        QMessageBox question(this);
         question.setWindowTitle("Quitter NaheulBeuk Helper ?");
         question.setText("Il y a des modifications non enregistrées");
         question.setInformativeText("Voulez-vous enregistrer les modifications ?");
@@ -1303,7 +1323,7 @@ void FenPrincipale::afficherOrdreMarche(bool affiche)
 void FenPrincipale::aProposDeNBH()
 {
 // On affiche le message d'à propos
-    QMessageBox::about(zoneCentrale, "A propos de NaheulBeuk Helper",
+    QMessageBox::about(this, "A propos de NaheulBeuk Helper",
                        "NaheulBeuk Helper est un programme destiné aux maîtres du jeu qui jouent au jeu de rôle de Naheulbeuk...\n"
                        "Ce programme facilitera leur tâche... qui est assez difficile !\n\n\n"
                        "Vous utilisez la version " VERSION ".\n\n"
@@ -1370,6 +1390,13 @@ void FenPrincipale::persoModifie()
             zoneCentrale->subWindowList().at(i)->setWindowTitle("* " + m_personnages.at(i)->getNom());
     }
     enregistrer->setEnabled(true);
+}
+
+
+// Compétences
+void FenPrincipale::setCompetencesPossibles(QVector<Competence *> competences)
+{
+    competencesPossibles = competences;
 }
 
 

@@ -34,36 +34,43 @@ FenChargement::FenChargement(char *argv[])
     ui->label->setText("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...");
     log("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...", 1);
     remove("tmp.zip");
-    ui->progression->setValue(10);
     ui->label->setText("Fichier temporaire de Mise à Jour supprimé !");
+    ui->progression->setValue(5);
 
 // Suppression du fichier d'erreur
     ui->label->setText("Suppression du fichier d'erreurs : 'error.log'...");
     log("Suppression du fichier d'erreurs : 'error.log'...", 1);
     remove("error.log");
-    ui->progression->setValue(20);
     ui->label->setText("Fichier d'erreur supprimé !");
+    ui->progression->setValue(10);
 
 // Suppression du fichier d'erreur
     ui->label->setText("Vérification des mises à jour...");
     log("Vérification des mises à jour...", 1);
     FenMAJ test(this, true);
-    ui->progression->setValue(30);
     ui->label->setText("Mises à jour vérifiées.");
+    ui->progression->setValue(15);
 
 // Chargement des origines
     ui->label->setText("Chargement des origines...");
     log("Chargement des origines...", 1);
     ouvrirOrigines();
-    ui->progression->setValue(55);
     ui->label->setText("Origines chargées !");
+    ui->progression->setValue(35);
 
 // Chargement des métiers
     ui->label->setText("Chargement des métiers...");
     log("Chargement des métiers...", 1);
     ouvrirMetiers();
-    ui->progression->setValue(90);
     ui->label->setText("Métiers chargés !");
+    ui->progression->setValue(65);
+
+// Chargement des compétences
+    ui->label->setText("Chargement des compétences...");
+    log("Chargement des compétences...", 1);
+    ouvrirCompetences();
+    ui->label->setText("Compétences chargés !");
+    ui->progression->setValue(95);
 
 // Création de l'interface graphique
     ui->label->setText("Création de l'interface graphique...");
@@ -72,6 +79,7 @@ FenChargement::FenChargement(char *argv[])
     fenetrePrincipale = new FenPrincipale;
         fenetrePrincipale->setOrigines(origines);
         fenetrePrincipale->setMetiers(metiers);
+        fenetrePrincipale->setCompetencesPossibles(competences);
     fenetrePrincipale->showMaximized();
 
     ui->progression->setValue(100);
@@ -146,10 +154,25 @@ void FenChargement::ouvrirOrigines()
             QString competence_description = originesTexte.readLine();
             compteurLigne++;
 
-            origines.at(nbOrigines)->addCompetence(competence_nom, competence_description);
-
             ligne = originesTexte.readLine();
             compteurLigne++;
+
+            bool fin = false;
+            while (!fin)
+            {
+                if (ligne == "~!competence-obligatoire!~")
+                    fin = true;
+                else if (ligne == "~!competence-choisir!~")
+                    fin = true;
+                else
+                {
+                    competence_description += "\n" + ligne;
+                    ligne = originesTexte.readLine();
+                    compteurLigne++;
+                }
+            }
+
+            origines.at(nbOrigines)->addCompetence(competence_nom, competence_description);
         }
         while (ligne == "~!competence-choisir!~")
         {
@@ -158,10 +181,27 @@ void FenChargement::ouvrirOrigines()
             QString competence_description = originesTexte.readLine();
             compteurLigne++;
 
-            origines.at(nbOrigines)->addCompetence(competence_nom, competence_description, false);
-
             ligne = originesTexte.readLine();
             compteurLigne++;
+
+            bool fin = false;
+            while (!fin)
+            {
+                if (ligne == "~!NOUVELLE_ORIGINE!~")
+                    fin = true;
+                else if (ligne == "~!FIN_ORIGINE!~")
+                    fin = true;
+                else if (ligne == "~!competence-choisir!~")
+                    fin = true;
+                else
+                {
+                    competence_description += "\n" + ligne;
+                    ligne = originesTexte.readLine();
+                    compteurLigne++;
+                }
+            }
+
+            origines.at(nbOrigines)->addCompetence(competence_nom, competence_description, false);
         }
 
         nbOrigines++;
@@ -281,10 +321,25 @@ void FenChargement::ouvrirMetiers()
             QString competence_description = metiersTexte.readLine();
             compteurLigne++;
 
-            metiers.at(nbMetiers)->addCompetence(competence_nom, competence_description);
-
             ligne = metiersTexte.readLine();
             compteurLigne++;
+
+            bool fin = false;
+            while (!fin)
+            {
+                if (ligne == "~!competence-obligatoire!~")
+                    fin = true;
+                else if (ligne == "~!competence-choisir!~")
+                    fin = true;
+                else
+                {
+                    competence_description += "\n" + ligne;
+                    ligne = metiersTexte.readLine();
+                    compteurLigne++;
+                }
+            }
+
+            metiers.at(nbMetiers)->addCompetence(competence_nom, competence_description);
         }
         while (ligne == "~!competence-choisir!~")
         {
@@ -293,12 +348,71 @@ void FenChargement::ouvrirMetiers()
             QString competence_description = metiersTexte.readLine();
             compteurLigne++;
 
-            metiers.at(nbMetiers)->addCompetence(competence_nom, competence_description, false);
-
             ligne = metiersTexte.readLine();
             compteurLigne++;
+
+            bool fin = false;
+            while (!fin)
+            {
+                if (ligne == "~!NOUVEAU_METIER!~")
+                    fin = true;
+                else if (ligne == "~!FIN_METIER!~")
+                    fin = true;
+                else if (ligne == "~!competence-choisir!~")
+                    fin = true;
+                else
+                {
+                    competence_description += "\n" + ligne;
+                    ligne = metiersTexte.readLine();
+                    compteurLigne++;
+                }
+            }
+
+            metiers.at(nbMetiers)->addCompetence(competence_nom, competence_description, false);
         }
 
         nbMetiers++;
     } while (ligne != "~!FIN_METIER!~");
+}
+void FenChargement::ouvrirCompetences()
+{
+// On ouvre le fichier
+    QFile fichierCompetences(":prog-data/competences.txt");
+    if (!fichierCompetences.open(QIODevice::ReadOnly | QIODevice::Text))
+        fatalError("Fichier contenant les compétences inaccessible !");
+
+    QTextStream entree(&fichierCompetences);
+
+    QString ligne(entree.readLine());
+
+    while (ligne == "~!competence!~")
+    {
+        QString nom = entree.readLine();
+        QString description = entree.readLine();
+
+
+        // On vérifier que la ligne suivante n'est pas la suite de la compétence
+        ligne = entree.readLine();
+
+        bool fin(false);
+
+        if (ligne == "~!competence!~")
+            fin = true;
+        if (ligne == "~!FIN_COMPETENCES!~")
+            fin = true;
+
+        while (!fin)
+        {
+            description += "\n" + ligne;
+            ligne = entree.readLine();
+
+            if (ligne == "~!competence!~")
+                fin = true;
+            if (ligne == "~!FIN_COMPETENCES!~")
+                fin = true;
+        }
+
+        // On ajoute la compétence
+        competences.push_back(new Competence(nom, description));
+    }
 }

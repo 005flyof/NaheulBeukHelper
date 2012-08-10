@@ -11,6 +11,11 @@ Prêtre
 ~!energie_modif!~
 10
 20
+~!carac_sup_inf!~
+0
+0
+0
+1
 ~!vetement!~
 Nu
 00_00_00_00_00
@@ -159,18 +164,6 @@ Pas de flèches
 
 ~!equipement!~
 
-~!competence!~
-TOMBER DANS LES PIÈGES
-le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.
-~!competence!~
-TOMBER DANS LES PIÈGES
-le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.
-~!competence!~
-TOMBER DANS LES PIÈGES
-le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.
-~!competence!~
-TOMBER DANS LES PIÈGES
-le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.
 ~!competence!~
 TOMBER DANS LES PIÈGES
 le héros est toujours le premier à tomber dans un piège si l'équipe en croise un.

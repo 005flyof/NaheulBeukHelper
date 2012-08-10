@@ -16,37 +16,36 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef FENCHARGEMENT_H
-    #define FENCHARGEMENT_H
+#ifndef SELECTCOMPETENCE_H
+    #define SELECTCOMPETENCE_H
 
+    #include <QDialog>
     #include <QtGui>
-    #include "FenPrincipale.h"
+    #include "ClassesPourPersonnage.h"
 
     namespace Ui {
-        class FenChargement;
+        class SelectCompetence;
     }
 
-    class FenChargement : public QDialog
+    class SelectCompetence : public QDialog
     {
         Q_OBJECT
 
     public:
-        explicit FenChargement(char *argv[]);
-        ~FenChargement();
+        explicit SelectCompetence(QVector<Competence*> value, QWidget *parent = 0);
+        explicit SelectCompetence(QVector<Competence*> value, bool plsChoix, QWidget *parent = 0);
+        ~SelectCompetence();
+
+        QString getChoix();
+        QStringList getChoix(bool plsChoix);
 
     private:
-        Ui::FenChargement *ui;
+        Ui::SelectCompetence *ui;
 
-        void ouvrirOrigines();
-        void ouvrirMetiers();
-        void ouvrirCompetences();
+        bool m_plsChoix;
 
-        FenPrincipale *fenetrePrincipale;
-
-        // Variables
-        QVector<Metier*> metiers;
-        QVector<Origine*> origines;
         QVector<Competence*> competences;
+        QVector<QAbstractButton*> tableauBouttons;
     };
 
-#endif // FENCHARGEMENT_H
+#endif // SELECTCOMPETENCE_H

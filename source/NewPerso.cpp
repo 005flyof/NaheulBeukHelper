@@ -66,7 +66,7 @@ void NewPerso::accept()
         return;
     }
 
-// On valide l'origine
+// On valide l'origine et le métier
     setOrigine();
     setMetier();
 
@@ -78,6 +78,11 @@ void NewPerso::accept()
     m_experience = 0;
 
     m_richesses = new Richesses(ui->po->value(), 0, 0);
+
+// On valide les compétences au choix
+    bool continuer(choixCompetences());
+    if (!continuer)
+        return;
 
 // On enregistre
     QString total = "~!NewPerso!~\n";
@@ -182,6 +187,13 @@ void NewPerso::changerPage(int id)
 }
 void NewPerso::testMetiers()
 {
+    for (int i(0); i < m_metiersBouttons.count(); i++)
+    {
+        ui->origLayout->removeWidget(m_metiersBouttons.at(i));
+        m_metiersBouttons.at(i)->hide();
+    }
+    m_metiersBouttons.clear();
+
     int nbMetiersPossibles(0);
     for (int i = 0; i < m_metiers.count(); i++)
     {
@@ -196,6 +208,13 @@ void NewPerso::testMetiers()
 }
 void NewPerso::testOrigines()
 {
+    for (int i(0); i < m_originesBouttons.count(); i++)
+    {
+        ui->origLayout->removeWidget(m_originesBouttons.at(i));
+        m_originesBouttons.at(i)->hide();
+    }
+    m_originesBouttons.clear();
+
     int nbOrigPossibles(0);
     for (int i = 0; i < m_origines.count(); i++)
     {
@@ -213,23 +232,33 @@ void NewPerso::testOrigines()
 void NewPerso::setOrigine()
 {
     for (int i(0); i < m_origines.count(); i++)
-    {
         if (m_origines.at(i)->getNom() == m_origine)
         {
+        // On valide l'EV
             m_EV = m_origines.at(i)->getEV();
 
+        // On valide l'AT s'il le faut
             if (m_origines.at(i)->getAT() != 0)
                 m_carac->setAttaque(m_origines.at(i)->getAT());
 
-            for (int j(0); j < m_origines.at(i)->getCompetences().count(); j++)
-                m_competences.append(m_origines.at(i)->getCompetences().at(i));
+        // Copie des compétences
+            for (int i3(0); i3 < m_origines.at(i)->getCompetences().count(); i3++)                                                   // On parcourt les compétences de l'origine courante
+            {
+                bool dejaInscrite = false;
+                for (int competenceAcquises(0); competenceAcquises < m_competences.count(); competenceAcquises++)                   // On parcourt les compétences déjà inscrites pour éviter les doublons
+                {
+                    if (m_competences.at(competenceAcquises)->getNom() == m_origines.at(i)->getCompetences().at(i3)->getNom())
+                        dejaInscrite = true;
+                }
+
+                if (!dejaInscrite)
+                    m_competences.append(m_origines.at(i)->getCompetences().at(i3));
+            }
         }
-    }
 }
 void NewPerso::setMetier()
 {
     for (int i(0); i < m_metiers.count(); i++)
-    {
         if (m_metiers.at(i)->getNom() == m_metier)
         {
             if (m_metiers.at(i)->getAT() != 0)
@@ -275,8 +304,99 @@ void NewPerso::setMetier()
             }
 
         // Copie des compétences
-            for (int i3(0); i3 < m_metiers.at(i)->getCompetences().count(); i3++)
-                m_competences.append(m_metiers.at(i)->getCompetences().at(i3));
+            for (int i3(0); i3 < m_metiers.at(i)->getCompetences().count(); i3++)                                                   // On parcourt les compétences du métier courant
+            {
+                bool dejaInscrite = false;
+                for (int competenceAcquises(0); competenceAcquises < m_competences.count(); competenceAcquises++)                   // On parcourt les compétences déjà inscrites pour éviter les doublons
+                {
+                    if (m_competences.at(competenceAcquises)->getNom() == m_metiers.at(i)->getCompetences().at(i3)->getNom())
+                        dejaInscrite = true;
+                }
+
+                if (!dejaInscrite)
+                    m_competences.append(m_metiers.at(i)->getCompetences().at(i3));
+            }
         }
+}
+
+bool NewPerso::choixCompetences()
+{
+    QMessageBox::information(this, "Sélection des compétences ...",
+                             "Veuillez sélectionner 2 compétences dans la liste suivante, elles seront ajoutées au personnage !");
+
+    QVector<Competence*> selection;
+    int metier(0), orig(0);
+
+    for (int i(0); i < m_metiers.count(); i++)
+        if (m_metiers.at(i)->getNom() == m_metier)
+            metier = i;
+    for (int i(0); i < m_origines.count(); i++)
+        if (m_origines.at(i)->getNom() == m_origine)
+            orig = i;
+
+    for (int i(0); i < m_metiers.at(metier)->getCompetences(false).count(); i++)                                                   // On parcourt les compétences du métier courant
+    {
+        bool dejaInscrite = false;
+
+        for (int competenceAcquises(0); competenceAcquises < selection.count(); competenceAcquises++)                   // On parcourt les compétences déjà inscrites pour éviter les doublons
+        {
+            if (selection.at(competenceAcquises)->getNom() == m_metiers.at(metier)->getCompetences(false).at(i)->getNom())
+                dejaInscrite = true;
+        }
+
+        if (!dejaInscrite)
+            selection.append(m_metiers.at(metier)->getCompetences(false).at(i));
     }
+    for (int i(0); i < m_origines.at(orig)->getCompetences(false).count(); i++)                                                   // On parcourt les compétences du métier courant
+    {
+        bool dejaInscrite = false;
+
+        for (int competenceAcquises(0); competenceAcquises < selection.count(); competenceAcquises++)                   // On parcourt les compétences déjà inscrites pour éviter les doublons
+        {
+            if (selection.at(competenceAcquises)->getNom() == m_origines.at(orig)->getCompetences(false).at(i)->getNom())
+                dejaInscrite = true;
+        }
+
+        if (!dejaInscrite)
+            selection.append(m_origines.at(orig)->getCompetences(false).at(i));
+    }
+
+    // On enlève les compétences déjà acquises !
+    for (int i(0); i < selection.count(); i++)
+        for (int j(0); j < m_competences.count(); j++)
+            if (selection.at(i)->getNom() == m_competences.at(j)->getNom())
+                selection.remove(i);
+
+    bool erreur = true;
+    while (erreur)
+    {
+        SelectCompetence *dialogue = new SelectCompetence(selection, true, this);
+        int result = dialogue->exec();
+
+        if (result == QDialog::Accepted)
+        {
+            QStringList noms = dialogue->getChoix(true);
+
+            if (noms.count() != 2)
+                QMessageBox::information(this, "Erreur !",
+                                         "ERREUR :\n"
+                                         "Vous avez sélectionné trop/pas assez de compétences !\n"
+                                         "Veuillez en sélectionner 2 !");
+            else
+            {
+            // On ajoute la compétence à la liste
+                for (int i(0); i < selection.count(); i++)
+                    if (selection.at(i)->getNom() == noms.at(0))
+                        m_competences.push_back(selection.at(i));
+                for (int i(0); i < selection.count(); i++)
+                    if (selection.at(i)->getNom() == noms.at(1))
+                        m_competences.push_back(selection.at(i));
+                erreur = false;
+            }
+        }
+        else
+            return false;
+    }
+
+    return true;
 }

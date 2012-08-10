@@ -1,4 +1,3 @@
-~!AddPerso!~
 Bizu-man
 Homme, mais pas sûr
 Demi-elfe
@@ -9,7 +8,160 @@ Prètre
 12_15_12_14_13_10_12
 12_15_12_14_13_10_12
 000200_000000_000000
-~!magie!~
+~!energie_modif!~
 30
-Karmique
+30
+~!carac_sup_inf!~
+1
+0
+1
+3
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!arme!~
+A mains nues
+1
+-2
+00_00_00_00_00_00_00
+00_00_00_00_00_04_00
+0
+0
+~!arme!~
+A mains nues
+1
+-2
+00_00_00_00_00_00_00
+00_00_00_00_00_04_00
+0
+0
+~!arme!~
+A mains nues
+1
+-2
+00_00_00_00_00_00_00
+00_00_00_00_00_04_00
+0
+0
+~!arme!~
+A mains nues
+1
+-2
+00_00_00_00_00_00_00
+00_00_00_00_00_04_00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
 ~!FIN_ENREGISTREMENT!~
