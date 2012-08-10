@@ -29,6 +29,7 @@
     #include "Acceuil.h"
     #include "AddPerso.h"
     #include "NewPerso.h"
+    #include "SearchCompetence.h"
 
     class FenPrincipale : public QMainWindow
     {
@@ -69,6 +70,8 @@
         void po();
         void pa();
         void pc();
+
+        void chercherCompetence();
 
     // Menu : Personnage en cours
         void COU();
@@ -152,6 +155,8 @@
         QAction *poGroupe;
         QAction *paGroupe;
         QAction *pcGroupe;
+
+        QAction *searchCompetences;
 
         QAction *achatATPRD;
         QAction *achatINT;

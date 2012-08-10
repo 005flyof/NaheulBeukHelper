@@ -20,7 +20,8 @@ HEADERS += \
     source/AddPerso.h \
     source/EquipModif.h \
     source/Personnage.h \
-    source/SelectCompetence.h
+    source/SelectCompetence.h \
+    source/SearchCompetence.h
 
 SOURCES += \
     source/main.cpp \
@@ -44,7 +45,8 @@ SOURCES += \
     source/AddPerso.cpp \
     source/EquipModif.cpp \
     source/Personnage.cpp \
-    source/SelectCompetence.cpp
+    source/SelectCompetence.cpp \
+    source/SearchCompetence.cpp
 
 QT += network
 
@@ -63,4 +65,6 @@ FORMS += \
     source/AddPerso.ui \
     source/EquipModif.ui \
     source/Personnage.ui \
-    source/SelectCompetence.ui
+    source/SelectCompetence.ui \
+    source/SearchCompetence.ui \
+    source/SearchCompetence.ui

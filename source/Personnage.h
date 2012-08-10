@@ -53,6 +53,7 @@
         bool getModif() const;
 
         void setCompetencesPossibles(QVector<Competence*> tab);
+        QVector<Competence*> getCompetence() const;
 
 
         // Modifications du perso

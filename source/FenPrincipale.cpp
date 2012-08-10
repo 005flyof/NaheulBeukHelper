@@ -182,6 +182,13 @@ void FenPrincipale::initMenus_ToolBars()
         pcGroupe->setIcon(QIcon(":prog-data/img/PC-.png"));
         pcGroupe->setStatusTip("Retirer des Pièces de Cuivre à chacun des personnages du groupe.");
         pcGroupe->setEnabled(false);
+    groupe->addSeparator();
+
+    searchCompetences = groupe->addAction("Rechercher une compétence dans le groupe");
+        searchCompetences->setIcon(QIcon(":prog-data/img/competence.png"));
+        searchCompetences->setStatusTip("Chercher si quelqu'un dans le groupe détient une compétence.");
+        searchCompetences->setEnabled(false);
+        searchCompetences->setShortcut(QKeySequence("Ctrl+F"));
 
 // Menu : Perso en cours
     QMenu *perso = barreDeMenu->addMenu("Personnage en cours");
@@ -224,7 +231,7 @@ void FenPrincipale::initMenus_ToolBars()
             afficher_fichier->setEnabled(true);
             afficher_fichier->setCheckable(true);
             afficher_fichier->setChecked(true);
-        afficher_action = affichage->addAction("Actions");
+        afficher_action = affichage->addAction("Actions sur le groupe");
             afficher_action->setEnabled(true);
             afficher_action->setCheckable(true);
             afficher_action->setChecked(true);
@@ -287,6 +294,8 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(paGroupe, SIGNAL(triggered()), this, SLOT(pa()));
     QObject::connect(pcGroupe, SIGNAL(triggered()), this, SLOT(pc()));
 
+    QObject::connect(searchCompetences, SIGNAL(triggered()), this, SLOT(chercherCompetence()));
+
     QObject::connect(achatATPRD, SIGNAL(triggered()), this, SLOT(ATPRD()));
     QObject::connect(achatINT, SIGNAL(triggered()), this, SLOT(INT()));
     QObject::connect(achatCHA, SIGNAL(triggered()), this, SLOT(CHA()));
@@ -308,7 +317,7 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(aide, SIGNAL(triggered()), this, SLOT(help()));
 
 // ToolBars
-    fichierToolBar = addToolBar("Barre d'outils de fichier");
+    fichierToolBar = addToolBar("Fichier");
         fichierToolBar->setObjectName("toolBar-Fichier");
 
         fichierToolBar->addAction(nouveauPerso);
@@ -328,7 +337,7 @@ void FenPrincipale::initMenus_ToolBars()
         fichierToolBar->addAction(quitter);
 
 
-    actionsToolBar = addToolBar("Barre d'outils d'Actions");
+    actionsToolBar = addToolBar("Actions sur le groupe");
         actionsToolBar->setObjectName("toolBar-Actions");
 
         actionsToolBar->addAction(attaque);
@@ -346,9 +355,12 @@ void FenPrincipale::initMenus_ToolBars()
         actionsToolBar->addAction(poGroupe);
         actionsToolBar->addAction(paGroupe);
         actionsToolBar->addAction(pcGroupe);
+        actionsToolBar->addSeparator();
+
+        actionsToolBar->addAction(searchCompetences);
 
 
-    achatToolBar = addToolBar("Barre d'outils d'Achat de puissance");
+    achatToolBar = addToolBar("Achat de puissance");
         achatToolBar->setObjectName("toolBar-Achat");
 
         achatToolBar->addAction(achatCOU);
@@ -662,6 +674,8 @@ void FenPrincipale::ouvrir()
             paGroupe->setEnabled(false);
             pcGroupe->setEnabled(false);
 
+            searchCompetences->setEnabled(false);
+
             achatATPRD->setEnabled(false);
             achatINT->setEnabled(false);
             achatCHA->setEnabled(false);
@@ -736,6 +750,8 @@ void FenPrincipale::ouvrir()
     poGroupe->setEnabled(true);
     paGroupe->setEnabled(true);
     pcGroupe->setEnabled(true);
+
+    searchCompetences->setEnabled(true);
 
     achatATPRD->setEnabled(true);
     achatINT->setEnabled(true);
@@ -897,6 +913,8 @@ void FenPrincipale::fermerGroupe()
             paGroupe->setEnabled(false);
             pcGroupe->setEnabled(false);
 
+            searchCompetences->setEnabled(false);
+
             achatATPRD->setEnabled(false);
             achatINT->setEnabled(false);
             achatCHA->setEnabled(false);
@@ -951,6 +969,8 @@ void FenPrincipale::fermerGroupe()
             poGroupe->setEnabled(false);
             paGroupe->setEnabled(false);
             pcGroupe->setEnabled(false);
+
+            searchCompetences->setEnabled(false);
 
             achatATPRD->setEnabled(false);
             achatINT->setEnabled(false);
@@ -1008,6 +1028,8 @@ void FenPrincipale::fermerGroupe()
         poGroupe->setEnabled(false);
         paGroupe->setEnabled(false);
         pcGroupe->setEnabled(false);
+
+        searchCompetences->setEnabled(false);
 
         achatATPRD->setEnabled(false);
         achatINT->setEnabled(false);
@@ -1226,6 +1248,14 @@ void FenPrincipale::pc()
 
         log("Retrait de PC de groupe : " + QString::number(pcMoins));
     }
+}
+
+
+// Rechercher une compétence
+void FenPrincipale::chercherCompetence()
+{
+    SearchCompetence fen(m_personnages);
+    fen.exec();
 }
 
 

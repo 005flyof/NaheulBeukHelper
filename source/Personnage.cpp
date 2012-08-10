@@ -3165,3 +3165,8 @@ void Personnage::ajouterCompetencePerso()
         emit persoModifie();
     }
 }
+
+QVector<Competence*> Personnage::getCompetence() const
+{
+    return m_competences;
+}
