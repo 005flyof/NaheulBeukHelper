@@ -32,7 +32,7 @@
         #define OS 0
     #endif
 
-    #define VERSION "2.1"
+    #define VERSION "2.1.5"
 
     #include <QtGui>
     #include <QtNetwork>

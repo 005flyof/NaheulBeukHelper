@@ -24,6 +24,8 @@
 // Fonctions
     void setIcone(QWidget* widget);
     void fatalError(QString const& message, bool const& logErreur = false);
+    void error(QString const& message);
+
     void log(QString const& message, bool vider = false);
     void log(QString const& message, int niveau);
 

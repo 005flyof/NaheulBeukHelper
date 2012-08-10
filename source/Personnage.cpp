@@ -1080,7 +1080,11 @@ bool Personnage::chargerPerso()
 
     m_fichierPerso = new QFile(m_cheminEnregistrement);
     if (!m_fichierPerso->open(QIODevice::ReadOnly | QIODevice::Text))
-        fatalError("Impossible d'ouvrir le fichier personnage suivant : " + m_cheminEnregistrement);
+    {
+        error("Impossible d'ouvrir le fichier personnage suivant : " + m_cheminEnregistrement + "\n"
+              "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
+        return;
+    }
 
     QTextStream entree(m_fichierPerso);
     int numLigne(1);
@@ -1613,7 +1617,11 @@ void Personnage::enregistrerPerso()
                    "Le programme va être arrêter car c'est une erreur de programmation.\n"
                    "Veuillez signaler ce bug sur : " SITE_BUGS);
     if (!m_fichierPerso->open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible d'enregistrer le fichier de personnage sélectionné.");
+    {
+        error("Impossible d'enregistrer le fichier de personnage sélectionné.\n"
+              "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
+        return;
+    }
 
     QTextStream sortie(m_fichierPerso);
 

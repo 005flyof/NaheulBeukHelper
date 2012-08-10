@@ -475,13 +475,21 @@ void FenPrincipale::creerNouveauGroupe()
 // Enregistrement
     QFile notesRec(cheminNotes);
     if (!notesRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de créer le fichier de note sélectionné. C'est une erreur impossible normalement. Réessayez de créer le groupe.");
+    {
+        error("Impossible de créer le fichier de note sélectionné.\n"
+              "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
+        return;
+    }
 
     log("Création d'un fichier de notes.");
 
     QFile groupeRec(cheminGroupe);
     if (!groupeRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de créer le fichier de groupe sélectionné. C'est une erreur impossible normalement. Réessayez de créer le groupe.");
+    {
+        error("Impossible de créer le fichier de groupe sélectionné.\n"
+              "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
+        return;
+    }
 
     log("Création d'un fichier groupe.");
 

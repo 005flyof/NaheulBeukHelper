@@ -122,7 +122,11 @@ void NewPerso::accept()
 
     QFile *m_fichierPerso = new QFile(chemin);
     if (!m_fichierPerso->open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible d'enregistrer le fichier de personnage sélectionné.");
+    {
+        error("Impossible d'enregistrer le fichier de personnage sélectionné.\n"
+              "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
+        return;
+    }
 
     QTextStream sortie(m_fichierPerso);
 
@@ -149,7 +153,11 @@ void NewPerso::accept()
 
     QFile groupeRec(cheminGroupe);
     if (!groupeRec.open(QIODevice::Append | QIODevice::Text))
-        fatalError("Impossible d'ouvrir le fichier de groupe sélectionné. Réessayez d'ajouter le personnage au groupe.");
+    {
+        error("Impossible d'ouvrir le fichier de groupe sélectionné. Réessayez d'ajouter le personnage au groupe.\n"
+              "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
+        return;
+    }
 
     QTextStream groupe(&groupeRec);
 

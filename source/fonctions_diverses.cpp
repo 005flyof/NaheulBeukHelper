@@ -45,6 +45,22 @@ void fatalError(QString const& message, bool const& logErreur)
 
     exit(2);
 }
+void error(QString const& message)
+{
+    QFile error("error.log");
+
+    if (error.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream entree(&error);
+
+        entree << "NBH -> Erreur : " + message << "\n";
+
+        QWidget *a = new QWidget();
+        QMessageBox::critical(a, "Erreur mineure",
+                              "NBH a rencontré une erreur :\n\n" + message);
+        log("Erreur mineure : NBH a rencontré une erreur :\n\n" + message);
+    }
+}
 
 void log(QString const& message, bool vider)
 {

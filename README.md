@@ -11,15 +11,19 @@ Explication des différents hébergeurs de NBH
 
 Versions
 ========
+Version 2.2
+-----------
+  Version en cours de développement
+### Nouveautés de la version
+    * Gestion de l'attaque
 Version 2.1.5
 -------------
-  Version en cours de développement
+  Actuelle version release
 ### Nouveautés de la version
     * Possibilité de chercher dans les compétences d'un groupe
     * Modification de la gestion des erreurs
 Version 2.1
 -----------
-  Actuelle version release
 ### Nouveautés de la version
     * Gestion des bonus et malus de caractéristiques inférieures/supérieures à la moyenne
     * Rétablissement de l'affichage compétences
