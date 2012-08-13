@@ -1138,8 +1138,10 @@ void FenPrincipale::modePassif()
 // Attaque
 void FenPrincipale::attaquer()
 {
-    QMessageBox::information(this, "En dévelopemment",
-                             "Cette fonction est encore en développement.");
+    for (int i(0); i < m_personnages.count(); i++)
+        if (zoneCentrale->currentSubWindow()->windowTitle() == m_personnages.at(i)->getNom()
+                || zoneCentrale->currentSubWindow()->windowTitle() == "* " + m_personnages.at(i)->getNom())
+            m_personnages.at(i)->attaquer();
 }
 
 

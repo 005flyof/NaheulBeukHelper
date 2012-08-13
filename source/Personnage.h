@@ -46,6 +46,8 @@
         bool chargerPerso();
         void enregistrerPerso();
 
+        void attaquer();
+
         static Caracteristiques chargerCaracStatic(bool *erreur, QString ligne, bool AT_PRD, int numLigne);
 
         // Accesseurs

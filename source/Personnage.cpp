@@ -617,7 +617,7 @@ void Personnage::calculerCaracSupInfMoy()
 
                 while (!ok)
                     choix = QInputDialog::getItem(this, m_nom + " -> Caractéristiques inférieures à la normale.",
-                                                  "Ce personnage a un malus de 1 point, en raison de son adresse nullissime, sur :",
+                                                  m_nom + " a un malus de 1 point, en raison de son adresse nullissime, sur :",
                                                   at_prd, 0, false, &ok);
                 if (choix == "Attaque (" + QString::number(m_carac->getAttaque()) + ")")
                 {
@@ -642,7 +642,7 @@ void Personnage::calculerCaracSupInfMoy()
 
                 while (!ok)
                     choix = QInputDialog::getItem(this, m_nom + " -> Caractéristiques inférieures à la normale.",
-                                                  "Ce personnage a un malus de 1 point, en raison de son adresse nullissime, sur :",
+                                                  m_nom + " a un malus de 1 point, en raison de son adresse nullissime, sur :",
                                                   at_prd, 0, false, &ok);
                 if (choix == "Attaque (" + QString::number(m_carac->getAttaque()) + ")")
                 {
@@ -888,6 +888,417 @@ bool Personnage::setNiveau()
         return false;
 }
 
+
+// Attaque et parade
+void Personnage::attaquer()
+{
+// On demande avec quelle arme attaquer
+    // On parcourt les armes pour prendre le nom
+    QStringList nomArmes;
+    for (int i(0); i < MAX_ARME; i++)
+        nomArmes << m_armes[i]->getNom() + " (AT: " + QString::number(m_AT_modif[i]) + " ; PRD: " + QString::number(m_PRD_modif[i]) + ")";
+    bool ok(false);
+
+    // On pose la question
+    QString nom_arme = QInputDialog::getItem(this, m_nom + " -> Attaque",
+                                             "Avec quelle arme " + m_nom + " veut-il attaquer ?",
+                                             nomArmes, 0, false, &ok);
+
+// Si on annule, on arrête tout
+    if (!ok)
+        return;
+
+// On parcourt pour savoir avec quelle arme attaquer
+    int i(0);
+    bool attaqueFaite(false);
+    while (!attaqueFaite)
+    {
+        int totalDegats(0);
+
+        // On teste si c'est l'arme choisi est celle correspondant à i
+        if (nom_arme == m_armes[i]->getNom() + " (AT: " + QString::number(m_AT_modif[i]) + " ; PRD: " + QString::number(m_PRD_modif[i]) + ")")
+        {
+        // Si l'arme est un projectile
+            if (m_armes[i]->getType() == Arme::Projectile)
+            {
+                // Valeur de D20 pour savoir s'il peut attaquer
+                int vingt = QInputDialog::getInt(this, m_nom + " -> Attaque -> Test au D20",
+                                                 "Lancez et rentrez la valeur du D20 :",
+                                                 1, 1, 20, 1, &ok);
+
+                // Echec critique
+                if (ok && (vingt == 19 || vingt == 20))
+                {
+                    int de = QInputDialog::getInt(this, m_nom + " -> Attaque -> Echec critique",
+                                                  m_nom + " a fait un échec critique en essayant d'attaquer.\n"
+                                                  "Veuillez lancer une deuxième fois le dé 20 et rentrer le score indiqué.",
+                                                  1, 1, 20);
+
+                    log(m_nom + " fait un échec critique avec '" + m_armes[i]->getNom() + "' :");
+
+                    if (de == 1 || de == 2)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " rattrape son erreur in extremis, mais le projectile n'atteint pas sa cible !");
+                        log("il rattrape son erreur in extremis, mais le projectile n'atteint pas sa cible.", 1);
+                    }
+                    else if (de >= 3 && de <= 5)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " lache son arme comme un loser !\n"
+                                                 "=> combat à main nue, change d'arme");
+                        log("il lache son arme comme un loser !\n"
+                            "=> combat à main nue, change d'arme", 1);
+                        m_armes[i]->setNom("(lachée) " + m_armes[i]->getNom());
+                    }
+                    else if (de == 6 || de == 7)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " frappe un allié proche vers la gauche !\n"
+                                                 "=> tirer les dégâts sur l'allié.");
+                        log("il frappe un allié proche vers la gauche !\n"
+                            "=> tirer les dégâts sur l'allié.", 1);
+                    }
+                    else if (de == 8 || de == 9)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " frappe un allié proche vers la droite !\n"
+                                                 "=> tirer les dégâts sur l'allié.");
+                        log("il frappe un allié proche vers la droite !\n"
+                            "=> tirer les dégâts sur l'allié.", 1);
+                    }
+                    else if (de >= 10 && de <= 12)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " frappe l'allié le plus lointain !\n"
+                                                 "=> tirer les dégâts sur l'allié");
+                        log("il frappe l'allié le plus lointain !\n"
+                            "=> tirer les dégâts sur l'allié", 1);
+                    }
+                    else if (de >= 13 && de <= 15)
+                    {
+                        int rupt = QInputDialog::getInt(this, m_nom + " -> Attaque -> Echec critique -> Rupture",
+                                                        "Veuillez rentrer le score indiqué par un D6 pour vérifier que l'arme n'est pas cassée !",
+                                                        1, 1, 6);
+                        if (rupt <= m_armes[i]->getRupture())
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique -> Rupture",
+                                                     m_nom + " casse son arme !");
+                            log("il casse son arme !", 1);
+                            m_armes[i]->setNom("(cassée) " + m_armes[i]->getNom());
+                        }
+                    }
+                    else if (de >= 16 && de <= 18)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " se tire dans le pied !\n"
+                                                 "=> tirer les dégâts (+2) sur le combattant.");
+                        log("il se tire dans le pied !\n"
+                            "=> tirer les dégâts (+2) sur le combattant.", 1);
+                        totalDegats += 2;
+                    }
+                    else if (de == 19)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " se blesse très sévèrement de façon atroce et douloureuse !\n"
+                                                 "=> tirer des dégâts critiques sur le combattant.");
+                        log("il se blesse très sévèrement de façon atroce et douloureuse !\n"
+                            "=> tirer des dégâts critiques sur le combattant.", 1);
+                    }
+                    else if (de == 20)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " crève l'œil de l'allié le plus proche !\n"
+                                                 "=> blessure grave.");
+                        log("il crève l'œil de l'allié le plus proche !\n"
+                            "=> blessure grave.", 1);
+                    }
+                }
+
+                // Réussite critique
+                if (ok && (vingt == 1 || vingt == 2))
+                {
+                    QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                             m_nom + " a fait une réussite critique en attaquant.");
+                    log(m_nom + " fait une réussite critique avec '" + m_armes[i]->getNom() + "' !");
+                }
+
+                // Attaque
+                if (ok && (vingt < m_carac_modif->getAdresse()))
+                {
+                    // On demande les résultats des dés
+                    int i2(1);
+                    totalDegats += m_armes[i]->getDegatsEnPlus();
+                    while (i2 <= m_armes[i]->getNbDes())
+                    {
+                        totalDegats += QInputDialog::getInt(this, m_nom + " -> Attaque -> Dégâts",
+                                                            "Rentrez le score indiqué par le D6 :", 1, 1, 6, 1);
+                        i2++;
+                    }
+
+                    // S'il n'y a pas d'arme
+                    if (m_armes[i]->getNom() == "A mains nues")
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Récapitulatif",
+                                                 m_nom + " attaque à mains nues et fait " + QString::number(totalDegats) + " de dégâts.\n"
+                                                 "A cela, il faut enlever la valeur de protection de la personne/monstre attaqué(e) !");
+                        log(m_nom + " attaque à mains nues et fait " + QString::number(totalDegats) + " de dégâts.");
+                    }
+                    // Si l'arme est une arme normale
+                    else
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Récapitulatif",
+                                                 m_nom + " attaque avec '" + m_armes[i]->getNom() + "' et fait " + QString::number(totalDegats) + " de dégâts.\n"
+                                                 "A cela, il faut enlever la valeur de protection de la personne/monstre attaqué(e) !");
+                        log(m_nom + " attaque avec '" + m_armes[i]->getNom() + "' et fait " + QString::number(totalDegats) + " de dégâts.");
+                    }
+                }
+
+                // Attaque pas
+                if (ok && vingt > m_carac_modif->getAdresse() && vingt != 19 && vingt != 20)
+                {
+                    QMessageBox::information(this, m_nom + " -> Attaque impossible",
+                                             m_nom + " ne peut pas attaquer.");
+                    log(m_nom + " essaye d'attaquer, mais se rate son attaque.");
+                }
+
+                // On dit au while que l'attaque a été faite
+                attaqueFaite = true;
+
+                return;
+            }
+
+        // si l'arme n'est pas un projectile
+            // Valeur de D20 pour savoir s'il peut attaquer
+            int vingt = QInputDialog::getInt(this, m_nom + " -> Attaque -> Test au D20",
+                                             "Lancez et rentrez la valeur du D20 :",
+                                             1, 1, 20, 1, &ok);
+
+            // Echec critique
+            if (ok && (vingt == 19 || vingt == 20))
+            {
+                int de = QInputDialog::getInt(this, m_nom + " -> Attaque -> Echec critique",
+                                              m_nom + " a fait un échec critique en essayant d'attaquer.\n"
+                                              "Veuillez lancer une deuxième fois le dé 20 et rentrer le score indiqué.",
+                                              1, 1, 20);
+
+                log(m_nom + " fait un échec critique avec '" + m_armes[i]->getNom() + "' :");
+
+            // A mains nues
+                if (m_armes[i]->getType() == Arme::MainNue)
+                {
+                    if (de == 1 || de == 2)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " rattrape son erreur in extremis, mais l'attaque échoue !");
+                        log("il rattrape son erreur in extremis, mais l'attaque échoue.", 1);
+                    }
+                    else if (de >= 3 && de <= 10)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " tombe et s'écrase le nez par terre !\n"
+                                                 "=> il pert deux assauts et reçoit 2BL.");
+                        log("il tombe et s'écrase le nez par terre !\n"
+                            "=> il pert deux assauts et reçoit 2BL.", 1);
+                    }
+                    else if (de == 11 || de == 12)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " frappe un allié proche vers la gauche !\n"
+                                                 "=> tirer les dégâts sur l'allié.");
+                        log("il frappe un allié proche vers la gauche !\n"
+                            "=> tirer les dégâts sur l'allié.", 1);
+                    }
+                    else if (de == 13 || de == 14)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " frappe un allié proche vers la droite !\n"
+                                                 "=> tirer les dégâts sur l'allié.");
+                        log("il frappe un allié proche vers la droite !\n"
+                            "=> tirer les dégâts sur l'allié.", 1);
+                    }
+                    else if (de == 15 || de == 16)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " se brise la main tout seul comme une tanche !\n"
+                                                 "=> 3BL et blessure grave");
+                        log("il se brise la main tout seul comme une tanche !\n"
+                            "=> 3BL et blessure grave", 1);
+                    }
+                    else if (de >= 17 && de <= 19)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " se casse un bras bêtement !\n"
+                                                 "=> 6BL et blessure grave.");
+                        log("il se casse un bras bêtement !\n"
+                            "=> 6BL et blessure grave.", 1);
+                    }
+                    else if (de == 20)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " tombe en arrière et s'assomme !\n"
+                                                 "=> il pert connaissance.");
+                        log("il tombe en arrière et s'assome !\n"
+                            "=> il pert connaissance.", 1);
+                    }
+                }
+            // Normalement
+                else
+                {
+                    if (de == 1 || de == 2)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " rattrape son erreur in extremis, mais l'attaque échoue !");
+                        log("il rattrape son erreur in extremis, mais l'attaque échoue.", 1);
+                    }
+                    else if (de >= 3 && de <= 5)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " trébuche et chutte maladroitement !\n"
+                                                 "=> il rate 2 assauts.");
+                        log("il trébuche et chutte maladroitement !\n"
+                            "=> il rate 2 assauts.", 1);
+                    }
+                    else if (de == 6 || de == 7)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " frappe un allié proche vers la gauche !\n"
+                                                 "=> tirer les dégâts sur l'allié.");
+                        log("il frappe un allié proche vers la gauche !\n"
+                            "=> tirer les dégâts sur l'allié.", 1);
+                    }
+                    else if (de == 8 || de == 9)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " frappe un allié proche vers la droite !\n"
+                                                 "=> tirer les dégâts sur l'allié.");
+                        log("il frappe un allié proche vers la droite !\n"
+                            "=> tirer les dégâts sur l'allié.", 1);
+                    }
+                    else if (de >= 10 && de <= 12)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " lache son arme comme un loser !\n"
+                                                 "=> combat à main nue, change d'arme");
+                        log("il lache son arme comme un loser !\n"
+                            "=> combat à main nue, change d'arme", 1);
+                        m_armes[i]->setNom("(cassée) " + m_armes[i]->getNom());
+                    }
+                    else if (de >= 13 && de <= 15)
+                    {
+                        int rupt = QInputDialog::getInt(this, m_nom + " -> Attaque -> Echec critique -> Rupture",
+                                                        "Veuillez rentrer le score indiqué par un D6 pour vérifier que l'arme n'est pas cassée !",
+                                                        1, 1, 6);
+                        if (rupt <= m_armes[i]->getRupture())
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique -> Rupture",
+                                                     m_nom + " casse son arme !");
+                            log("il casse son arme !", 1);
+                        }
+                    }
+                    else if (de >= 16 && de <= 18)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " se blesse tout seul comme un cake !\n"
+                                                 "=> tirer les dégâts sur le combattant.");
+                        log("il se blesse tout seul comme un cake !\n"
+                            "=> tirer les dégâts sur le combattant.", 1);
+                    }
+                    else if (de == 19)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique",
+                                                 m_nom + " se blesse très sévèrement de façon atroce et douloureuse !\n"
+                                                 "=> tirer des dégâts critiques sur le combattant.");
+                        log("il se blesse très sévèrement de façon atroce et douloureuse !\n"
+                            "=> tirer des dégâts critiques sur le combattant.", 1);
+                    }
+                    else if (de == 20)
+                    {
+                        int de6 = QInputDialog::getInt(this, m_nom + " -> Attaque -> Echec critique -> Perte d'un membre",
+                                                       m_nom + " va perdre un membre, veuillez lancer un D6 et rentrer le score indiqué pour savoir quel membre est perdu...",
+                                                       1, 1, 6);
+
+                        if (de6 <= 2)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique -> Perte d'un membre",
+                                                     m_nom + " perd un œil !\n"
+                                                     "=> blessure grave.");
+                            log("il perd un œil !\n"
+                                "=> blessure grave.", 1);
+                        }
+                        else
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique -> Perte d'un membre",
+                                                     m_nom + " perd un doigt !\n"
+                                                     "=> blessure grave.");
+                            log("il perd un doigt !\n"
+                                "=> blessure grave.", 1);
+                        }
+                    }
+                }
+            }
+
+            // Réussite critique
+            if (ok && (vingt == 1 || vingt == 2))
+            {
+                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                         m_nom + " a fait une réussite critique en attaquant.");
+                log(m_nom + " fait une réussite critique avec '" + m_armes[i]->getNom() + "' !");
+            }
+
+            // Attaque
+            if (ok && (vingt < m_carac_modif->getAttaque()))
+            {
+                // On demande les résultats des dés
+                int i2(1);
+                totalDegats += m_armes[i]->getDegatsEnPlus();
+                while (i2 <= m_armes[i]->getNbDes())
+                {
+                    totalDegats += QInputDialog::getInt(this, m_nom + " -> Attaque -> Dégâts",
+                                                        "Rentrez le score indiqué par le D6 :", 1, 1, 6, 1);
+                    i2++;
+                }
+
+                // S'il n'y a pas d'arme
+                if (m_armes[i]->getNom() == "A mains nues")
+                {
+                    QMessageBox::information(this, m_nom + " -> Attaque -> Récapitulatif",
+                                             m_nom + " attaque à mains nues et fait " + QString::number(totalDegats) + " de dégâts.\n"
+                                             "A cela, il faut enlever la valeur de protection de la personne/monstre attaqué(e) !");
+                    log(m_nom + " attaque à mains nues et fait " + QString::number(totalDegats) + " de dégâts.");
+                }
+                // Si l'arme est une arme normale
+                else
+                {
+                    QMessageBox::information(this, m_nom + " -> Attaque -> Récapitulatif",
+                                             m_nom + " attaque avec '" + m_armes[i]->getNom() + "' et fait " + QString::number(totalDegats) + " de dégâts.\n"
+                                             "A cela, il faut enlever la valeur de protection de la personne/monstre attaqué(e) !");
+                    log(m_nom + " attaque avec '" + m_armes[i]->getNom() + "' et fait " + QString::number(totalDegats) + " de dégâts.");
+                }
+            }
+
+            // Attaque pas
+            if (ok && vingt > m_carac_modif->getAttaque() && vingt != 19 && vingt != 20)
+            {
+                QMessageBox::information(this, m_nom + " -> Attaque impossible",
+                                         m_nom + " ne peut pas attaquer.");
+                log(m_nom + " essaye d'attaquer, mais se rate son attaque.");
+            }
+
+            // On dit au while que l'attaque a été faite
+            attaqueFaite = true;
+        }
+
+        // On dit au while que l'attaque a été faite
+        if (i >= MAX_ARME)
+            attaqueFaite = true;
+
+        // On incrémente i pour passer à l'arme suivante
+        i++;
+    }
+}
+
+
 // Fonctions de chargement
 Caracteristiques Personnage::chargerCaracStatic(bool *erreur, QString ligne, bool AT_PRD, int numLigne)
 {
@@ -1083,7 +1494,7 @@ bool Personnage::chargerPerso()
     {
         error("Impossible d'ouvrir le fichier personnage suivant : " + m_cheminEnregistrement + "\n"
               "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
-        return;
+        return true;
     }
 
     QTextStream entree(m_fichierPerso);

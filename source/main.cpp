@@ -64,5 +64,8 @@ int main(int argc, char *argv[])
     21	- faire la doc des sources									(21)	-
     22	- chargement des origines/métiers au démarrage				(22)	- fait
     - fen chargement perso -> quand tout est fini !
-    - finir de mettre les compétences
+
+    - échec critique -> bon !
+    - réussite critique
+    - tirage des dégas
 */
