@@ -60,7 +60,7 @@
         QProgressBar *progression;
 
     // Autres variables
-        bool alerteAJour;
+        bool alerteSiAJour;
         bool erreurTrouvee; //Variable qui nous permet de savoir s'il y a eu une erreur ou non.
     };
 

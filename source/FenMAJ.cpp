@@ -23,7 +23,7 @@
 
 FenMAJ::FenMAJ(QWidget* parent, bool silencieux)
     : QDialog(parent, Qt::WindowTitleHint | Qt::WindowSystemMenuHint),
-      alerteAJour(!silencieux),
+      alerteSiAJour(!silencieux),
       erreurTrouvee(false)
 {
     setModal(true);
@@ -36,6 +36,7 @@ FenMAJ::FenMAJ(QWidget* parent, bool silencieux)
 
     label = new QLabel("Bienvenue dans le contrôleur de mises à jour de NBH.");
         verticalLayout->addWidget(label);
+        label->setAlignment(Qt::AlignCenter);
 
     verifier = new QPushButton("Vérifier...");
         verticalLayout->addWidget(verifier);
@@ -58,7 +59,8 @@ FenMAJ::FenMAJ(QWidget* parent, bool silencieux)
 
 void FenMAJ::verifierMAJ()
 {
-    log("Recherche de Mises à Jour.");
+    if (alerteSiAJour)
+        log("Recherche de Mises à Jour.");
 
     verifier->setEnabled(false);
     label->setText("Vérification de la disponibilité de Mise à Jour.");
@@ -91,7 +93,7 @@ void FenMAJ::verifierMAJ_2()
         if (VERSION == r->readLine())
         {
             label->setText("NBH est à jour");
-            if (alerteAJour)
+            if (alerteSiAJour)
                 QMessageBox::information(this, "NBH déjà à jour", "NBH est déjà à jour...");
 
             log("NBH est à jour !");
@@ -103,19 +105,21 @@ void FenMAJ::verifierMAJ_2()
         // Sinon
         demarrerTelechargement->setEnabled(true);
         label->setText("NBH n'est pas à jour !");
-        log("NBH n'est pas à jour !");
+        if (alerteSiAJour)
+            log("NBH n'est pas à jour !", 1);
+        else
+            log("NBH n'est pas à jour !");
 
         //On indique que tout s'est bien passé
-        QString messageFin;
-        if (alerteAJour)
-            messageFin = "Vérification des MAJ terminé !\n"
-                    "Votre version n'est pas la plus récente.";
+        if (alerteSiAJour)
+            QMessageBox::information(this, "Fin de vérification",
+                                     "Vérification des MAJ terminé :\n"
+                                     "Votre version n'est pas la plus récente.");
         else
-            messageFin = "Vérification des MAJ terminé !\n"
-                    "Votre version n'est pas la plus récente.\n\n"
-                    "vous devriez démarrer l'updater pour que la mise à jour se fasse !";
-        QMessageBox::information(this, "Fin de vérification",
-                                 messageFin);
+            QMessageBox::information(parentWidget(), "Fin de vérification",
+                                     "Vérification des MAJ terminé :\n"
+                                     "Votre version n'est pas la plus récente.\n\n"
+                                     "Vous devriez démarrer l'updater pour que la mise à jour se fasse !");
     }
 }
 
@@ -164,7 +168,7 @@ void FenMAJ::messageErreur(QNetworkReply::NetworkError)
     erreurTrouvee = true; //On indique qu'il y a eu une erreur au slot enregistrer
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender());
 
-    if (alerteAJour)
+    if (alerteSiAJour)
         QMessageBox::critical(this, "Erreur",
                               "Erreur lors du chargement."
                               "Vérifiez votre connexion internet ou réessayez plus tard.<br /><br />"

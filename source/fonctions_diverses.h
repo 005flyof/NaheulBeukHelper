@@ -29,6 +29,8 @@
     void log(QString const& message, bool vider = false);
     void log(QString const& message, int niveau);
 
+    void pause(int msec);
+
 // Variables
     #define SITE_BUGS "https://sourceforge.net/p/naheulbeuk-help/bugs/"
 

@@ -34,43 +34,44 @@ FenChargement::FenChargement(char *argv[])
     ui->label->setText("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...");
     log("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...", 1);
     remove("tmp.zip");
-    ui->label->setText("Fichier temporaire de Mise à Jour supprimé !");
     ui->progression->setValue(5);
+    pause(800);
 
 // Suppression du fichier d'erreur
     ui->label->setText("Suppression du fichier d'erreurs : 'error.log'...");
     log("Suppression du fichier d'erreurs : 'error.log'...", 1);
     remove("error.log");
-    ui->label->setText("Fichier d'erreur supprimé !");
     ui->progression->setValue(10);
+    pause(800);
 
-// Suppression du fichier d'erreur
-    ui->label->setText("Vérification des mises à jour...");
+// Vérification des MAJ
+    ui->label->setText("Lancement de la vérification des mises à jour...");
     log("Vérification des mises à jour...", 1);
-    FenMAJ test(this, true);
-    ui->label->setText("Mises à jour vérifiées.");
+    FenMAJ *test = new FenMAJ(this, true);
+        test->verifierMAJ();
     ui->progression->setValue(15);
+    pause(1000);
 
 // Chargement des origines
     ui->label->setText("Chargement des origines...");
     log("Chargement des origines...", 1);
     ouvrirOrigines();
-    ui->label->setText("Origines chargées !");
     ui->progression->setValue(35);
+    pause(1000);
 
 // Chargement des métiers
     ui->label->setText("Chargement des métiers...");
     log("Chargement des métiers...", 1);
     ouvrirMetiers();
-    ui->label->setText("Métiers chargés !");
     ui->progression->setValue(65);
+    pause(1000);
 
 // Chargement des compétences
     ui->label->setText("Chargement des compétences...");
     log("Chargement des compétences...", 1);
     ouvrirCompetences();
-    ui->label->setText("Compétences chargés !");
     ui->progression->setValue(95);
+    pause(1000);
 
 // Création de l'interface graphique
     ui->label->setText("Création de l'interface graphique...");
@@ -80,11 +81,12 @@ FenChargement::FenChargement(char *argv[])
         fenetrePrincipale->setOrigines(origines);
         fenetrePrincipale->setMetiers(metiers);
         fenetrePrincipale->setCompetencesPossibles(competences);
-    fenetrePrincipale->showMaximized();
 
     ui->progression->setValue(100);
-    ui->label->setText("Interface chargée ! Fermeture de la fenêtre de chargement...");
+    pause(1000);
+
     close();
+    fenetrePrincipale->showMaximized();
 }
 
 FenChargement::~FenChargement()

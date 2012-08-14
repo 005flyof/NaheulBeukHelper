@@ -124,3 +124,10 @@ void log(QString const& message, int niveau)
 
     log.close();
 }
+
+void pause(int msec)
+{
+    QTime tempo;
+    tempo.start();
+    while (tempo.elapsed() < msec);
+}

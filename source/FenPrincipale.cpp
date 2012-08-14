@@ -31,7 +31,7 @@ FenPrincipale::FenPrincipale() :
 // On s'occupe de la fenêtre
     setWindowTitle("NBH     --     NaheulBeuk Helper");
     setIcone(this);
-    setMinimumSize(1116, 670);
+    setMinimumSize(1116, 695);
 
 // Création de la statusBar
     statusBar = new QStatusBar();
