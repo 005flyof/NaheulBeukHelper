@@ -100,7 +100,7 @@ void log(QString const& message, bool vider)
 
     log.close();
 }
-void log(QString const& message, int niveau)
+void log(QString message, int niveau)
 {
     QFile log("nbh.log");
     if (!log.open(QIODevice::Append | QIODevice::Text))
@@ -111,10 +111,12 @@ void log(QString const& message, int niveau)
     switch (niveau)
     {
     case 1:
+        message.replace("\n", "\n                            ");
         entree << "                         -> " + message + "\n";
         break;
 
     case 2:
+        message.replace("\n", "\n                                       ");
         entree << "                                     * " + message + "\n";
         break;
 

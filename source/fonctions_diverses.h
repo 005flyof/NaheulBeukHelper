@@ -27,7 +27,7 @@
     void error(QString const& message);
 
     void log(QString const& message, bool vider = false);
-    void log(QString const& message, int niveau);
+    void log(QString message, int niveau);
 
     void pause(int msec);
 

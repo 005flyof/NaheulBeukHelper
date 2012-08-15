@@ -47,12 +47,15 @@
         void enregistrerPerso();
 
         void attaquer();
+        void parer();
+        void esquiver();
 
         static Caracteristiques chargerCaracStatic(bool *erreur, QString ligne, bool AT_PRD, int numLigne);
 
         // Accesseurs
         QString getNom() const;
         bool getModif() const;
+        QScrollArea* getScroll() const;
 
         void setCompetencesPossibles(QVector<Competence*> tab);
         QVector<Competence*> getCompetence() const;

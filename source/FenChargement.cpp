@@ -30,62 +30,82 @@ FenChargement::FenChargement(char *argv[])
 
     log("Lancement de NBH :", true);
 
+    // Chargement des préférences
+    bool ralentir(true), verifMaj(true);
+    QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
+    if (!settings->value("FenChargement/accelererChargement").isNull())
+        ralentir = !settings->value("FenChargement/accelererChargement").toBool();
+    if (!settings->value("FenChargement/verifMAJ").isNull())
+        verifMaj = settings->value("FenChargement/verifMAJ").toBool();
+
 // Suppression du fichier temporaire de la MAJ
     ui->label->setText("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...");
     log("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...", 1);
     remove("tmp.zip");
     ui->progression->setValue(5);
-    pause(800);
+    if (ralentir)
+        pause(800);
 
 // Suppression du fichier d'erreur
     ui->label->setText("Suppression du fichier d'erreurs : 'error.log'...");
     log("Suppression du fichier d'erreurs : 'error.log'...", 1);
     remove("error.log");
     ui->progression->setValue(10);
-    pause(800);
+    if (ralentir)
+        pause(800);
 
 // Vérification des MAJ
-    ui->label->setText("Lancement de la vérification des mises à jour...");
-    log("Vérification des mises à jour...", 1);
-    FenMAJ *test = new FenMAJ(this, true);
-        test->verifierMAJ();
-    ui->progression->setValue(15);
-    pause(1000);
+    if (verifMaj)
+    {
+        ui->label->setText("Lancement de la vérification des mises à jour...");
+        log("Vérification des mises à jour...", 1);
+        testMAJ = new FenMAJ(this, true);
+            testMAJ->verifierMAJ();
+        ui->progression->setValue(15);
+        if (ralentir)
+            pause(1000);
+    }
+    else
+        testMAJ = 0;
 
 // Chargement des origines
     ui->label->setText("Chargement des origines...");
     log("Chargement des origines...", 1);
     ouvrirOrigines();
     ui->progression->setValue(35);
-    pause(1000);
+    if (ralentir)
+        pause(1000);
 
 // Chargement des métiers
     ui->label->setText("Chargement des métiers...");
     log("Chargement des métiers...", 1);
     ouvrirMetiers();
     ui->progression->setValue(65);
-    pause(1000);
+    if (ralentir)
+        pause(1000);
 
 // Chargement des compétences
     ui->label->setText("Chargement des compétences...");
     log("Chargement des compétences...", 1);
     ouvrirCompetences();
     ui->progression->setValue(95);
-    pause(1000);
+    if (ralentir)
+        pause(1000);
 
 // Création de l'interface graphique
     ui->label->setText("Création de l'interface graphique...");
     log("Création de l'interface graphique...", 1);
 
-    fenetrePrincipale = new FenPrincipale;
+    fenetrePrincipale = new FenPrincipale(testMAJ);
         fenetrePrincipale->setOrigines(origines);
         fenetrePrincipale->setMetiers(metiers);
         fenetrePrincipale->setCompetencesPossibles(competences);
 
     ui->progression->setValue(100);
-    pause(1000);
+    if (ralentir)
+        pause(1000);
 
-    close();
+    hide();
     fenetrePrincipale->showMaximized();
 }
 

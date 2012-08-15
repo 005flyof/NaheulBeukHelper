@@ -35,7 +35,7 @@
     {
         Q_OBJECT
     public:
-        FenPrincipale();
+        FenPrincipale(FenMAJ *aFermer = 0);
         ~FenPrincipale();
 
         // Pour la création d'un personnage
@@ -46,6 +46,8 @@
 
     public slots:
         void attaquer();
+        void parer();
+        void esquiver();
 
     private slots:
         void persoModifie();
@@ -171,6 +173,9 @@
         QAction *afficher_achat;
         QAction *afficher_notes;
         QAction *afficher_ordreMarche;
+
+        QAction *param_accelererChargement;
+        QAction *param_verifMAJ_demarrage;
     };
 
     class MdiSubWindow : public QMdiSubWindow

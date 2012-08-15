@@ -42,6 +42,7 @@
         void ouvrirCompetences();
 
         FenPrincipale *fenetrePrincipale;
+        FenMAJ *testMAJ;
 
         // Variables
         QVector<Metier*> metiers;

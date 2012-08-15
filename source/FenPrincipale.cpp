@@ -24,10 +24,13 @@
 using namespace std;
 
 // Fenêtre principale
-FenPrincipale::FenPrincipale() :
-    QMainWindow(),
-    m_fichierGroupe(0), m_fichierNotes(0)
+FenPrincipale::FenPrincipale(FenMAJ *aFermer)
+    : QMainWindow(),
+      m_fichierGroupe(0), m_fichierNotes(0)
 {
+    if (aFermer != 0)
+        aFermer->close();
+
 // On s'occupe de la fenêtre
     setWindowTitle("NBH     --     NaheulBeuk Helper");
     setIcone(this);
@@ -65,6 +68,11 @@ FenPrincipale::FenPrincipale() :
         else
             modeAttaque();
     }
+    else
+    {
+        passif->setChecked(true);
+        attaque->setChecked(false);
+    }
 
 
     if (!settings->value("FenPrincipale/toolBar/Fichier").isNull())
@@ -82,6 +90,13 @@ FenPrincipale::FenPrincipale() :
 
     if (!settings->value("FenPrincipale/docks/ordreMarche").isNull())
         afficher_ordreMarche->setChecked(settings->value("FenPrincipale/docks/orderMarche").toBool());
+
+
+    if (!settings->value("FenChargement/accelererChargement").isNull())
+        param_accelererChargement->setChecked(settings->value("FenChargement/accelererChargement").toBool());
+
+    if (!settings->value("FenChargement/verifMAJ").isNull())
+        param_verifMAJ_demarrage->setChecked(settings->value("FenChargement/verifMAJ").toBool());
 }
 void FenPrincipale::initMenus_ToolBars()
 {
@@ -136,14 +151,12 @@ void FenPrincipale::initMenus_ToolBars()
         attaque->setStatusTip("Passer en mode \"Attaque\"");
         attaque->setIcon(QIcon(":prog-data/img/attaque.png"));
         attaque->setCheckable(true);
-        attaque->setChecked(false);
         attaque->setEnabled(false);
     passif = mode->addAction("Passif");
         passif->setShortcut(QKeySequence("Ctrl+P"));
         passif->setStatusTip("Passer en mode \"Passif\"");
         passif->setIcon(QIcon(":prog-data/img/passif.png"));
         passif->setCheckable(true);
-        passif->setChecked(true);
         passif->setEnabled(false);
 
 
@@ -250,6 +263,17 @@ void FenPrincipale::initMenus_ToolBars()
             afficher_ordreMarche->setCheckable(true);
             afficher_ordreMarche->setChecked(true);
 
+
+// Menu : Paramètres
+    QMenu *param = barreDeMenu->addMenu("&Paramètres");
+        param_accelererChargement = param->addAction("Accélérer le chargement de NBH");
+            param_accelererChargement->setEnabled(true);
+            param_accelererChargement->setCheckable(true);
+            param_accelererChargement->setChecked(false);
+        param_verifMAJ_demarrage = param->addAction("Vérifier les MAJ au démarrage");
+            param_verifMAJ_demarrage->setEnabled(true);
+            param_verifMAJ_demarrage->setCheckable(true);
+            param_verifMAJ_demarrage->setChecked(true);
 
 // Menu : ?
     QMenu *question = barreDeMenu->addMenu("&?");
@@ -414,6 +438,8 @@ void FenPrincipale::initWidget()
     attaque_fen = new FenAttaque(listeNomVide);
     attaque_fen->setEnabled(false);
         QObject::connect(attaque_fen, SIGNAL(attaque()), this, SLOT(attaquer()));
+        QObject::connect(attaque_fen, SIGNAL(parade()), this, SLOT(parer()));
+        QObject::connect(attaque_fen, SIGNAL(esquive()), this, SLOT(esquiver()));
     attaque_dock->setWidget(attaque_fen);
 
     addDockWidget(Qt::RightDockWidgetArea, attaque_dock);
@@ -719,6 +745,8 @@ void FenPrincipale::ouvrir()
 
         // On connecte le changement de nom des onglets
         QObject::connect(m_personnages.at(compteurOnglets), SIGNAL(persoModifie()), this, SLOT(persoModifie()));
+        // On connecte la modification des notes
+        QObject::connect(m_personnages.at(compteurOnglets), SIGNAL(perteMembre(QString)), this, SLOT(modifierNotes(QString)));
 
         cheminPersoOuverture++;
         compteurOnglets++;
@@ -731,12 +759,19 @@ void FenPrincipale::ouvrir()
     statusBar->showMessage("Groupe ouvert avec succès", 2000);
     log("Groupe ouvert avec succès !", 1);
 
-// On synchronise tous les onglets
+// On synchronise
+    // 1- tous les onglets
     for (int i(0); i < m_personnages.count(); i++)
         for (int i2(0); i2 < m_personnages.count(); i2++)
             if (m_personnages.at(i)->getNom() != m_personnages.at(i2)->getNom())
                 QObject::connect(m_personnages.at(i), SIGNAL(currentChanged(int)),
                                  m_personnages.at(i2), SLOT(setCurrentIndex(int)));
+    // 2- toutes les QScrollArea
+    for (int i(0); i < m_personnages.count(); i++)
+        for (int i2(0); i2 < m_personnages.count(); i2++)
+            if (m_personnages.at(i)->getNom() != m_personnages.at(i2)->getNom())
+                QObject::connect(m_personnages.at(i)->getScroll()->verticalScrollBar(), SIGNAL(valueChanged(int)),
+                                 m_personnages.at(i2)->getScroll()->verticalScrollBar(), SLOT(setValue(int)));
 
 // On "enable" l'ordre de marche et la gestion de l'attaque
     ordreMarche->setNomPersos(m_nomPersos);
@@ -853,6 +888,11 @@ void FenPrincipale::enregistrerPref()   // Pour les préférences
             settings->setValue("notes", afficher_notes->isChecked());
             settings->setValue("ordreMarche", afficher_ordreMarche->isChecked());
         settings->endGroup();
+    settings->endGroup();
+
+    settings->beginGroup("FenChargement");
+        settings->setValue("accelererChargement", param_accelererChargement->isChecked());
+        settings->setValue("verifMAJ", param_verifMAJ_demarrage->isChecked());
     settings->endGroup();
 }
 
@@ -1142,6 +1182,20 @@ void FenPrincipale::attaquer()
         if (zoneCentrale->currentSubWindow()->windowTitle() == m_personnages.at(i)->getNom()
                 || zoneCentrale->currentSubWindow()->windowTitle() == "* " + m_personnages.at(i)->getNom())
             m_personnages.at(i)->attaquer();
+}
+void FenPrincipale::parer()
+{
+    for (int i(0); i < m_personnages.count(); i++)
+        if (zoneCentrale->currentSubWindow()->windowTitle() == m_personnages.at(i)->getNom()
+                || zoneCentrale->currentSubWindow()->windowTitle() == "* " + m_personnages.at(i)->getNom())
+            m_personnages.at(i)->parer();
+}
+void FenPrincipale::esquiver()
+{
+    for (int i(0); i < m_personnages.count(); i++)
+        if (zoneCentrale->currentSubWindow()->windowTitle() == m_personnages.at(i)->getNom()
+                || zoneCentrale->currentSubWindow()->windowTitle() == "* " + m_personnages.at(i)->getNom())
+            m_personnages.at(i)->esquiver();
 }
 
 
