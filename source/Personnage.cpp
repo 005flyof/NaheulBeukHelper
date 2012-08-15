@@ -1335,7 +1335,7 @@ void Personnage::attaquer()
                         while (!valid2)
                             rupt = QInputDialog::getInt(this, m_nom + " -> Attaque -> Echec critique -> Rupture",
                                                         "Veuillez rentrer le score indiqué par un D6 pour vérifier que l'arme n'est pas cassée !",
-                                                        1, 1, 6, 1, &valid);
+                                                        1, 1, 6, 1, &valid2);
                         if (rupt <= m_armes[i]->getRupture())
                         {
                             QMessageBox::information(this, m_nom + " -> Attaque -> Echec critique -> Rupture",
@@ -2044,7 +2044,1062 @@ void Personnage::attaquer()
 }
 void Personnage::parer()
 {
+// On demande avec quelle arme parer
+    // On parcourt les armes pour prendre le nom
+    QStringList nomArmes;
+    for (int i(0); i < MAX_ARME; i++)
+        nomArmes << m_armes[i]->getNom() + " (AT: " + QString::number(m_AT_modif[i]) + " ; PRD: " + QString::number(m_PRD_modif[i]) + ")";
+    bool ok(false);
 
+    // On pose la question
+    QString nom_arme = QInputDialog::getItem(this, m_nom + " -> Parade",
+                                             "Avec quelle arme " + m_nom + " veut-il parer ?",
+                                             nomArmes, 0, false, &ok);
+
+// Si on annule, on arrête tout
+    if (!ok)
+        return;
+
+// On parcourt pour savoir avec quelle arme parer
+    int i(0);
+    bool paradeFaite(false);
+    while (!paradeFaite)
+    {
+        // On teste si c'est l'arme choisi est celle correspondant à i
+        if (nom_arme == m_armes[i]->getNom() + " (AT: " + QString::number(m_AT_modif[i]) + " ; PRD: " + QString::number(m_PRD_modif[i]) + ")")
+        {
+            // Valeur de D20 pour savoir s'il peut parer
+            int vingt = QInputDialog::getInt(this, m_nom + " -> Parade -> Test au D20",
+                                             "Lancez et rentrez la valeur du D20 :",
+                                             1, 1, 20, 1, &ok);
+
+            if (!ok)
+                return;
+
+            bool tirerDegats(false), tirerDegatsCritiques(false);
+
+            // Echec critique
+            if (vingt == 19 || vingt == 20)
+            {
+                bool valid(false);
+                int de(0);
+
+                while (!valid)
+                    de = QInputDialog::getInt(this, m_nom + " -> Parade -> Echec critique",
+                                              m_nom + " a fait un échec critique en essayant de parer.\n"
+                                              "Veuillez lancer une deuxième fois le dé 20 et rentrer le score indiqué.",
+                                              1, 1, 20, 1, &valid);
+
+                log(m_nom + " fait un échec critique de parade avec '" + m_armes[i]->getNom() + "' :");
+
+                if (de == 1 || de == 2)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Echec critique",
+                                             m_nom + " rattrape son erreur in extremis, mais la parade échoue !");
+                    log("il rattrape son erreur in extremis, mais l'attaque échoue.", 1);
+                }
+                else if (de >= 3 && de <= 5)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Echec critique",
+                                             m_nom + " trébuche et chutte maladroitement !\n"
+                                             "=> il rate 2 assauts.");
+                    log("il trébuche et chutte maladroitement !\n"
+                        "=> il rate 2 assauts.", 1);
+                }
+                else if (de == 6 || de == 7)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Echec critique",
+                                             m_nom + " frappe un allié proche vers la gauche !\n"
+                                             "=> tirer les dégâts sur l'allié.");
+                    log("il frappe un allié proche vers la gauche !\n"
+                        "=> tirer les dégâts sur l'allié.", 1);
+                    tirerDegats = true;
+                }
+                else if (de == 8 || de == 9)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Echec critique",
+                                             m_nom + " frappe un allié proche vers la droite !\n"
+                                             "=> tirer les dégâts sur l'allié.");
+                    log("il frappe un allié proche vers la droite !\n"
+                        "=> tirer les dégâts sur l'allié.", 1);
+                    tirerDegats = true;
+                }
+                else if (de >= 10 && de <= 12)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Echec critique",
+                                             m_nom + " lache son arme comme un loser !\n"
+                                             "=> combat à main nue, change d'arme");
+                    log("il lache son arme comme un loser !\n"
+                        "=> combat à main nue, change d'arme", 1);
+                    m_armes[i]->setNom("(cassée) " + m_armes[i]->getNom());
+                }
+                else if (de >= 13 && de <= 15)
+                {
+                    bool valid2(false);
+                    int rupt(0);
+
+                    while (!valid2)
+                        rupt = QInputDialog::getInt(this, m_nom + " -> Parade -> Echec critique -> Rupture",
+                                                    "Veuillez rentrer le score indiqué par un D6 pour vérifier que l'arme n'est pas cassée !",
+                                                    1, 1, 6, 1, &valid2);
+                    if (rupt <= m_armes[i]->getRupture())
+                    {
+                        QMessageBox::information(this, m_nom + " -> Parade -> Echec critique -> Rupture",
+                                                 m_nom + " casse son arme !");
+                        log("il casse son arme !", 1);
+                    }
+                }
+                else if (de >= 16 && de <= 18)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Echec critique",
+                                             m_nom + " se blesse tout seul comme un cake !\n"
+                                             "=> tirer les dégâts sur le combattant.");
+                    log("il se blesse tout seul comme un cake !\n"
+                        "=> tirer les dégâts sur le combattant.", 1);
+                    tirerDegats = true;
+                }
+                else if (de == 19)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Echec critique",
+                                             m_nom + " se blesse très sévèrement de façon atroce et douloureuse !\n"
+                                             "=> tirer des dégâts critiques sur le combattant.");
+                    log("il se blesse très sévèrement de façon atroce et douloureuse !\n"
+                        "=> tirer des dégâts critiques sur le combattant.", 1);
+                    tirerDegatsCritiques = true;
+                }
+                else if (de == 20)
+                {
+                    bool valid2(false);
+                    int de6(0);
+
+                    while (!valid2)
+                        de6 = QInputDialog::getInt(this, m_nom + " -> Parade -> Echec critique -> Perte d'un membre",
+                                                   m_nom + " va perdre un membre, veuillez lancer un D6 et rentrer le score indiqué pour savoir quel membre est perdu...",
+                                                   1, 1, 6, 1, &valid2);
+
+                    if (de6 <= 2)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Parade -> Echec critique -> Perte d'un membre",
+                                                 m_nom + " perd un œil !\n"
+                                                 "=> blessure grave.");
+                        log("il perd un œil !\n"
+                            "=> blessure grave.", 1);
+                    }
+                    else
+                    {
+                        QMessageBox::information(this, m_nom + " -> Parade -> Echec critique -> Perte d'un membre",
+                                                 m_nom + " perd un doigt !\n"
+                                                 "=> blessure grave.");
+                        log("il perd un doigt !\n"
+                            "=> blessure grave.", 1);
+                    }
+                }
+            }
+
+            // Réussite critique
+            if (vingt == 1 || vingt == 2)
+            {
+                bool valid(false);
+                int de(0);
+
+                while (!valid)
+                    de = QInputDialog::getInt(this, m_nom + " -> Parade -> Réussite critique",
+                                              m_nom + " a fait une réussite critique en essayant de parer.\n"
+                                              "Veuillez lancer une deuxième fois le dé 20 et rentrer le score indiqué.",
+                                              1, 1, 20, 1, &valid);
+                log(m_nom + " fait une réussite critique de parade avec '" + m_armes[i]->getNom() + "' :");
+
+                if (de == 1 || de == 2)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             m_nom + " fait une parade normale en fait !");
+                    log("il fait une parade normale en fait !", 1);
+                }
+                else if (de == 3 || de == 4 || de == 5)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             m_nom + " repousse l'ennemi !\n"
+                                             "=> l'ennemi rate 1 assaut");
+                    log("il repousse l'ennemi !\n"
+                        "=> l'ennemi rate 1 assaut", 1);
+                }
+                else if (de == 6 || de == 7)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             m_nom + " fait trébucher l'ennemi\n"
+                                             "=> l'ennemi subit 1 attaque imparable");
+                    log("il fait trébucher l'ennemi\n"
+                        "=> l'ennemi subit 1 attaque imparable", 1);
+                }
+                else if (de == 8 || de == 9)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             m_nom + " fait tomber l'ennemi\n"
+                                             "=> l'ennemi subit 2 attaques imparables");
+                    log("il fait tomber l'ennemi\n"
+                        "=> l'ennemi subit 2 attaques imparables", 1);
+                }
+                else if (de == 10 || de == 11 || de == 12)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             m_nom + " fait lâcher l'arme de l'ennemi à 1D6 mètres\n"
+                                             "=> l'ennemi combat à mains nues");
+                    log("il fait lâcher l'arme de l'ennemi à 1D6 mètres\n"
+                        "=> l'ennemi combat à mains nues", 1);
+                }
+                else if (de == 13 || de == 14 || de == 15)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             m_nom + " casse l'arme de l'ennemi !\n"
+                                             "=> l'ennemi combat à mains nues");
+                    log("il casse l'arme de l'ennemi !\n"
+                        "=> l'ennemi combat à mains nues", 1);
+                }
+                else if (de == 16 || de == 17 || de == 18)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             m_nom + " donne un coup de son arme à l'ennemi !\n"
+                                             "=> l'ennemi subit des dégâts");
+                    log("il donne un coup de son arme à l'ennemi !\n"
+                        "=> l'ennemi subit des dégâts", 1);
+                    tirerDegats = true;
+                }
+                else if (de == 19)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             m_nom + " donne un coup critique de son arme à l'ennemi !\n"
+                                             "=> l'ennemi subit des dégâts");
+                    log("il donne un coup critique de son arme à l'ennemi !\n"
+                        "=> l'ennemi subit des dégâts", 1);
+                    tirerDegats = true;
+                }
+                else if (de == 20)
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Réussite critique",
+                                             "L'ennemi, ce loser, subit un coup critique de sa propre arme !");
+                    log("L'ennemi, ce loser, subit un coup critique de sa propre arme !", 1);
+                    tirerDegats = true;
+                }
+            }
+
+            // Parade
+            if (vingt < m_carac_modif->getParade() && vingt != 1 && vingt != 2)
+            {
+                // S'il n'y a pas d'arme
+                if (m_armes[i]->getNom() == "A mains nues")
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Récapitulatif",
+                                             m_nom + " pare à mains nues !");
+                    log(m_nom + " pare à mains nues !");
+                }
+                // Si l'arme est une arme normale
+                else
+                {
+                    QMessageBox::information(this, m_nom + " -> Parade -> Récapitulatif",
+                                             m_nom + " pare avec '" + m_armes[i]->getNom() + "' !");
+                    log(m_nom + " pare avec '" + m_armes[i]->getNom() + "' !");
+                }
+            }
+
+            // Ne pare pas
+            if (vingt > m_carac_modif->getAttaque() && vingt != 19 && vingt != 20)
+            {
+                QMessageBox::information(this, m_nom + " -> Parade impossible",
+                                         m_nom + " ne peut pas parer.");
+                log(m_nom + " essaye de parer, mais se rate sa parade.");
+            }
+
+            // On dit au while que la parade a été faite
+            paradeFaite = true;
+
+
+
+
+            // Si il faut tirer des dégâts
+            if (tirerDegats)
+            {
+                // On demande les résultats des dés
+                int i2(1);
+                int totalDegats = m_armes[i]->getDegatsEnPlus();
+                while (i2 <= m_armes[i]->getNbDes())
+                {
+                    bool valid(false);
+
+                    while (!valid)
+                        totalDegats += QInputDialog::getInt(this, m_nom + " -> Attaque -> Dégâts",
+                                                            "Rentrez le score indiqué par le D6 :", 1, 1, 6, 1, &valid);
+                    i2++;
+                }
+
+                // S'il n'y a pas d'arme
+                if (m_armes[i]->getNom() == "A mains nues")
+                {
+                    QMessageBox::information(this, m_nom + " -> Attaque -> Récapitulatif",
+                                             m_nom + " attaque à mains nues et fait " + QString::number(totalDegats) + " de dégâts.\n"
+                                             "A cela, il faut enlever la valeur de protection de la personne/monstre attaqué(e) !");
+                    log(m_nom + " attaque à mains nues et fait " + QString::number(totalDegats) + " de dégâts.");
+                }
+                // Si l'arme est une arme normale
+                else
+                {
+                    QMessageBox::information(this, m_nom + " -> Attaque -> Récapitulatif",
+                                             m_nom + " attaque avec '" + m_armes[i]->getNom() + "' et fait " + QString::number(totalDegats) + " de dégâts.\n"
+                                             "A cela, il faut enlever la valeur de protection de la personne/monstre attaqué(e) !");
+                    log(m_nom + " attaque avec '" + m_armes[i]->getNom() + "' et fait " + QString::number(totalDegats) + " de dégâts.");
+                }
+            }
+            if (tirerDegatsCritiques)
+            {
+                bool tirageDegats(false);
+                int totalDegats(0);
+
+                if (m_armes[i]->getType() == Arme::Projectile)
+                {
+                    bool valid(false);
+                    int de(0);
+
+                    while (!valid)
+                        de = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                  m_nom + " a fait une réussite critique en essayant d'attaquer.\n"
+                                                  "Veuillez lancer une deuxième fois le dé 20 et rentrer le score indiqué.",
+                                                  1, 1, 20, 1, &valid);
+
+                    log(m_nom + " fait une réussite critique avec '" + m_armes[i]->getNom() + "' :");
+
+                    if (de == 1 || de == 2)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 m_nom + " lance bien son projectile : dégâts +1 !");
+                        log("il lance bien son projectile : dégâts +1 !", 1);
+                        totalDegats++;
+                        tirageDegats = true;
+                    }
+                    else if (de == 3 || de == 4)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 m_nom + " lance magistralement bien son projectile : dégâts +2 !");
+                        log("il lance magistralement bien son projectile : dégâts +2 !", 1);
+                        totalDegats += 2;
+                        tirageDegats = true;
+                    }
+                    else if (de == 5 || de == 6)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 "Le projectile de " + m_nom + " atteint l'ennemi dans une articulation du bras.\n"
+                                                 "=> dégâts +3 et AT/PRD-2");
+                        log("Le projectile de " + m_nom + " atteint l'ennemi dans une articulation du bras.\n"
+                            "=> dégâts +3 et AT/PRD-2", 1);
+                        totalDegats += 3;
+                        tirageDegats = true;
+                    }
+                    else if (de == 7 || de == 8)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 "Le projectile de " + m_nom + " atteint l'ennemi dans une articulation de la jambe.\n"
+                                                 "=> dégâts +3 et MV-50%");
+                        log("Le projectile de " + m_nom + " atteint l'ennemi dans une articulation de la jambe.\n"
+                            "=> dégâts +3 et MV-50%", 1);
+                        totalDegats += 3;
+                        tirageDegats = true;
+                    }
+                    else if (de >= 9 && de <= 11)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 "Le projectile de " + m_nom + " atteint l'ennemi dans un poumon.\n"
+                                                 "=> dégâts +3 et toutes caractéristiques -1");
+                        log("Le projectile de " + m_nom + " atteint l'ennemi dans un poumon.\n"
+                            "=> dégâts +3 et toutes caractéristiques -1", 1);
+                        totalDegats += 3;
+                        tirageDegats = true;
+                    }
+                    else if (de >= 12 && de <= 16)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 "Projectile de maître !\n"
+                                                 "=> dégâts +5");
+                        log("Projectile de maître !\n"
+                            "=> dégâts +5", 1);
+                        totalDegats += 5;
+                        tirageDegats = true;
+                    }
+                    else if (de == 17)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 m_nom + " tire en plein dans les organes génitaux de l'ennemi, bien fait !\n"
+                                                 "=> dégâts +5 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne)");
+                        log("il tire en plein dans les organes génitaux de l'ennemi, bien fait !\n"
+                            "=> dégâts +5 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne)", 1);
+                        totalDegats += 5;
+                        tirageDegats = true;
+                    }
+                    else if (de == 18)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 m_nom + " tire en plein dans un organe vital de l'ennemi, bien fait !\n"
+                                                 "=> dégâts +5 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne)");
+                        log("il tire en plein dans un organe vital de l'ennemi, bien fait !\n"
+                            "=> dégâts +5 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne)", 1);
+                        totalDegats += 6;
+                        tirageDegats = true;
+                    }
+                    else if (de == 19)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 m_nom + " tire en plein dans cœur de l'ennemi et le transperce !\n"
+                                                 "=> décès !");
+                        log("il tire en plein dans cœur de l'ennemi et le transperce !\n"
+                            "=> décès !", 1);
+                        totalDegats += 5;
+                        tirageDegats = true;
+                    }
+                    else if (de == 20)
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                 m_nom + " tire en plein dans l'œil et le cerveau de l'ennemi et les transperce !\n"
+                                                 "=> décès !");
+                        log("il tire en plein dans l'œil et le cerveau de l'ennemi et les transperce !\n"
+                            "=> décès !", 1);
+                    }
+                }
+                else
+                {
+                    bool valid(false);
+                    int de(0);
+
+                    while (!valid)
+                        de = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                  m_nom + " a fait une réussite critique en essayant d'attaquer.\n"
+                                                  "Veuillez lancer une deuxième fois le dé 20 et rentrer le score indiqué.",
+                                                  1, 1, 20, 1, &valid);
+                    log(m_nom + " fait une réussite critique avec '" + m_armes[i]->getNom() + "' :");
+
+                    if (m_armes[i]->getType() == Arme::MainNue)
+                    {
+                        if (de == 1 || de == 2)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " provoque un ématome impressionnant sur l'ennemi : dégâts +1 !");
+                            log("il provoque un ématome impressionnant sur l'ennemi : dégâts +1 !", 1);
+                            totalDegats++;
+                            tirageDegats = true;
+                        }
+                        else if (de == 3 || de == 4)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " provoque un ématome et une luxation d'un membre de l'ennemi : dégâts +2 !");
+                            log("il provoque un ématome et une luxation d'un membre de l'ennemi : dégâts +2 !", 1);
+                            totalDegats += 2;
+                            tirageDegats = true;
+                        }
+                        else if (de == 5 || de == 6)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fracasse le nez de l'ennemi et provoque une hémorragie nasale : dégâts +3");
+                            log("il fracasse le nez de l'ennemi et provoque une hémorragie nasale : dégâts +3", 1);
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 7 || de == 8)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fracasse une côte de l'ennemi : dégâts +4");
+                            log("il fracasse une côte de l'ennemi : dégâts +4", 1);
+                            totalDegats += 4;
+                            tirageDegats = true;
+                        }
+                        else if (de == 9 || de == 10)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " frappe d'un coup précis de bourrin la tempe de l'ennemi\n"
+                                                     "=> dégâts +2 et étourdissement de la cible pour 3 assauts");
+                            log("il frappe d'un coup précis de bourrin la tempe de l'ennemi\n"
+                                "=> dégâts +2 et étourdissement de la cible pour 3 assauts", 1);
+                            totalDegats += 2;
+                            tirageDegats = true;
+                        }
+                        else if (de == 11)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " frappe d'un coup précis le sternum de l'ennemi\n"
+                                                     "=> étourdissement de la cible pour 4 assauts");
+                            log("il frappe d'un coup précis le sternum de l'ennemi\n"
+                                "=> étourdissement de la cible pour 4 assauts", 1);
+                        }
+                        else if (de == 12)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " luxe le genou de l'ennemi !\n"
+                                                     "=> dégâts +3 et blessure grave !");
+                            log("il luxe le genou de l'ennemi !\n"
+                                "=> dégâts +3 et blessure grave !", 1);
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 13)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quelle main est cassée...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " casse la main droite de l'ennemi !\n"
+                                                         "=> dégâts +3 et blessure grave !");
+                                log("il casse la main droite de l'ennemi !\n"
+                                    "=> dégâts +3 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " casse la main gauche de l'ennemi !\n"
+                                                         "=> dégâts +3 et blessure grave !");
+                                log("il casse la main gauche de l'ennemi !\n"
+                                    "=> dégâts +3 et blessure grave !", 1);
+                            }
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 14)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " brise la mâchoire de l'ennemi !\n"
+                                                     "=> dégâts +3 et incapacité à parler !");
+                            log("il brise la mâchoire de l'ennemi !\n"
+                                "=> dégâts +3 et incapacité à parler !", 1);
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 15)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quel bras est cassé...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " casse le bras droit de l'ennemi !\n"
+                                                         "=> dégâts +3 et blessure grave !");
+                                log("il casse le bras droit de l'ennemi !\n"
+                                    "=> dégâts +3 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " casse le bras gauche de l'ennemi !\n"
+                                                         "=> dégâts +3 et blessure grave !");
+                                log("il casse le bras gauche de l'ennemi !\n"
+                                    "=> dégâts +3 et blessure grave !", 1);
+                            }
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 16 || de == 17)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " écrase les organes génitaux de l'ennemi !\n"
+                                                     "=> dégâts +5 et blessure grave !");
+                            log("il écrase les organes génitaux de l'ennemi !\n"
+                                "=> dégâts +5 et blessure grave !", 1);
+                            totalDegats += 5;
+                            tirageDegats = true;
+                        }
+                        else if (de == 18 || de == 19)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " assomme l'ennemi !\n"
+                                                     "=> inconscient !");
+                            log("il assomme l'ennemi !\n"
+                                "=> inconscient !", 1);
+                        }
+                        else if (de == 20)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " enfonce le nez de l'ennemi dans son cerveau !\n"
+                                                     "=> décès !");
+                            log("il enfonce le nez de l'ennemi dans son cerveau !\n"
+                                "=> décès !", 1);
+                        }
+                    }
+                    else if (m_armes[i]->getType() == Arme::Tranchante)
+                    {
+                        if (de == 1 || de == 2)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait une incision profonde à l'ennemi : dégâts +1 !");
+                            log("il fait une incision profonde à l'ennemi : dégâts +1 !", 1);
+                            totalDegats++;
+                            tirageDegats = true;
+                        }
+                        else if (de == 3 || de == 4)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait une incision vraiment profonde à l'ennemi : dégâts +2 !");
+                            log("il fait une incision vraiment profonde à l'ennemi : dégâts +2 !", 1);
+                            totalDegats += 2;
+                            tirageDegats = true;
+                        }
+                        else if (de == 5 || de == 6)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait une plaie impressionnante et des dommages à l'armure !\n"
+                                                     "=> dégâts +3 et pièce d'armure PR -1");
+                            log("il fait une plaie impressionnante et des dommages à l'armure !\n"
+                                "=> dégâts +3 et pièce d'armure PR -1", 1);
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 7 || de == 8)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait une plaie impressionnante et des dommages à l'armure !\n"
+                                                     "=> dégâts +4 et pièce d'armure PR -2");
+                            log("il fait une plaie impressionnante et des dommages à l'armure !\n"
+                                "=> dégâts +4 et pièce d'armure PR -2", 1);
+                            totalDegats += 4;
+                            tirageDegats = true;
+                        }
+                        else if (de == 9 || de == 10)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait une plaie impressionnante et des dommages à l'armure !\n"
+                                                     "=> dégâts +5 et pièce d'armure PR -3");
+                            log("il fait une plaie impressionnante et des dommages à l'armure !\n"
+                                "=> dégâts +5 et pièce d'armure PR -3", 1);
+                            totalDegats += 5;
+                            tirageDegats = true;
+                        }
+                        else if (de == 11)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " détruit une partie de l'amure de l'ennemi\n"
+                                                     "=> pièce de l'armure concernée : PR = 0");
+                            log("il détruit une partie de l'amure de l'ennemi\n"
+                                "=> pièce de l'armure concernée : PR = 0", 1);
+                        }
+                        else if (de == 12)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " crève un œil de l'ennemi !\n"
+                                                     "=> dégâts +5 et blessure grave !");
+                            log("il crève un œil de l'ennemi !\n"
+                                "=> dégâts +5 et blessure grave !", 1);
+                            totalDegats += 5;
+                            tirageDegats = true;
+                        }
+                        else if (de == 13)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quelle main est tranchée...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la main droite de l'ennemi !\n"
+                                                         "=> dégâts +6 et blessure grave !");
+                                log("il tranche la main droite de l'ennemi !\n"
+                                    "=> dégâts +6 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la main gauche de l'ennemi !\n"
+                                                         "=> dégâts +6 et blessure grave !");
+                                log("il tranche la main gauche de l'ennemi !\n"
+                                    "=> dégâts +6 et blessure grave !", 1);
+                            }
+                            totalDegats += 6;
+                            tirageDegats = true;
+                        }
+                        else if (de == 14)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quel pied est tranché...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche le pied droit de l'ennemi !\n"
+                                                         "=> dégâts +6 et blessure grave !");
+                                log("il tranche le pied droit de l'ennemi !\n"
+                                    "=> dégâts +6 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche le pied gauche de l'ennemi !\n"
+                                                         "=> dégâts +6 et blessure grave !");
+                                log("il tranche le pied gauche de l'ennemi !\n"
+                                    "=> dégâts +6 et blessure grave !", 1);
+                            }
+                            totalDegats += 6;
+                            tirageDegats = true;
+                        }
+                        else if (de == 15)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quel bras est tranché...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche le bras droit de l'ennemi !\n"
+                                                         "=> dégâts +7 et blessure grave !");
+                                log("il tranche le bras droit de l'ennemi !\n"
+                                    "=> dégâts +7 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la main gauche de l'ennemi !\n"
+                                                         "=> dégâts +7 et blessure grave !");
+                                log("il tranche la main gauche de l'ennemi !\n"
+                                    "=> dégâts +7 et blessure grave !", 1);
+                            }
+                            totalDegats += 7;
+                            tirageDegats = true;
+                        }
+                        else if (de == 16)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quelle jambe est tranchée...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la jambe droite de l'ennemi !\n"
+                                                         "=> dégâts +8 et blessure grave !");
+                                log("il tranche la jambe droite de l'ennemi !\n"
+                                    "=> dégâts +8 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la jambe gauche de l'ennemi !\n"
+                                                         "=> dégâts +8 et blessure grave !");
+                                log("il tranche la jambe gauche de l'ennemi !\n"
+                                    "=> dégâts +8 et blessure grave !", 1);
+                            }
+                            totalDegats += 8;
+                            tirageDegats = true;
+                        }
+                        else if (de == 17)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " endommage un organe génital de l'ennemi !\n"
+                                                     "=> dégâts +5 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne) !");
+                            log("il endommage un organe génital de l'ennemi !\n"
+                                "=> dégâts +5 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne) !", 1);
+                            totalDegats += 5;
+                            tirageDegats = true;
+                        }
+                        else if (de == 18)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " endommage un organe vital de l'ennemi !\n"
+                                                     "=> dégâts +9 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne) !");
+                            log("il endommage un organe vital de l'ennemi !\n"
+                                "=> dégâts +9 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne) !", 1);
+                            totalDegats += 9;
+                            tirageDegats = true;
+                        }
+                        else if (de == 19)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait une blessure au cœur de l'ennemi !\n"
+                                                     "=> décès !");
+                            log("il fait une blessure au cœur de l'ennemi !\n"
+                                "=> décès !", 1);
+                        }
+                        else if (de == 20)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait une blessure grave à la tête de l'ennemi !\n"
+                                                     "=> décès !");
+                            log("il fait une blessure grave à la tête de l'ennemi !\n"
+                                "=> décès !", 1);
+                        }
+                    }
+                    else if (m_armes[i]->getType() == Arme::Contandante)
+                    {
+                        if (de == 1 || de == 2)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait un ématome impressionnant à l'ennemi : dégâts +1 !");
+                            log("il fait un ématome impressionnant à l'ennemi : dégâts +1 !", 1);
+                            totalDegats++;
+                            tirageDegats = true;
+                        }
+                        else if (de == 3 || de == 4)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait un ématome impressionnant à l'ennemi et lui luxe un membre : dégâts +2 !");
+                            log("il fait un ématome impressionnant à l'ennemi et lui luxe un membre : dégâts +2 !", 1);
+                            totalDegats += 2;
+                            tirageDegats = true;
+                        }
+                        else if (de == 5 || de == 6)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fracture une côte de l'ennemi : dégâts +3 !");
+                            log("il fracture une côte de l'ennemi : dégâts +3 !", 1);
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 7 || de == 8)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait un coup précis et des dommages à l'armure !\n"
+                                                     "=> dégâts +4 et pièce d'armure PR -1");
+                            log("il fait un coup précis et des dommages à l'armure !\n"
+                                "=> dégâts +4 et pièce d'armure PR -1", 1);
+                            totalDegats += 4;
+                            tirageDegats = true;
+                        }
+                        else if (de == 9 || de == 10)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fait un coup précis de bourrin et des dommages à l'armure !\n"
+                                                     "=> dégâts +5 et pièce d'armure PR -2");
+                            log("il fait un coup précis de bourrin et des dommages à l'armure !\n"
+                                "=> dégâts +5 et pièce d'armure PR -2", 1);
+                            totalDegats += 5;
+                            tirageDegats = true;
+                        }
+                        else if (de == 11)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " détruit une partie de l'amure de l'ennemi\n"
+                                                     "=> pièce de l'armure concernée : PR = 0");
+                            log("il détruit une partie de l'amure de l'ennemi\n"
+                                "=> pièce de l'armure concernée : PR = 0", 1);
+                        }
+                        else if (de == 12)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " luxe un genou de l'ennemi !\n"
+                                                     "=> dégâts +3 et blessure grave !");
+                            log("il luxe un genou de l'ennemi !\n"
+                                "=> dégâts +3 et blessure grave !", 1);
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 13)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quelle main est tranchée...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la main droite de l'ennemi !\n"
+                                                         "=> dégâts +3 et blessure grave !");
+                                log("il tranche la main droite de l'ennemi !\n"
+                                    "=> dégâts +3 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la main gauche de l'ennemi !\n"
+                                                         "=> dégâts +3 et blessure grave !");
+                                log("il tranche la main gauche de l'ennemi !\n"
+                                    "=> dégâts +3 et blessure grave !", 1);
+                            }
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 14)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quel pied est tranché...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche le pied droit de l'ennemi !\n"
+                                                         "=> dégâts +3 et blessure grave !");
+                                log("il tranche le pied droit de l'ennemi !\n"
+                                    "=> dégâts +3 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche le pied gauche de l'ennemi !\n"
+                                                         "=> dégâts +3 et blessure grave !");
+                                log("il tranche le pied gauche de l'ennemi !\n"
+                                    "=> dégâts +3 et blessure grave !", 1);
+                            }
+                            totalDegats += 3;
+                            tirageDegats = true;
+                        }
+                        else if (de == 15)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quel bras est tranché...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche le bras droit de l'ennemi !\n"
+                                                         "=> dégâts +4 et blessure grave !");
+                                log("il tranche le bras droit de l'ennemi !\n"
+                                    "=> dégâts +4 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la main gauche de l'ennemi !\n"
+                                                         "=> dégâts +4 et blessure grave !");
+                                log("il tranche la main gauche de l'ennemi !\n"
+                                    "=> dégâts +4 et blessure grave !", 1);
+                            }
+                            totalDegats += 4;
+                            tirageDegats = true;
+                        }
+                        else if (de == 16)
+                        {
+                            int cote(0);
+                            bool valid(false);
+
+                            while (!valid)
+                                cote = QInputDialog::getInt(this, m_nom + " -> Attaque -> Réussite critique",
+                                                            "Veuillez rentrer le score indiqué par un D6 pour savoir quelle jambe est tranchée...",
+                                                            1, 1, 6, 1, &valid);
+                            if (cote <= 3)
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la jambe droite de l'ennemi !\n"
+                                                         "=> dégâts +5 et blessure grave !");
+                                log("il tranche la jambe droite de l'ennemi !\n"
+                                    "=> dégâts +5 et blessure grave !", 1);
+                            }
+                            else
+                            {
+                                QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                         m_nom + " tranche la jambe gauche de l'ennemi !\n"
+                                                         "=> dégâts +5 et blessure grave !");
+                                log("il tranche la jambe gauche de l'ennemi !\n"
+                                    "=> dégâts +5 et blessure grave !", 1);
+                            }
+                            totalDegats += 5;
+                            tirageDegats = true;
+                        }
+                        else if (de == 17)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " endommage un organe génital de l'ennemi !\n"
+                                                     "=> dégâts +5 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne) !");
+                            log("il endommage un organe génital de l'ennemi !\n"
+                                "=> dégâts +5 et hémorragie (la victime perd 1D6 de PV chaque minute jusqu'à ce qu'on la soigne) !", 1);
+                            totalDegats += 5;
+                            tirageDegats = true;
+                        }
+                        else if (de == 18)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " assomme l'ennemi !\n"
+                                                     "=> inconscient !");
+                            log("il assomme l'ennemi !\n"
+                                "=> inconscient !", 1);
+                        }
+                        else if (de == 19)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " fracture le crâne de l'ennemi !\n"
+                                                     "=> décès !");
+                            log("il fracture le crâne de l'ennemi !\n"
+                                "=> décès !", 1);
+                        }
+                        else if (de == 20)
+                        {
+                            QMessageBox::information(this, m_nom + " -> Attaque -> Réussite critique",
+                                                     m_nom + " écrase violemment un organe vital de l'ennemi !\n"
+                                                     "=> décès !");
+                            log("il écrase violemment un organe vital de l'ennemi !\n"
+                                "=> décès !", 1);
+                        }
+                    }
+                }
+
+                // Attaque
+                if (tirageDegats)
+                {
+                    // On demande les résultats des dés
+                    int i2(1);
+                    totalDegats += m_armes[i]->getDegatsEnPlus();
+                    while (i2 <= m_armes[i]->getNbDes())
+                    {
+                        bool valid(false);
+
+                        while (!valid)
+                            totalDegats += QInputDialog::getInt(this, m_nom + " -> Attaque -> Dégâts",
+                                                                "Rentrez le score indiqué par le D6 :",
+                                                                1, 1, 6, 1, &valid);
+                        i2++;
+                    }
+
+                    // S'il n'y a pas d'arme
+                    if (m_armes[i]->getNom() == "A mains nues")
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Récapitulatif",
+                                                 m_nom + " attaque à mains nues et fait " + QString::number(totalDegats) + " de dégâts.\n"
+                                                 "A cela, il faut enlever la valeur de protection de la personne/monstre attaqué(e) !");
+                        log(m_nom + " attaque à mains nues et fait " + QString::number(totalDegats) + " de dégâts.");
+                    }
+                    // Si l'arme est une arme normale
+                    else
+                    {
+                        QMessageBox::information(this, m_nom + " -> Attaque -> Récapitulatif",
+                                                 m_nom + " attaque avec '" + m_armes[i]->getNom() + "' et fait " + QString::number(totalDegats) + " de dégâts.\n"
+                                                 "A cela, il faut enlever la valeur de protection de la personne/monstre attaqué(e) !");
+                        log(m_nom + " attaque avec '" + m_armes[i]->getNom() + "' et fait " + QString::number(totalDegats) + " de dégâts.");
+                    }
+                }
+            }
+        }
+
+        // On dit au while que la parade a été faite
+        if (i >= MAX_ARME)
+            paradeFaite = true;
+
+        // On incrémente i pour passer à l'arme suivante
+        i++;
+    }
 }
 void Personnage::esquiver()
 {

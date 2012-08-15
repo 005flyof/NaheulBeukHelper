@@ -745,8 +745,6 @@ void FenPrincipale::ouvrir()
 
         // On connecte le changement de nom des onglets
         QObject::connect(m_personnages.at(compteurOnglets), SIGNAL(persoModifie()), this, SLOT(persoModifie()));
-        // On connecte la modification des notes
-        QObject::connect(m_personnages.at(compteurOnglets), SIGNAL(perteMembre(QString)), this, SLOT(modifierNotes(QString)));
 
         cheminPersoOuverture++;
         compteurOnglets++;
@@ -1178,23 +1176,23 @@ void FenPrincipale::modePassif()
 // Attaque
 void FenPrincipale::attaquer()
 {
+    QString nom = attaque_fen->getNomActivePerso();
     for (int i(0); i < m_personnages.count(); i++)
-        if (zoneCentrale->currentSubWindow()->windowTitle() == m_personnages.at(i)->getNom()
-                || zoneCentrale->currentSubWindow()->windowTitle() == "* " + m_personnages.at(i)->getNom())
+        if (nom == m_personnages.at(i)->getNom())
             m_personnages.at(i)->attaquer();
 }
 void FenPrincipale::parer()
 {
+    QString nom = attaque_fen->getNomActivePerso();
     for (int i(0); i < m_personnages.count(); i++)
-        if (zoneCentrale->currentSubWindow()->windowTitle() == m_personnages.at(i)->getNom()
-                || zoneCentrale->currentSubWindow()->windowTitle() == "* " + m_personnages.at(i)->getNom())
+        if (nom == m_personnages.at(i)->getNom())
             m_personnages.at(i)->parer();
 }
 void FenPrincipale::esquiver()
 {
+    QString nom = attaque_fen->getNomActivePerso();
     for (int i(0); i < m_personnages.count(); i++)
-        if (zoneCentrale->currentSubWindow()->windowTitle() == m_personnages.at(i)->getNom()
-                || zoneCentrale->currentSubWindow()->windowTitle() == "* " + m_personnages.at(i)->getNom())
+        if (nom == m_personnages.at(i)->getNom())
             m_personnages.at(i)->esquiver();
 }
 
