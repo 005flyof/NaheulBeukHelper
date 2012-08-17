@@ -11,14 +11,22 @@ Explication des différents hébergeurs de NBH
 
 Versions
 ========
-Version 2.2
+Version 2.8
 -----------
   Version en cours de développement
 ### Nouveautés de la version
-    * Gestion de l'attaque
+    * Gestion de l'historique
+        (sortira à plus longue échéance !)
+Version 2.2
+-----------
+  Actuelle version release
+### Nouveautés de la version
+    * Amélioration du chargement de NBH
+    * Gestion des fonctions d'attaque, de parade et d'esquive
+    * Possibilité d'afficher les logs
+    * Modification de la gestion des erreurs
 Version 2.1.5
 -------------
-  Actuelle version release
 ### Nouveautés de la version
     * Possibilité de chercher dans les compétences d'un groupe
     * Modification de la gestion des erreurs
