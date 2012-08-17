@@ -28,15 +28,18 @@ FenChargement::FenChargement(char *argv[])
 
     show();
 
-    log("Lancement de NBH :", true);
-
     // Chargement des préférences
-    bool ralentir(true), verifMaj(true);
+    bool ralentir(true), verifMaj(true), effacerLog(true);
     QSettings *settings = new QSettings("config.ini", QSettings::IniFormat, this);
     if (!settings->value("FenChargement/accelererChargement").isNull())
         ralentir = !settings->value("FenChargement/accelererChargement").toBool();
     if (!settings->value("FenChargement/verifMAJ").isNull())
         verifMaj = settings->value("FenChargement/verifMAJ").toBool();
+    if (!settings->value("FenChargement/effacerLog").isNull())
+        effacerLog = settings->value("FenChargement/effacerLog").toBool();
+
+// Démarrage !
+    log("Lancement de NBH :", effacerLog);
 
 // Suppression du fichier temporaire de la MAJ
     ui->label->setText("Suppression du fichier temporaire de mise à jour : 'tmp.zip'...");
@@ -105,7 +108,7 @@ FenChargement::FenChargement(char *argv[])
     if (ralentir)
         pause(1000);
 
-    hide();
+    close();
     fenetrePrincipale->showMaximized();
 }
 

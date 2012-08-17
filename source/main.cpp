@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
   Ce qui reste à faire :
     1	- XP / PO / PA / PC de groupe								(1)		- fait
     2	- modificat° tout le temps (if fo >= 12) etc				(2)		- fait
-    3	- pouvoir attaquer, parer, esquiver => combat				(3)		-
+    3	- pouvoir attaquer, parer, esquiver => combat				(3)		- fait
     4	- augmentation d'un niveau									(4)		- fait
     5	- acheter puissance											(5)		- fait
     6	- mankdebol / débilibeuk									(6)		- NON
@@ -63,5 +63,5 @@ int main(int argc, char *argv[])
     20	- modififer les updates / updaters							(20)	- fait
     21	- faire la doc des sources									(21)	-
     22	- chargement des origines/métiers au démarrage				(22)	- fait
-    23  - possibilité d'afficher les logs                           (23)    -
+    23  - possibilité d'afficher les logs                           (23)    - fait
 */

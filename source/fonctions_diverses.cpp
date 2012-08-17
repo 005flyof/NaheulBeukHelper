@@ -35,13 +35,13 @@ void fatalError(QString const& message, bool const& logErreur)
         QTextStream entree(&error);
 
         entree << "NBH -> Erreur : " + message << "\n";
-
-        QWidget *a = new QWidget();
-        QMessageBox::critical(a, "Erreur fatale",
-                              "NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
-        if (!logErreur)
-            log("Erreur fatale : NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
     }
+
+    QWidget *a = new QWidget();
+    QMessageBox::critical(a, "Erreur fatale",
+                          "NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
+    if (!logErreur)
+        log("Erreur fatale : NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
 
     exit(2);
 }

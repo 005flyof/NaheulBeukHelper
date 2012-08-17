@@ -30,6 +30,7 @@
     #include "AddPerso.h"
     #include "NewPerso.h"
     #include "SearchCompetence.h"
+    #include "AfficherLogs.h"
 
     class FenPrincipale : public QMainWindow
     {
@@ -90,6 +91,8 @@
         void afficherAchat(bool affiche);
         void afficherNotes(bool affiche);
         void afficherOrdreMarche(bool affiche);
+
+        void afficherLogs();
 
     // Menu : ?
         void aProposDeNBH();
@@ -176,6 +179,7 @@
 
         QAction *param_accelererChargement;
         QAction *param_verifMAJ_demarrage;
+        QAction *param_effacerLog_demarrage;
     };
 
     class MdiSubWindow : public QMdiSubWindow

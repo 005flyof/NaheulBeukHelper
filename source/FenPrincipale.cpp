@@ -97,6 +97,9 @@ FenPrincipale::FenPrincipale(FenMAJ *aFermer)
 
     if (!settings->value("FenChargement/verifMAJ").isNull())
         param_verifMAJ_demarrage->setChecked(settings->value("FenChargement/verifMAJ").toBool());
+
+    if (!settings->value("FenChargement/effacerLog").isNull())
+        param_effacerLog_demarrage->setChecked(settings->value("FenChargement/effacerLog").toBool());
 }
 void FenPrincipale::initMenus_ToolBars()
 {
@@ -264,16 +267,27 @@ void FenPrincipale::initMenus_ToolBars()
             afficher_ordreMarche->setChecked(true);
 
 
-// Menu : Paramètres
-    QMenu *param = barreDeMenu->addMenu("&Paramètres");
-        param_accelererChargement = param->addAction("Accélérer le chargement de NBH");
-            param_accelererChargement->setEnabled(true);
-            param_accelererChargement->setCheckable(true);
-            param_accelererChargement->setChecked(false);
-        param_verifMAJ_demarrage = param->addAction("Vérifier les MAJ au démarrage");
-            param_verifMAJ_demarrage->setEnabled(true);
-            param_verifMAJ_demarrage->setCheckable(true);
-            param_verifMAJ_demarrage->setChecked(true);
+// Menu : Programme
+    QMenu *prog = barreDeMenu->addMenu("&Programme");
+
+        // Menu : Paramètres
+        QMenu *param = prog->addMenu("Paramètres");
+            param_accelererChargement = param->addAction("Accélérer le chargement de NBH");
+                param_accelererChargement->setEnabled(true);
+                param_accelererChargement->setCheckable(true);
+                param_accelererChargement->setChecked(false);
+            param_verifMAJ_demarrage = param->addAction("Vérifier les MAJ au démarrage");
+                param_verifMAJ_demarrage->setEnabled(true);
+                param_verifMAJ_demarrage->setCheckable(true);
+                param_verifMAJ_demarrage->setChecked(true);
+            param_effacerLog_demarrage = param->addAction("Effacer les logs au démarrage");
+                param_effacerLog_demarrage->setEnabled(true);
+                param_effacerLog_demarrage->setCheckable(true);
+                param_effacerLog_demarrage->setChecked(true);
+        // suite de menu : Programme
+        prog->addSeparator();
+        QAction* afficherLog = prog->addAction("Afficher les logs");
+            afficherLog->setEnabled(true);
 
 // Menu : ?
     QMenu *question = barreDeMenu->addMenu("&?");
@@ -333,6 +347,8 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(afficher_achat, SIGNAL(toggled(bool)), this, SLOT(afficherAchat(bool)));
     QObject::connect(afficher_notes, SIGNAL(toggled(bool)), this, SLOT(afficherNotes(bool)));
     QObject::connect(afficher_ordreMarche, SIGNAL(toggled(bool)), this, SLOT(afficherOrdreMarche(bool)));
+
+    QObject::connect(afficherLog, SIGNAL(triggered()), this, SLOT(afficherLogs()));
 
     QObject::connect(aPropos, SIGNAL(triggered()), this, SLOT(aProposDeNBH()));
     QObject::connect(aProposDeQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
@@ -891,6 +907,7 @@ void FenPrincipale::enregistrerPref()   // Pour les préférences
     settings->beginGroup("FenChargement");
         settings->setValue("accelererChargement", param_accelererChargement->isChecked());
         settings->setValue("verifMAJ", param_verifMAJ_demarrage->isChecked());
+        settings->setValue("effacerLog", param_effacerLog_demarrage->isChecked());
     settings->endGroup();
 }
 
@@ -1114,6 +1131,8 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
             enregistrerTout();
             enregistrerPref();
 
+            log("Fermeture de l'interface...\n\n");
+
             // On ferme NBH
             e->accept();
         }
@@ -1121,6 +1140,8 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
         {
             log("Fermeture de NBH !");
             enregistrerPref();
+
+            log("Fermeture de l'interface...\n\n");
 
             // On ferme NBH
             e->accept();
@@ -1135,6 +1156,8 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
         log("Enregistrement du groupe :", 1);
         enregistrerNotes();
         enregistrerPref();
+
+        log("Fermeture de l'interface...\n\n");
 
         // On ferme NBH
         e->accept();
@@ -1408,6 +1431,14 @@ void FenPrincipale::afficherNotes(bool affiche)
 void FenPrincipale::afficherOrdreMarche(bool affiche)
 {
     ordreMarche_dock->setVisible(affiche);
+}
+
+
+// Affichage du log
+void FenPrincipale::afficherLogs()
+{
+    AfficherLogs *fen = new AfficherLogs(this);
+    fen->exec();
 }
 
 
