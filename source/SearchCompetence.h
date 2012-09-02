@@ -16,22 +16,34 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef FONCTIONS_DIVERSES_H
-    #define FONCTIONS_DIVERSES_H
+#ifndef SEARCHCOMPETENCE_H
+    #define SEARCHCOMPETENCE_H
 
     #include <QtGui>
+    #include "Personnage.h"
 
-// Fonctions
-    void setIcone(QWidget* widget);
-    void fatalError(QString const& message, bool const& logErreur = false);
-    void error(QString const& message);
+    namespace Ui {
+        class SearchCompetence;
+    }
 
-    void log(QString const& message, bool vider = false);
-    void log(QString message, int niveau);
+    class SearchCompetence : public QDialog
+    {
+        Q_OBJECT
 
-    void pause(int msec);
+    public:
+        explicit SearchCompetence(QVector<Personnage*> tab, QWidget *parent = 0);
+        ~SearchCompetence();
 
-// Variables
-    #define SITE_BUGS "https://sourceforge.net/p/naheulbeuk-help/bugs/"
+    private slots:
+        void on_closeBoutton_clicked();
+        void on_search_clicked();
 
-#endif // FONCTIONS_DIVERSES_H
+    private:
+        Ui::SearchCompetence *ui;
+
+        void chercher(bool nom, bool description);
+
+        QVector<Personnage*> personnages;
+    };
+
+#endif // SEARCHCOMPETENCE_H

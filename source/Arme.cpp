@@ -127,6 +127,10 @@ int Arme::getRupture() const
     return m_rupture_max;
 }
 
+Arme::typeArme Arme::getType() const
+{
+    return m_type;
+}
 
 /*
  * Enregistrement

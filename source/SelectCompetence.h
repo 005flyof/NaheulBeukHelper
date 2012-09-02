@@ -16,22 +16,36 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef FONCTIONS_DIVERSES_H
-    #define FONCTIONS_DIVERSES_H
+#ifndef SELECTCOMPETENCE_H
+    #define SELECTCOMPETENCE_H
 
+    #include <QDialog>
     #include <QtGui>
+    #include "ClassesPourPersonnage.h"
 
-// Fonctions
-    void setIcone(QWidget* widget);
-    void fatalError(QString const& message, bool const& logErreur = false);
-    void error(QString const& message);
+    namespace Ui {
+        class SelectCompetence;
+    }
 
-    void log(QString const& message, bool vider = false);
-    void log(QString message, int niveau);
+    class SelectCompetence : public QDialog
+    {
+        Q_OBJECT
 
-    void pause(int msec);
+    public:
+        explicit SelectCompetence(QVector<Competence*> value, QWidget *parent = 0);
+        explicit SelectCompetence(QVector<Competence*> value, bool plsChoix, QWidget *parent = 0);
+        ~SelectCompetence();
 
-// Variables
-    #define SITE_BUGS "https://sourceforge.net/p/naheulbeuk-help/bugs/"
+        QString getChoix();
+        QStringList getChoix(bool plsChoix);
 
-#endif // FONCTIONS_DIVERSES_H
+    private:
+        Ui::SelectCompetence *ui;
+
+        bool m_plsChoix;
+
+        QVector<Competence*> competences;
+        QVector<QAbstractButton*> tableauBouttons;
+    };
+
+#endif // SELECTCOMPETENCE_H

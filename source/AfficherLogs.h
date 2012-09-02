@@ -16,22 +16,26 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef FONCTIONS_DIVERSES_H
-    #define FONCTIONS_DIVERSES_H
+#ifndef AFFICHERLOGS_H
+    #define AFFICHERLOGS_H
 
     #include <QtGui>
+    #include "fonctions_diverses.h"
 
-// Fonctions
-    void setIcone(QWidget* widget);
-    void fatalError(QString const& message, bool const& logErreur = false);
-    void error(QString const& message);
+    namespace Ui {
+        class AfficherLogs;
+    }
 
-    void log(QString const& message, bool vider = false);
-    void log(QString message, int niveau);
+    class AfficherLogs : public QDialog
+    {
+        Q_OBJECT
 
-    void pause(int msec);
+    public:
+        explicit AfficherLogs(QWidget *parent = 0);
+        ~AfficherLogs();
 
-// Variables
-    #define SITE_BUGS "https://sourceforge.net/p/naheulbeuk-help/bugs/"
+    private:
+        Ui::AfficherLogs *ui;
+    };
 
-#endif // FONCTIONS_DIVERSES_H
+#endif // AFFICHERLOGS_H

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SearchCompetence</class>
+ <widget class="QDialog" name="SearchCompetence">
+  <property name="minimumSize">
+   <size>
+    <width>721</width>
+    <height>581</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Chercher une compétence dans le groupe</string>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>701</width>
+     <height>561</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" rowspan="2" colspan="2">
+     <widget class="QGroupBox" name="optionsGroup">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>190</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>190</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>Options de recherche</string>
+      </property>
+      <widget class="QWidget" name="gridLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>571</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="layoutQuestion">
+        <item row="0" column="0">
+         <widget class="QLabel" name="termeLabel">
+          <property name="text">
+           <string>Terme à chercher :</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="terme"/>
+        </item>
+        <item row="2" column="0" rowspan="2">
+         <widget class="QLabel" name="searchIn">
+          <property name="text">
+           <string>Chercher dans :</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="nomCheck">
+          <property name="text">
+           <string>le nom de la compétence</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QCheckBox" name="descriptionCheck">
+          <property name="text">
+           <string>la description de la compétence</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="3">
+     <widget class="QGroupBox" name="searchGroup">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>250</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>Résultat de recherche</string>
+      </property>
+      <widget class="QTableView" name="results">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>681</width>
+         <height>301</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>340</y>
+         <width>681</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="search">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>&amp;Chercher</string>
+      </property>
+      <property name="default">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="closeBoutton">
+      <property name="text">
+       <string>&amp;Quitter</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>terme</tabstop>
+  <tabstop>nomCheck</tabstop>
+  <tabstop>descriptionCheck</tabstop>
+  <tabstop>search</tabstop>
+  <tabstop>results</tabstop>
+  <tabstop>closeBoutton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

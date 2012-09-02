@@ -1,9 +1,28 @@
+/*
+    Copyright (C) 2011 Florent FAYOLLAS
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+*/
+
 #ifndef PERSONNAGE_H
     #define PERSONNAGE_H
 
-    #include <QScrollArea>
+    #include <QTabWidget>
     #include "ClassesPourPersonnage.h"
     #include "EquipModif.h"
+    #include "SelectCompetence.h"
 
     namespace Ui {
         class Personnage;
@@ -16,7 +35,7 @@
     #define MAX_EQUIPEMENT 10
 
 
-    class Personnage : public QScrollArea
+    class Personnage : public QTabWidget
     {
         Q_OBJECT
 
@@ -27,11 +46,19 @@
         bool chargerPerso();
         void enregistrerPerso();
 
+        void attaquer();
+        void parer();
+        void esquiver();
+
         static Caracteristiques chargerCaracStatic(bool *erreur, QString ligne, bool AT_PRD, int numLigne);
 
         // Accesseurs
         QString getNom() const;
         bool getModif() const;
+        QScrollArea* getScroll() const;
+
+        void setCompetencesPossibles(QVector<Competence*> tab);
+        QVector<Competence*> getCompetence() const;
 
 
         // Modifications du perso
@@ -160,6 +187,9 @@
 
         void on_remiseAZero_clicked(bool checked);
 
+        void on_addCompetence_clicked();
+        void on_addCompetencePerso_clicked();
+
     private:
         Ui::Personnage *ui;
 
@@ -178,6 +208,10 @@
         void rafraichirVetements();
 
         void calculerCarac();
+        void calculerCaracSupInfMoy();
+
+        void ajouterCompetence();
+        void ajouterCompetencePerso();
 
     // Variables
         // Pour le programme
@@ -217,6 +251,18 @@
         Fleche *m_fleches[MAX_FLECHE];
 
         QVector<Competence*> m_competences;
+
+            // Pour les caractéristiques supérieures et inférieures à la moyenne
+        bool m_bonusMalus_carac_calcules;
+        bool m_bonusMalus_ATPRD_calcules;
+
+        int m_bonus_degats;
+        int m_bonus_degatsMagiques;
+        int m_bonus_attaque;
+        int m_bonus_parade;
+
+        // Compétences
+        QVector<Competence*> competencesPossibles;
     };
 
 #endif // PERSONNAGE_H

@@ -20,7 +20,7 @@
 #include "ui_EquipModif.h"
 
 EquipModif::EquipModif(Protection *objet)
-    : QDialog(), ui(new Ui::EquipModif)
+    : QDialog(), ui(new Ui::EquipModif), modif(false)
 {
     ui->setupUi(this);
 
@@ -31,8 +31,9 @@ EquipModif::EquipModif(Protection *objet)
 
     chargerAffichage();
 }
+
 EquipModif::EquipModif(Arme *objet)
-    : QDialog(), ui(new Ui::EquipModif)
+    : QDialog(), ui(new Ui::EquipModif), modif(false)
 {
     ui->setupUi(this);
 
@@ -43,8 +44,9 @@ EquipModif::EquipModif(Arme *objet)
 
     chargerAffichage();
 }
+
 EquipModif::EquipModif(Fleche *objet)
-    : QDialog(), ui(new Ui::EquipModif)
+    : QDialog(), ui(new Ui::EquipModif), modif(false)
 {
     ui->setupUi(this);
 
@@ -55,8 +57,9 @@ EquipModif::EquipModif(Fleche *objet)
 
     chargerAffichage();
 }
+
 EquipModif::EquipModif(Vetement *objet)
-    : QDialog(), ui(new Ui::EquipModif)
+    : QDialog(), ui(new Ui::EquipModif), modif(false)
 {
     ui->setupUi(this);
 
@@ -68,6 +71,7 @@ EquipModif::EquipModif(Vetement *objet)
     chargerAffichage();
 }
 
+
 EquipModif::~EquipModif()
 {
     delete ui;
@@ -76,6 +80,8 @@ EquipModif::~EquipModif()
 
 void EquipModif::on_vider_clicked()
 {
+    verifModif();
+
     if (m_pr != 0)
     {
         m_pr->setNom("Pas de protection");
@@ -146,6 +152,8 @@ void EquipModif::chargerAffichage()
             ui->PI->hide();
         ui->nbLabel->hide();
             ui->nb->hide();
+        ui->typeLabel->hide();
+            ui->type->hide();
     }
     else if (m_arme != 0)
     {
@@ -170,6 +178,15 @@ void EquipModif::chargerAffichage()
         ui->fo->setValue(m_arme->getMalus().getForce());
         ui->at->setValue(m_arme->getMalus().getAttaque());
         ui->prd->setValue(m_arme->getMalus().getParade());
+
+        if (m_arme->getType() == Arme::MainNue)
+            ui->type->setCurrentIndex(0);
+        else if (m_arme->getType() == Arme::Contandante)
+            ui->type->setCurrentIndex(1);
+        else if (m_arme->getType() == Arme::Tranchante)
+            ui->type->setCurrentIndex(2);
+        else if (m_arme->getType() == Arme::Projectile)
+            ui->type->setCurrentIndex(3);
 
         // On cache le reste
         ui->prLabel->hide();
@@ -209,6 +226,8 @@ void EquipModif::chargerAffichage()
         ui->malusGroup->hide();
         ui->line_3->hide();
 
+        ui->typeLabel->hide();
+            ui->type->hide();
     }
     else if (m_vet != 0)
     {
@@ -247,6 +266,8 @@ void EquipModif::chargerAffichage()
             ui->at->hide();
         ui->prdLabel->hide();
             ui->prd->hide();
+        ui->typeLabel->hide();
+            ui->type->hide();
     }
     else
         fatalError("Aucun équipement valide envoyé à la fenêtre de modification !");
@@ -255,6 +276,8 @@ void EquipModif::chargerAffichage()
 
 void EquipModif::accept()
 {
+    verifModif();
+
     if (m_pr != 0)
     {
         m_pr->setNom(ui->nom->text());
@@ -294,6 +317,24 @@ void EquipModif::accept()
                                           ui->at->value(),
                                           ui->prd->value()));
         m_arme->setRupture(ui->rupt->value());
+        switch(ui->type->currentIndex())
+        {
+        case 0:
+            m_arme->setType(Arme::MainNue);
+            break;
+
+        case 1:
+            m_arme->setType(Arme::Contandante);
+            break;
+
+        case 2:
+            m_arme->setType(Arme::Tranchante);
+            break;
+
+        case 3:
+            m_arme->setType(Arme::Projectile);
+            break;
+        }
     }
     else if (m_fleche != 0)
     {
@@ -322,4 +363,110 @@ void EquipModif::accept()
         fatalError("Aucun équipement valide envoyé à la fenêtre de modification !");
 
     QDialog::accept();
+}
+
+
+void EquipModif::verifModif()
+{
+    if (m_pr != 0)
+    {
+        Protection temp(ui->nom->text(),
+                        ui->pr->value(),
+                        ui->cou->value(),
+                        ui->intel->value(),
+                        ui->cha->value(),
+                        ui->ad->value(),
+                        ui->fo->value(),
+                        ui->at->value(),
+                        ui->prd->value(),
+                        ui->COU->value(),
+                        ui->INTEL->value(),
+                        ui->CHA->value(),
+                        ui->AD->value(),
+                        ui->FO->value(),
+                        ui->AT->value(),
+                        ui->PRD->value());
+        temp.setRupture(ui->rupt->value());
+
+        if (m_pr->protectionEnregistrement() != temp.protectionEnregistrement())
+            modif = true;
+    }
+    else if (m_arme != 0)
+    {
+        Arme temp(ui->nom->text(),
+                  ui->de->value(),
+                  ui->PI->value(),
+                  ui->cou->value(),
+                  ui->intel->value(),
+                  ui->cha->value(),
+                  ui->ad->value(),
+                  ui->fo->value(),
+                  ui->at->value(),
+                  ui->prd->value(),
+                  ui->COU->value(),
+                  ui->INTEL->value(),
+                  ui->CHA->value(),
+                  ui->AD->value(),
+                  ui->FO->value(),
+                  ui->AT->value(),
+                  ui->PRD->value());
+        temp.setRupture(ui->rupt->value());
+        switch(ui->type->currentIndex())
+        {
+        case 0:
+            temp.setType(Arme::MainNue);
+            break;
+
+        case 1:
+            temp.setType(Arme::Contandante);
+            break;
+
+        case 2:
+            temp.setType(Arme::Tranchante);
+            break;
+
+        case 3:
+            temp.setType(Arme::Projectile);
+            break;
+        }
+
+        if (m_arme->armeEnregistrement() != temp.armeEnregistrement())
+            modif = true;
+    }
+    else if (m_fleche != 0)
+    {
+        Fleche temp(ui->nom->text(),
+                    ui->nb->value(),
+                    ui->PI->value(),
+                    ui->AD->value());
+        temp.setRupture(ui->rupt->value());
+
+        if (m_fleche->flechesEnregistrement() != temp.flechesEnregistrement())
+            modif = true;
+    }
+    else if (m_vet != 0)
+    {
+        Vetement temp(ui->nom->text(),
+                      ui->cou->value(),
+                      ui->intel->value(),
+                      ui->cha->value(),
+                      ui->ad->value(),
+                      ui->fo->value(),
+                      ui->COU->value(),
+                      ui->INTEL->value(),
+                      ui->CHA->value(),
+                      ui->AD->value(),
+                      ui->FO->value());
+
+        if (m_vet->vetementEnregistrement() != temp.vetementEnregistrement())
+            modif = true;
+    }
+    else
+        fatalError("Aucun équipement valide envoyé à la fenêtre de modification !");
+
+    QDialog::accept();
+}
+bool EquipModif::equipementModifie()
+{
+    return modif;
 }

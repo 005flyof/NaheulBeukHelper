@@ -34,17 +34,20 @@
         explicit FenChargement(char *argv[]);
         ~FenChargement();
 
-        void ouvrirOrigines();
-        void ouvrirMetiers();
-
     private:
         Ui::FenChargement *ui;
 
+        void ouvrirOrigines();
+        void ouvrirMetiers();
+        void ouvrirCompetences();
+
         FenPrincipale *fenetrePrincipale;
+        FenMAJ *testMAJ;
 
         // Variables
         QVector<Metier*> metiers;
         QVector<Origine*> origines;
+        QVector<Competence*> competences;
     };
 
 #endif // FENCHARGEMENT_H

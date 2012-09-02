@@ -32,7 +32,7 @@
         #define OS 0
     #endif
 
-    #define VERSION "2.0"
+    #define VERSION "2.2"
 
     #include <QtGui>
     #include <QtNetwork>
@@ -60,7 +60,7 @@
         QProgressBar *progression;
 
     // Autres variables
-        bool alerteAJour;
+        bool alerteSiAJour;
         bool erreurTrouvee; //Variable qui nous permet de savoir s'il y a eu une erreur ou non.
     };
 

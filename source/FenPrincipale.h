@@ -18,8 +18,6 @@
 
 #ifndef FENPRINCIPALE_H
     #define FENPRINCIPALE_H
-    #define NOMBRE_PERSO_MAX 15
-    #define NB_SPACER_FENPRINCIPALE 11
 
     #include <QtGui>
     #include "Personnage.h"
@@ -31,20 +29,26 @@
     #include "Acceuil.h"
     #include "AddPerso.h"
     #include "NewPerso.h"
+    #include "SearchCompetence.h"
+    #include "AfficherLogs.h"
 
     class FenPrincipale : public QMainWindow
     {
         Q_OBJECT
     public:
-        FenPrincipale();
+        FenPrincipale(FenMAJ *aFermer = 0);
         ~FenPrincipale();
 
         // Pour la création d'un personnage
         void setMetiers(QVector<Metier*> metiers);
         void setOrigines(QVector<Origine*> origines);
 
+        void setCompetencesPossibles(QVector<Competence*> competences);
+
     public slots:
         void attaquer();
+        void parer();
+        void esquiver();
 
     private slots:
         void persoModifie();
@@ -70,6 +74,8 @@
         void pa();
         void pc();
 
+        void chercherCompetence();
+
     // Menu : Personnage en cours
         void COU();
         void INT();
@@ -85,6 +91,8 @@
         void afficherAchat(bool affiche);
         void afficherNotes(bool affiche);
         void afficherOrdreMarche(bool affiche);
+
+        void afficherLogs();
 
     // Menu : ?
         void aProposDeNBH();
@@ -110,6 +118,8 @@
         // Création d'un personnage
         QVector<Metier*> m_metiers;
         QVector<Origine*> m_origines;
+
+        QVector<Competence*> competencesPossibles;
 
         // Pour le groupe
         QFile *m_fichierGroupe;
@@ -151,6 +161,8 @@
         QAction *paGroupe;
         QAction *pcGroupe;
 
+        QAction *searchCompetences;
+
         QAction *achatATPRD;
         QAction *achatINT;
         QAction *achatCHA;
@@ -164,6 +176,10 @@
         QAction *afficher_achat;
         QAction *afficher_notes;
         QAction *afficher_ordreMarche;
+
+        QAction *param_accelererChargement;
+        QAction *param_verifMAJ_demarrage;
+        QAction *param_effacerLog_demarrage;
     };
 
     class MdiSubWindow : public QMdiSubWindow

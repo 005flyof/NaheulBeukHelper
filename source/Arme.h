@@ -53,6 +53,8 @@
         int getDegatsEnPlus() const;
         int getRupture() const;
 
+        typeArme getType() const;
+
     // Récupérer pour enregistrer
         QString armeEnregistrement() const;
 

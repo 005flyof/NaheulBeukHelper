@@ -37,6 +37,8 @@
         explicit EquipModif(Vetement* objet);
         ~EquipModif();
 
+        bool equipementModifie();
+
     public slots:
         void accept();
 
@@ -47,12 +49,14 @@
         Ui::EquipModif *ui;
 
         void chargerAffichage();
+        void verifModif();
 
         Protection *m_pr;
         Arme *m_arme;
         Fleche *m_fleche;
         Vetement *m_vet;
 
+        bool modif;
     };
 
 #endif // EQUIPMODIF_H

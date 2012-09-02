@@ -24,14 +24,17 @@
 using namespace std;
 
 // Fenêtre principale
-FenPrincipale::FenPrincipale() :
-    QMainWindow(),
-    m_fichierGroupe(0), m_fichierNotes(0)
+FenPrincipale::FenPrincipale(FenMAJ *aFermer)
+    : QMainWindow(),
+      m_fichierGroupe(0), m_fichierNotes(0)
 {
+    if (aFermer != 0)
+        aFermer->close();
+
 // On s'occupe de la fenêtre
     setWindowTitle("NBH     --     NaheulBeuk Helper");
     setIcone(this);
-    setMinimumSize(900, 540);
+    setMinimumSize(1116, 695);
 
 // Création de la statusBar
     statusBar = new QStatusBar();
@@ -65,6 +68,11 @@ FenPrincipale::FenPrincipale() :
         else
             modeAttaque();
     }
+    else
+    {
+        passif->setChecked(true);
+        attaque->setChecked(false);
+    }
 
 
     if (!settings->value("FenPrincipale/toolBar/Fichier").isNull())
@@ -82,6 +90,16 @@ FenPrincipale::FenPrincipale() :
 
     if (!settings->value("FenPrincipale/docks/ordreMarche").isNull())
         afficher_ordreMarche->setChecked(settings->value("FenPrincipale/docks/orderMarche").toBool());
+
+
+    if (!settings->value("FenChargement/accelererChargement").isNull())
+        param_accelererChargement->setChecked(settings->value("FenChargement/accelererChargement").toBool());
+
+    if (!settings->value("FenChargement/verifMAJ").isNull())
+        param_verifMAJ_demarrage->setChecked(settings->value("FenChargement/verifMAJ").toBool());
+
+    if (!settings->value("FenChargement/effacerLog").isNull())
+        param_effacerLog_demarrage->setChecked(settings->value("FenChargement/effacerLog").toBool());
 }
 void FenPrincipale::initMenus_ToolBars()
 {
@@ -136,14 +154,12 @@ void FenPrincipale::initMenus_ToolBars()
         attaque->setStatusTip("Passer en mode \"Attaque\"");
         attaque->setIcon(QIcon(":prog-data/img/attaque.png"));
         attaque->setCheckable(true);
-        attaque->setChecked(false);
         attaque->setEnabled(false);
     passif = mode->addAction("Passif");
         passif->setShortcut(QKeySequence("Ctrl+P"));
         passif->setStatusTip("Passer en mode \"Passif\"");
         passif->setIcon(QIcon(":prog-data/img/passif.png"));
         passif->setCheckable(true);
-        passif->setChecked(true);
         passif->setEnabled(false);
 
 
@@ -182,6 +198,13 @@ void FenPrincipale::initMenus_ToolBars()
         pcGroupe->setIcon(QIcon(":prog-data/img/PC-.png"));
         pcGroupe->setStatusTip("Retirer des Pièces de Cuivre à chacun des personnages du groupe.");
         pcGroupe->setEnabled(false);
+    groupe->addSeparator();
+
+    searchCompetences = groupe->addAction("Rechercher une compétence dans le groupe");
+        searchCompetences->setIcon(QIcon(":prog-data/img/competence.png"));
+        searchCompetences->setStatusTip("Chercher si quelqu'un dans le groupe détient une compétence.");
+        searchCompetences->setEnabled(false);
+        searchCompetences->setShortcut(QKeySequence("Ctrl+F"));
 
 // Menu : Perso en cours
     QMenu *perso = barreDeMenu->addMenu("Personnage en cours");
@@ -224,7 +247,7 @@ void FenPrincipale::initMenus_ToolBars()
             afficher_fichier->setEnabled(true);
             afficher_fichier->setCheckable(true);
             afficher_fichier->setChecked(true);
-        afficher_action = affichage->addAction("Actions");
+        afficher_action = affichage->addAction("Actions sur le groupe");
             afficher_action->setEnabled(true);
             afficher_action->setCheckable(true);
             afficher_action->setChecked(true);
@@ -243,6 +266,28 @@ void FenPrincipale::initMenus_ToolBars()
             afficher_ordreMarche->setCheckable(true);
             afficher_ordreMarche->setChecked(true);
 
+
+// Menu : Programme
+    QMenu *prog = barreDeMenu->addMenu("&Programme");
+
+        // Menu : Paramètres
+        QMenu *param = prog->addMenu("Paramètres");
+            param_accelererChargement = param->addAction("Accélérer le chargement de NBH");
+                param_accelererChargement->setEnabled(true);
+                param_accelererChargement->setCheckable(true);
+                param_accelererChargement->setChecked(false);
+            param_verifMAJ_demarrage = param->addAction("Vérifier les MAJ au démarrage");
+                param_verifMAJ_demarrage->setEnabled(true);
+                param_verifMAJ_demarrage->setCheckable(true);
+                param_verifMAJ_demarrage->setChecked(true);
+            param_effacerLog_demarrage = param->addAction("Effacer les logs au démarrage");
+                param_effacerLog_demarrage->setEnabled(true);
+                param_effacerLog_demarrage->setCheckable(true);
+                param_effacerLog_demarrage->setChecked(true);
+        // suite de menu : Programme
+        prog->addSeparator();
+        QAction* afficherLog = prog->addAction("Afficher les logs");
+            afficherLog->setEnabled(true);
 
 // Menu : ?
     QMenu *question = barreDeMenu->addMenu("&?");
@@ -287,6 +332,8 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(paGroupe, SIGNAL(triggered()), this, SLOT(pa()));
     QObject::connect(pcGroupe, SIGNAL(triggered()), this, SLOT(pc()));
 
+    QObject::connect(searchCompetences, SIGNAL(triggered()), this, SLOT(chercherCompetence()));
+
     QObject::connect(achatATPRD, SIGNAL(triggered()), this, SLOT(ATPRD()));
     QObject::connect(achatINT, SIGNAL(triggered()), this, SLOT(INT()));
     QObject::connect(achatCHA, SIGNAL(triggered()), this, SLOT(CHA()));
@@ -301,6 +348,8 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(afficher_notes, SIGNAL(toggled(bool)), this, SLOT(afficherNotes(bool)));
     QObject::connect(afficher_ordreMarche, SIGNAL(toggled(bool)), this, SLOT(afficherOrdreMarche(bool)));
 
+    QObject::connect(afficherLog, SIGNAL(triggered()), this, SLOT(afficherLogs()));
+
     QObject::connect(aPropos, SIGNAL(triggered()), this, SLOT(aProposDeNBH()));
     QObject::connect(aProposDeQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     QObject::connect(licence, SIGNAL(triggered()), this, SLOT(licence()));
@@ -308,7 +357,7 @@ void FenPrincipale::initMenus_ToolBars()
     QObject::connect(aide, SIGNAL(triggered()), this, SLOT(help()));
 
 // ToolBars
-    fichierToolBar = addToolBar("Barre d'outils de fichier");
+    fichierToolBar = addToolBar("Fichier");
         fichierToolBar->setObjectName("toolBar-Fichier");
 
         fichierToolBar->addAction(nouveauPerso);
@@ -328,7 +377,7 @@ void FenPrincipale::initMenus_ToolBars()
         fichierToolBar->addAction(quitter);
 
 
-    actionsToolBar = addToolBar("Barre d'outils d'Actions");
+    actionsToolBar = addToolBar("Actions sur le groupe");
         actionsToolBar->setObjectName("toolBar-Actions");
 
         actionsToolBar->addAction(attaque);
@@ -346,9 +395,12 @@ void FenPrincipale::initMenus_ToolBars()
         actionsToolBar->addAction(poGroupe);
         actionsToolBar->addAction(paGroupe);
         actionsToolBar->addAction(pcGroupe);
+        actionsToolBar->addSeparator();
+
+        actionsToolBar->addAction(searchCompetences);
 
 
-    achatToolBar = addToolBar("Barre d'outils d'Achat de puissance");
+    achatToolBar = addToolBar("Achat de puissance");
         achatToolBar->setObjectName("toolBar-Achat");
 
         achatToolBar->addAction(achatCOU);
@@ -402,6 +454,8 @@ void FenPrincipale::initWidget()
     attaque_fen = new FenAttaque(listeNomVide);
     attaque_fen->setEnabled(false);
         QObject::connect(attaque_fen, SIGNAL(attaque()), this, SLOT(attaquer()));
+        QObject::connect(attaque_fen, SIGNAL(parade()), this, SLOT(parer()));
+        QObject::connect(attaque_fen, SIGNAL(esquive()), this, SLOT(esquiver()));
     attaque_dock->setWidget(attaque_fen);
 
     addDockWidget(Qt::RightDockWidgetArea, attaque_dock);
@@ -430,8 +484,7 @@ void FenPrincipale::setMetiers(QVector<Metier *> metiers)
 void FenPrincipale::creerNouveauGroupe()
 {
 // Choix des chemins
-    QString cheminGroupe;
-    cheminGroupe = QFileDialog::getSaveFileName(zoneCentrale, "Créer un groupe de personnage",
+    QString cheminGroupe = QFileDialog::getSaveFileName(this, "Créer un groupe de personnage",
                                                         "enregistrements", "Groupe de personnages (*.nbh)");
 
     if (cheminGroupe.isEmpty())
@@ -441,14 +494,14 @@ void FenPrincipale::creerNouveauGroupe()
     QString cheminNotes;
     while (!erreur)
     {
-        QMessageBox::information(zoneCentrale, "Notes",
+        QMessageBox::information(this, "Notes",
                                  "Dans la fenêtre suivante, vous devrez rentrer un nom pour le fichier qui contiendra vos notes.");
 
-        cheminNotes = QFileDialog::getSaveFileName(zoneCentrale, "Créer un groupe -> Fichier 'notes'",
+        cheminNotes = QFileDialog::getSaveFileName(this, "Créer un groupe -> Fichier 'notes'",
                                                            QString("enregistrements"), "Fichier Notes (*.notes)");
 
         if (cheminNotes.isEmpty())
-            QMessageBox::critical(zoneCentrale, "ERREUR !", "Erreur :\nVous devez enregistrer un fichier contenant vos notes !");
+            QMessageBox::critical(this, "ERREUR !", "Erreur :\nVous devez enregistrer un fichier contenant vos notes !");
         else
             erreur = true;
     }
@@ -464,13 +517,21 @@ void FenPrincipale::creerNouveauGroupe()
 // Enregistrement
     QFile notesRec(cheminNotes);
     if (!notesRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de créer le fichier de note sélectionné. C'est une erreur impossible normalement. Réessayez de créer le groupe.");
+    {
+        error("Impossible de créer le fichier de note sélectionné.\n"
+              "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
+        return;
+    }
 
     log("Création d'un fichier de notes.");
 
     QFile groupeRec(cheminGroupe);
     if (!groupeRec.open(QIODevice::WriteOnly | QIODevice::Text))
-        fatalError("Impossible de créer le fichier de groupe sélectionné. C'est une erreur impossible normalement. Réessayez de créer le groupe.");
+    {
+        error("Impossible de créer le fichier de groupe sélectionné.\n"
+              "Ceci peut être dû aux permissions du fichier : il n'est pas accessible.");
+        return;
+    }
 
     log("Création d'un fichier groupe.");
 
@@ -544,7 +605,15 @@ void FenPrincipale::ouvrir()
         cheminApp.remove("/release");
         if (OS == 0)
             cheminApp.replace("/", "\\");
-        chemins << cheminApp + ligne;
+
+        QString test;
+        for (int i = 0; i < 16; i++)
+            test += ligne.at(i);
+        if (test == "/enregistrements")
+            chemins << cheminApp + ligne;
+        else
+            chemins << ligne;
+
         ligne = groupeTxt.readLine();
     }
 
@@ -584,7 +653,7 @@ void FenPrincipale::ouvrir()
 
 // Création du widget central
     zoneCentrale = new QMdiArea(this);
-    zoneCentrale->setMinimumWidth(901);
+    zoneCentrale->setMinimumWidth(908);
     zoneCentrale->setViewMode(QMdiArea::TabbedView);
     zoneCentrale->setTabsMovable(false);
 
@@ -609,6 +678,7 @@ void FenPrincipale::ouvrir()
 
         // On crée le personnage
         m_personnages.push_back(new Personnage(*cheminPersoOuverture));
+        m_personnages.at(compteurOnglets)->setCompetencesPossibles(competencesPossibles);
 
         // On charge le personnage
         bool erreur = m_personnages.at(compteurOnglets)->chargerPerso();
@@ -654,6 +724,8 @@ void FenPrincipale::ouvrir()
             paGroupe->setEnabled(false);
             pcGroupe->setEnabled(false);
 
+            searchCompetences->setEnabled(false);
+
             achatATPRD->setEnabled(false);
             achatINT->setEnabled(false);
             achatCHA->setEnabled(false);
@@ -678,7 +750,13 @@ void FenPrincipale::ouvrir()
         // On crée l'affichage
         MdiSubWindow *sousFen = new MdiSubWindow();
         sousFen->setWidget(m_personnages.at(compteurOnglets));
-        sousFen->setWindowTitle(m_personnages.at(compteurOnglets)->getNom());
+        if (m_personnages.at(compteurOnglets)->getModif())
+        {
+            sousFen->setWindowTitle("* " + m_personnages.at(compteurOnglets)->getNom());
+            enregistrer->setEnabled(true);
+        }
+        else
+            sousFen->setWindowTitle(m_personnages.at(compteurOnglets)->getNom());
         zoneCentrale->addSubWindow(sousFen)->show();
 
         // On connecte le changement de nom des onglets
@@ -695,6 +773,19 @@ void FenPrincipale::ouvrir()
     statusBar->showMessage("Groupe ouvert avec succès", 2000);
     log("Groupe ouvert avec succès !", 1);
 
+// On synchronise
+    // 1- tous les onglets
+    for (int i(0); i < m_personnages.count(); i++)
+        for (int i2(0); i2 < m_personnages.count(); i2++)
+            if (m_personnages.at(i)->getNom() != m_personnages.at(i2)->getNom())
+                QObject::connect(m_personnages.at(i), SIGNAL(currentChanged(int)),
+                                 m_personnages.at(i2), SLOT(setCurrentIndex(int)));
+    // 2- toutes les QScrollArea
+    for (int i(0); i < m_personnages.count(); i++)
+        for (int i2(0); i2 < m_personnages.count(); i2++)
+            if (m_personnages.at(i)->getNom() != m_personnages.at(i2)->getNom())
+                QObject::connect(m_personnages.at(i)->getScroll()->verticalScrollBar(), SIGNAL(valueChanged(int)),
+                                 m_personnages.at(i2)->getScroll()->verticalScrollBar(), SLOT(setValue(int)));
 
 // On "enable" l'ordre de marche et la gestion de l'attaque
     ordreMarche->setNomPersos(m_nomPersos);
@@ -716,6 +807,8 @@ void FenPrincipale::ouvrir()
     poGroupe->setEnabled(true);
     paGroupe->setEnabled(true);
     pcGroupe->setEnabled(true);
+
+    searchCompetences->setEnabled(true);
 
     achatATPRD->setEnabled(true);
     achatINT->setEnabled(true);
@@ -810,6 +903,12 @@ void FenPrincipale::enregistrerPref()   // Pour les préférences
             settings->setValue("ordreMarche", afficher_ordreMarche->isChecked());
         settings->endGroup();
     settings->endGroup();
+
+    settings->beginGroup("FenChargement");
+        settings->setValue("accelererChargement", param_accelererChargement->isChecked());
+        settings->setValue("verifMAJ", param_verifMAJ_demarrage->isChecked());
+        settings->setValue("effacerLog", param_effacerLog_demarrage->isChecked());
+    settings->endGroup();
 }
 
 
@@ -824,7 +923,7 @@ void FenPrincipale::fermerGroupe()
 // S'il y a des modifications non enregistrées, on demande que faire
     if (modifNonRec)
     {
-        QMessageBox question;
+        QMessageBox question(this);
         question.setWindowTitle("Fermer le groupe actuel ?");
         question.setText("Il y a des modifications non enregistrées");
         question.setInformativeText("Voulez-vous enregistrer les modifications ?");
@@ -876,6 +975,8 @@ void FenPrincipale::fermerGroupe()
             poGroupe->setEnabled(false);
             paGroupe->setEnabled(false);
             pcGroupe->setEnabled(false);
+
+            searchCompetences->setEnabled(false);
 
             achatATPRD->setEnabled(false);
             achatINT->setEnabled(false);
@@ -931,6 +1032,8 @@ void FenPrincipale::fermerGroupe()
             poGroupe->setEnabled(false);
             paGroupe->setEnabled(false);
             pcGroupe->setEnabled(false);
+
+            searchCompetences->setEnabled(false);
 
             achatATPRD->setEnabled(false);
             achatINT->setEnabled(false);
@@ -989,6 +1092,8 @@ void FenPrincipale::fermerGroupe()
         paGroupe->setEnabled(false);
         pcGroupe->setEnabled(false);
 
+        searchCompetences->setEnabled(false);
+
         achatATPRD->setEnabled(false);
         achatINT->setEnabled(false);
         achatCHA->setEnabled(false);
@@ -1011,7 +1116,7 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
 // S'il y a des modifications non enregistrées, on demande que faire
     if (modifNonRec)
     {
-        QMessageBox question;
+        QMessageBox question(this);
         question.setWindowTitle("Quitter NaheulBeuk Helper ?");
         question.setText("Il y a des modifications non enregistrées");
         question.setInformativeText("Voulez-vous enregistrer les modifications ?");
@@ -1026,6 +1131,8 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
             enregistrerTout();
             enregistrerPref();
 
+            log("Fermeture de l'interface...\n\n");
+
             // On ferme NBH
             e->accept();
         }
@@ -1033,6 +1140,8 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
         {
             log("Fermeture de NBH !");
             enregistrerPref();
+
+            log("Fermeture de l'interface...\n\n");
 
             // On ferme NBH
             e->accept();
@@ -1047,6 +1156,8 @@ void FenPrincipale::closeEvent(QCloseEvent *e)
         log("Enregistrement du groupe :", 1);
         enregistrerNotes();
         enregistrerPref();
+
+        log("Fermeture de l'interface...\n\n");
 
         // On ferme NBH
         e->accept();
@@ -1088,8 +1199,24 @@ void FenPrincipale::modePassif()
 // Attaque
 void FenPrincipale::attaquer()
 {
-    QMessageBox::information(this, "En dévelopemment",
-                             "Cette fonction est encore en développement.");
+    QString nom = attaque_fen->getNomActivePerso();
+    for (int i(0); i < m_personnages.count(); i++)
+        if (nom == m_personnages.at(i)->getNom())
+            m_personnages.at(i)->attaquer();
+}
+void FenPrincipale::parer()
+{
+    QString nom = attaque_fen->getNomActivePerso();
+    for (int i(0); i < m_personnages.count(); i++)
+        if (nom == m_personnages.at(i)->getNom())
+            m_personnages.at(i)->parer();
+}
+void FenPrincipale::esquiver()
+{
+    QString nom = attaque_fen->getNomActivePerso();
+    for (int i(0); i < m_personnages.count(); i++)
+        if (nom == m_personnages.at(i)->getNom())
+            m_personnages.at(i)->esquiver();
 }
 
 
@@ -1209,6 +1336,14 @@ void FenPrincipale::pc()
 }
 
 
+// Rechercher une compétence
+void FenPrincipale::chercherCompetence()
+{
+    SearchCompetence fen(m_personnages);
+    fen.exec();
+}
+
+
 // Achat
 void FenPrincipale::COU()
 {
@@ -1299,11 +1434,19 @@ void FenPrincipale::afficherOrdreMarche(bool affiche)
 }
 
 
+// Affichage du log
+void FenPrincipale::afficherLogs()
+{
+    AfficherLogs *fen = new AfficherLogs(this);
+    fen->exec();
+}
+
+
 // A propos
 void FenPrincipale::aProposDeNBH()
 {
 // On affiche le message d'à propos
-    QMessageBox::about(zoneCentrale, "A propos de NaheulBeuk Helper",
+    QMessageBox::about(this, "A propos de NaheulBeuk Helper",
                        "NaheulBeuk Helper est un programme destiné aux maîtres du jeu qui jouent au jeu de rôle de Naheulbeuk...\n"
                        "Ce programme facilitera leur tâche... qui est assez difficile !\n\n\n"
                        "Vous utilisez la version " VERSION ".\n\n"
@@ -1370,6 +1513,13 @@ void FenPrincipale::persoModifie()
             zoneCentrale->subWindowList().at(i)->setWindowTitle("* " + m_personnages.at(i)->getNom());
     }
     enregistrer->setEnabled(true);
+}
+
+
+// Compétences
+void FenPrincipale::setCompetencesPossibles(QVector<Competence *> competences)
+{
+    competencesPossibles = competences;
 }
 
 

@@ -1,4 +1,3 @@
-~!AddPerso!~
 Gudule
 Masculine
 Troll des collines Berzerks
@@ -9,4 +8,160 @@ Eventreur
 15_12_13_13_15_10_12
 15_12_13_13_15_10_12
 003000_000000_000000
+~!energie_modif!~
+100
+0
+~!carac_sup_inf!~
+3
+0
+1
+0
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!vetement!~
+Nu
+00_00_00_00_00
+00_00_00_00_00
+false
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!protection!~
+Pas de protection
+0
+00_00_00_00_00_00_00
+00_00_00_00_00_00_00
+0
+~!arme!~
+A mains nues
+1
+-2
+00_00_00_00_00_00_00
+00_00_00_00_00_04_00
+0
+0
+~!arme!~
+A mains nues
+1
+-2
+00_00_00_00_00_00_00
+00_00_00_00_00_04_00
+0
+0
+~!arme!~
+A mains nues
+1
+-2
+00_00_00_00_00_00_00
+00_00_00_00_00_04_00
+0
+0
+~!arme!~
+A mains nues
+1
+-2
+00_00_00_00_00_00_00
+00_00_00_00_00_04_00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!fleche!~
+Pas de flèches
+0
+0
+00
+0
+0
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
+~!equipement!~
+
 ~!FIN_ENREGISTREMENT!~

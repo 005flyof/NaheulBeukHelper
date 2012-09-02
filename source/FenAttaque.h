@@ -32,9 +32,14 @@
 
     signals:
         void attaque();
+        void parade();
+        void esquive();
 
     public slots:
         void attaquer();
+        void parer();
+        void esquiver();
+
         void select(QModelIndex index);
         void verrouillerBouton();
         void recharger();
@@ -45,7 +50,10 @@
 
         QStringListModel *modele;
         QListView *vue;
+
         QPushButton *m_attaquer;
+        QPushButton *m_esquiver;
+        QPushButton *m_parer;
     };
 
 #endif // FENATTAQUE_H

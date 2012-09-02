@@ -16,22 +16,25 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef FONCTIONS_DIVERSES_H
-    #define FONCTIONS_DIVERSES_H
+#include "AfficherLogs.h"
+#include "ui_AfficherLogs.h"
 
-    #include <QtGui>
+AfficherLogs::AfficherLogs(QWidget *parent)
+    : QDialog(parent),
+      ui(new Ui::AfficherLogs)
+{
+    ui->setupUi(this);
 
-// Fonctions
-    void setIcone(QWidget* widget);
-    void fatalError(QString const& message, bool const& logErreur = false);
-    void error(QString const& message);
+    QFile fichierLog("nbh.log");
+    if (!fichierLog.open(QIODevice::ReadOnly | QIODevice::Text))
+        fatalError("Erreur lors de l'ouverture du fichier log");
 
-    void log(QString const& message, bool vider = false);
-    void log(QString message, int niveau);
+    QTextStream entree(&fichierLog);
 
-    void pause(int msec);
+    ui->logs->setText(entree.readAll());
+}
 
-// Variables
-    #define SITE_BUGS "https://sourceforge.net/p/naheulbeuk-help/bugs/"
-
-#endif // FONCTIONS_DIVERSES_H
+AfficherLogs::~AfficherLogs()
+{
+    delete ui;
+}

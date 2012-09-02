@@ -35,15 +35,31 @@ void fatalError(QString const& message, bool const& logErreur)
         QTextStream entree(&error);
 
         entree << "NBH -> Erreur : " + message << "\n";
-
-        QWidget *a = new QWidget();
-        QMessageBox::critical(a, "Erreur fatale",
-                              "NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
-        if (!logErreur)
-            log("Erreur fatale : NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
     }
 
+    QWidget *a = new QWidget();
+    QMessageBox::critical(a, "Erreur fatale",
+                          "NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
+    if (!logErreur)
+        log("Erreur fatale : NBH va être fermé car une erreur fatale a été décelée :\n\n" + message);
+
     exit(2);
+}
+void error(QString const& message)
+{
+    QFile error("error.log");
+
+    if (error.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream entree(&error);
+
+        entree << "NBH -> Erreur : " + message << "\n";
+
+        QWidget *a = new QWidget();
+        QMessageBox::critical(a, "Erreur mineure",
+                              "NBH a rencontré une erreur :\n\n" + message);
+        log("Erreur mineure : NBH a rencontré une erreur :\n\n" + message);
+    }
 }
 
 void log(QString const& message, bool vider)
@@ -84,7 +100,7 @@ void log(QString const& message, bool vider)
 
     log.close();
 }
-void log(QString const& message, int niveau)
+void log(QString message, int niveau)
 {
     QFile log("nbh.log");
     if (!log.open(QIODevice::Append | QIODevice::Text))
@@ -95,10 +111,12 @@ void log(QString const& message, int niveau)
     switch (niveau)
     {
     case 1:
+        message.replace("\n", "\n                            ");
         entree << "                         -> " + message + "\n";
         break;
 
     case 2:
+        message.replace("\n", "\n                                       ");
         entree << "                                     * " + message + "\n";
         break;
 
@@ -107,4 +125,11 @@ void log(QString const& message, int niveau)
     }
 
     log.close();
+}
+
+void pause(int msec)
+{
+    QTime tempo;
+    tempo.start();
+    while (tempo.elapsed() < msec);
 }

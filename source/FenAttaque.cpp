@@ -32,10 +32,18 @@ FenAttaque::FenAttaque(QStringList const& nomPersos, QMainWindow *parent)
     m_attaquer = new QPushButton("Attaquer !");
         m_attaquer->setEnabled(false);
         QObject::connect(m_attaquer, SIGNAL(clicked()), this, SLOT(attaquer()));
+    m_parer = new QPushButton("Parer !");
+        m_parer->setEnabled(false);
+        QObject::connect(m_parer, SIGNAL(clicked()), this, SLOT(parer()));
+    m_esquiver = new QPushButton("Esquiver !");
+        m_esquiver->setEnabled(false);
+        QObject::connect(m_esquiver, SIGNAL(clicked()), this, SLOT(esquiver()));
 
     QVBoxLayout *layout = new QVBoxLayout;
         layout->addWidget(vue);
         layout->addWidget(m_attaquer);
+        layout->addWidget(m_parer);
+        layout->addWidget(m_esquiver);
 
     setLayout(layout);
 
@@ -47,6 +55,14 @@ FenAttaque::FenAttaque(QStringList const& nomPersos, QMainWindow *parent)
 void FenAttaque::attaquer()
 {
     emit attaque();
+}
+void FenAttaque::parer()
+{
+    emit parade();
+}
+void FenAttaque::esquiver()
+{
+    emit esquive();
 }
 QString FenAttaque::getNomActivePerso()
 {
@@ -62,13 +78,23 @@ void FenAttaque::setNomPersos(QStringList const& nomPersos)
 void FenAttaque::select(QModelIndex index)
 {
     if (!index.isValid())
+    {
         m_attaquer->setEnabled(false);
+        m_parer->setEnabled(false);
+        m_esquiver->setEnabled(false);
+    }
     else
+    {
         m_attaquer->setEnabled(true);
+        m_parer->setEnabled(true);
+        m_esquiver->setEnabled(true);
+    }
 }
 void FenAttaque::verrouillerBouton()
 {
     m_attaquer->setEnabled(false);
+    m_parer->setEnabled(false);
+    m_esquiver->setEnabled(false);
 }
 
 void FenAttaque::recharger()
